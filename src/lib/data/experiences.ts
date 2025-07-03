@@ -1,6 +1,7 @@
 import { Experience } from '../types';
 
 export const experiences: Experience[] = [
+  // Work Experiences
   {
     id: "ledgity",
     company: "Ledgity",
@@ -16,7 +17,9 @@ export const experiences: Experience[] = [
       "Developed user-friendly interfaces for complex blockchain functions to improve accessibility."
     ],
     skills: ["Solidity", "Smart Contracts", "Ethereum", "L2", "Code Auditing", "dApps"],
-    logo: "/logos/ledgity.png"
+    logo: "/logos/ledgity-logo.svg",
+    type: "work",
+    website: "https://ledgity.finance/"
   },
   {
     id: "freelance",
@@ -34,7 +37,8 @@ export const experiences: Experience[] = [
       "Conducted thorough testing using frameworks like Foundry and Hardhat."
     ],
     skills: ["Solidity", "Smart Contracts", "NFT", "ERC20", "ERC721", "React.js", "Next.js", "Foundry", "Hardhat"],
-    logo: "/logos/freelance.png"
+    logo: "/logos/freelance.svg",
+    type: "work"
   },
   {
     id: "tasc",
@@ -51,7 +55,8 @@ export const experiences: Experience[] = [
       "Implemented an Ethereum-based token economy to enhance player engagement."
     ],
     skills: ["Leadership", "Solidity", "Smart Contracts", "P2E", "Game Development", "Ethereum", "Agile"],
-    logo: "/logos/tasc.png"
+    logo: "/logos/tasc.svg",
+    type: "work"
   },
   {
     id: "future-institution",
@@ -66,7 +71,9 @@ export const experiences: Experience[] = [
       "Implemented token standards, including ERC20 and ERC721, to facilitate token creation and management."
     ],
     skills: ["Solidity", "Smart Contracts", "Ethereum", "ERC20", "ERC721", "Game Development"],
-    logo: "/logos/future-institution.png"
+    logo: "/logos/future-institution.jpeg",
+    type: "work",
+    website: "https://www.linkedin.com/company/future-institution/"
   },
   {
     id: "bitcoin-vietnam",
@@ -82,6 +89,68 @@ export const experiences: Experience[] = [
       "Maintained the front-end of the website"
     ],
     skills: ["Solidity", "Web3", "ERC20", "dApps", "Ethereum", "Frontend Development"],
-    logo: "/logos/bitcoin-vietnam.png"
+    logo: "/logos/bitcoin-vietnam-logo.png",
+    type: "work",
+    website: "https://bitcoinvn.io/"
+  },
+
+  // Hackathons
+  {
+    id: "chiliz-hackathon",
+    company: "Chiliz",
+    position: "Hackathon Participant",
+    startDate: "2023",
+    endDate: "2023",
+    description: "Built 'Chiliz Got Talent' - an innovative platform for sports talent discovery on Chiliz blockchain.",
+    achievements: [
+      "Developed full-stack dApp with React TypeScript frontend",
+      "Implemented smart contracts for talent verification and rewards",
+      "Created backend API with Handlebars templating",
+      "Delivered working prototype within hackathon timeframe",
+      "Team name: RedCodeChilizPeppers"
+    ],
+    skills: ["Solidity", "Smart Contracts", "Chiliz Blockchain", "Full-Stack Development"],
+    logo: "/logos/chiliz.png",
+    type: "hackathon",
+    website: "https://www.chiliz.com/hacking-paris/"
+  },
+  {
+    id: "eth-global-hackathon",
+    company: "ETH Global",
+    position: "Hackathon Participant",
+    startDate: "2023",
+    endDate: "2023",
+    description: "Built AATBA Profile - Trustless & Verifiable Profile with Security & Privacy, fully on-chain.",
+    achievements: [
+      "Developed on-chain identity management platform using Soul Bound Tokens (SBT)",
+      "Implemented Token Bound Accounts (TBA) with ERC6551 standard",
+      "Integrated Account Abstraction using ERC4337",
+      "Deployed across multiple testnets: Scroll Sepolia, Mantle, Mumbai Polygon",
+      "Created live demo at aatba.org",
+      "Collaborated with international team of 5 developers"
+    ],
+    skills: ["Solidity", "Next.js", "React", "Thirdweb", "Hardhat", "ERC6551", "ERC4337", "Soul Bound Tokens"],
+    logo: "/logos/eth-global.ico",
+    type: "hackathon",
+    website: "https://ethglobal.com/events/ethonline2023"
+  },
+  {
+    id: "careerzen-hackathon",
+    company: "ETHCon Korea",
+    position: "Hackathon Participant",
+    startDate: "2024",
+    endDate: "2024",
+    description: "Built CareerZen - a blockchain-based career verification platform using NFTs to authenticate work history and enable anonymous professional networking.",
+    achievements: [
+      "Created career NFT system for verified work history and certifications",
+      "Implemented privacy-preserving profile sharing with approval mechanism",
+      "Built anonymous professional networking features for Asian job market needs",
+      "Tackled gasless transaction implementation with ecrecover signature verification",
+      "Enabled third-party career validation from mentors, hackathons, and instructors"
+    ],
+    skills: ["Solidity", "NFT", "Smart Contracts", "Privacy Solutions"],
+    logo: "/logos/ethcon-korea.png",
+    type: "hackathon",
+    website: "https://devfolio.co/projects/careerzen-c34f"
   }
 ];
