@@ -1,0 +1,27 @@
+<svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- TASC text -->
+  <text x="100" y="40" 
+        font-family="Arial, sans-serif" 
+        font-size="36" 
+        font-weight="bold" 
+        text-anchor="middle" 
+        fill="white" 
+        stroke="black" 
+        stroke-width="2" 
+        stroke-linejoin="round">
+    TASC
+  </text>
+  
+  <!-- STUDIO text -->
+  <text x="100" y="80" 
+        font-family="Arial, sans-serif" 
+        font-size="32" 
+        font-weight="bold" 
+        text-anchor="middle" 
+        fill="white" 
+        stroke="black" 
+        stroke-width="2" 
+        stroke-linejoin="round">
+    STUDIO
+  </text>
+</svg>
