@@ -5,9 +5,11 @@ import { personalInfo } from "@/lib/data";
 import { useScrollAnimation, getAnimationClass } from "@/lib/hooks/useScrollAnimation";
 import AnimatedTitle from "@/components/AnimatedTitle";
 import { useLanguage } from "@/lib/context/LanguageContext";
+import { useTheme } from "@/lib/context/ThemeContext";
 
 export default function AboutSection() {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
   const text1Animation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 100 });
   const text2Animation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
@@ -37,7 +39,11 @@ export default function AboutSection() {
         <div className="space-y-6">
           <div 
             ref={text1Animation.ref}
-            className={`relative p-6 rounded-xl bg-gradient-to-r from-[rgba(59,130,246,0.25)] to-[rgba(147,51,234,0.25)] backdrop-blur-md border border-[rgba(255,255,255,0.2)] group hover:border-[rgba(59,130,246,0.4)] transition-all duration-300 ${getAnimationClass(text1Animation.isVisible, 'fadeInLeft')}`}
+            className={`relative p-6 rounded-xl backdrop-blur-md group transition-all duration-300 ${
+              theme === 'theme-light'
+                ? 'bg-gradient-to-r from-[rgba(59,130,246,0.15)] to-[rgba(147,51,234,0.15)] border border-[rgba(0,0,0,0.1)] hover:border-[rgba(59,130,246,0.4)]'
+                : 'bg-gradient-to-r from-[rgba(59,130,246,0.25)] to-[rgba(147,51,234,0.25)] border border-[rgba(255,255,255,0.2)] hover:border-[rgba(59,130,246,0.4)]'
+            } ${getAnimationClass(text1Animation.isVisible, 'fadeInLeft')}`}
           >
             <div className="absolute top-4 left-4 text-2xl opacity-50 group-hover:opacity-70 transition-opacity">
               🎯
@@ -52,7 +58,11 @@ export default function AboutSection() {
           
           <div 
             ref={text2Animation.ref}
-            className={`relative p-6 rounded-xl bg-gradient-to-r from-[rgba(236,72,153,0.25)] to-[rgba(239,68,68,0.25)] backdrop-blur-md border border-[rgba(255,255,255,0.2)] group hover:border-[rgba(236,72,153,0.4)] transition-all duration-300 ${getAnimationClass(text2Animation.isVisible, 'fadeInRight')}`}
+            className={`relative p-6 rounded-xl backdrop-blur-md group transition-all duration-300 ${
+              theme === 'theme-light'
+                ? 'bg-gradient-to-r from-[rgba(236,72,153,0.15)] to-[rgba(239,68,68,0.15)] border border-[rgba(0,0,0,0.1)] hover:border-[rgba(236,72,153,0.4)]'
+                : 'bg-gradient-to-r from-[rgba(236,72,153,0.25)] to-[rgba(239,68,68,0.25)] border border-[rgba(255,255,255,0.2)] hover:border-[rgba(236,72,153,0.4)]'
+            } ${getAnimationClass(text2Animation.isVisible, 'fadeInRight')}`}
           >
             <div className="absolute top-4 left-4 text-2xl opacity-50 group-hover:opacity-70 transition-opacity">
               ⚡
@@ -64,7 +74,11 @@ export default function AboutSection() {
           
           <div 
             ref={text3Animation.ref}
-            className={`relative p-6 rounded-xl bg-gradient-to-r from-[rgba(34,197,94,0.25)] to-[rgba(59,130,246,0.25)] backdrop-blur-md border border-[rgba(255,255,255,0.2)] group hover:border-[rgba(34,197,94,0.4)] transition-all duration-300 ${getAnimationClass(text3Animation.isVisible, 'fadeInLeft')}`}
+            className={`relative p-6 rounded-xl backdrop-blur-md group transition-all duration-300 ${
+              theme === 'theme-light'
+                ? 'bg-gradient-to-r from-[rgba(34,197,94,0.15)] to-[rgba(59,130,246,0.15)] border border-[rgba(0,0,0,0.1)] hover:border-[rgba(34,197,94,0.4)]'
+                : 'bg-gradient-to-r from-[rgba(34,197,94,0.25)] to-[rgba(59,130,246,0.25)] border border-[rgba(255,255,255,0.2)] hover:border-[rgba(34,197,94,0.4)]'
+            } ${getAnimationClass(text3Animation.isVisible, 'fadeInLeft')}`}
           >
             <div className="absolute top-4 left-4 text-2xl opacity-50 group-hover:opacity-70 transition-opacity">
               🌱
@@ -77,7 +91,11 @@ export default function AboutSection() {
         
         <div 
           ref={cardAnimation.ref}
-          className={`mt-8 bg-gradient-to-br from-[rgba(255,255,255,0.15)] to-[rgba(255,255,255,0.05)] backdrop-blur-md border border-[rgba(255,255,255,0.2)] rounded-xl p-6 shadow-lg ${getAnimationClass(cardAnimation.isVisible, 'scaleIn')}`}
+          className={`mt-8 backdrop-blur-md rounded-xl p-6 shadow-lg ${
+            theme === 'theme-light'
+              ? 'bg-gradient-to-br from-[rgba(0,0,0,0.08)] to-[rgba(0,0,0,0.03)] border border-[rgba(0,0,0,0.1)]'
+              : 'bg-gradient-to-br from-[rgba(255,255,255,0.15)] to-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.2)]'
+          } ${getAnimationClass(cardAnimation.isVisible, 'scaleIn')}`}
         >
           <h3 className="text-xl font-medium mb-5 flex items-center light-text">
             <span className="inline-block w-8 h-8 mr-3 rounded-full bg-[var(--primary-400)] bg-opacity-20 flex items-center justify-center">
@@ -92,7 +110,11 @@ export default function AboutSection() {
           <div className="space-y-4 light-text">
             <div 
               ref={item1Animation.ref}
-              className={`flex items-start p-3 rounded-lg transition-all duration-300 hover:bg-[rgba(255,255,255,0.05)] group ${getAnimationClass(item1Animation.isVisible, 'fadeInRight')}`}
+              className={`flex items-start p-3 rounded-lg transition-all duration-300 group ${
+                theme === 'theme-light'
+                  ? 'hover:bg-[rgba(0,0,0,0.05)]'
+                  : 'hover:bg-[rgba(255,255,255,0.05)]'
+              } ${getAnimationClass(item1Animation.isVisible, 'fadeInRight')}`}
             >
               <span className="text-2xl mr-3 shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
                 🔒
@@ -101,7 +123,7 @@ export default function AboutSection() {
             </div>
             <div 
               ref={item2Animation.ref}
-              className={`flex items-start p-3 rounded-lg transition-all duration-300 hover:bg-[rgba(255,255,255,0.05)] group ${getAnimationClass(item2Animation.isVisible, 'fadeInLeft')}`}
+              className={`flex items-start p-3 rounded-lg transition-all duration-300 group ${theme === 'theme-light' ? 'hover:bg-[rgba(0,0,0,0.05)]' : 'hover:bg-[rgba(255,255,255,0.05)]'} ${getAnimationClass(item2Animation.isVisible, 'fadeInLeft')}`}
             >
               <span className="text-2xl mr-3 shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
                 🚀
@@ -110,7 +132,7 @@ export default function AboutSection() {
             </div>
             <div 
               ref={item3Animation.ref}
-              className={`flex items-start p-3 rounded-lg transition-all duration-300 hover:bg-[rgba(255,255,255,0.05)] group ${getAnimationClass(item3Animation.isVisible, 'fadeInRight')}`}
+              className={`flex items-start p-3 rounded-lg transition-all duration-300 group ${theme === 'theme-light' ? 'hover:bg-[rgba(0,0,0,0.05)]' : 'hover:bg-[rgba(255,255,255,0.05)]'} ${getAnimationClass(item3Animation.isVisible, 'fadeInRight')}`}
             >
               <span className="text-2xl mr-3 shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
                 🔍
@@ -119,14 +141,14 @@ export default function AboutSection() {
             </div>
             <div 
               ref={item4Animation.ref}
-              className={`flex items-start p-3 rounded-lg transition-all duration-300 hover:bg-[rgba(255,255,255,0.05)] group ${getAnimationClass(item4Animation.isVisible, 'fadeInLeft')}`}
+              className={`flex items-start p-3 rounded-lg transition-all duration-300 group ${theme === 'theme-light' ? 'hover:bg-[rgba(0,0,0,0.05)]' : 'hover:bg-[rgba(255,255,255,0.05)]'} ${getAnimationClass(item4Animation.isVisible, 'fadeInLeft')}`}
             >
               <span className="text-2xl mr-3 shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
                 💎
               </span>
               <span className="leading-tight">{t('about.item4')}</span>
             </div>
-            <div className="flex items-start p-3 rounded-lg transition-all duration-300 hover:bg-[rgba(255,255,255,0.05)] group">
+            <div className={`flex items-start p-3 rounded-lg transition-all duration-300 group ${theme === 'theme-light' ? 'hover:bg-[rgba(0,0,0,0.05)]' : 'hover:bg-[rgba(255,255,255,0.05)]'}`}>
               <span className="text-2xl mr-3 shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
                 💻
               </span>

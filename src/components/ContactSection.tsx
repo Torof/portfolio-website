@@ -4,16 +4,22 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useScrollAnimation, getAnimationClass } from "@/lib/hooks/useScrollAnimation";
 import { useLanguage } from "@/lib/context/LanguageContext";
+import { useTheme } from "@/lib/context/ThemeContext";
 
 export default function ContactSection() {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
   const textAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 100 });
   const centralCardAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
   const buttonAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 400 });
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155] border-b border-slate-700" style={{ minHeight: '90vh' }}>
+    <section className={`relative overflow-hidden border-b ${
+      theme === 'theme-light'
+        ? 'bg-gradient-to-br from-[#f8fafc] via-[#f1f5f9] to-[#e2e8f0] border-slate-300'
+        : 'bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155] border-slate-700'
+    }`} style={{ minHeight: '90vh' }}>
       {/* Animated particles background */}
       <div className="absolute inset-0">
         {[...Array(50)].map((_, i) => {

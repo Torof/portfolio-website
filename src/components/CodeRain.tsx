@@ -2,7 +2,11 @@
 
 import { useEffect, useRef } from "react";
 
-export default function CodeRain() {
+interface CodeRainProps {
+  theme?: string;
+}
+
+export default function CodeRain({ theme = 'theme-dark' }: CodeRainProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -74,7 +78,9 @@ export default function CodeRain() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       // Set dark grey background
-      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+      ctx.fillStyle = theme === 'theme-light' 
+        ? 'rgba(248, 250, 252, 0.85)'  // Light gray for light theme
+        : 'rgba(15, 23, 42, 0.85)';    // Dark blue for dark theme
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       // Set text properties
@@ -139,7 +145,7 @@ export default function CodeRain() {
       clearInterval(intervalId);
       window.removeEventListener("resize", resizeCanvas);
     };
-  }, []);
+  }, [theme]);
 
   return (
     <canvas

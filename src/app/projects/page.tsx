@@ -7,11 +7,13 @@ import GitHubMetrics from '@/components/GitHubMetrics';
 import { fetchProjectsFromGitHub } from '@/lib/services/projects';
 import { fetchGitHubStats } from '@/lib/services/github';
 import { useLanguage } from '@/lib/context/LanguageContext';
+import { useTheme } from '@/lib/context/ThemeContext';
 import { Project } from '@/lib/types';
 import { GitHubStats } from '@/lib/services/github';
 
 export default function ProjectsPage() {
   const { t, language } = useLanguage();
+  const { theme } = useTheme();
   const [projects, setProjects] = useState<Project[]>([]);
   const [githubStats, setGithubStats] = useState<GitHubStats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -36,10 +38,14 @@ export default function ProjectsPage() {
   }, [language]);
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-[#0f1729] to-[#1e293b] border-b border-[rgba(255,255,255,0.05)]">
+    <div className={`relative min-h-screen border-b ${
+      theme === 'theme-light'
+        ? 'bg-gradient-to-b from-[#f8fafc] to-[#f1f5f9] border-[rgba(0,0,0,0.05)]'
+        : 'bg-gradient-to-b from-[#0f1729] to-[#1e293b] border-[rgba(255,255,255,0.05)]'
+    }`}>
       {/* Code Rain Background - Fixed to cover full viewport */}
       <div className="fixed inset-0 z-0">
-        <CodeRain />
+        <CodeRain theme={theme} />
       </div>
       
       <div className="relative z-10 container-custom py-16">
