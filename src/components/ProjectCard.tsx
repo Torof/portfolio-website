@@ -2,12 +2,14 @@
 
 import Image from 'next/image';
 import { Project } from "@/lib/types";
+import { useTheme } from '@/lib/context/ThemeContext';
 
 interface ProjectCardProps {
   project: Project;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  const { theme } = useTheme();
   const CardWrapper = project.githubUrl ? 'a' : 'div';
   const cardProps = project.githubUrl ? {
     href: project.githubUrl,
@@ -18,7 +20,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
     <CardWrapper 
       {...cardProps}
-      className="group block rounded-xl overflow-hidden border border-[rgba(255,255,255,0.1)] mb-6 w-full backdrop-blur-md bg-[rgba(15,23,42,0.7)] theme-light-card transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[rgba(124,58,237,0.3)] hover:border-[rgba(124,58,237,0.4)] cursor-pointer"
+      className={`group block rounded-xl overflow-hidden border mb-6 w-full backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer ${
+        theme === 'theme-light'
+          ? 'bg-[rgba(255,255,255,0.95)] border-[rgba(0,0,0,0.1)] hover:shadow-[rgba(124,58,237,0.2)] hover:border-[rgba(124,58,237,0.3)]'
+          : 'bg-[rgba(15,23,42,0.7)] border-[rgba(255,255,255,0.1)] hover:shadow-[rgba(124,58,237,0.3)] hover:border-[rgba(124,58,237,0.4)]'
+      }`}
     >
       <div className="h-48 relative overflow-hidden project-card-image">
         {/* Project thumbnail with fallback */}
@@ -43,19 +49,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         
         {/* Project name overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-transparent flex items-end transition-all duration-300 group-hover:from-[rgba(124,58,237,0.8)]">
-          <h3 className="text-xl font-semibold p-4 transition-all duration-300 group-hover:text-white group-hover:transform group-hover:translate-y-[-4px]">{project.title}</h3>
+          <h3 className="text-xl font-semibold p-4 text-white transition-all duration-300 group-hover:transform group-hover:translate-y-[-4px]">{project.title}</h3>
         </div>
       </div>
       
       <div className="p-6 flex-grow">
-        <p className="text-[var(--dark-200)] mb-4 transition-colors duration-300 group-hover:text-[var(--dark-100)]">
+        <p className={`mb-4 transition-colors duration-300 ${
+          theme === 'theme-light'
+            ? 'text-gray-700 group-hover:text-gray-900'
+            : 'text-[var(--dark-200)] group-hover:text-[var(--dark-100)]'
+        }`}>
           {project.longDescription || project.description}
         </p>
         <div className="flex flex-wrap gap-2 mb-4">
           {project.technologies.map((tech: string) => (
             <span 
               key={tech} 
-              className="px-2 py-1 text-xs bg-[rgba(124,58,237,0.1)] text-[var(--secondary-300)] rounded-full transition-all duration-300 group-hover:bg-[rgba(124,58,237,0.2)] group-hover:text-[var(--secondary-200)] group-hover:scale-105"
+              className={`px-2 py-1 text-xs rounded-full transition-all duration-300 group-hover:scale-105 ${
+                theme === 'theme-light'
+                  ? 'bg-[rgba(124,58,237,0.15)] text-purple-700 group-hover:bg-[rgba(124,58,237,0.25)] group-hover:text-purple-800'
+                  : 'bg-[rgba(124,58,237,0.1)] text-[var(--secondary-300)] group-hover:bg-[rgba(124,58,237,0.2)] group-hover:text-[var(--secondary-200)]'
+              }`}
             >
               {tech}
             </span>
@@ -64,7 +78,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         
         <div className="flex gap-4 mt-8">
           {project.githubUrl && (
-            <span className="flex items-center text-[var(--dark-200)] group-hover:text-[var(--secondary-400)] transition-all duration-300">
+            <span className={`flex items-center transition-all duration-300 ${
+              theme === 'theme-light'
+                ? 'text-gray-600 group-hover:text-purple-600'
+                : 'text-[var(--dark-200)] group-hover:text-[var(--secondary-400)]'
+            }`}>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 transition-transform duration-300 group-hover:rotate-12">
                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
               </svg>
@@ -77,7 +95,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center text-[var(--dark-200)] hover:text-[var(--secondary-400)] transition-all duration-300 hover:scale-110 hover:translate-x-1 z-10 relative"
+              className={`flex items-center transition-all duration-300 hover:scale-110 hover:translate-x-1 z-10 relative ${
+                theme === 'theme-light'
+                  ? 'text-gray-600 hover:text-purple-600'
+                  : 'text-[var(--dark-200)] hover:text-[var(--secondary-400)]'
+              }`}
               onClick={(e) => e.stopPropagation()}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 transition-transform duration-300 group-hover:rotate-12">

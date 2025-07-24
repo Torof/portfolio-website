@@ -6,6 +6,7 @@ import ContributionGraph from './ContributionGraph';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/context/LanguageContext';
+import { useTheme } from '@/lib/context/ThemeContext';
 
 interface GitHubMetricsProps {
   stats: GitHubStats | null;
@@ -14,6 +15,7 @@ interface GitHubMetricsProps {
 
 const GitHubMetrics: React.FC<GitHubMetricsProps> = ({ stats }) => {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -23,13 +25,17 @@ const GitHubMetrics: React.FC<GitHubMetricsProps> = ({ stats }) => {
 
   if (!stats) {
     return (
-      <div className="w-full bg-gradient-to-br from-[rgba(15,23,42,0.8)] to-[rgba(30,41,59,0.8)] rounded-xl border border-[rgba(255,255,255,0.1)] p-8">
+      <div className={`w-full rounded-xl border-2 p-8 ${
+        theme === 'theme-light'
+          ? 'bg-white shadow-lg border-gray-200'
+          : 'bg-gray-900 shadow-2xl shadow-black/20 border-gray-700'
+      }`}>
         <div className="flex items-center justify-center h-32">
           <div className="flex items-center space-x-2">
             <div className="w-2 h-2 bg-[var(--primary-400)] rounded-full animate-pulse"></div>
             <div className="w-2 h-2 bg-[var(--secondary-400)] rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
             <div className="w-2 h-2 bg-[var(--primary-400)] rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-            <span className="ml-4 text-[var(--dark-200)]">{t('projects.loading')}</span>
+            <span className={`ml-4 ${theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-200)]'}`}>{t('projects.loading')}</span>
           </div>
         </div>
       </div>
@@ -45,8 +51,11 @@ const GitHubMetrics: React.FC<GitHubMetricsProps> = ({ stats }) => {
         className={`
           transition-all duration-700 
           ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
-          bg-gradient-to-br from-[rgba(15,23,42,0.8)] to-[rgba(30,41,59,0.8)]
-          rounded-xl border border-[rgba(255,255,255,0.1)] p-6
+          ${theme === 'theme-light'
+            ? 'bg-white shadow-lg border-gray-200'
+            : 'bg-gray-900 shadow-2xl shadow-black/20 border-gray-700'
+          }
+          rounded-xl border-2 p-6
           backdrop-blur-sm mb-8
         `}
         style={{ transitionDelay: '300ms' }}
@@ -54,8 +63,14 @@ const GitHubMetrics: React.FC<GitHubMetricsProps> = ({ stats }) => {
         <div className="flex items-center gap-8">
           {/* Compact Language Stats */}
           {stats.topLanguages.length > 0 && (
-            <div className="flex-1">
-              <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
+            <div className={`flex-1 p-4 rounded-lg ${
+              theme === 'theme-light'
+                ? 'bg-gradient-to-br from-gray-50 to-blue-50/30'
+                : 'bg-gradient-to-br from-gray-800/50 to-purple-900/20'
+            }`}>
+              <h3 className={`text-lg font-bold mb-4 flex items-center ${
+                theme === 'theme-light' ? 'text-gray-800' : 'text-white'
+              }`}>
                 <span className="text-xl mr-2">🛠️</span>
                 {t('github.topLanguages')}
               </h3>
@@ -65,29 +80,42 @@ const GitHubMetrics: React.FC<GitHubMetricsProps> = ({ stats }) => {
                   <div key={language.name} className="flex items-center">
                     {/* Language color indicator */}
                     <div 
-                      className="w-3 h-3 rounded-full mr-3 flex-shrink-0"
+                      className={`w-3 h-3 rounded-full mr-3 flex-shrink-0 ring-2 ${
+                        theme === 'theme-light' ? 'ring-gray-300' : 'ring-gray-600'
+                      }`}
                       style={{ backgroundColor: language.color }}
                     ></div>
                     
                     {/* Language name */}
-                    <span className="text-sm font-medium text-[var(--dark-100)] min-w-0 flex-shrink-0 w-20">
+                    <span className={`text-sm font-semibold min-w-0 flex-shrink-0 w-20 ${
+                      theme === 'theme-light' ? 'text-gray-900' : 'text-white'
+                    }`}>
                       {language.name}
                     </span>
                     
                     {/* Compact progress bar */}
-                    <div className="flex-1 mx-3 bg-[rgba(255,255,255,0.1)] rounded-full h-2 max-w-32 overflow-hidden">
+                    <div className={`flex-1 mx-3 rounded-full h-3 max-w-32 overflow-hidden ${
+                      theme === 'theme-light' 
+                        ? 'bg-gray-200 ring-1 ring-gray-300' 
+                        : 'bg-gray-800 ring-1 ring-gray-600'
+                    }`}>
                       <div 
-                        className="h-full rounded-full transition-all duration-1000 ease-out"
+                        className="h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden"
                         style={{ 
                           backgroundColor: language.color,
                           width: isVisible ? `${language.percentage}%` : '0%',
                           transitionDelay: `${500 + index * 100}ms`
                         }}
-                      ></div>
+                      >
+                        {/* Subtle shine effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-pulse"></div>
+                      </div>
                     </div>
                     
                     {/* Percentage */}
-                    <span className="text-sm text-[var(--dark-300)] font-mono flex-shrink-0">
+                    <span className={`text-sm font-bold font-mono flex-shrink-0 ${
+                      theme === 'theme-light' ? 'text-gray-800' : 'text-gray-200'
+                    }`}>
                       {language.percentage}%
                     </span>
                   </div>
@@ -110,7 +138,11 @@ const GitHubMetrics: React.FC<GitHubMetricsProps> = ({ stats }) => {
                   <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[var(--primary-400)] to-[var(--secondary-400)] opacity-20 blur-sm group-hover:opacity-40 transition-opacity duration-300"></div>
                   
                   {/* Profile image container */}
-                  <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-[rgba(255,255,255,0.2)] group-hover:border-[rgba(255,255,255,0.4)] transition-all duration-300 group-hover:scale-105">
+                  <div className={`relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-2 transition-all duration-300 group-hover:scale-105 ${
+                    theme === 'theme-light' 
+                      ? 'border-[rgba(0,0,0,0.2)] group-hover:border-[rgba(0,0,0,0.4)]'
+                      : 'border-[rgba(255,255,255,0.2)] group-hover:border-[rgba(255,255,255,0.4)]'
+                  }`}>
                     <Image
                       src={stats.user.avatar_url}
                       alt={`${stats.user.name || stats.user.login} GitHub Avatar`}
@@ -141,11 +173,15 @@ const GitHubMetrics: React.FC<GitHubMetricsProps> = ({ stats }) => {
 
                   {/* GitHub username */}
                   <div className="text-center mt-3">
-                    <p className="text-sm font-medium text-[var(--dark-100)] group-hover:text-[var(--primary-400)] transition-colors duration-300">
+                    <p className={`text-sm font-medium group-hover:text-[var(--primary-400)] transition-colors duration-300 ${
+                      theme === 'theme-light' ? 'text-gray-700' : 'text-[var(--dark-100)]'
+                    }`}>
                       @{stats.user.login}
                     </p>
                     {stats.user.name && (
-                      <p className="text-xs text-[var(--dark-300)] mt-1">
+                      <p className={`text-xs mt-1 ${
+                        theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-300)]'
+                      }`}>
                         {stats.user.name}
                       </p>
                     )}

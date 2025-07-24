@@ -5,14 +5,20 @@ import { personalInfo, socialLinks } from '@/lib/data/personalInfo';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/context/LanguageContext';
+import { useTheme } from '@/lib/context/ThemeContext';
 
 export default function ContactPage() {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   return (
     <>
       {/* Background Effects */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0f1729] to-[#1e293b] opacity-90"></div>
+        <div className={`absolute inset-0 opacity-90 ${
+          theme === 'theme-light'
+            ? 'bg-gradient-to-br from-gray-50 to-gray-100'
+            : 'bg-gradient-to-br from-[#0f1729] to-[#1e293b]'
+        }`}></div>
         {/* Floating particles */}
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(20)].map((_, i) => {
@@ -26,7 +32,9 @@ export default function ContactPage() {
             return (
               <div
                 key={i}
-                className="absolute rounded-full bg-blue-400 opacity-20"
+                className={`absolute rounded-full opacity-20 ${
+                  theme === 'theme-light' ? 'bg-blue-500' : 'bg-blue-400'
+                }`}
                 style={{
                   left: `${left}%`,
                   top: `${top}%`,

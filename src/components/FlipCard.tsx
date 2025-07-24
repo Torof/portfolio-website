@@ -1,6 +1,7 @@
 'use client';
 
 import React, { ReactNode, useState } from 'react';
+import { useTheme } from '@/lib/context/ThemeContext';
 
 interface FlipCardProps {
   frontContent: ReactNode;
@@ -16,6 +17,7 @@ const FlipCard: React.FC<FlipCardProps> = ({
   colorScheme = 'experience' 
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const { theme } = useTheme();
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -94,10 +96,10 @@ const FlipCard: React.FC<FlipCardProps> = ({
         }
         
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: rgba(0, 0, 0, 0.3);
+          background: ${theme === 'theme-light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(0, 0, 0, 0.3)'};
           border-radius: 6px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+          border: 1px solid ${theme === 'theme-light' ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.2)'};
+          box-shadow: inset 0 0 6px ${theme === 'theme-light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(0, 0, 0, 0.3)'};
           margin: 5px 0;
         }
         
@@ -106,9 +108,9 @@ const FlipCard: React.FC<FlipCardProps> = ({
             ${colorScheme === 'experience' ? '#3b82f6' : '#DAA520'}, 
             ${colorScheme === 'experience' ? '#9333ea' : '#FFD700'});
           border-radius: 6px;
-          border: 2px solid rgba(255, 255, 255, 0.4);
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4),
-                      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+          border: 2px solid ${theme === 'theme-light' ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.4)'};
+          box-shadow: 0 2px 6px ${theme === 'theme-light' ? 'rgba(0, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.4)'},
+                      inset 0 1px 0 ${theme === 'theme-light' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.3)'};
           transition: all 0.3s ease;
           min-height: 30px;
         }

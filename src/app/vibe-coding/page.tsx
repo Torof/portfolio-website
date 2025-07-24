@@ -4,9 +4,11 @@ import Image from "next/image";
 import AnimatedTitle from "@/components/AnimatedTitle";
 import { useScrollAnimation, getAnimationClass } from "@/lib/hooks/useScrollAnimation";
 import { useLanguage } from "@/lib/context/LanguageContext";
+import { useTheme } from "@/lib/context/ThemeContext";
 
 export default function VibeCodingPage() {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
   const heroAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
   const workflowAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 100 });
@@ -14,7 +16,11 @@ export default function VibeCodingPage() {
   const productivityAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 100 });
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800">
+    <div className={`min-h-screen relative overflow-hidden ${
+      theme === 'theme-light'
+        ? 'bg-gradient-to-br from-orange-50 via-red-50 to-yellow-50'
+        : 'bg-gradient-to-br from-gray-900 via-black to-gray-800'
+    }`}>
       {/* Flame Curves on Left Side */}
       <div className="absolute left-0 top-0 w-1/2 h-full overflow-hidden">
         {/* Left flame curve extending to bottom */}
@@ -55,7 +61,7 @@ export default function VibeCodingPage() {
               </AnimatedTitle>
               <div className="flex items-center justify-center space-x-4 text-2xl md:text-3xl font-bold">
                 <span className="text-orange-300">{t('vibe-coding.blockchainDev')}</span>
-                <span className="text-white">×</span>
+                <span className={theme === 'theme-light' ? 'text-gray-700' : 'text-white'}>×</span>
                 <span className="text-red-300">{t('vibe-coding.aiAcceleration')}</span>
               </div>
             </div>
@@ -69,10 +75,10 @@ export default function VibeCodingPage() {
                   <span className="text-white font-semibold">🔥 {t('vibe-coding.description')}</span>
                 </div>
                 <div className="mt-4 space-y-6">
-                  <p className="text-xl text-white leading-relaxed">
+                  <p className={`text-xl leading-relaxed ${theme === 'theme-light' ? 'text-gray-800' : 'text-white'}`}>
                     <strong>{t('vibe-coding.title')}</strong> {t('vibe-coding.approach')}
                   </p>
-                  <p className="text-lg text-gray-100 leading-relaxed">
+                  <p className={`text-lg leading-relaxed ${theme === 'theme-light' ? 'text-gray-700' : 'text-gray-100'}`}>
                     {t('vibe-coding.whileIArchitect')}
                   </p>
                 </div>
@@ -103,7 +109,7 @@ export default function VibeCodingPage() {
                   <div className="w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center mr-4 shadow-lg">
                     <span className="text-2xl">🧠</span>
                   </div>
-                  <h3 className="text-2xl font-bold text-white">{t('vibe-coding.coreExpertise')}</h3>
+                  <h3 className={`text-2xl font-bold ${theme === 'theme-light' ? 'text-gray-800' : 'text-white'}`}>{t('vibe-coding.coreExpertise')}</h3>
                 </div>
                 <ul className="space-y-3">
                   {[
@@ -116,7 +122,7 @@ export default function VibeCodingPage() {
                   ].map((key, index) => (
                     <li key={index} className="flex items-start">
                       <span className="text-orange-400 mr-3 mt-1">🔥</span>
-                      <span className="text-gray-100">{t(key)}</span>
+                      <span className={theme === 'theme-light' ? 'text-gray-700' : 'text-gray-100'}>{t(key)}</span>
                     </li>
                   ))}
                 </ul>
@@ -128,7 +134,7 @@ export default function VibeCodingPage() {
                   <div className="w-12 h-12 rounded-full bg-gradient-to-r from-red-500 to-pink-500 flex items-center justify-center mr-4 shadow-lg">
                     <span className="text-2xl">🚀</span>
                   </div>
-                  <h3 className="text-2xl font-bold text-white">{t('vibe-coding.aiPowered')} Development</h3>
+                  <h3 className={`text-2xl font-bold ${theme === 'theme-light' ? 'text-gray-800' : 'text-white'}`}>{t('vibe-coding.aiPowered')} Development</h3>
                 </div>
                 <ul className="space-y-3">
                   {[
@@ -141,7 +147,7 @@ export default function VibeCodingPage() {
                   ].map((key, index) => (
                     <li key={index} className="flex items-start">
                       <span className="text-red-400 mr-3 mt-1">⚡</span>
-                      <span className="text-gray-100">{t(key)}</span>
+                      <span className={theme === 'theme-light' ? 'text-gray-700' : 'text-gray-100'}>{t(key)}</span>
                     </li>
                   ))}
                 </ul>
@@ -164,7 +170,7 @@ export default function VibeCodingPage() {
               <AnimatedTitle variant="gradient" className="text-4xl md:text-5xl text-center mb-8">
                 🔥 {t('vibe-coding.aiArsenal')}
               </AnimatedTitle>
-              <p className="text-center text-xl text-gray-200 max-w-3xl mx-auto">
+              <p className={`text-center text-xl max-w-3xl mx-auto ${theme === 'theme-light' ? 'text-gray-600' : 'text-gray-200'}`}>
                 {t('vibe-coding.arsenalSubtitle')}
               </p>
             </div>
@@ -218,8 +224,8 @@ export default function VibeCodingPage() {
                       className="w-full h-full object-contain filter brightness-110"
                     />
                   </div>
-                  <h4 className="text-xl font-semibold text-white mb-3">{t(tool.nameKey)}</h4>
-                  <p className="text-sm text-gray-200 leading-relaxed">{t(tool.descKey)}</p>
+                  <h4 className={`text-xl font-semibold mb-3 ${theme === 'theme-light' ? 'text-gray-800' : 'text-white'}`}>{t(tool.nameKey)}</h4>
+                  <p className={`text-sm leading-relaxed ${theme === 'theme-light' ? 'text-gray-600' : 'text-gray-200'}`}>{t(tool.descKey)}</p>
                   {/* Flame accent */}
                   <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-orange-500/50 to-transparent group-hover:via-orange-500 transition-all"></div>
                 </div>
@@ -275,8 +281,8 @@ export default function VibeCodingPage() {
                     <div className="text-5xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent mb-2">
                       {stat.metric}
                     </div>
-                    <h4 className="text-xl font-semibold text-white mb-3">{stat.label}</h4>
-                    <p className="text-sm text-gray-200">{stat.description}</p>
+                    <h4 className={`text-xl font-semibold mb-3 ${theme === 'theme-light' ? 'text-gray-800' : 'text-white'}`}>{stat.label}</h4>
+                    <p className={`text-sm ${theme === 'theme-light' ? 'text-gray-600' : 'text-gray-200'}`}>{stat.description}</p>
                     {/* Flame glow effect */}
                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-500/5 to-red-500/5 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
@@ -286,9 +292,15 @@ export default function VibeCodingPage() {
             </div>
 
             <div className="mt-16 text-center">
-              <div className="inline-block p-6 rounded-xl bg-gradient-to-r from-orange-500/25 via-red-500/20 to-yellow-500/25 backdrop-blur-sm border border-orange-400/40 shadow-xl">
-                <p className="text-2xl text-white">
-                  <span className="text-orange-300 font-semibold">🔥 {t('vibe-coding.result')}</span>
+              <div className={`inline-block p-6 rounded-xl backdrop-blur-sm shadow-xl ${
+                theme === 'theme-light'
+                  ? 'bg-gradient-to-r from-orange-100 via-red-100 to-yellow-100 border border-orange-300'
+                  : 'bg-gradient-to-r from-orange-500/25 via-red-500/20 to-yellow-500/25 border border-orange-400/40'
+              }`}>
+                <p className={`text-2xl ${theme === 'theme-light' ? 'text-gray-800' : 'text-white'}`}>
+                  <span className={`font-semibold ${
+                    theme === 'theme-light' ? 'text-orange-600' : 'text-orange-300'
+                  }`}>🔥 {t('vibe-coding.result')}</span>
                 </p>
               </div>
             </div>

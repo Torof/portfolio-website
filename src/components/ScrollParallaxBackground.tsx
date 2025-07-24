@@ -4,13 +4,15 @@ import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Line, Box, Edges } from '@react-three/drei';
 import * as THREE from 'three';
+import { useTheme } from '@/lib/context/ThemeContext';
 
 interface FloatingCubeProps {
   position: [number, number, number];
   scale: number;
+  color: string;
 }
 
-function FloatingCube({ position, scale }: FloatingCubeProps) {
+function FloatingCube({ position, scale, color }: FloatingCubeProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   
   useFrame((state) => {
@@ -41,11 +43,11 @@ function FloatingCube({ position, scale }: FloatingCubeProps) {
         args={[scale, scale, scale]}
       >
         <meshBasicMaterial 
-          color="#0ea5e9" 
+          color={color} 
           transparent 
           opacity={0.1}
         />
-        <Edges color="#0ea5e9" linewidth={2} />
+        <Edges color={color} linewidth={2} />
       </Box>
     </group>
   );
@@ -54,9 +56,10 @@ function FloatingCube({ position, scale }: FloatingCubeProps) {
 interface ConnectionLineProps {
   start: [number, number, number];
   end: [number, number, number];
+  color: string;
 }
 
-function ConnectionLine({ start, end }: ConnectionLineProps) {
+function ConnectionLine({ start, end, color }: ConnectionLineProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const lineRef = useRef<any>(null);
   
@@ -93,7 +96,7 @@ function ConnectionLine({ start, end }: ConnectionLineProps) {
     <Line
       ref={lineRef}
       points={[start, end]}
-      color="#0ea5e9"
+      color={color}
       lineWidth={1}
       transparent
       opacity={0.15}
@@ -102,6 +105,11 @@ function ConnectionLine({ start, end }: ConnectionLineProps) {
 }
 
 function ParallaxScene() {
+  const { theme } = useTheme();
+  
+  // Theme-aware colors
+  const cubeColor = theme === 'theme-light' ? '#3b82f6' : '#0ea5e9';
+  const gridColor = theme === 'theme-light' ? '#60a5fa' : '#0ea5e9';
   
   // Generate random positions for cubes
   const cubePositions = useMemo(() => {
@@ -152,6 +160,7 @@ function ParallaxScene() {
           key={index}
           position={position}
           scale={0.3 + Math.random() * 0.4}
+          color={cubeColor}
         />
       ))}
       
@@ -161,12 +170,13 @@ function ParallaxScene() {
           key={index}
           start={connection.start}
           end={connection.end}
+          color={cubeColor}
         />
       ))}
       
       {/* Grid lines */}
       <gridHelper 
-        args={[30, 30, '#0ea5e9', '#0ea5e9']} 
+        args={[30, 30, gridColor, gridColor]} 
         position={[0, -8, 0]}
         material-opacity={0.05}
         material-transparent={true}

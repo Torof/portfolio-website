@@ -56,7 +56,9 @@ export default function ProjectsPage() {
               {t('projects.title')}
             </span>
           </h1>
-          <p className="text-lg text-[var(--dark-200)] max-w-3xl mx-auto">
+          <p className={`text-lg max-w-3xl mx-auto ${
+            theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-200)]'
+          }`}>
             {t('projects.subtitle')}
           </p>
         </div>
@@ -69,7 +71,9 @@ export default function ProjectsPage() {
                 {t('projects.githubStats')}
               </span>
             </h2>
-            <p className="text-[var(--dark-200)] max-w-2xl mx-auto">
+            <p className={`max-w-2xl mx-auto ${
+              theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-200)]'
+            }`}>
               {t('projects.githubStatsSubtitle')}
             </p>
           </div>
@@ -80,8 +84,10 @@ export default function ProjectsPage() {
         {loading ? (
           <div className="text-center py-16">
             <div className="text-6xl mb-4">🚧</div>
-            <h3 className="text-xl font-semibold mb-2 text-[var(--dark-100)]">{t('projects.loading')}</h3>
-            <p className="text-[var(--dark-200)]">
+            <h3 className={`text-xl font-semibold mb-2 ${
+              theme === 'theme-light' ? 'text-gray-800' : 'text-[var(--dark-100)]'
+            }`}>{t('projects.loading')}</h3>
+            <p className={theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-200)]'}>
               {t('projects.loadingDescription')}
             </p>
           </div>
@@ -94,8 +100,10 @@ export default function ProjectsPage() {
         ) : (
           <div className="text-center py-16">
             <div className="text-6xl mb-4">🚧</div>
-            <h3 className="text-xl font-semibold mb-2 text-[var(--dark-100)]">{t('projects.noProjects')}</h3>
-            <p className="text-[var(--dark-200)]">
+            <h3 className={`text-xl font-semibold mb-2 ${
+              theme === 'theme-light' ? 'text-gray-800' : 'text-[var(--dark-100)]'
+            }`}>{t('projects.noProjects')}</h3>
+            <p className={theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-200)]'}>
               {t('projects.noProjectsDescription')}
             </p>
           </div>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useTheme } from "@/lib/context/ThemeContext";
 
 interface Orb {
   id: number;
@@ -15,15 +16,24 @@ interface Orb {
 
 export default function FloatingOrbs() {
   const [orbs, setOrbs] = useState<Orb[]>([]);
+  const { theme } = useTheme();
 
   useEffect(() => {
-    const colors = [
-      "rgba(79, 70, 229, 0.3)",    // Primary blue
-      "rgba(139, 92, 246, 0.3)",   // Purple
-      "rgba(6, 182, 212, 0.3)",    // Cyan
-      "rgba(236, 72, 153, 0.3)",   // Pink
-      "rgba(16, 185, 129, 0.3)",   // Emerald
-    ];
+    const colors = theme === 'theme-light' 
+      ? [
+          "rgba(79, 70, 229, 0.2)",    // Primary blue (lighter)
+          "rgba(139, 92, 246, 0.2)",   // Purple (lighter)
+          "rgba(6, 182, 212, 0.2)",    // Cyan (lighter)
+          "rgba(236, 72, 153, 0.2)",   // Pink (lighter)
+          "rgba(16, 185, 129, 0.2)",   // Emerald (lighter)
+        ]
+      : [
+          "rgba(79, 70, 229, 0.3)",    // Primary blue
+          "rgba(139, 92, 246, 0.3)",   // Purple
+          "rgba(6, 182, 212, 0.3)",    // Cyan
+          "rgba(236, 72, 153, 0.3)",   // Pink
+          "rgba(16, 185, 129, 0.3)",   // Emerald
+        ];
 
     const generatedOrbs = Array.from({ length: 6 }, (_, i) => ({
       id: i,
@@ -36,7 +46,7 @@ export default function FloatingOrbs() {
     }));
 
     setOrbs(generatedOrbs);
-  }, []);
+  }, [theme]);
 
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none">

@@ -32,7 +32,11 @@ export default function HeroSection() {
       <div className="w-full relative z-10 px-4">
         <div className="max-w-6xl mx-auto">
           <div 
-            className="relative overflow-hidden rounded-xl p-8 transition-all duration-300 backdrop-blur-md bg-gradient-to-br from-[rgba(255,255,255,0.12)] to-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.25)] shadow-[0_8px_32px_rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.35)] hover:shadow-[0_8px_48px_rgba(255,255,255,0.15)]"
+            className={`relative overflow-hidden rounded-xl p-8 transition-all duration-300 backdrop-blur-md ${
+              theme === 'theme-light'
+                ? 'bg-gradient-to-br from-[rgba(255,255,255,0.95)] to-[rgba(248,250,252,0.9)] border border-[rgba(0,0,0,0.1)] shadow-[0_8px_32px_rgba(0,0,0,0.1)] hover:border-[rgba(0,0,0,0.2)] hover:shadow-[0_8px_48px_rgba(0,0,0,0.15)]'
+                : 'bg-gradient-to-br from-[rgba(255,255,255,0.12)] to-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.25)] shadow-[0_8px_32px_rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.35)] hover:shadow-[0_8px_48px_rgba(255,255,255,0.15)]'
+            }`}
           >
             <div className="flex flex-col md:flex-row items-center gap-12">
               {/* Content */}

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useTheme } from "@/lib/context/ThemeContext";
 
 interface AnimatedTitleProps {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ export default function AnimatedTitle({
   delay = 0 
 }: AnimatedTitleProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     setIsVisible(true);
@@ -111,7 +113,11 @@ export default function AnimatedTitle({
           animate={{ y: 0 }}
           transition={{ delay: delay + 0.2, duration: 0.8, type: "spring", damping: 15 }}
         >
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
+          <span className={`bg-clip-text text-transparent bg-gradient-to-r ${
+            theme === 'theme-light' 
+              ? 'from-gray-800 to-gray-600' 
+              : 'from-white to-gray-300'
+          }`}>
             {children}
           </span>
         </motion.h2>

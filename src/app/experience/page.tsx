@@ -7,9 +7,11 @@ import ScrollParallaxBackground from '@/components/ScrollParallaxBackground';
 import FloatingOrbs from '@/components/FloatingOrbs';
 import FlipCard from '@/components/FlipCard';
 import { useLanguage } from '@/lib/context/LanguageContext';
+import { useTheme } from '@/lib/context/ThemeContext';
 
 export default function ExperiencePage() {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   return (
     <>
       {/* Floating Orbs for Visual Interest */}
@@ -21,7 +23,11 @@ export default function ExperiencePage() {
       <div className="section">
         <div className="container-custom py-20">
           {/* Title Section */}
-          <div className="text-center mb-20 backdrop-blur-sm rounded-2xl p-12 bg-gradient-to-br from-[rgba(59,130,246,0.15)] to-[rgba(147,51,234,0.15)] dark:from-[rgba(59,130,246,0.1)] dark:to-[rgba(147,51,234,0.1)] border border-[rgba(59,130,246,0.2)] dark:border-[rgba(255,255,255,0.1)]">
+          <div className={`text-center mb-20 backdrop-blur-sm rounded-2xl p-12 border ${
+            theme === 'theme-light'
+              ? 'bg-gradient-to-br from-[rgba(59,130,246,0.1)] to-[rgba(147,51,234,0.1)] border-[rgba(59,130,246,0.3)]'
+              : 'bg-gradient-to-br from-[rgba(59,130,246,0.15)] to-[rgba(147,51,234,0.15)] border-[rgba(255,255,255,0.1)]'
+          }`}>
             <h1 className="text-6xl md:text-7xl font-black mb-6 tracking-tight">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary-400)] to-[var(--secondary-400)]">
                 {t('experience.title')}

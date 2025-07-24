@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useTheme } from '@/lib/context/ThemeContext';
 
 interface ContributionGraphProps {
   yearlyContributions: number;
@@ -12,6 +13,7 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
   className = '' 
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 500);
@@ -52,13 +54,21 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
   };
 
   const getContributionColor = (level: number) => {
-    const colors = [
-      'rgba(255, 255, 255, 0.05)', // No contributions
-      'rgba(99, 126, 234, 0.3)',   // Low (Ethereum blue)
-      'rgba(99, 126, 234, 0.5)',   // Medium-low
-      'rgba(99, 126, 234, 0.7)',   // Medium-high
-      'rgba(99, 126, 234, 0.9)'    // High
-    ];
+    const colors = theme === 'theme-light' 
+      ? [
+          'rgba(0, 0, 0, 0.05)',     // No contributions
+          'rgba(99, 126, 234, 0.4)', // Low (Ethereum blue)
+          'rgba(99, 126, 234, 0.6)', // Medium-low
+          'rgba(99, 126, 234, 0.8)', // Medium-high
+          'rgba(99, 126, 234, 1.0)'  // High
+        ]
+      : [
+          'rgba(255, 255, 255, 0.05)', // No contributions
+          'rgba(99, 126, 234, 0.3)',   // Low (Ethereum blue)
+          'rgba(99, 126, 234, 0.5)',   // Medium-low
+          'rgba(99, 126, 234, 0.7)',   // Medium-high
+          'rgba(99, 126, 234, 0.9)'    // High
+        ];
     return colors[level];
   };
 
@@ -67,7 +77,9 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
   return (
     <div className={`${className}`}>
       <div className="flex flex-col items-center">
-        <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
+        <h3 className={`text-lg font-semibold mb-4 flex items-center ${
+          theme === 'theme-light' ? 'text-gray-800' : 'text-white'
+        }`}>
           <span className="text-xl mr-2">📊</span>
           Contribution Activity
         </h3>
@@ -77,8 +89,11 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
           className={`
             transition-all duration-1000 
             ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
-            bg-gradient-to-br from-[rgba(15,23,42,0.6)] to-[rgba(30,41,59,0.6)]
-            rounded-lg p-4 border border-[rgba(255,255,255,0.1)]
+            ${theme === 'theme-light' 
+              ? 'bg-gradient-to-br from-[rgba(255,255,255,0.8)] to-[rgba(248,250,252,0.8)] border-[rgba(0,0,0,0.1)]'
+              : 'bg-gradient-to-br from-[rgba(15,23,42,0.6)] to-[rgba(30,41,59,0.6)] border-[rgba(255,255,255,0.1)]'
+            }
+            rounded-lg p-4 border 
             backdrop-blur-sm overflow-x-auto
           `}
         >
@@ -111,7 +126,9 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
           </div>
           
           {/* Legend */}
-          <div className="flex items-center justify-between mt-4 text-xs text-[var(--dark-300)]">
+          <div className={`flex items-center justify-between mt-4 text-xs ${
+            theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-300)]'
+          }`}>
             <span>Jan</span>
             <span>Mar</span>
             <span>May</span>
@@ -121,21 +138,23 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
           </div>
           
           <div className="flex items-center justify-end mt-2 gap-2">
-            <span className="text-xs text-[var(--dark-300)]">Less</span>
+            <span className={`text-xs ${theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-300)]'}`}>Less</span>
             {[0, 1, 2, 3, 4].map(level => (
               <div
                 key={level}
-                className="w-2.5 h-2.5 rounded-sm border border-[rgba(255,255,255,0.1)]"
+                className={`w-2.5 h-2.5 rounded-sm border ${
+                  theme === 'theme-light' ? 'border-[rgba(0,0,0,0.1)]' : 'border-[rgba(255,255,255,0.1)]'
+                }`}
                 style={{ backgroundColor: getContributionColor(level) }}
               />
             ))}
-            <span className="text-xs text-[var(--dark-300)]">More</span>
+            <span className={`text-xs ${theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-300)]'}`}>More</span>
           </div>
         </div>
 
         {/* Contribution Summary */}
         <div className="mt-4 text-center">
-          <p className="text-sm text-[var(--dark-200)]">
+          <p className={`text-sm ${theme === 'theme-light' ? 'text-gray-700' : 'text-[var(--dark-200)]'}`}>
             <span className="font-semibold text-[var(--primary-400)]">
               {yearlyContributions.toLocaleString()}
             </span>{' '}
