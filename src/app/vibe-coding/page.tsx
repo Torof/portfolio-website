@@ -7,11 +7,11 @@ import { useLanguage } from "@/lib/context/LanguageContext";
 
 export default function VibeCodingPage() {
   const { t } = useLanguage();
-  const titleAnimation = useScrollAnimation({ threshold: 0.1 });
-  const heroAnimation = useScrollAnimation({ threshold: 0.1, delay: 200 });
-  const workflowAnimation = useScrollAnimation({ threshold: 0.1, delay: 100 });
-  const toolsAnimation = useScrollAnimation({ threshold: 0.1, delay: 100 });
-  const productivityAnimation = useScrollAnimation({ threshold: 0.1, delay: 100 });
+  const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
+  const heroAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
+  const workflowAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 100 });
+  const toolsAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 100 });
+  const productivityAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 100 });
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800">

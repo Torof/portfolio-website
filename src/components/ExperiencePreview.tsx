@@ -15,15 +15,14 @@ export default function ExperiencePreview() {
     new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
   ).slice(0, 2);
 
-  const titleAnimation = useScrollAnimation({ threshold: 0.1 });
-  const card1Animation = useScrollAnimation({ threshold: 0.1, delay: 200 });
-  const card2Animation = useScrollAnimation({ threshold: 0.1, delay: 400 });
-  const buttonAnimation = useScrollAnimation({ threshold: 0.1, delay: 600 });
+  const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
+  const card1Animation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
+  const card2Animation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 400 });
+  const buttonAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 600 });
 
   const [scrollY, setScrollY] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   
   // Handle scroll and mouse position
   useEffect(() => {
@@ -47,26 +46,16 @@ export default function ExperiencePreview() {
       });
     };
 
-    const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight
-      });
-    };
-
     // Initial call
     handleScroll();
-    handleResize();
     
     // Add event listeners
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', handleResize);
     };
   }, []);
 

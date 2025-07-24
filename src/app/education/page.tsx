@@ -112,7 +112,7 @@ export default function EducationPage() {
                         <span className="tracking-wide">{t('education.skillsAcquired')}</span>
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {education.skills.map((skill) => (
+                        {education.skills?.map((skill) => (
                           <span 
                             key={skill}
                             className="px-3 py-2 text-xs bg-gradient-to-r from-[rgba(218,165,32,0.25)] to-[rgba(255,140,0,0.25)] dark:from-[rgba(218,165,32,0.2)] dark:to-[rgba(255,140,0,0.2)] text-[#B8860B] dark:text-[#DAA520] rounded-full border border-[rgba(218,165,32,0.3)] dark:border-[rgba(255,255,255,0.2)] font-semibold tracking-wide transition-all duration-300 hover:scale-105"

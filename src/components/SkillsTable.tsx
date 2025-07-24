@@ -53,8 +53,8 @@ const skillsData: SkillsData = {
 
 export default function SkillsTable() {
   const { t } = useLanguage();
-  const titleAnimation = useScrollAnimation({ threshold: 0.1 });
-  const tableAnimation = useScrollAnimation({ threshold: 0.1, delay: 200 });
+  const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
+  const tableAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
 
   const containerVariants = {
     hidden: { opacity: 0 },

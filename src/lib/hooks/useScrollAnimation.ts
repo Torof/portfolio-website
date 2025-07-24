@@ -8,12 +8,12 @@ interface UseScrollAnimationProps {
   delay?: number;
 }
 
-export function useScrollAnimation({
+export function useScrollAnimation<T extends HTMLElement = HTMLElement>({
   threshold = 0.1,
   rootMargin = '0px',
   delay = 0
 }: UseScrollAnimationProps = {}) {
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = useRef<T | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

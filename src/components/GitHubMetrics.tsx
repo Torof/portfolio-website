@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GitHubStats } from '@/lib/services/github';
 import ContributionGraph from './ContributionGraph';
 import Image from 'next/image';
@@ -11,47 +11,6 @@ interface GitHubMetricsProps {
   stats: GitHubStats | null;
 }
 
-interface AnimatedNumberProps {
-  value: number;
-  duration?: number;
-  prefix?: string;
-  suffix?: string;
-}
-
-const AnimatedNumber: React.FC<AnimatedNumberProps> = ({ 
-  value, 
-  duration = 2000, 
-  prefix = '', 
-  suffix = '' 
-}) => {
-  const [displayValue, setDisplayValue] = useState(0);
-
-  useEffect(() => {
-    let startTime: number;
-    let animationFrame: number;
-
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime;
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      
-      // Easing function for smoother animation
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
-      
-      setDisplayValue(Math.floor(value * easedProgress));
-
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate);
-      }
-    };
-
-    animationFrame = requestAnimationFrame(animate);
-    
-    return () => cancelAnimationFrame(animationFrame);
-  }, [value, duration]);
-
-  return <span>{prefix}{displayValue.toLocaleString()}{suffix}</span>;
-};
 
 const GitHubMetrics: React.FC<GitHubMetricsProps> = ({ stats }) => {
   const { t } = useLanguage();

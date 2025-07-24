@@ -57,7 +57,8 @@ interface ConnectionLineProps {
 }
 
 function ConnectionLine({ start, end }: ConnectionLineProps) {
-  const lineRef = useRef<THREE.Line>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const lineRef = useRef<any>(null);
   
   useFrame((state) => {
     if (lineRef.current) {

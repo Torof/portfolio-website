@@ -49,11 +49,11 @@ const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryC
           <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
         </svg>
       ),
-      color: active => active ? 'from-[#036aa3] to-[#0284c9]' : 'from-[#0ea5e9] to-[#38b2f8]',
+      color: (active: boolean) => active ? 'from-[#036aa3] to-[#0284c9]' : 'from-[#0ea5e9] to-[#38b2f8]',
       baseColor: '#0ea5e9',
       brightColor: '#38b2f8',
       darkColor: '#036aa3',
-      textColor: active => active ? 'white' : '#0ea5e9'
+      textColor: (active: boolean) => active ? 'white' : '#0ea5e9'
     },
     { 
       id: 'frontend', 
@@ -64,11 +64,11 @@ const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryC
           <polyline points="8 6 2 12 8 18"></polyline>
         </svg>
       ),
-      color: active => active ? 'from-[#5b21b6] to-[#6d28d9]' : 'from-[#7c3aed] to-[#8b5cf6]',
+      color: (active: boolean) => active ? 'from-[#5b21b6] to-[#6d28d9]' : 'from-[#7c3aed] to-[#8b5cf6]',
       baseColor: '#7c3aed',
       brightColor: '#8b5cf6',
       darkColor: '#5b21b6',
-      textColor: active => active ? 'white' : '#7c3aed'
+      textColor: (active: boolean) => active ? 'white' : '#7c3aed'
     },
     { 
       id: 'backend', 
@@ -78,11 +78,11 @@ const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryC
           <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
         </svg>
       ),
-      color: active => active ? 'from-[#065a86] to-[#036aa3]' : 'from-[#06b6d4] to-[#0ea5e9]',
+      color: (active: boolean) => active ? 'from-[#065a86] to-[#036aa3]' : 'from-[#06b6d4] to-[#0ea5e9]',
       baseColor: '#06b6d4',
       brightColor: '#0ea5e9',
       darkColor: '#065a86',
-      textColor: active => active ? 'white' : '#06b6d4'
+      textColor: (active: boolean) => active ? 'white' : '#06b6d4'
     }
   ];
 
@@ -119,7 +119,7 @@ const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryC
           Choose a category to explore different technologies
         </p>
         <div className="flex items-center gap-2 p-2 rounded-2xl glass-vibrant backdrop-blur-md border border-white/20">
-          {categories.map((category, idx) => {
+          {categories.map((category) => {
             const isActive = activeCategory === category.id;
             
             return (
@@ -127,7 +127,7 @@ const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryC
                 key={category.id}
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => setActiveCategory(category.id as any)}
+                onClick={() => setActiveCategory(category.id as 'blockchain' | 'frontend' | 'backend')}
                 className={`relative rounded-xl flex flex-col items-center justify-center font-medium transition-all duration-300 cursor-pointer group ${
                   isActive 
                     ? 'px-8 py-4 bg-gradient-to-r text-white shadow-lg glow-' + (category.id === 'blockchain' ? 'blue' : category.id === 'frontend' ? 'purple' : 'blue')

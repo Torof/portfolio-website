@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import EnhancedProjectsSection from './EnhancedProjectsSection';
 import InteractiveTechStack from './InteractiveTechStack';
 import FeaturedGitHubStats from './FeaturedGitHubStats';
@@ -14,12 +13,12 @@ interface SequentialLayoutProps {
 
 const SequentialLayout: React.FC<SequentialLayoutProps> = ({ projects }) => {
   const { t } = useLanguage();
-  const titleAnimation = useScrollAnimation({ threshold: 0.1 });
-  const textAnimation = useScrollAnimation({ threshold: 0.1, delay: 200 });
-  const techStackAnimation = useScrollAnimation({ threshold: 0.1, delay: 400 });
-  const projectsTitleAnimation = useScrollAnimation({ threshold: 0.1 });
-  const projectsTextAnimation = useScrollAnimation({ threshold: 0.1, delay: 200 });
-  const projectsGridAnimation = useScrollAnimation({ threshold: 0.1, delay: 400 });
+  const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
+  const textAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
+  const techStackAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 400 });
+  const projectsTitleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
+  const projectsTextAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
+  const projectsGridAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 400 });
 
   return (
     <div>

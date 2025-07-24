@@ -7,12 +7,13 @@ import GitHubMetrics from '@/components/GitHubMetrics';
 import { fetchProjectsFromGitHub } from '@/lib/services/projects';
 import { fetchGitHubStats } from '@/lib/services/github';
 import { useLanguage } from '@/lib/context/LanguageContext';
-
+import { Project } from '@/lib/types';
+import { GitHubStats } from '@/lib/services/github';
 
 export default function ProjectsPage() {
   const { t, language } = useLanguage();
-  const [projects, setProjects] = useState([]);
-  const [githubStats, setGithubStats] = useState(null);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [githubStats, setGithubStats] = useState<GitHubStats | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

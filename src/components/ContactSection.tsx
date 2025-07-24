@@ -7,10 +7,10 @@ import { useLanguage } from "@/lib/context/LanguageContext";
 
 export default function ContactSection() {
   const { t } = useLanguage();
-  const titleAnimation = useScrollAnimation({ threshold: 0.1 });
-  const textAnimation = useScrollAnimation({ threshold: 0.1, delay: 100 });
-  const centralCardAnimation = useScrollAnimation({ threshold: 0.1, delay: 200 });
-  const buttonAnimation = useScrollAnimation({ threshold: 0.1, delay: 400 });
+  const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
+  const textAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 100 });
+  const centralCardAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
+  const buttonAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 400 });
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155] border-b border-slate-700" style={{ minHeight: '90vh' }}>

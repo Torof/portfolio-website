@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 type Language = 'en' | 'fr';
 
@@ -47,7 +47,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   };
 
   const t = (key: string, variables?: Record<string, string | number>): string => {
-    let text = translations[language]?.[key] || translations.en[key] || key;
+    let text = (translations[language] as Record<string, string>)?.[key] || (translations.en as Record<string, string>)[key] || key;
     
     if (variables) {
       Object.entries(variables).forEach(([key, value]) => {

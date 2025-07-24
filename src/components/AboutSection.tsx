@@ -8,15 +8,15 @@ import { useLanguage } from "@/lib/context/LanguageContext";
 
 export default function AboutSection() {
   const { t } = useLanguage();
-  const titleAnimation = useScrollAnimation({ threshold: 0.1 });
-  const text1Animation = useScrollAnimation({ threshold: 0.1, delay: 100 });
-  const text2Animation = useScrollAnimation({ threshold: 0.1, delay: 200 });
-  const text3Animation = useScrollAnimation({ threshold: 0.1, delay: 300 });
-  const cardAnimation = useScrollAnimation({ threshold: 0.1, delay: 400 });
-  const item1Animation = useScrollAnimation({ threshold: 0.1, delay: 500 });
-  const item2Animation = useScrollAnimation({ threshold: 0.1, delay: 600 });
-  const item3Animation = useScrollAnimation({ threshold: 0.1, delay: 700 });
-  const item4Animation = useScrollAnimation({ threshold: 0.1, delay: 800 });
+  const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
+  const text1Animation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 100 });
+  const text2Animation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
+  const text3Animation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 300 });
+  const cardAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 400 });
+  const item1Animation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 500 });
+  const item2Animation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 600 });
+  const item3Animation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 700 });
+  const item4Animation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 800 });
 
 
   return (

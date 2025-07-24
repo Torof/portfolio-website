@@ -63,7 +63,6 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
   };
 
   const contributionData = generateContributionData(yearlyContributions);
-  const totalSquares = 52 * 7;
 
   return (
     <div className={`${className}`}>

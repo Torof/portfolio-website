@@ -105,7 +105,7 @@ const FeaturedGitHubStats: React.FC = () => {
               <div className="text-right">
                 <p className="text-sm text-[var(--dark-300)] mb-2">{t('github.topLanguages')}</p>
                 <div className="flex space-x-2">
-                  {stats.topLanguages.slice(0, 3).map((language, index) => (
+                  {stats.topLanguages.slice(0, 3).map((language) => (
                     <div key={language.name} className="flex items-center space-x-1">
                       <div 
                         className="w-3 h-3 rounded-full"

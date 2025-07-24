@@ -10,11 +10,11 @@ import { useLanguage } from "@/lib/context/LanguageContext";
 
 export default function HeroSection() {
   const { t } = useLanguage();
-  const titleAnimation = useScrollAnimation({ threshold: 0.1 });
-  const textAnimation = useScrollAnimation({ threshold: 0.1, delay: 200 });
-  const buttonsAnimation = useScrollAnimation({ threshold: 0.1, delay: 400 });
-  const infoAnimation = useScrollAnimation({ threshold: 0.1, delay: 600 });
-  const profileAnimation = useScrollAnimation({ threshold: 0.1, delay: 300 });
+  const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
+  const textAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
+  const buttonsAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 400 });
+  const infoAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 600 });
+  const profileAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 300 });
 
   return (
     <section 

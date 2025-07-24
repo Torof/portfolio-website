@@ -181,7 +181,7 @@ export async function fetchGitHubStats(): Promise<GitHubStats | null> {
         }
         // Small delay to prevent rate limiting
         await new Promise(resolve => setTimeout(resolve, 100));
-      } catch (error) {
+      } catch {
         console.warn(`Failed to fetch languages for ${repo.name}`);
       }
     }
