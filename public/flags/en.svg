@@ -1,0 +1,15 @@
+<svg width="24" height="18" viewBox="0 0 24 18" xmlns="http://www.w3.org/2000/svg">
+  <rect width="24" height="18" fill="#012169" stroke="#ccc" stroke-width="0.5"/>
+  
+  <!-- White diagonal stripes -->
+  <path d="M0,0 L24,18 M24,0 L0,18" stroke="#ffffff" stroke-width="3" fill="none"/>
+  
+  <!-- Red diagonal stripes -->
+  <path d="M0,0 L24,18 M24,0 L0,18" stroke="#c8102e" stroke-width="2" fill="none"/>
+  
+  <!-- White cross -->
+  <path d="M12,0 L12,18 M0,9 L24,9" stroke="#ffffff" stroke-width="3" fill="none"/>
+  
+  <!-- Red cross -->
+  <path d="M12,0 L12,18 M0,9 L24,9" stroke="#c8102e" stroke-width="2" fill="none"/>
+</svg>

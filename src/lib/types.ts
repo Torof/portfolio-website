@@ -8,6 +8,8 @@ export interface Experience {
     achievements: string[];
     skills: string[];
     logo?: string;
+    type?: 'work' | 'hackathon';
+    website?: string;
   }
   
   export interface Education {
@@ -20,6 +22,7 @@ export interface Experience {
     description?: string;
     skills?: string[];
     logo?: string;
+    website?: string;
   }
   
   export interface Certification {
@@ -61,4 +64,15 @@ export interface Experience {
   export interface NavLink {
     name: string;
     path: string;
+  }
+
+  export interface TechItem {
+    name: string;
+    logo: string;
+  }
+  
+  export interface TechStack {
+    blockchain: TechItem[];
+    frontend: TechItem[];
+    backend: TechItem[];
   }

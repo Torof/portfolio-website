@@ -1,60 +1,147 @@
+'use client';
+
+import Link from "next/link";
 import { personalInfo } from "@/lib/data";
+import { useScrollAnimation, getAnimationClass } from "@/lib/hooks/useScrollAnimation";
+import AnimatedTitle from "@/components/AnimatedTitle";
+import { useLanguage } from "@/lib/context/LanguageContext";
 
 export default function AboutSection() {
+  const { t } = useLanguage();
+  const titleAnimation = useScrollAnimation({ threshold: 0.1 });
+  const text1Animation = useScrollAnimation({ threshold: 0.1, delay: 100 });
+  const text2Animation = useScrollAnimation({ threshold: 0.1, delay: 200 });
+  const text3Animation = useScrollAnimation({ threshold: 0.1, delay: 300 });
+  const cardAnimation = useScrollAnimation({ threshold: 0.1, delay: 400 });
+  const item1Animation = useScrollAnimation({ threshold: 0.1, delay: 500 });
+  const item2Animation = useScrollAnimation({ threshold: 0.1, delay: 600 });
+  const item3Animation = useScrollAnimation({ threshold: 0.1, delay: 700 });
+  const item4Animation = useScrollAnimation({ threshold: 0.1, delay: 800 });
+
+
   return (
-    <div className="mt-16 md:mt-24">
-      <h2 className="text-3xl font-bold mb-6 text-white">About Me</h2>
-      <div className="space-y-4">
-        <p className="text-lg text-[var(--dark-200)] leading-relaxed">
-          I'm a passionate blockchain developer with expertise in smart contract development,
-          having started my journey in {personalInfo.startedBlockchain}. With over {new Date().getFullYear() - parseInt(personalInfo.startedBlockchain)} years
-          in the blockchain space, I've gained deep experience in Solidity, EVM, DeFi, and NFTs.
-        </p>
-        <p className="text-lg text-[var(--dark-200)] leading-relaxed">
-          I enjoy building fullstack Decentralized Applications (dApps) from conception to production,
-          with a focus on security, efficiency, and user experience. My background includes working
-          with various blockchain platforms and technologies, always staying at the cutting edge.
-        </p>
-        <p className="text-lg text-[var(--dark-200)] leading-relaxed">
-          Currently expanding my expertise to include Rust, Solana, and Polkadot, I'm constantly
-          learning and adapting to the evolving blockchain landscape.
-        </p>
-      </div>
-      
-      <div className="mt-8 bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.05)] rounded-xl p-5">
-        <h3 className="text-lg font-medium mb-3 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 text-[var(--primary-400)]">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M12 8v4M12 16h.01"></path>
-          </svg>
-          What I Do
-        </h3>
-        <ul className="space-y-3 text-[var(--dark-200)]">
-          <li className="flex items-start">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 mt-1 text-[var(--primary-400)]">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Design and develop secure, efficient smart contracts
-          </li>
-          <li className="flex items-start">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 mt-1 text-[var(--primary-400)]">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Build full-stack dApps with modern frontend technologies
-          </li>
-          <li className="flex items-start">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 mt-1 text-[var(--primary-400)]">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Audit and optimize existing blockchain projects
-          </li>
-          <li className="flex items-start">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 mt-1 text-[var(--primary-400)]">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Create and implement token economies and NFT systems
-          </li>
-        </ul>
+    <div className="py-4">
+      <div className="relative z-10">
+        <div 
+          ref={titleAnimation.ref} 
+          className={`flex justify-center ${getAnimationClass(titleAnimation.isVisible, 'fadeInUp')}`}
+        >
+          <AnimatedTitle 
+            variant="split" 
+            className="text-4xl md:text-5xl mb-6 text-center"
+          >
+            {t('about.title')}
+          </AnimatedTitle>
+        </div>
+
+        <div className="space-y-6">
+          <div 
+            ref={text1Animation.ref}
+            className={`relative p-6 rounded-xl bg-gradient-to-r from-[rgba(59,130,246,0.25)] to-[rgba(147,51,234,0.25)] backdrop-blur-md border border-[rgba(255,255,255,0.2)] group hover:border-[rgba(59,130,246,0.4)] transition-all duration-300 ${getAnimationClass(text1Animation.isVisible, 'fadeInLeft')}`}
+          >
+            <div className="absolute top-4 left-4 text-2xl opacity-50 group-hover:opacity-70 transition-opacity">
+              🎯
+            </div>
+            <p className="text-lg light-text leading-relaxed pl-8">
+              {t('about.card1.text', {
+                year: personalInfo.startedBlockchain,
+                experience: new Date().getFullYear() - parseInt(personalInfo.startedBlockchain)
+              })}
+            </p>
+          </div>
+          
+          <div 
+            ref={text2Animation.ref}
+            className={`relative p-6 rounded-xl bg-gradient-to-r from-[rgba(236,72,153,0.25)] to-[rgba(239,68,68,0.25)] backdrop-blur-md border border-[rgba(255,255,255,0.2)] group hover:border-[rgba(236,72,153,0.4)] transition-all duration-300 ${getAnimationClass(text2Animation.isVisible, 'fadeInRight')}`}
+          >
+            <div className="absolute top-4 left-4 text-2xl opacity-50 group-hover:opacity-70 transition-opacity">
+              ⚡
+            </div>
+            <p className="text-lg light-text leading-relaxed pl-8">
+              {t('about.card2.text')}
+            </p>
+          </div>
+          
+          <div 
+            ref={text3Animation.ref}
+            className={`relative p-6 rounded-xl bg-gradient-to-r from-[rgba(34,197,94,0.25)] to-[rgba(59,130,246,0.25)] backdrop-blur-md border border-[rgba(255,255,255,0.2)] group hover:border-[rgba(34,197,94,0.4)] transition-all duration-300 ${getAnimationClass(text3Animation.isVisible, 'fadeInLeft')}`}
+          >
+            <div className="absolute top-4 left-4 text-2xl opacity-50 group-hover:opacity-70 transition-opacity">
+              🌱
+            </div>
+            <p className="text-lg light-text leading-relaxed pl-8">
+              {t('about.card3.text')}
+            </p>
+          </div>
+        </div>
+        
+        <div 
+          ref={cardAnimation.ref}
+          className={`mt-8 bg-gradient-to-br from-[rgba(255,255,255,0.15)] to-[rgba(255,255,255,0.05)] backdrop-blur-md border border-[rgba(255,255,255,0.2)] rounded-xl p-6 shadow-lg ${getAnimationClass(cardAnimation.isVisible, 'scaleIn')}`}
+        >
+          <h3 className="text-xl font-medium mb-5 flex items-center light-text">
+            <span className="inline-block w-8 h-8 mr-3 rounded-full bg-[var(--primary-400)] bg-opacity-20 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--primary-400)]">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 8v4M12 16h.01"></path>
+              </svg>
+            </span>
+            {t('about.whatIDo')}
+          </h3>
+
+          <div className="space-y-4 light-text">
+            <div 
+              ref={item1Animation.ref}
+              className={`flex items-start p-3 rounded-lg transition-all duration-300 hover:bg-[rgba(255,255,255,0.05)] group ${getAnimationClass(item1Animation.isVisible, 'fadeInRight')}`}
+            >
+              <span className="text-2xl mr-3 shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
+                🔒
+              </span>
+              <span className="leading-tight">{t('about.item1')}</span>
+            </div>
+            <div 
+              ref={item2Animation.ref}
+              className={`flex items-start p-3 rounded-lg transition-all duration-300 hover:bg-[rgba(255,255,255,0.05)] group ${getAnimationClass(item2Animation.isVisible, 'fadeInLeft')}`}
+            >
+              <span className="text-2xl mr-3 shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
+                🚀
+              </span>
+              <span className="leading-tight">{t('about.item2')}</span>
+            </div>
+            <div 
+              ref={item3Animation.ref}
+              className={`flex items-start p-3 rounded-lg transition-all duration-300 hover:bg-[rgba(255,255,255,0.05)] group ${getAnimationClass(item3Animation.isVisible, 'fadeInRight')}`}
+            >
+              <span className="text-2xl mr-3 shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
+                🔍
+              </span>
+              <span className="leading-tight">{t('about.item3')}</span>
+            </div>
+            <div 
+              ref={item4Animation.ref}
+              className={`flex items-start p-3 rounded-lg transition-all duration-300 hover:bg-[rgba(255,255,255,0.05)] group ${getAnimationClass(item4Animation.isVisible, 'fadeInLeft')}`}
+            >
+              <span className="text-2xl mr-3 shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
+                💎
+              </span>
+              <span className="leading-tight">{t('about.item4')}</span>
+            </div>
+            <div className="flex items-start p-3 rounded-lg transition-all duration-300 hover:bg-[rgba(255,255,255,0.05)] group">
+              <span className="text-2xl mr-3 shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
+                💻
+              </span>
+              <div className="flex items-center justify-between w-full">
+                <span className="leading-tight">{t('about.interests.vibe')}</span>
+                <Link
+                  href="/vibe-coding"
+                  className="ml-4 px-4 py-2 bg-gradient-to-r from-[var(--primary-400)] to-[var(--secondary-400)] text-white text-sm font-medium rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300"
+                >
+                  {t('about.vibeButton')}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
