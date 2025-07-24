@@ -59,7 +59,11 @@ export default function Navbar() {
       <div className="container-custom flex justify-between items-center">
         <Link href="/" className="relative group">
           <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-[var(--primary-400)] to-[var(--secondary-500)] opacity-70 blur-md group-hover:opacity-100 transition duration-500"></div>
-          <div className="relative flex items-center justify-center w-10 h-10 rounded-full border text-lg font-bold transition-colors duration-300 bg-[#050505] border-[rgba(255,255,255,0.1)] text-white">
+          <div className={`relative flex items-center justify-center w-10 h-10 rounded-full border text-lg font-bold transition-colors duration-300 ${
+            theme === 'theme-light' 
+              ? 'bg-white border-[rgba(0,0,0,0.1)] text-black' 
+              : 'bg-[#050505] border-[rgba(255,255,255,0.1)] text-white'
+          }`}>
             SD
           </div>
         </Link>
@@ -81,7 +85,11 @@ export default function Navbar() {
             ))}
           </div>
           
-          <div className="h-6 w-px bg-[rgba(255,255,255,0.1)]"></div>
+          <div className={`h-6 w-px ${
+            theme === 'theme-light' 
+              ? 'bg-[rgba(0,0,0,0.1)]' 
+              : 'bg-[rgba(255,255,255,0.1)]'
+          }`}></div>
           
           <div className="flex items-center space-x-2">
             <div className="flex items-center space-x-1 mr-2">
@@ -137,7 +145,11 @@ export default function Navbar() {
         <div className="md:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="flex items-center justify-center w-8 h-8 rounded-lg bg-[rgba(255,255,255,0.05)] hover:bg-[rgba(255,255,255,0.1)] transition-all"
+            className={`flex items-center justify-center w-8 h-8 rounded-lg transition-all ${
+              theme === 'theme-light' 
+                ? 'bg-[rgba(0,0,0,0.05)] hover:bg-[rgba(0,0,0,0.1)]' 
+                : 'bg-[rgba(255,255,255,0.05)] hover:bg-[rgba(255,255,255,0.1)]'
+            }`}
             aria-label="Toggle mobile menu"
           >
             <svg
@@ -160,7 +172,11 @@ export default function Navbar() {
       </div>
 
       {isMenuOpen && (
-        <div className="md:hidden backdrop-blur-lg bg-[rgba(5,5,5,0.95)] border-t border-[rgba(255,255,255,0.1)]">
+        <div className={`md:hidden backdrop-blur-lg border-t ${
+          theme === 'theme-light' 
+            ? 'bg-[rgba(255,255,255,0.95)] border-[rgba(0,0,0,0.1)]' 
+            : 'bg-[rgba(5,5,5,0.95)] border-[rgba(255,255,255,0.1)]'
+        }`}>
           <div className="container-custom py-4">
             {navLinks.map((link) => (
               <Link
@@ -173,7 +189,11 @@ export default function Navbar() {
               </Link>
             ))}
             
-            <div className="pt-2 flex flex-col space-y-2 border-t border-[rgba(255,255,255,0.05)] mt-2">
+            <div className={`pt-2 flex flex-col space-y-2 border-t mt-2 ${
+              theme === 'theme-light' 
+                ? 'border-[rgba(0,0,0,0.05)]' 
+                : 'border-[rgba(255,255,255,0.05)]'
+            }`}>
               <div className="py-2 px-4 rounded-lg flex items-center">
                 <span className="mr-2">Language:</span>
                 <div className="flex items-center space-x-2">

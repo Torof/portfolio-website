@@ -2,7 +2,11 @@
 
 import { useEffect, useRef } from "react";
 
-export default function BlockchainRain() {
+interface BlockchainRainProps {
+  theme?: string;
+}
+
+export default function BlockchainRain({ theme = 'theme-dark' }: BlockchainRainProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -74,7 +78,9 @@ export default function BlockchainRain() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       // Set grey background
-      ctx.fillStyle = 'rgba(42, 42, 42, 0.9)';
+      ctx.fillStyle = theme === 'theme-light' 
+        ? 'rgba(243, 244, 246, 0.9)'  // Light gray for light theme
+        : 'rgba(42, 42, 42, 0.9)';    // Dark gray for dark theme
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       // Set text properties
@@ -145,7 +151,7 @@ export default function BlockchainRain() {
       clearInterval(intervalId);
       window.removeEventListener("resize", resizeCanvas);
     };
-  }, []);
+  }, [theme]);
 
   return (
     <canvas

@@ -7,9 +7,11 @@ import ScrollIndicator from "@/components/ScrollIndicator";
 import { useScrollAnimation, getAnimationClass } from "@/lib/hooks/useScrollAnimation";
 import BlockchainRain from "@/components/BlockchainRain";
 import { useLanguage } from "@/lib/context/LanguageContext";
+import { useTheme } from "@/lib/context/ThemeContext";
 
 export default function HeroSection() {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
   const textAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
   const buttonsAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 400 });
@@ -18,10 +20,14 @@ export default function HeroSection() {
 
   return (
     <section 
-      className="relative flex items-start pt-32 md:pt-40 pb-16 overflow-hidden bg-gradient-to-b from-[#2a2a2a] to-[#1a1a1a] border-b border-[rgba(255,255,255,0.05)]"
+      className={`relative flex items-start pt-32 md:pt-40 pb-16 overflow-hidden border-b ${
+        theme === 'theme-light'
+          ? 'bg-gradient-to-b from-[#f3f4f6] to-[#e5e7eb] border-[rgba(0,0,0,0.05)]'
+          : 'bg-gradient-to-b from-[#2a2a2a] to-[#1a1a1a] border-[rgba(255,255,255,0.05)]'
+      }`}
     >
       {/* Blockchain Rain Background */}
-      <BlockchainRain />
+      <BlockchainRain theme={theme} />
       
       <div className="w-full relative z-10 px-4">
         <div className="max-w-6xl mx-auto">
