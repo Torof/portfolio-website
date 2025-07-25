@@ -21,8 +21,21 @@ function fixPathsInFile(filePath) {
     if (p1 === '') {
       return `href="./"`;
     }
-    // Convert to relative path
+    // Convert to relative path and add .html extension if it's a page
+    const pagePaths = ['experience', 'education', 'projects', 'vibe-coding', 'contact'];
+    if (pagePaths.includes(p1)) {
+      return `href="./${p1}.html"`;
+    }
     return `href="./${p1}"`;
+  });
+  
+  // Also fix any relative paths without .html extensions
+  content = content.replace(/href="\.\/([^"\.]*?)"/g, (match, p1) => {
+    const pagePaths = ['experience', 'education', 'projects', 'vibe-coding', 'contact'];
+    if (pagePaths.includes(p1)) {
+      return `href="./${p1}.html"`;
+    }
+    return match;
   });
   
   // For src attributes (excluding external URLs)
