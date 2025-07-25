@@ -7,13 +7,19 @@ const glob = require('glob');
 // Function to fix paths in HTML files
 function fixPathsInFile(filePath) {
   let content = fs.readFileSync(filePath, 'utf8');
+  let changesMade = false;
   
   // Replace absolute paths with relative paths
   // For href attributes (excluding external URLs and anchors)
+  const originalContent = content;
   content = content.replace(/href="\/([^"]*?)"/g, (match, p1) => {
     // Skip external URLs and anchors
     if (p1.startsWith('http') || p1.startsWith('#') || p1.startsWith('//')) {
       return match;
+    }
+    // Handle root path
+    if (p1 === '') {
+      return `href="./"`;
     }
     // Convert to relative path
     return `href="./${p1}"`;
@@ -29,9 +35,27 @@ function fixPathsInFile(filePath) {
     return `src="./${p1}"`;
   });
   
+  // Fix any remaining absolute paths in other attributes
+  content = content.replace(/action="\/([^"]*?)"/g, (match, p1) => {
+    if (p1.startsWith('http') || p1.startsWith('#') || p1.startsWith('//')) {
+      return match;
+    }
+    return `action="./${p1}"`;
+  });
+  
+  // Fix content attributes that might contain absolute paths
+  content = content.replace(/content="\/([^"]*?)"/g, (match, p1) => {
+    if (p1.startsWith('http') || p1.startsWith('#') || p1.startsWith('//')) {
+      return match;
+    }
+    return `content="./${p1}"`;
+  });
+  
+  changesMade = content !== originalContent;
+  
   // Write the fixed content back
   fs.writeFileSync(filePath, content, 'utf8');
-  console.log(`Fixed paths in: ${filePath}`);
+  console.log(`Fixed paths in: ${filePath}${changesMade ? ' ✓' : ' (no changes)'}`);
 }
 
 // Main function

@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
   assetPrefix: './',
   
   // Optimize for static hosting
-  trailingSlash: true,
+  trailingSlash: false, // Changed to false to avoid issues with IPFS paths
   
   // Configure images for static export
   images: {
