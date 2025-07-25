@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "next build && node scripts/ipfs-post-build.js",
     "build:ipfs": "next build && node scripts/ipfs-post-build.js",
     "start": "next start",
     "export": "next build",
