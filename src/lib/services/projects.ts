@@ -42,9 +42,9 @@ const FEATURED_REPOS = [
 function generateThumbnail(repo: GitHubRepository): string {
   // Use repository-specific screenshots if available
   const screenshotMap: Record<string, string> = {
-    'NFT-Marketplace': '/screenshots/nft-marketplace.png',
-    'Uniswap_V2_rebuild': '/screenshots/uniswap-v2.png',
-    'AATBA-ETH-Global-Hackathon': '/screenshots/aatba.png'
+    'NFT-Marketplace': '/screenshots/solidity-default.svg',
+    'Uniswap_V2_rebuild': '/screenshots/solidity-default.svg',
+    'AATBA-ETH-Global-Hackathon': '/screenshots/web-default.svg'
   };
   
   if (screenshotMap[repo.name]) {
