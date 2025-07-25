@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   // Enable static export for IPFS deployment
   output: 'export',
   
+  // Use relative paths for IPFS compatibility
+  basePath: '',
+  assetPrefix: './',
+  
   // Optimize for static hosting
   trailingSlash: true,
   

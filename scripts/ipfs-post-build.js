@@ -1,0 +1,63 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+const glob = require('glob');
+
+// Function to fix paths in HTML files
+function fixPathsInFile(filePath) {
+  let content = fs.readFileSync(filePath, 'utf8');
+  
+  // Replace absolute paths with relative paths
+  // For href attributes (excluding external URLs and anchors)
+  content = content.replace(/href="\/([^"]*?)"/g, (match, p1) => {
+    // Skip external URLs and anchors
+    if (p1.startsWith('http') || p1.startsWith('#') || p1.startsWith('//')) {
+      return match;
+    }
+    // Convert to relative path
+    return `href="./${p1}"`;
+  });
+  
+  // For src attributes (excluding external URLs)
+  content = content.replace(/src="\/([^"]*?)"/g, (match, p1) => {
+    // Skip external URLs
+    if (p1.startsWith('http') || p1.startsWith('//')) {
+      return match;
+    }
+    // Convert to relative path
+    return `src="./${p1}"`;
+  });
+  
+  // Write the fixed content back
+  fs.writeFileSync(filePath, content, 'utf8');
+  console.log(`Fixed paths in: ${filePath}`);
+}
+
+// Main function
+async function main() {
+  console.log('🔧 Fixing absolute paths for IPFS deployment...\n');
+  
+  const buildDir = path.join(__dirname, '..', 'out');
+  
+  // Find all HTML files in the build directory
+  const htmlFiles = glob.sync('**/*.html', {
+    cwd: buildDir,
+    absolute: true
+  });
+  
+  console.log(`Found ${htmlFiles.length} HTML files to process.\n`);
+  
+  // Process each HTML file
+  htmlFiles.forEach(file => {
+    fixPathsInFile(file);
+  });
+  
+  console.log('\n✅ Successfully fixed all absolute paths for IPFS deployment!');
+}
+
+// Run the script
+main().catch(err => {
+  console.error('❌ Error:', err);
+  process.exit(1);
+});
