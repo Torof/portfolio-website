@@ -1,11 +1,20 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useTheme } from "@/lib/context/ThemeContext";
 
 export default function MatrixRain() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
+    if (!mounted) return;
+    
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -36,8 +45,10 @@ export default function MatrixRain() {
     function draw() {
       if (!ctx || !canvas) return;
       
-      // Black background with opacity for trail effect
-      ctx.fillStyle = "rgba(5, 5, 5, 0.08)";
+      // Theme-aware background with opacity for trail effect
+      ctx.fillStyle = theme === 'theme-light' 
+        ? "rgba(243, 244, 246, 0.08)" 
+        : "rgba(5, 5, 5, 0.08)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       // Set text properties
@@ -58,11 +69,17 @@ export default function MatrixRain() {
         // Color based on theme colors
         if (Math.random() > 0.98) {
           // Occasional bright characters
-          ctx.fillStyle = `rgba(79, 70, 229, ${opacity})`;
+          ctx.fillStyle = theme === 'theme-light'
+            ? `rgba(79, 70, 229, ${opacity * 0.9})`
+            : `rgba(79, 70, 229, ${opacity})`;
         } else if (Math.random() > 0.95) {
-          ctx.fillStyle = `rgba(139, 92, 246, ${opacity})`;
+          ctx.fillStyle = theme === 'theme-light'
+            ? `rgba(139, 92, 246, ${opacity * 0.9})`
+            : `rgba(139, 92, 246, ${opacity})`;
         } else {
-          ctx.fillStyle = `rgba(6, 182, 212, ${opacity * 0.8})`;
+          ctx.fillStyle = theme === 'theme-light'
+            ? `rgba(6, 182, 212, ${opacity * 0.7})`
+            : `rgba(6, 182, 212, ${opacity * 0.8})`;
         }
         
         ctx.fillText(text, x, y);
@@ -85,7 +102,9 @@ export default function MatrixRain() {
       clearInterval(intervalId);
       window.removeEventListener("resize", resizeCanvas);
     };
-  }, []);
+  }, [mounted, theme]);
+
+  if (!mounted) return null;
 
   return (
     <canvas

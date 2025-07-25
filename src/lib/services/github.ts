@@ -56,18 +56,27 @@ const GITHUB_API_BASE = 'https://api.github.com';
  */
 export async function fetchGitHubRepositories(): Promise<GitHubRepository[]> {
   try {
+    console.log('🔍 GitHub Token available:', !!process.env.GITHUB_TOKEN);
+    console.log('📡 Fetching repositories for user:', GITHUB_USERNAME);
+    
+    const headers: Record<string, string> = {
+      'Accept': 'application/vnd.github.v3+json',
+    };
+    
+    // Add GitHub token if available for higher rate limits
+    if (process.env.GITHUB_TOKEN) {
+      headers['Authorization'] = `Bearer ${process.env.GITHUB_TOKEN}`;
+      console.log('🔑 Using authenticated request');
+    } else {
+      console.log('⚠️ Using unauthenticated request (rate limited)');
+    }
+    
     const response = await fetch(
       `${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`,
       {
-        headers: {
-          'Accept': 'application/vnd.github.v3+json',
-          // Add GitHub token if available for higher rate limits
-          ...(process.env.GITHUB_TOKEN && {
-            'Authorization': `Bearer ${process.env.GITHUB_TOKEN}`
-          })
-        },
-        // Cache for 5 minutes in production
-        next: { revalidate: 300 }
+        headers,
+        // Cache for 1 hour in production to reduce API calls
+        next: { revalidate: 3600 }
       }
     );
 

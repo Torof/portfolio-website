@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useTheme } from '@/lib/context/ThemeContext';
+import { fetchGitHubContributions, transformContributionsForGraph } from '@/lib/services/githubContributions';
 
 interface ContributionGraphProps {
   yearlyContributions: number;
@@ -13,12 +14,44 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
   className = '' 
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [contributionData, setContributionData] = useState<number[][]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [actualContributions, setActualContributions] = useState(yearlyContributions);
   const { theme } = useTheme();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 500);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const loadContributions = async () => {
+      try {
+        setIsLoading(true);
+        const username = 'Torof'; // Use hardcoded username since env var isn't available on client
+        const data = await fetchGitHubContributions(username);
+        
+        if (data) {
+          const graphData = transformContributionsForGraph(data);
+          setContributionData(graphData);
+          setActualContributions(data.total);
+        } else {
+          // Fallback to mock data if API fails
+          const mockData = generateContributionData(yearlyContributions);
+          setContributionData(mockData);
+        }
+      } catch (error) {
+        console.error('Error loading contributions:', error);
+        // Fallback to mock data
+        const mockData = generateContributionData(yearlyContributions);
+        setContributionData(mockData);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadContributions();
+  }, [yearlyContributions]);
 
   // Generate mock contribution data for visualization
   // In a real implementation, this would come from GitHub's GraphQL API
@@ -72,7 +105,7 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
     return colors[level];
   };
 
-  const contributionData = generateContributionData(yearlyContributions);
+  // contributionData is now set via useEffect
 
   return (
     <div className={`${className}`}>
@@ -95,12 +128,20 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
             }
             rounded-lg p-4 border 
             backdrop-blur-sm overflow-x-auto
+            relative min-h-[200px]
           `}
         >
+          {isLoading ? (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className={`text-sm ${theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-300)]'}`}>
+                Loading contributions...
+              </div>
+            </div>
+          ) : (
           <div className="flex gap-1 min-w-max">
-            {contributionData.map((week, weekIndex) => (
+            {contributionData && contributionData.length > 0 ? contributionData.map((week, weekIndex) => (
               <div key={weekIndex} className="flex flex-col gap-1">
-                {week.map((contributions, dayIndex) => {
+                {Array.isArray(week) ? week.map((contributions, dayIndex) => {
                   const level = getContributionLevel(contributions);
                   const delay = (weekIndex * 7 + dayIndex) * 2;
                   
@@ -120,10 +161,15 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
                       title={`${contributions} contributions`}
                     />
                   );
-                })}
+                }) : null}
               </div>
-            ))}
+            )) : (
+              <div className="text-center text-sm text-gray-500">
+                No contribution data available
+              </div>
+            )}
           </div>
+          )}
           
           {/* Legend */}
           <div className={`flex items-center justify-between mt-4 text-xs ${
@@ -156,7 +202,7 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
         <div className="mt-4 text-center">
           <p className={`text-sm ${theme === 'theme-light' ? 'text-gray-700' : 'text-[var(--dark-200)]'}`}>
             <span className="font-semibold text-[var(--primary-400)]">
-              {yearlyContributions.toLocaleString()}
+              {actualContributions.toLocaleString()}
             </span>{' '}
             contributions in the last year
           </p>
