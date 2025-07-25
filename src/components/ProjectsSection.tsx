@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+// import Link from 'next/link'; // Removed for IPFS compatibility
 import { Project } from "@/lib/types";
 import ProjectCard from './ProjectCard';
 import { useLanguage } from '@/lib/context/LanguageContext';
@@ -23,9 +23,9 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
       </div>
       
       <div className="text-center mt-8">
-        <Link href="/projects" className="btn-primary">
+        <a href="./projects.html" className="btn-primary">
 {t('common.viewAllProjects')}
-        </Link>
+        </a>
       </div>
     </div>
   );

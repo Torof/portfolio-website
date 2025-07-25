@@ -1,6 +1,6 @@
 'use client';
 
-import Link from "next/link";
+// import Link from "next/link"; // Removed for IPFS compatibility
 import Image from "next/image";
 import { personalInfo } from "@/lib/data";
 import ScrollIndicator from "@/components/ScrollIndicator";
@@ -67,12 +67,12 @@ export default function HeroSection() {
                   ref={buttonsAnimation.ref}
                   className={`flex flex-wrap gap-4 justify-center md:justify-start ${getAnimationClass(buttonsAnimation.isVisible, 'fadeInUp')}`}
                 >
-                  <Link href="/experience" className="btn-primary">
+                  <a href="./experience.html" className="btn-primary">
                     {t('hero.cta')}
-                  </Link>
-                  <Link href="/projects" className="btn-outline">
+                  </a>
+                  <a href="./projects.html" className="btn-outline">
                     {t('hero.projects')}
-                  </Link>
+                  </a>
                 </div>
                 
                 <div 
