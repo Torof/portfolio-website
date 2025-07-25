@@ -1,8 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Enable static export for IPFS deployment
+  output: 'export',
+  
+  // Optimize for static hosting
+  trailingSlash: true,
+  
+  // Configure images for static export
   images: {
+    unoptimized: true, // Required for static export
     domains: ['avatars.githubusercontent.com'],
+  },
+  
+  // Disable server-side features for static export
+  experimental: {
+    // Ensure static generation works properly
   },
 };
 
