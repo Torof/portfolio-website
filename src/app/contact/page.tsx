@@ -217,7 +217,11 @@ export default function ContactPage() {
                       {['French', 'English', 'Spanish', 'Vietnamese'].map((language) => (
                         <span 
                           key={language}
-                          className="px-3 py-1 text-xs bg-emerald-500/20 text-emerald-300 rounded-full border border-emerald-500/30"
+                          className={`px-3 py-1 text-xs rounded-full border transition-colors ${
+                            theme === 'theme-light'
+                              ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
+                              : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
+                          }`}
                         >
                           {language}
                         </span>
