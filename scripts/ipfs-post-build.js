@@ -64,6 +64,36 @@ function fixPathsInFile(filePath) {
     return `content="./${p1}"`;
   });
   
+  // Fix JSON data with absolute paths (for embedded JavaScript data)
+  content = content.replace(/"\/([^"]*?\.(png|jpg|jpeg|svg|gif))"/g, (match, p1) => {
+    // Skip external URLs
+    if (p1.startsWith('http') || p1.startsWith('//')) {
+      return match;
+    }
+    return `"./${p1}"`;
+  });
+  
+  // Fix thumbnail paths in JavaScript data specifically
+  content = content.replace(/"thumbnail":"\/([^"]*?)"/g, (match, p1) => {
+    return `"thumbnail":"./${p1}"`;
+  });
+  
+  // Also fix any other JSON paths like screenshots, logos, etc.
+  content = content.replace(/("[\w]*"):("\/[^"]*?\.(png|jpg|jpeg|svg|gif|webp)")/g, (match, key, path) => {
+    // Extract the path without quotes
+    const pathValue = path.replace(/"/g, '');
+    // Skip external URLs
+    if (pathValue.startsWith('//') || pathValue.includes('http')) {
+      return match;
+    }
+    return `${key}:".${pathValue}"`;
+  });
+  
+  // Additional fix for escaped slash patterns in JSON
+  content = content.replace(/\\"thumbnail\\":\\"\\\/([^"]*?)\\"/g, (match, p1) => {
+    return `\\"thumbnail\\":\\"./${p1}\\"`;
+  });
+  
   changesMade = content !== originalContent;
   
   // Write the fixed content back
