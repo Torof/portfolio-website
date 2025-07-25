@@ -54,6 +54,24 @@ async function main() {
   });
   
   console.log('\n✅ Successfully fixed all absolute paths for IPFS deployment!');
+  
+  // Create ipfs redirect if it doesn't exist
+  const ipfsDir = path.join(buildDir, 'ipfs');
+  if (!fs.existsSync(ipfsDir)) {
+    fs.mkdirSync(ipfsDir, { recursive: true });
+    const redirectHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="refresh" content="0; url=../">
+  <script>window.location.href = "../";</script>
+</head>
+<body>
+  <p>Redirecting to main site...</p>
+</body>
+</html>`;
+    fs.writeFileSync(path.join(ipfsDir, 'index.html'), redirectHtml);
+    console.log('✅ Created IPFS redirect directory');
+  }
 }
 
 // Run the script
