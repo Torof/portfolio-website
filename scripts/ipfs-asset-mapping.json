@@ -13,225 +13,225 @@
   },
   "/logos/v0-vercel.svg": {
     "localPath": "logos/v0-vercel.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/v0-vercel.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/v0-vercel.svg",
+    "uploaded": true
   },
   "/logos/udemy.webp": {
     "localPath": "logos/udemy.webp",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/udemy.webp",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/udemy.webp",
+    "uploaded": true
   },
   "/logos/typescript.svg": {
     "localPath": "logos/typescript.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/typescript.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/typescript.svg",
+    "uploaded": true
   },
   "/logos/thegraph.svg": {
     "localPath": "logos/thegraph.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/thegraph.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/thegraph.svg",
+    "uploaded": true
   },
   "/logos/tasc.svg": {
     "localPath": "logos/tasc.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/tasc.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/tasc.svg",
+    "uploaded": true
   },
   "/logos/tailwindcss.svg": {
     "localPath": "logos/tailwindcss.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/tailwindcss.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/tailwindcss.svg",
+    "uploaded": true
   },
   "/logos/solidity.svg": {
     "localPath": "logos/solidity.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/solidity.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/solidity.svg",
+    "uploaded": true
   },
   "/logos/solana.svg": {
     "localPath": "logos/solana.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/solana.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/solana.svg",
+    "uploaded": true
   },
   "/logos/rust.svg": {
     "localPath": "logos/rust.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/rust.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/rust.svg",
+    "uploaded": true
   },
   "/logos/reactjs.svg": {
     "localPath": "logos/reactjs.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/reactjs.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/reactjs.svg",
+    "uploaded": true
   },
   "/logos/rareskills.svg": {
     "localPath": "logos/rareskills.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/rareskills.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/rareskills.svg",
+    "uploaded": true
   },
   "/logos/polkadot.svg": {
     "localPath": "logos/polkadot.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/polkadot.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/polkadot.svg",
+    "uploaded": true
   },
   "/logos/perplexity.svg": {
     "localPath": "logos/perplexity.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/perplexity.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/perplexity.svg",
+    "uploaded": true
   },
   "/logos/nodejs.svg": {
     "localPath": "logos/nodejs.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/nodejs.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/nodejs.svg",
+    "uploaded": true
   },
   "/logos/nextjs.svg": {
     "localPath": "logos/nextjs.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/nextjs.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/nextjs.svg",
+    "uploaded": true
   },
   "/logos/ledgity-logo.svg": {
     "localPath": "logos/ledgity-logo.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/ledgity-logo.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/ledgity-logo.svg",
+    "uploaded": true
   },
   "/logos/html-5.svg": {
     "localPath": "logos/html-5.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/html-5.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/html-5.svg",
+    "uploaded": true
   },
   "/logos/hardhat.svg": {
     "localPath": "logos/hardhat.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/hardhat.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/hardhat.svg",
+    "uploaded": true
   },
   "/logos/github-copilot.svg": {
     "localPath": "logos/github-copilot.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/github-copilot.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/github-copilot.svg",
+    "uploaded": true
   },
   "/logos/future-institution.jpeg": {
     "localPath": "logos/future-institution.jpeg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/future-institution.jpeg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/future-institution.jpeg",
+    "uploaded": true
   },
   "/logos/freelance.svg": {
     "localPath": "logos/freelance.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/freelance.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/freelance.svg",
+    "uploaded": true
   },
   "/logos/foundry.svg": {
     "localPath": "logos/foundry.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/foundry.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/foundry.svg",
+    "uploaded": true
   },
   "/logos/ethereum.svg": {
     "localPath": "logos/ethereum.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/ethereum.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/ethereum.svg",
+    "uploaded": true
   },
   "/logos/ethcon-korea.png": {
     "localPath": "logos/ethcon-korea.png",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/ethcon-korea.png",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/ethcon-korea.png",
+    "uploaded": true
   },
   "/logos/eth-global.ico": {
     "localPath": "logos/eth-global.ico",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/eth-global.ico",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/eth-global.ico",
+    "uploaded": true
   },
   "/logos/cursor.svg": {
     "localPath": "logos/cursor.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/cursor.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/cursor.svg",
+    "uploaded": true
   },
   "/logos/css-3.svg": {
     "localPath": "logos/css-3.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/css-3.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/css-3.svg",
+    "uploaded": true
   },
   "/logos/consensys.svg": {
     "localPath": "logos/consensys.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/consensys.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/consensys.svg",
+    "uploaded": true
   },
   "/logos/claude.svg": {
     "localPath": "logos/claude.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/claude.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/claude.svg",
+    "uploaded": true
   },
   "/logos/chiliz.png": {
     "localPath": "logos/chiliz.png",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/chiliz.png",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/chiliz.png",
+    "uploaded": true
   },
   "/logos/chatgpt.svg": {
     "localPath": "logos/chatgpt.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/chatgpt.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/chatgpt.svg",
+    "uploaded": true
   },
   "/logos/bitcoin-vietnam-logo.png": {
     "localPath": "logos/bitcoin-vietnam-logo.png",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/bitcoin-vietnam-logo.png",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/bitcoin-vietnam-logo.png",
+    "uploaded": true
   },
   "/logos/bash.svg": {
     "localPath": "logos/bash.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/bash.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/bash.svg",
+    "uploaded": true
   },
   "/logos/alyra.png": {
     "localPath": "logos/alyra.png",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/alyra.png",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/alyra.png",
+    "uploaded": true
   },
   "/screenshots/web-default.svg": {
     "localPath": "screenshots/web-default.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeia3uzg6u4j5jdlfqvhprm6ih4fubuk3hrre4emwmqdehgprj2e7hm/web-default.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeia3uzg6u4j5jdlfqvhprm6ih4fubuk3hrre4emwmqdehgprj2e7hm/web-default.svg",
+    "uploaded": true
   },
   "/screenshots/solidity-default.svg": {
     "localPath": "screenshots/solidity-default.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeia3uzg6u4j5jdlfqvhprm6ih4fubuk3hrre4emwmqdehgprj2e7hm/solidity-default.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeia3uzg6u4j5jdlfqvhprm6ih4fubuk3hrre4emwmqdehgprj2e7hm/solidity-default.svg",
+    "uploaded": true
   },
   "/screenshots/code-default.svg": {
     "localPath": "screenshots/code-default.svg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafybeia3uzg6u4j5jdlfqvhprm6ih4fubuk3hrre4emwmqdehgprj2e7hm/code-default.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeia3uzg6u4j5jdlfqvhprm6ih4fubuk3hrre4emwmqdehgprj2e7hm/code-default.svg",
+    "uploaded": true
   },
   "/profile.jpg": {
     "localPath": "profile.jpg",

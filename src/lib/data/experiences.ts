@@ -17,7 +17,7 @@ export const experiences: Experience[] = [
       "Developed user-friendly interfaces for complex blockchain functions to improve accessibility."
     ],
     skills: ["Solidity", "Smart Contracts", "Ethereum", "L2", "Code Auditing", "dApps"],
-    logo: "/logos/ledgity-logo.svg",
+    logo: "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/ledgity-logo.svg",
     type: "work",
     website: "https://ledgity.finance/"
   },
@@ -37,7 +37,7 @@ export const experiences: Experience[] = [
       "Conducted thorough testing using frameworks like Foundry and Hardhat."
     ],
     skills: ["Solidity", "Smart Contracts", "NFT", "ERC20", "ERC721", "React.js", "Next.js", "Foundry", "Hardhat"],
-    logo: "/logos/freelance.svg",
+    logo: "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/freelance.svg",
     type: "work"
   },
   {
@@ -55,7 +55,7 @@ export const experiences: Experience[] = [
       "Implemented an Ethereum-based token economy to enhance player engagement."
     ],
     skills: ["Leadership", "Solidity", "Smart Contracts", "P2E", "Game Development", "Ethereum", "Agile"],
-    logo: "/logos/tasc.svg",
+    logo: "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/tasc.svg",
     type: "work"
   },
   {
@@ -71,7 +71,7 @@ export const experiences: Experience[] = [
       "Implemented token standards, including ERC20 and ERC721, to facilitate token creation and management."
     ],
     skills: ["Solidity", "Smart Contracts", "Ethereum", "ERC20", "ERC721", "Game Development"],
-    logo: "/logos/future-institution.jpeg",
+    logo: "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/future-institution.jpeg",
     type: "work",
     website: "https://www.linkedin.com/company/future-institution/"
   },
@@ -89,7 +89,7 @@ export const experiences: Experience[] = [
       "Maintained the front-end of the website"
     ],
     skills: ["Solidity", "Web3", "ERC20", "dApps", "Ethereum", "Frontend Development"],
-    logo: "/logos/bitcoin-vietnam-logo.png",
+    logo: "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/bitcoin-vietnam-logo.png",
     type: "work",
     website: "https://bitcoinvn.io/"
   },
@@ -110,7 +110,7 @@ export const experiences: Experience[] = [
       "Team name: RedCodeChilizPeppers"
     ],
     skills: ["Solidity", "Smart Contracts", "Chiliz Blockchain", "Full-Stack Development"],
-    logo: "/logos/chiliz.png",
+    logo: "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/chiliz.png",
     type: "hackathon",
     website: "https://www.chiliz.com/hacking-paris/"
   },
@@ -130,7 +130,7 @@ export const experiences: Experience[] = [
       "Collaborated with international team of 5 developers"
     ],
     skills: ["Solidity", "Next.js", "React", "Thirdweb", "Hardhat", "ERC6551", "ERC4337", "Soul Bound Tokens"],
-    logo: "/logos/eth-global.ico",
+    logo: "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/eth-global.ico",
     type: "hackathon",
     website: "https://ethglobal.com/events/ethonline2023"
   },
@@ -149,7 +149,7 @@ export const experiences: Experience[] = [
       "Enabled third-party career validation from mentors, hackathons, and instructors"
     ],
     skills: ["Solidity", "NFT", "Smart Contracts", "Privacy Solutions"],
-    logo: "/logos/ethcon-korea.png",
+    logo: "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeiewatwvt7kahus3vvjs5medk64h5jp34awhyzhuyzouykudyqulaa/ethcon-korea.png",
     type: "hackathon",
     website: "https://devfolio.co/projects/careerzen-c34f"
   }

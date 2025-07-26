@@ -42,9 +42,9 @@ const FEATURED_REPOS = [
 function generateThumbnail(repo: GitHubRepository): string {
   // Use repository-specific screenshots if available
   const screenshotMap: Record<string, string> = {
-    'NFT-Marketplace': '/screenshots/solidity-default.svg',
-    'Uniswap_V2_rebuild': '/screenshots/solidity-default.svg',
-    'AATBA-ETH-Global-Hackathon': '/screenshots/web-default.svg'
+    'NFT-Marketplace': "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeia3uzg6u4j5jdlfqvhprm6ih4fubuk3hrre4emwmqdehgprj2e7hm/solidity-default.svg",
+    'Uniswap_V2_rebuild': "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeia3uzg6u4j5jdlfqvhprm6ih4fubuk3hrre4emwmqdehgprj2e7hm/solidity-default.svg",
+    'AATBA-ETH-Global-Hackathon': "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeia3uzg6u4j5jdlfqvhprm6ih4fubuk3hrre4emwmqdehgprj2e7hm/web-default.svg"
   };
   
   if (screenshotMap[repo.name]) {
@@ -56,16 +56,16 @@ function generateThumbnail(repo: GitHubRepository): string {
   const topics = repo.topics.join(' ').toLowerCase();
   
   if (language === 'solidity' || topics.includes('solidity') || topics.includes('smart-contract')) {
-    return '/screenshots/solidity-default.svg';
+    return "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeia3uzg6u4j5jdlfqvhprm6ih4fubuk3hrre4emwmqdehgprj2e7hm/solidity-default.svg";
   } else if (language === 'typescript' || language === 'javascript' || topics.includes('react') || topics.includes('nextjs')) {
-    return '/screenshots/web-default.svg';
+    return "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeia3uzg6u4j5jdlfqvhprm6ih4fubuk3hrre4emwmqdehgprj2e7hm/web-default.svg";
   } else if (language === 'rust') {
     return '/screenshots/rust-default.svg';
   } else if (language === 'python') {
     return '/screenshots/python-default.svg';
   }
   
-  return '/screenshots/code-default.svg';
+  return "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeia3uzg6u4j5jdlfqvhprm6ih4fubuk3hrre4emwmqdehgprj2e7hm/code-default.svg";
 }
 
 /**
