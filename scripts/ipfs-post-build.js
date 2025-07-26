@@ -113,10 +113,21 @@ async function main() {
     absolute: true
   });
   
-  console.log(`Found ${htmlFiles.length} HTML files to process.\n`);
+  // Find all JavaScript files in the _next/static/chunks directory
+  const jsFiles = glob.sync('_next/static/chunks/**/*.js', {
+    cwd: buildDir,
+    absolute: true
+  });
+  
+  console.log(`Found ${htmlFiles.length} HTML files and ${jsFiles.length} JavaScript files to process.\n`);
   
   // Process each HTML file
   htmlFiles.forEach(file => {
+    fixPathsInFile(file);
+  });
+  
+  // Process each JavaScript file
+  jsFiles.forEach(file => {
     fixPathsInFile(file);
   });
   
