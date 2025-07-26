@@ -235,8 +235,8 @@
   },
   "/profile.jpg": {
     "localPath": "profile.jpg",
-    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
-    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
-    "uploaded": false
+    "ipfsCID": "bafkreianh3jiq6jtnmbyfbas6n5m2xnb2wbblmu2pwdhsb4zbvsaczpnya",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafkreianh3jiq6jtnmbyfbas6n5m2xnb2wbblmu2pwdhsb4zbvsaczpnya",
+    "uploaded": true
   }
 }
