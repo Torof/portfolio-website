@@ -51,7 +51,7 @@ const SequentialLayout: React.FC<SequentialLayoutProps> = ({ projects }) => {
 
 
       {/* Projects Section */}
-      <section className="relative overflow-hidden bg-gray-800 border-b border-gray-700" style={{ minHeight: '90vh' }}>
+      <section className="relative overflow-hidden section-bg-secondary border-b border-gray-700 dark:border-gray-700 theme-light:border-warm-300" style={{ minHeight: '90vh' }}>
         {/* Ethereum Logo Columns Background */}
         <div className="absolute inset-0 opacity-100">
           <style jsx>{`

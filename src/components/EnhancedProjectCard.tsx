@@ -17,30 +17,69 @@ const EnhancedProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => 
   return (
     <>
       <style jsx>{`
+        /* Light theme warm styling */
+        .theme-light .theme-project-card {
+          background: rgba(254, 253, 248, 0.95) !important;
+          border-color: rgba(212, 192, 161, 0.3) !important;
+          box-shadow: 0 8px 25px rgba(139, 118, 96, 0.15) !important;
+        }
+        .theme-light .theme-project-title {
+          color: var(--warm-900) !important;
+          text-shadow: none !important;
+        }
+        .theme-light .theme-project-description {
+          color: var(--warm-700) !important;
+        }
+        .theme-light .theme-tech-tag {
+          background: var(--warm-200) !important;
+          color: var(--primary-700) !important;
+          border-color: var(--warm-400) !important;
+        }
+        .theme-light .theme-tech-tag:hover {
+          background: var(--warm-300) !important;
+          color: var(--primary-800) !important;
+        }
+        .theme-light .theme-project-links {
+          color: var(--warm-600) !important;
+        }
+        .theme-light .theme-project-links:hover {
+          color: var(--primary-700) !important;
+        }
+        .theme-light .theme-project-overlay {
+          background: linear-gradient(to top, rgba(68, 60, 53, 0.8) 0%, transparent 100%) !important;
+        }
+        
+        /* System preference light mode */
         @media (prefers-color-scheme: light) {
-          .theme-project-card {
-            background: rgb(31 41 55) !important;
-            border-color: rgb(55 65 81) !important;
+          :root:not(.theme-dark):not(.theme-light) .theme-project-card {
+            background: rgba(254, 253, 248, 0.95) !important;
+            border-color: rgba(212, 192, 161, 0.3) !important;
+            box-shadow: 0 8px 25px rgba(139, 118, 96, 0.15) !important;
           }
-          .theme-project-title {
-            color: white !important;
+          :root:not(.theme-dark):not(.theme-light) .theme-project-title {
+            color: #443c35 !important;
+            text-shadow: none !important;
           }
-          .theme-project-description {
-            color: rgb(209 213 219) !important;
+          :root:not(.theme-dark):not(.theme-light) .theme-project-description {
+            color: #94806b !important;
           }
-          .theme-tech-tag {
-            background: rgb(31 41 55) !important;
-            color: rgb(96 165 250) !important;
-            border-color: rgb(55 65 81) !important;
+          :root:not(.theme-dark):not(.theme-light) .theme-tech-tag {
+            background: #f7f3e9 !important;
+            color: #6d28d9 !important;
+            border-color: #e6d7bb !important;
           }
-          .theme-tech-tag:hover {
-            background: rgb(55 65 81) !important;
+          :root:not(.theme-dark):not(.theme-light) .theme-tech-tag:hover {
+            background: #f0e8d6 !important;
+            color: #5b21b6 !important;
           }
-          .theme-project-links {
-            color: rgb(156 163 175) !important;
+          :root:not(.theme-dark):not(.theme-light) .theme-project-links {
+            color: #b8a082 !important;
           }
-          .theme-project-links:hover {
-            color: rgb(96 165 250) !important;
+          :root:not(.theme-dark):not(.theme-light) .theme-project-links:hover {
+            color: #6d28d9 !important;
+          }
+          :root:not(.theme-dark):not(.theme-light) .theme-project-overlay {
+            background: linear-gradient(to top, rgba(68, 60, 53, 0.8) 0%, transparent 100%) !important;
           }
         }
       `}</style>
@@ -87,7 +126,7 @@ const EnhancedProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => 
         
         {/* Project name overlay with animated gradient */}
         <motion.div 
-          className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-transparent flex items-end"
+          className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-transparent flex items-end theme-project-overlay"
           whileHover={{ opacity: 0.9 }}
         >
           <motion.h3 
