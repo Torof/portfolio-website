@@ -1,0 +1,242 @@
+{
+  "/flags/fr.svg": {
+    "localPath": "flags/fr.svg",
+    "ipfsCID": "bafybeidwj5fqouemjnjyrnwgkg2ltcwi46g6pbx2seuq6chyeebzoza7nu/fr.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeidwj5fqouemjnjyrnwgkg2ltcwi46g6pbx2seuq6chyeebzoza7nu/fr.svg",
+    "uploaded": true
+  },
+  "/flags/en.svg": {
+    "localPath": "flags/en.svg",
+    "ipfsCID": "bafybeidwj5fqouemjnjyrnwgkg2ltcwi46g6pbx2seuq6chyeebzoza7nu/en.svg",
+    "ipfsUrl": "https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeidwj5fqouemjnjyrnwgkg2ltcwi46g6pbx2seuq6chyeebzoza7nu/en.svg",
+    "uploaded": true
+  },
+  "/logos/v0-vercel.svg": {
+    "localPath": "logos/v0-vercel.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/udemy.webp": {
+    "localPath": "logos/udemy.webp",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/typescript.svg": {
+    "localPath": "logos/typescript.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/thegraph.svg": {
+    "localPath": "logos/thegraph.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/tasc.svg": {
+    "localPath": "logos/tasc.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/tailwindcss.svg": {
+    "localPath": "logos/tailwindcss.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/solidity.svg": {
+    "localPath": "logos/solidity.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/solana.svg": {
+    "localPath": "logos/solana.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/rust.svg": {
+    "localPath": "logos/rust.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/reactjs.svg": {
+    "localPath": "logos/reactjs.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/rareskills.svg": {
+    "localPath": "logos/rareskills.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/polkadot.svg": {
+    "localPath": "logos/polkadot.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/perplexity.svg": {
+    "localPath": "logos/perplexity.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/nodejs.svg": {
+    "localPath": "logos/nodejs.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/nextjs.svg": {
+    "localPath": "logos/nextjs.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/ledgity-logo.svg": {
+    "localPath": "logos/ledgity-logo.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/html-5.svg": {
+    "localPath": "logos/html-5.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/hardhat.svg": {
+    "localPath": "logos/hardhat.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/github-copilot.svg": {
+    "localPath": "logos/github-copilot.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/future-institution.jpeg": {
+    "localPath": "logos/future-institution.jpeg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/freelance.svg": {
+    "localPath": "logos/freelance.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/foundry.svg": {
+    "localPath": "logos/foundry.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/ethereum.svg": {
+    "localPath": "logos/ethereum.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/ethcon-korea.png": {
+    "localPath": "logos/ethcon-korea.png",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/eth-global.ico": {
+    "localPath": "logos/eth-global.ico",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/cursor.svg": {
+    "localPath": "logos/cursor.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/css-3.svg": {
+    "localPath": "logos/css-3.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/consensys.svg": {
+    "localPath": "logos/consensys.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/claude.svg": {
+    "localPath": "logos/claude.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/chiliz.png": {
+    "localPath": "logos/chiliz.png",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/chatgpt.svg": {
+    "localPath": "logos/chatgpt.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/bitcoin-vietnam-logo.png": {
+    "localPath": "logos/bitcoin-vietnam-logo.png",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/bash.svg": {
+    "localPath": "logos/bash.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/logos/alyra.png": {
+    "localPath": "logos/alyra.png",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/screenshots/web-default.svg": {
+    "localPath": "screenshots/web-default.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/screenshots/solidity-default.svg": {
+    "localPath": "screenshots/solidity-default.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/screenshots/code-default.svg": {
+    "localPath": "screenshots/code-default.svg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  },
+  "/profile.jpg": {
+    "localPath": "profile.jpg",
+    "ipfsCID": "REPLACE_WITH_ACTUAL_CID",
+    "ipfsUrl": "https://gateway.pinata.cloud/ipfs/REPLACE_WITH_ACTUAL_CID",
+    "uploaded": false
+  }
+}

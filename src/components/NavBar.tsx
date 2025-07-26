@@ -111,7 +111,7 @@ export default function Navbar() {
                 aria-label="Switch to English"
               >
                 <Image 
-                  src="/flags/en.svg" 
+                  src="https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeidwj5fqouemjnjyrnwgkg2ltcwi46g6pbx2seuq6chyeebzoza7nu/en.svg" 
                   alt="English" 
                   width={16} 
                   height={12}
@@ -132,7 +132,7 @@ export default function Navbar() {
                 aria-label="Changer vers le français"
               >
                 <Image 
-                  src="/flags/fr.svg" 
+                  src="https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeidwj5fqouemjnjyrnwgkg2ltcwi46g6pbx2seuq6chyeebzoza7nu/fr.svg" 
                   alt="Français" 
                   width={16} 
                   height={12}
@@ -219,7 +219,7 @@ export default function Navbar() {
                     aria-label="Switch to English"
                   >
                     <Image 
-                      src="/flags/en.svg" 
+                      src="https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeidwj5fqouemjnjyrnwgkg2ltcwi46g6pbx2seuq6chyeebzoza7nu/en.svg" 
                       alt="English" 
                       width={16} 
                       height={12}
@@ -240,7 +240,7 @@ export default function Navbar() {
                     aria-label="Changer vers le français"
                   >
                     <Image 
-                      src="/flags/fr.svg" 
+                      src="https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeidwj5fqouemjnjyrnwgkg2ltcwi46g6pbx2seuq6chyeebzoza7nu/fr.svg" 
                       alt="Français" 
                       width={16} 
                       height={12}
