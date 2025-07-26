@@ -7,7 +7,7 @@ import { navLinks } from "@/lib/data/navigation";
 import ThemeToggle from "./ThemeToggle";
 import { useTheme } from "@/lib/context/ThemeContext";
 import { useLanguage } from "@/lib/context/LanguageContext";
-import { getAssetUrl } from "@/lib/utils/assetLoader";
+import { getAssetUrl, isIPFSDeployment } from "@/lib/utils/assetLoader";
 import Image from "next/image";
 
 export default function Navbar() {
@@ -72,12 +72,14 @@ export default function Navbar() {
         <div className="hidden md:flex items-center space-x-8">
           <div className="flex space-x-1">
             {navLinks.map((link) => {
-              // Convert paths for IPFS compatibility
-              const ipfsPath = link.path === "/" ? "./" : `.${link.path}.html`;
+              // Use appropriate path based on deployment target
+              const linkPath = isIPFSDeployment() 
+                ? (link.path === "/" ? "./" : `.${link.path}.html`)
+                : link.path;
               return (
                 <a
                   key={link.path}
-                  href={ipfsPath}
+                  href={linkPath}
                   className={`nav-link ${
                     pathname === link.path
                       ? "active"
@@ -184,12 +186,14 @@ export default function Navbar() {
         }`}>
           <div className="container-custom py-4">
             {navLinks.map((link) => {
-              // Convert paths for IPFS compatibility
-              const ipfsPath = link.path === "/" ? "./" : `.${link.path}.html`;
+              // Use appropriate path based on deployment target
+              const linkPath = isIPFSDeployment() 
+                ? (link.path === "/" ? "./" : `.${link.path}.html`)
+                : link.path;
               return (
                 <a
                   key={link.path}
-                  href={ipfsPath}
+                  href={linkPath}
                   className="py-3 px-4 rounded-lg transition-all block"
                   onClick={() => setIsMenuOpen(false)}
                 >
