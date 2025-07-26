@@ -7,6 +7,7 @@ import { navLinks } from "@/lib/data/navigation";
 import ThemeToggle from "./ThemeToggle";
 import { useTheme } from "@/lib/context/ThemeContext";
 import { useLanguage } from "@/lib/context/LanguageContext";
+import { getAssetUrl } from "@/lib/utils/assetLoader";
 import Image from "next/image";
 
 export default function Navbar() {
@@ -111,7 +112,7 @@ export default function Navbar() {
                 aria-label="Switch to English"
               >
                 <Image 
-                  src="https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeidwj5fqouemjnjyrnwgkg2ltcwi46g6pbx2seuq6chyeebzoza7nu/en.svg" 
+                  src={getAssetUrl('/flags/en.svg')} 
                   alt="English" 
                   width={16} 
                   height={12}
@@ -132,7 +133,7 @@ export default function Navbar() {
                 aria-label="Changer vers le français"
               >
                 <Image 
-                  src="https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeidwj5fqouemjnjyrnwgkg2ltcwi46g6pbx2seuq6chyeebzoza7nu/fr.svg" 
+                  src={getAssetUrl('/flags/fr.svg')} 
                   alt="Français" 
                   width={16} 
                   height={12}
@@ -219,7 +220,7 @@ export default function Navbar() {
                     aria-label="Switch to English"
                   >
                     <Image 
-                      src="https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeidwj5fqouemjnjyrnwgkg2ltcwi46g6pbx2seuq6chyeebzoza7nu/en.svg" 
+                      src={getAssetUrl('/flags/en.svg')} 
                       alt="English" 
                       width={16} 
                       height={12}
@@ -240,7 +241,7 @@ export default function Navbar() {
                     aria-label="Changer vers le français"
                   >
                     <Image 
-                      src="https://crimson-immediate-porcupine-844.mypinata.cloud/ipfs/bafybeidwj5fqouemjnjyrnwgkg2ltcwi46g6pbx2seuq6chyeebzoza7nu/fr.svg" 
+                      src={getAssetUrl('/flags/fr.svg')} 
                       alt="Français" 
                       width={16} 
                       height={12}
