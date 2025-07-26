@@ -45,6 +45,18 @@
   --dark-800: #0d1424;
   --dark-900: #030712;
   
+  /* Warm colors for light theme */
+  --warm-50: #fefdf8;
+  --warm-100: #faf8f1;
+  --warm-200: #f7f3e9;
+  --warm-300: #f0e8d6;
+  --warm-400: #e6d7bb;
+  --warm-500: #d4c0a1;
+  --warm-600: #b8a082;
+  --warm-700: #94806b;
+  --warm-800: #6b5d52;
+  --warm-900: #443c35;
+  
   /* Accent colors */
   --accent-blue: #4f46e5;
   --accent-purple: #8b5cf6;
@@ -86,9 +98,9 @@
 }
 
 .theme-light {
-  --background: #ffffff;
-  --background-secondary: #f3f4f6;
-  --foreground: #171717;
+  --background: #fefdf8;
+  --background-secondary: #f7f5f0;
+  --foreground: #2d2a27;
 }
 
 /* Project card light theme styles */
@@ -127,9 +139,9 @@
 /* Legacy support for system preferences */
 @media (prefers-color-scheme: light) {
   :root:not(.theme-dark):not(.theme-light) {
-    --background: #ffffff;
-    --background-secondary: #f3f4f6;
-    --foreground: #171717;
+    --background: #fefdf8;
+    --background-secondary: #f7f5f0;
+    --foreground: #2d2a27;
   }
 }
 
@@ -522,9 +534,9 @@ pre code {
 }
 
 .theme-light .card {
-  background: white;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(254, 253, 248, 0.9);
+  box-shadow: 0 4px 20px rgba(139, 118, 96, 0.15);
+  border: 1px solid rgba(212, 192, 161, 0.2);
 }
 
 .nav-link {
@@ -579,7 +591,7 @@ pre code {
 }
 
 .theme-light .nav-link {
-  color: var(--dark-500);
+  color: var(--warm-700);
 }
 
 .theme-light .nav-link:hover {
@@ -592,12 +604,12 @@ pre code {
 
 /* Special case for light mode when navbar is scrolled */
 .theme-light .navbar-scrolled .nav-link {
-  color: var(--dark-700);
+  color: var(--warm-800);
 }
 
 .theme-light .navbar-scrolled .nav-link:hover {
   color: var(--primary-700);
-  background: rgba(79, 70, 229, 0.1);
+  background: rgba(79, 70, 229, 0.08);
 }
 
 .theme-light .navbar-scrolled .nav-link.active {
@@ -676,13 +688,14 @@ pre code {
 }
 
 .theme-light .btn-outline {
-  border-color: rgba(0, 0, 0, 0.1);
-  color: var(--foreground);
+  border-color: var(--warm-400);
+  color: var(--warm-800);
 }
 
 .theme-light .btn-outline:hover {
   border-color: var(--primary-600);
-  background: rgba(var(--primary-600), 0.05);
+  background: rgba(79, 70, 229, 0.05);
+  color: var(--primary-700);
 }
 
 /* Skill bar styling */
@@ -765,7 +778,7 @@ pre code {
 }
 
 .theme-light .dots-pattern {
-  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(148, 128, 107, 0.2) 1px, transparent 1px);
 }
 
 .diagonal-pattern {
@@ -783,8 +796,8 @@ pre code {
   background-image:
     repeating-linear-gradient(
       45deg,
-      rgba(0, 0, 0, 0.03),
-      rgba(0, 0, 0, 0.03) 1px,
+      rgba(212, 192, 161, 0.15),
+      rgba(212, 192, 161, 0.15) 1px,
       transparent 1px,
       transparent 10px
     );
@@ -1205,14 +1218,68 @@ pre code {
 }
 
 .theme-light .glass-card {
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(254, 253, 248, 0.6);
+  border: 1px solid var(--warm-300);
+  backdrop-filter: blur(10px);
 }
 
 /* For system preference without explicit theme class */
 @media (prefers-color-scheme: light) {
   :root:not(.theme-dark):not(.theme-light) .glass-card {
-    background: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(254, 253, 248, 0.6);
+    border: 1px solid rgba(240, 232, 214, 0.7);
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* Warm section backgrounds for light theme */
+.theme-light .section-bg-primary {
+  background-color: var(--warm-50);
+  background-image: radial-gradient(
+    circle at 20% 30%,
+    rgba(212, 192, 161, 0.1) 0%,
+    transparent 50%
+  );
+}
+
+.theme-light .section-bg-secondary {
+  background-color: var(--warm-100);
+  background-image: radial-gradient(
+    circle at 80% 20%,
+    rgba(184, 160, 130, 0.15) 0%,
+    transparent 60%
+  );
+}
+
+.theme-light .section-bg-accent {
+  background: linear-gradient(135deg,
+    rgba(212, 192, 161, 0.2) 0%,
+    rgba(240, 232, 214, 0.1) 100%);
+}
+
+.theme-light .section-bg-gradient {
+  background: linear-gradient(135deg,
+    rgba(184, 160, 130, 0.12) 0%,
+    rgba(212, 192, 161, 0.08) 100%);
+}
+
+/* System preference warm backgrounds */
+@media (prefers-color-scheme: light) {
+  :root:not(.theme-dark):not(.theme-light) .section-bg-primary {
+    background-color: #fefdf8;
+    background-image: radial-gradient(
+      circle at 20% 30%,
+      rgba(212, 192, 161, 0.1) 0%,
+      transparent 50%
+    );
+  }
+  
+  :root:not(.theme-dark):not(.theme-light) .section-bg-secondary {
+    background-color: #faf8f1;
+    background-image: radial-gradient(
+      circle at 80% 20%,
+      rgba(184, 160, 130, 0.15) 0%,
+      transparent 60%
+    );
   }
 }
