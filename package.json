@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "dev:web2": "NEXT_PUBLIC_DEPLOYMENT_TARGET=web2 next dev --turbopack",
     "dev:ipfs": "NEXT_PUBLIC_DEPLOYMENT_TARGET=ipfs next dev --turbopack",
-    "build": "next build && node scripts/ipfs-post-build.js",
+    "build": "next build",
     "build:web2": "NEXT_PUBLIC_DEPLOYMENT_TARGET=web2 next build",
     "build:ipfs": "NEXT_PUBLIC_DEPLOYMENT_TARGET=ipfs next build && node scripts/ipfs-post-build.js",
     "start": "next start",

@@ -8,17 +8,22 @@ This portfolio supports both traditional Web2 hosting and IPFS/Web3 deployment. 
 
 ### Development
 ```bash
-npm run dev:web2
+npm run dev:web2        # Starts dev server with Web2 asset loading
+# Or use the default dev command (same as Web2):
+npm run dev            # Default development server
 ```
 
 ### Build for Production
 ```bash
-npm run build:web2
+npm run build:web2     # Clean build without IPFS processing
+# Or use the default build command (same as Web2):
+npm run build         # Default production build
 ```
 
 ### Preview Build
 ```bash
-npm run preview:web2
+npm run preview:web2   # Preview Web2 build
+npm run preview       # Default preview (same as Web2)
 ```
 
 ### Deployment Targets
