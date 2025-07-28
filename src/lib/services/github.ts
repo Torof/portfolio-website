@@ -211,6 +211,7 @@ export async function fetchGitHubStats(): Promise<GitHubStats | null> {
 
     const totalBytes = Object.values(allLanguages).reduce((sum, bytes) => sum + bytes, 0);
     const topLanguages = Object.entries(allLanguages)
+      .filter(([name]) => name !== 'CSS') // Filter out CSS
       .map(([name, bytes]) => ({
         name,
         bytes,

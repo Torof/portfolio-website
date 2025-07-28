@@ -17,7 +17,7 @@ export default function ContactSection() {
   return (
     <section className={`relative overflow-hidden border-b ${
       theme === 'theme-light'
-        ? 'bg-gradient-to-br from-[#f8fafc] via-[#f1f5f9] to-[#e2e8f0] border-slate-300'
+        ? 'bg-gradient-to-br from-[#fef7f0] via-[#fdf4ff] to-[#f0f9ff] border-warm-300'
         : 'bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155] border-slate-700'
     }`} style={{ minHeight: '90vh' }}>
       {/* Animated particles background */}
@@ -30,10 +30,16 @@ export default function ContactSection() {
           const duration = 2 + (i % 3);
           const delay = (i * 0.04) % 2;
           
+          // Colorful particles for light theme
+          const particleColors = ['bg-rose-400', 'bg-orange-400', 'bg-amber-400', 'bg-emerald-400', 'bg-blue-400', 'bg-violet-400', 'bg-pink-400'];
+          const particleColor = particleColors[i % particleColors.length];
+          
           return (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-30"
+              className={`absolute w-1 h-1 rounded-full opacity-30 ${
+                theme === 'theme-light' ? particleColor : 'bg-blue-400'
+              }`}
               style={{
                 left: `${left}%`,
                 top: `${top}%`,
@@ -53,10 +59,22 @@ export default function ContactSection() {
       </div>
       
       {/* Gradient mesh overlay */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 left-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-emerald-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse" style={{ animationDelay: '4s' }}></div>
+      <div className={`absolute inset-0 ${theme === 'theme-light' ? 'opacity-40' : 'opacity-20'}`}>
+        <div className={`absolute top-0 left-1/4 w-72 h-72 rounded-full mix-blend-multiply filter blur-xl animate-pulse ${
+          theme === 'theme-light' ? 'bg-rose-300' : 'bg-purple-500'
+        }`}></div>
+        <div className={`absolute bottom-0 right-1/4 w-72 h-72 rounded-full mix-blend-multiply filter blur-xl animate-pulse ${
+          theme === 'theme-light' ? 'bg-blue-300' : 'bg-blue-500'
+        }`} style={{ animationDelay: '2s' }}></div>
+        <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full mix-blend-multiply filter blur-xl animate-pulse ${
+          theme === 'theme-light' ? 'bg-amber-300' : 'bg-emerald-500'
+        }`} style={{ animationDelay: '4s' }}></div>
+        <div className={`absolute top-1/4 right-0 w-60 h-60 rounded-full mix-blend-multiply filter blur-xl animate-pulse ${
+          theme === 'theme-light' ? 'bg-violet-300' : 'bg-indigo-500'
+        }`} style={{ animationDelay: '6s' }}></div>
+        <div className={`absolute bottom-1/4 left-0 w-60 h-60 rounded-full mix-blend-multiply filter blur-xl animate-pulse ${
+          theme === 'theme-light' ? 'bg-emerald-300' : 'bg-teal-500'
+        }`} style={{ animationDelay: '8s' }}></div>
       </div>
       
       <div className="container-custom relative z-10 max-w-5xl py-24 flex flex-col justify-center min-h-screen">
@@ -87,20 +105,30 @@ export default function ContactSection() {
           className={`${getAnimationClass(centralCardAnimation.isVisible, 'scaleIn')}`}
         >
           <motion.div 
-            className="relative overflow-hidden rounded-2xl p-8 md:p-12 backdrop-blur-md bg-gradient-to-br from-[rgba(59,130,246,0.1)] to-[rgba(147,51,234,0.1)] border border-[rgba(255,255,255,0.1)] transition-all duration-500 group"
+            className={`relative overflow-hidden rounded-2xl p-8 md:p-12 backdrop-blur-md border transition-all duration-500 group ${
+              theme === 'theme-light' 
+                ? 'bg-gradient-to-br from-[rgba(255,255,255,0.9)] via-[rgba(254,252,232,0.9)] to-[rgba(255,247,237,0.9)] border-[rgba(212,192,161,0.3)] shadow-xl'
+                : 'bg-gradient-to-br from-[rgba(59,130,246,0.1)] to-[rgba(147,51,234,0.1)] border-[rgba(255,255,255,0.1)]'
+            }`}
             whileHover={{ 
               scale: 1.02,
-              boxShadow: '0 25px 50px rgba(59, 130, 246, 0.15)',
+              boxShadow: theme === 'theme-light' 
+                ? '0 25px 50px rgba(251, 146, 60, 0.2)' 
+                : '0 25px 50px rgba(59, 130, 246, 0.15)',
             }}
             initial={{ 
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)' 
+              boxShadow: theme === 'theme-light'
+                ? '0 10px 30px rgba(139, 118, 96, 0.15)'
+                : '0 10px 30px rgba(0, 0, 0, 0.1)' 
             }}
           >
             {/* Animated border gradient */}
             <motion.div
               className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               style={{
-                background: 'linear-gradient(45deg, transparent, rgba(59,130,246,0.2), transparent, rgba(147,51,234,0.2), transparent)',
+                background: theme === 'theme-light'
+                  ? 'linear-gradient(45deg, transparent, rgba(251,146,60,0.3), transparent, rgba(239,68,68,0.3), transparent, rgba(168,85,247,0.3), transparent)'
+                  : 'linear-gradient(45deg, transparent, rgba(59,130,246,0.2), transparent, rgba(147,51,234,0.2), transparent)',
                 backgroundSize: '400% 400%',
               }}
               animate={{
@@ -117,7 +145,11 @@ export default function ContactSection() {
               {/* Icon cluster */}
               <div className="flex justify-center items-center mb-8 space-x-4">
                 <motion.div 
-                  className="w-16 h-16 rounded-full bg-gradient-to-r from-[var(--primary-400)] to-[var(--primary-500)] flex items-center justify-center"
+                  className={`w-16 h-16 rounded-full flex items-center justify-center ${
+                    theme === 'theme-light' 
+                      ? 'bg-gradient-to-r from-rose-400 to-pink-500 shadow-lg shadow-rose-200'
+                      : 'bg-gradient-to-r from-[var(--primary-400)] to-[var(--primary-500)]'
+                  }`}
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 >
@@ -129,7 +161,11 @@ export default function ContactSection() {
                 </motion.div>
                 
                 <motion.div 
-                  className="w-20 h-20 rounded-full bg-gradient-to-r from-[var(--secondary-400)] to-[var(--secondary-500)] flex items-center justify-center"
+                  className={`w-20 h-20 rounded-full flex items-center justify-center ${
+                    theme === 'theme-light' 
+                      ? 'bg-gradient-to-r from-orange-400 to-amber-500 shadow-lg shadow-orange-200'
+                      : 'bg-gradient-to-r from-[var(--secondary-400)] to-[var(--secondary-500)]'
+                  }`}
                   whileHover={{ rotate: -360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 >
@@ -139,7 +175,11 @@ export default function ContactSection() {
                 </motion.div>
                 
                 <motion.div 
-                  className="w-16 h-16 rounded-full bg-gradient-to-r from-emerald-400 to-emerald-500 flex items-center justify-center"
+                  className={`w-16 h-16 rounded-full flex items-center justify-center ${
+                    theme === 'theme-light' 
+                      ? 'bg-gradient-to-r from-blue-400 to-violet-500 shadow-lg shadow-blue-200'
+                      : 'bg-gradient-to-r from-emerald-400 to-emerald-500'
+                  }`}
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 >
@@ -160,15 +200,21 @@ export default function ContactSection() {
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-[var(--primary-400)] mb-2">6+</div>
+                  <div className={`text-2xl font-bold mb-2 ${
+                    theme === 'theme-light' ? 'text-rose-500' : 'text-[var(--primary-400)]'
+                  }`}>6+</div>
                   <div className="text-sm light-text opacity-75">Years Experience</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-[var(--secondary-400)] mb-2">50+</div>
+                  <div className={`text-2xl font-bold mb-2 ${
+                    theme === 'theme-light' ? 'text-orange-500' : 'text-[var(--secondary-400)]'
+                  }`}>50+</div>
                   <div className="text-sm light-text opacity-75">Projects Delivered</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-emerald-400 mb-2">24h</div>
+                  <div className={`text-2xl font-bold mb-2 ${
+                    theme === 'theme-light' ? 'text-blue-500' : 'text-emerald-400'
+                  }`}>24h</div>
                   <div className="text-sm light-text opacity-75">Response Time</div>
                 </div>
               </div>
@@ -187,7 +233,11 @@ export default function ContactSection() {
           >
             <Link 
               href="/contact" 
-              className="relative inline-flex items-center px-12 py-4 text-lg font-semibold text-white rounded-full bg-gradient-to-r from-[var(--primary-500)] to-[var(--secondary-500)] shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+              className={`relative inline-flex items-center px-12 py-4 text-lg font-semibold text-white rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group ${
+                theme === 'theme-light'
+                  ? 'bg-gradient-to-r from-rose-500 via-orange-500 to-pink-500 hover:from-rose-600 hover:via-orange-600 hover:to-pink-600'
+                  : 'bg-gradient-to-r from-[var(--primary-500)] to-[var(--secondary-500)]'
+              }`}
             >
               <span className="relative z-10 flex items-center">
                 {t('contact.startConversation')}

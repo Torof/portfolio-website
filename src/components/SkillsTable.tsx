@@ -6,6 +6,7 @@ import { useScrollAnimation, getAnimationClass } from "@/lib/hooks/useScrollAnim
 import AnimatedTitle from "./AnimatedTitle";
 import MatrixRain from "./MatrixRain";
 import { useLanguage } from "@/lib/context/LanguageContext";
+import { useTheme } from "@/lib/context/ThemeContext";
 
 interface Skill {
   key: string;
@@ -53,6 +54,7 @@ const skillsData: SkillsData = {
 
 export default function SkillsTable() {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
   const tableAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
 
@@ -91,7 +93,11 @@ export default function SkillsTable() {
   };
 
   return (
-    <section className="section section-bg-primary relative overflow-hidden">
+    <section className={`section relative overflow-hidden ${
+      theme === 'theme-light' 
+        ? 'section-bg-primary' 
+        : 'bg-gradient-to-br from-slate-900 via-gray-800 to-slate-900 border-y border-slate-700'
+    }`}>
       {/* Matrix Rain Background */}
       <MatrixRain />
       

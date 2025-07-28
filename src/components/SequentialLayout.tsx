@@ -6,6 +6,7 @@ import FeaturedGitHubStats from './FeaturedGitHubStats';
 import { useScrollAnimation, getAnimationClass } from "@/lib/hooks/useScrollAnimation";
 import { Project } from '@/lib/types';
 import { useLanguage } from '@/lib/context/LanguageContext';
+import { useTheme } from '@/lib/context/ThemeContext';
 
 interface SequentialLayoutProps {
   projects: Project[];
@@ -13,6 +14,7 @@ interface SequentialLayoutProps {
 
 const SequentialLayout: React.FC<SequentialLayoutProps> = ({ projects }) => {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
   const textAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
   const techStackAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 400 });
@@ -51,7 +53,14 @@ const SequentialLayout: React.FC<SequentialLayoutProps> = ({ projects }) => {
 
 
       {/* Projects Section */}
-      <section className="relative overflow-hidden section-bg-secondary border-b border-gray-700 dark:border-gray-700 theme-light:border-warm-300" style={{ minHeight: '90vh' }}>
+      <section className={`relative overflow-hidden border-b ${
+        theme === 'theme-light' 
+          ? 'section-bg-secondary theme-light:border-warm-300' 
+          : 'bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 border-gray-700'
+      }`} style={{ 
+        minHeight: '90vh', 
+        backgroundColor: theme === 'theme-light' ? 'var(--warm-100)' : undefined 
+      }}>
         {/* Ethereum Logo Columns Background */}
         <div className="absolute inset-0 opacity-100">
           <style jsx>{`

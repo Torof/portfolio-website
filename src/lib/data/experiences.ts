@@ -100,8 +100,8 @@ export const experiences: Experience[] = [
     id: "chiliz-hackathon",
     company: "Chiliz",
     position: "Hackathon Participant",
-    startDate: "2023",
-    endDate: "2023",
+    startDate: "Jul 2023",
+    endDate: "Jul 2023",
     description: "Built 'Chiliz Got Talent' - an innovative platform for sports talent discovery on Chiliz blockchain.",
     achievements: [
       "Developed full-stack dApp with React TypeScript frontend",
@@ -119,8 +119,8 @@ export const experiences: Experience[] = [
     id: "eth-global-hackathon",
     company: "ETH Global",
     position: "Hackathon Participant",
-    startDate: "2023",
-    endDate: "2023",
+    startDate: "Jul 2023",
+    endDate: "Jul 2023",
     description: "Built AATBA Profile - Trustless & Verifiable Profile with Security & Privacy, fully on-chain.",
     achievements: [
       "Developed on-chain identity management platform using Soul Bound Tokens (SBT)",
@@ -139,8 +139,8 @@ export const experiences: Experience[] = [
     id: "careerzen-hackathon",
     company: "ETHCon Korea",
     position: "Hackathon Participant",
-    startDate: "2024",
-    endDate: "2024",
+    startDate: "Sep 2023",
+    endDate: "Sep 2023",
     description: "Built CareerZen - a blockchain-based career verification platform using NFTs to authenticate work history and enable anonymous professional networking.",
     achievements: [
       "Created career NFT system for verified work history and certifications",
