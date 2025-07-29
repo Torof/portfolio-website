@@ -76,3 +76,51 @@ export interface Experience {
     frontend: TechItem[];
     backend: TechItem[];
   }
+
+  // Extended Skills for comprehensive skills page
+  export interface AdvancedSkill {
+    id: string;
+    name: string;
+    description: string;
+    level: 1 | 2 | 3 | 4 | 5; // Expert level
+    category: 'smart-contracts' | 'defi' | 'layer2' | 'security' | 'development' | 'auditing';
+    subcategory?: string;
+    icon?: string;
+    examples?: string[];
+    projects?: string[];
+  }
+
+  export interface SkillCategory {
+    id: string;
+    name: string;
+    description: string;
+    icon: string;
+    skills: AdvancedSkill[];
+    color: string;
+  }
+
+  // Stack Overflow Integration
+  export interface StackOverflowProfile {
+    userId: string;
+    displayName: string;
+    profileImage: string;
+    reputation: number;
+    badges: {
+      gold: number;
+      silver: number;
+      bronze: number;
+    };
+    topTags: string[];
+    profileUrl: string;
+  }
+
+  export interface StackOverflowAnswer {
+    id: string;
+    questionTitle: string;
+    questionUrl: string;
+    answerUrl: string;
+    score: number;
+    isAccepted: boolean;
+    excerpt: string;
+    tags: string[];
+  }
