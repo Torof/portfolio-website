@@ -650,10 +650,25 @@ const DeFiSection = ({ category }: { category: SkillCategory }) => {
 };
 
 
-// Layer 2 - Network Topology (Final Design)
+// Layer 2 - Network Topology with Official Logos
 const Layer2Section = ({ category }: { category: SkillCategory }) => {
   const { theme } = useTheme();
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  
+  // Logo mapping for Layer 2 networks
+  const getNetworkLogo = (skillId: string): string => {
+    const logoMap: { [key: string]: string } = {
+      'arbitrum': '/logos/arbitrum.svg',
+      'optimism': '/logos/optimism.svg',
+      'polygon': '/logos/polygon.svg',
+      'base': '/logos/base.svg',
+      'berachain': '/logos/berachain.svg',
+      'zk-rollups': '/logos/zksync.svg',
+      'cross-chain': '/logos/ethereum.svg', // Use Ethereum logo for cross-chain
+      'state-channels': '/logos/ethereum.svg', // Use Ethereum logo for state channels
+    };
+    return logoMap[skillId] || '/logos/ethereum.svg';
+  };
 
   // Position calculations for network layout
   const centerPos = { x: 50, y: 50 }; // Ethereum at center (percentage)
@@ -869,17 +884,21 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
                       stroke={theme === 'theme-light' ? '#6366f1' : '#818cf8'}
                       strokeWidth="0.5"
                     />
-                    <text
-                      x={pos.x}
-                      y={pos.y - 1.5}
-                      textAnchor="middle"
-                      dominantBaseline="central"
-                      fontSize="5"
-                      fill={theme === 'theme-light' ? '#1e293b' : '#ffffff'}
-                      fontWeight="bold"
+                    {/* Network Logo */}
+                    <foreignObject
+                      x={pos.x - 4}
+                      y={pos.y - 5.5}
+                      width="8"
+                      height="8"
                     >
-                      {skill.icon}
-                    </text>
+                      <div className="w-full h-full flex items-center justify-center">
+                        <img 
+                          src={getNetworkLogo(skill.id)}
+                          alt={`${skill.name} logo`}
+                          className="w-full h-full object-contain rounded-full"
+                        />
+                      </div>
+                    </foreignObject>
                     <text
                       x={pos.x}
                       y={pos.y + 3.5}
