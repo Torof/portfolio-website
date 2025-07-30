@@ -422,7 +422,7 @@ export default function SkillsPage() {
             transition={{ delay: 0.4, duration: 0.6 }}
           >
             <h3 className="text-3xl font-bold light-text mb-6">
-              Why I'm the Right Choice
+              Why I&apos;m the Right Choice
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
               <div>

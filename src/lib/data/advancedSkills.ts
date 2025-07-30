@@ -410,6 +410,28 @@ export const skillCategories: SkillCategory[] = [
         icon: '📡',
         examples: ['Payment channels', 'Gaming channels', 'Micropayments'],
         projects: ['Channel implementations', 'Dispute resolution', 'Channel networks']
+      },
+      {
+        id: 'base',
+        name: 'Base',
+        description: 'Coinbase L2 built on OP Stack for mainstream adoption',
+        level: 4,
+        category: 'layer2',
+        subcategory: 'Rollups',
+        icon: '🔵',
+        examples: ['Consumer apps', 'Fiat onramps', 'Social tokens'],
+        projects: ['Consumer-facing dApps', 'Fiat-to-crypto bridges', 'Social finance protocols']
+      },
+      {
+        id: 'berachain',
+        name: 'Berachain',
+        description: 'EVM-compatible chain with innovative PoL consensus',
+        level: 3,
+        category: 'layer2',
+        subcategory: 'Alt L1',
+        icon: '🐻',
+        examples: ['Proof of Liquidity', 'Native yield', 'Consensus rewards'],
+        projects: ['PoL-optimized protocols', 'Validator incentive systems', 'Liquidity-driven applications']
       }
     ]
   },
