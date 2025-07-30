@@ -1,22 +1,7 @@
-<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="50" cy="50" r="50" fill="#8B4513"/>
-  <!-- Bear head shape -->
-  <circle cx="50" cy="45" r="20" fill="#D2691E"/>
-  <!-- Bear ears -->
-  <circle cx="38" cy="30" r="8" fill="#D2691E"/>
-  <circle cx="62" cy="30" r="8" fill="#D2691E"/>
-  <circle cx="38" cy="30" r="5" fill="#A0522D"/>
-  <circle cx="62" cy="30" r="5" fill="#A0522D"/>
-  <!-- Bear eyes -->
-  <circle cx="44" cy="42" r="3" fill="#2F1B14"/>
-  <circle cx="56" cy="42" r="3" fill="#2F1B14"/>
-  <!-- Bear nose -->
-  <ellipse cx="50" cy="48" rx="2" ry="1.5" fill="#2F1B14"/>
-  <!-- Bear mouth -->
-  <path d="M47 52 Q50 55 53 52" stroke="#2F1B14" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <!-- Chain links around -->
-  <circle cx="25" cy="25" r="4" fill="none" stroke="#FFD700" stroke-width="2"/>
-  <circle cx="75" cy="75" r="4" fill="none" stroke="#FFD700" stroke-width="2"/>
-  <circle cx="75" cy="25" r="4" fill="none" stroke="#FFD700" stroke-width="2"/>
-  <circle cx="25" cy="75" r="4" fill="none" stroke="#FFD700" stroke-width="2"/>
+<svg width="100" height="100" viewBox="0 0 1441 1496" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#F97316" d="M1286.9,687.3c-2.2-7-3.8-14.1-5-21.3c-0.6-3.3-1.2-6.7-1.9-10c-1.6-7.2-3.3-14.3-5.2-21.4v0
+        c31.5-47.6,181.9-296.1,10.7-455.6c-190-177-412,55-412,55l0.7,1c-99.8-30.3-208-33.9-313.2-1c0,0,0,0,0,0
+        c-1.3-1.4-222.5-231.5-412-55c-189.5,176.5,15.1,462.1,16.2,463.6c0,0,0,0,0,0c-2.2,6.7-3.9,13.6-5.1,20.5
+        C139.6,785.4,0,823.1,0,1036s146,388,444,388h122.3c0,0,0,0,0,0c0.5,0.8,50.9,72.1,154.3,72.1c96-0.1,159.3-71.4,159.9-72.1
+        c0,0,0,0,0,0h116.7c298,0,444-171,444-388C1441.2,837.8,1320.1,791.4,1286.9,687.3L1286.9,687.3z"></path>
 </svg>
