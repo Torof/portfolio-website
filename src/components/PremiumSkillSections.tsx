@@ -493,7 +493,7 @@ const DeFiSection = ({ category }: { category: SkillCategory }) => {
         </div>
 
         {/* Protocol List */}
-        <div className="space-y-3">
+        <div className="max-h-[400px] overflow-y-auto pr-2 space-y-3 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-600 dark:scrollbar-track-gray-800">
           {category.skills.map((skill, index) => (
             <motion.div
               key={skill.id}
@@ -654,20 +654,53 @@ const DeFiSection = ({ category }: { category: SkillCategory }) => {
 const Layer2Section = ({ category }: { category: SkillCategory }) => {
   const { theme } = useTheme();
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
+  
+  const handleMouseEnter = (skillId: string) => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+    setHoveredNode(skillId);
+  };
+
+  const handleMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setHoveredNode(null);
+    }, 150); // Small delay to allow moving to tooltip
+    setHoverTimeout(timeout);
+  };
+
+  const handleTooltipEnter = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+  };
+
+  const handleTooltipLeave = () => {
+    setHoveredNode(null);
+  };
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout);
+      }
+    };
+  }, [hoverTimeout]);
   
   // Logo mapping for Layer 2 networks
-  const getNetworkLogo = (skillId: string): string => {
+  const getNetworkLogo = (skillId: string): string | null => {
     const logoMap: { [key: string]: string } = {
       'arbitrum': '/logos/arbitrum.svg',
       'optimism': '/logos/optimism.svg',
       'polygon': '/logos/polygon.svg',
-      'base': '/logos/base.svg',
+      'base': '/logos/base.webp',
       'berachain': '/logos/berachain.svg',
-      'zk-rollups': '/logos/zksync.svg',
-      'cross-chain': '/logos/ethereum.svg', // Use Ethereum logo for cross-chain
-      'state-channels': '/logos/ethereum.svg', // Use Ethereum logo for state channels
     };
-    return logoMap[skillId] || '/logos/ethereum.svg';
+    return logoMap[skillId] || null; // Return null for emoji-based items
   };
 
   // Position calculations for network layout
@@ -840,17 +873,20 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
                   stroke={theme === 'theme-light' ? '#3b82f6' : '#60a5fa'}
                   strokeWidth="1"
                 />
-                <text
-                  x={centerPos.x}
-                  y={centerPos.y}
-                  textAnchor="middle"
-                  dominantBaseline="central"
-                  fontSize="10"
-                  fill="white"
-                  fontWeight="bold"
+                <foreignObject 
+                  x={centerPos.x - 6} 
+                  y={centerPos.y - 6} 
+                  width="12" 
+                  height="12"
                 >
-                  ⟠
-                </text>
+                  <div className="w-full h-full flex items-center justify-center">
+                    <img 
+                      src="/logos/ethereum.svg" 
+                      alt="Ethereum logo" 
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                </foreignObject>
               </motion.g>
 
               {/* L2 Network Nodes (SVG) */}
@@ -861,8 +897,8 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
                   <motion.g
                     key={skill.id}
                     style={{ cursor: 'pointer' }}
-                    onMouseEnter={() => setHoveredNode(skill.id)}
-                    onMouseLeave={() => setHoveredNode(null)}
+                    onMouseEnter={() => handleMouseEnter(skill.id)}
+                    onMouseLeave={handleMouseLeave}
                     animate={{
                       scale: isHovered ? 1.25 : 1,
                       filter: isHovered 
@@ -884,21 +920,34 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
                       stroke={theme === 'theme-light' ? '#6366f1' : '#818cf8'}
                       strokeWidth="0.5"
                     />
-                    {/* Network Logo */}
-                    <foreignObject
-                      x={pos.x - 4}
-                      y={pos.y - 5.5}
-                      width="8"
-                      height="8"
-                    >
-                      <div className="w-full h-full flex items-center justify-center">
-                        <img 
-                          src={getNetworkLogo(skill.id)}
-                          alt={`${skill.name} logo`}
-                          className="w-full h-full object-contain rounded-full"
-                        />
-                      </div>
-                    </foreignObject>
+                    {/* Network Logo or Emoji */}
+                    {getNetworkLogo(skill.id) ? (
+                      <foreignObject
+                        x={pos.x - 4}
+                        y={pos.y - 5.5}
+                        width="8"
+                        height="8"
+                      >
+                        <div className="w-full h-full flex items-center justify-center">
+                          <img 
+                            src={getNetworkLogo(skill.id)}
+                            alt={`${skill.name} logo`}
+                            className="w-full h-full object-contain rounded-full"
+                          />
+                        </div>
+                      </foreignObject>
+                    ) : (
+                      <text
+                        x={pos.x}
+                        y={pos.y}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fontSize="6"
+                        fill={theme === 'theme-light' ? '#1e293b' : '#ffffff'}
+                      >
+                        {skill.icon}
+                      </text>
+                    )}
                     <text
                       x={pos.x}
                       y={pos.y + 3.5}
@@ -936,43 +985,81 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
             </svg>
 
             {/* Tooltips (HTML overlay for better styling) */}
-            {category.skills.map((skill, index) => {
-              const pos = nodePositions[index];
-              return hoveredNode === skill.id ? (
+            <AnimatePresence>
+              {category.skills.map((skill, index) => {
+                const pos = nodePositions[index];
+                return hoveredNode === skill.id ? (
                 <motion.div
                   key={`tooltip-${skill.id}`}
-                  className={`absolute p-4 rounded-lg shadow-xl border min-w-52 z-20 ${
+                  className={`absolute p-4 rounded-lg shadow-xl border min-w-52 max-w-80 z-30 backdrop-blur-sm ${
                     theme === 'theme-light'
-                      ? 'bg-white border-gray-200'
-                      : 'bg-slate-800 border-slate-600'
+                      ? 'bg-white/95 border-gray-200'
+                      : 'bg-slate-800/95 border-slate-600'
                   }`}
                   style={{
                     left: `${pos.x}%`,
                     top: `${pos.y}%`,
-                    transform: 'translate(-50%, calc(-100% - 12px))'
+                    transform: pos.y < 30 
+                      ? 'translate(-50%, calc(100% + 12px))' // Show below if near top
+                      : 'translate(-50%, calc(-100% - 12px))', // Show above by default
+                    pointerEvents: 'auto'
                   }}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.2 }}
+                  initial={{ opacity: 0, y: pos.y < 30 ? -10 : 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: pos.y < 30 ? -10 : 10, scale: 0.95 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  onMouseEnter={handleTooltipEnter}
+                  onMouseLeave={handleTooltipLeave}
                 >
-                  <h4 className={`font-bold text-base mb-2 ${
-                    theme === 'theme-light' ? 'text-slate-800' : 'text-white'
-                  }`}>
-                    {skill.name}
-                  </h4>
-                  <p className={`text-sm leading-relaxed mb-2 ${
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="text-lg">
+                      {getNetworkLogo(skill.id) ? (
+                        <img 
+                          src={getNetworkLogo(skill.id)} 
+                          alt={`${skill.name} logo`} 
+                          className="w-6 h-6 object-contain rounded-full"
+                        />
+                      ) : (
+                        <span>{skill.icon}</span>
+                      )}
+                    </div>
+                    <h4 className={`font-bold text-base ${
+                      theme === 'theme-light' ? 'text-slate-800' : 'text-white'
+                    }`}>
+                      {skill.name}
+                    </h4>
+                  </div>
+                  
+                  <p className={`text-sm leading-relaxed mb-3 ${
                     theme === 'theme-light' ? 'text-slate-600' : 'text-slate-300'
                   }`}>
                     {skill.description}
                   </p>
-                  <div className={`text-xs px-3 py-1 rounded-full ${
-                    theme === 'theme-light' ? 'bg-indigo-100 text-indigo-800' : 'bg-indigo-900/50 text-indigo-300'
+
+                  <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
+                    <div className={`${
+                      theme === 'theme-light' ? 'text-slate-500' : 'text-slate-400'
+                    }`}>
+                      <span className="font-medium">Type:</span> {skill.subcategory}
+                    </div>
+                    <div className={`${
+                      theme === 'theme-light' ? 'text-slate-500' : 'text-slate-400'
+                    }`}>
+                      <span className="font-medium">Experience:</span> {skill.level * 2}+ years
+                    </div>
+                  </div>
+
+                  <div className={`text-xs px-3 py-1.5 rounded-full text-center font-medium ${
+                    skill.level >= 4 
+                      ? (theme === 'theme-light' ? 'bg-emerald-100 text-emerald-800' : 'bg-emerald-900/50 text-emerald-300')
+                      : (theme === 'theme-light' ? 'bg-blue-100 text-blue-800' : 'bg-blue-900/50 text-blue-300')
                   }`}>
-                    {skill.subcategory}
+                    {skill.level >= 4 ? 'Expert Level' : 'Proficient Level'}
                   </div>
                 </motion.div>
               ) : null;
             })}
+            </AnimatePresence>
           </div>
         </div>
       </div>
