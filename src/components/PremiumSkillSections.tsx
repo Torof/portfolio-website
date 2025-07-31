@@ -481,6 +481,7 @@ const DeFiSection = ({ category }: { category: SkillCategory }) => {
   const { theme } = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [expandedProtocol, setExpandedProtocol] = useState<string | null>(null);
 
   // Update time every second for retro terminal feel
   useEffect(() => {
@@ -497,6 +498,23 @@ const DeFiSection = ({ category }: { category: SkillCategory }) => {
   const getTVL = (level: number) => {
     const base = level * 250;
     return `$${base}M`;
+  };
+
+  // Get detailed protocol information
+  const getProtocolDetails = (skill: any) => {
+    const usageDescriptions: { [key: string]: string } = {
+      'DEX': `I architect and optimize automated market maker (AMM) systems, implementing custom trading strategies and liquidity pool integrations. My expertise includes MEV protection, arbitrage mechanisms, and cross-chain bridge development for seamless asset transfers.`,
+      'Lending': `I design sophisticated lending and borrowing protocols with dynamic interest rate models and advanced collateral management systems. My work focuses on risk assessment algorithms, liquidation mechanisms, and yield optimization strategies.`,
+      'Yield Farming': `I create auto-compounding yield farming strategies and implement complex reward distribution mechanisms. My expertise covers liquidity mining protocols, governance token economics, and sustainable yield generation models.`,
+      'Derivatives': `I build advanced derivatives platforms with options, futures, and perpetual contracts. My implementations include synthetic asset protocols, prediction markets, and automated settlement systems.`,
+      'default': `I integrate this protocol into comprehensive DeFi ecosystems, focusing on interoperability, gas optimization, and security best practices. My implementations emphasize user experience and robust smart contract architecture.`
+    };
+
+    return {
+      description: skill.description,
+      usage: usageDescriptions[skill.subcategory] || usageDescriptions['default'],
+      features: skill.examples || []
+    };
   };
 
   return (
@@ -656,59 +674,153 @@ const DeFiSection = ({ category }: { category: SkillCategory }) => {
                 }`}
               >
                 {category.skills.map((skill, index) => (
-                  <motion.div
-                    key={skill.id}
-                    className={`grid grid-cols-12 gap-2 px-4 py-3 border-b font-mono text-sm transition-all ${
-                      theme === 'theme-light'
-                        ? 'border-amber-200 hover:bg-amber-100'
-                        : 'border-green-900 hover:bg-green-950/30'
-                    }`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: index * 0.05 }}
-                  >
-                    <div className={`col-span-1 ${
-                      theme === 'theme-light' ? 'text-amber-700' : 'text-green-600'
-                    }`}>
-                      {String(index + 1).padStart(2, '0')}
-                    </div>
-                    <div className={`col-span-3 font-bold ${
-                      theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
-                    }`}>
-                      {skill.name}
-                    </div>
-                    <div className={`col-span-2 text-xs ${
-                      theme === 'theme-light' ? 'text-amber-700' : 'text-green-500'
-                    }`}>
-                      {skill.subcategory}
-                    </div>
-                    <div className={`col-span-2 ${
-                      theme === 'theme-light' ? 'text-amber-800' : 'text-green-400'
-                    }`}>
-                      {getTVL(skill.level)}
-                    </div>
-                    <div className={`col-span-2 font-bold ${
-                      getPriceChange(index).startsWith('+') 
-                        ? 'text-green-600' 
-                        : 'text-red-600'
-                    }`}>
-                      {getPriceChange(index)}
-                    </div>
-                    <div className="col-span-2">
-                      <div className={`inline-flex items-center space-x-1 ${
-                        skill.level >= 4 
-                          ? 'text-green-600' 
-                          : theme === 'theme-light' ? 'text-amber-600' : 'text-yellow-500'
+                  <div key={skill.id}>
+                    <motion.div
+                      className={`grid grid-cols-12 gap-2 px-4 py-3 border-b font-mono text-sm transition-all cursor-pointer ${
+                        expandedProtocol === skill.id
+                          ? theme === 'theme-light'
+                            ? 'bg-amber-200 border-amber-300'
+                            : 'bg-green-900/50 border-green-400'
+                          : theme === 'theme-light'
+                            ? 'border-amber-200 hover:bg-amber-100'
+                            : 'border-green-900 hover:bg-green-950/30'
+                      }`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: index * 0.05 }}
+                      onClick={() => setExpandedProtocol(expandedProtocol === skill.id ? null : skill.id)}
+                    >
+                      <div className={`col-span-1 ${
+                        theme === 'theme-light' ? 'text-amber-700' : 'text-green-600'
                       }`}>
-                        <div className={`w-2 h-2 rounded-full ${
-                          skill.level >= 4 ? 'bg-green-600' : 'bg-yellow-500'
-                        } animate-pulse`} />
-                        <span className="text-xs">
-                          {skill.level >= 4 ? 'EXPERT' : 'ACTIVE'}
-                        </span>
+                        {String(index + 1).padStart(2, '0')}
                       </div>
-                    </div>
-                  </motion.div>
+                      <div className={`col-span-3 font-bold flex items-center ${
+                        theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
+                      }`}>
+                        <span>{skill.name}</span>
+                        <motion.div
+                          className="ml-2"
+                          animate={{ rotate: expandedProtocol === skill.id ? 90 : 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <span className="text-xs">▶</span>
+                        </motion.div>
+                      </div>
+                      <div className={`col-span-2 text-xs ${
+                        theme === 'theme-light' ? 'text-amber-700' : 'text-green-500'
+                      }`}>
+                        {skill.subcategory}
+                      </div>
+                      <div className={`col-span-2 ${
+                        theme === 'theme-light' ? 'text-amber-800' : 'text-green-400'
+                      }`}>
+                        {getTVL(skill.level)}
+                      </div>
+                      <div className={`col-span-2 font-bold ${
+                        getPriceChange(index).startsWith('+') 
+                          ? 'text-green-600' 
+                          : 'text-red-600'
+                      }`}>
+                        {getPriceChange(index)}
+                      </div>
+                      <div className="col-span-2">
+                        <div className={`inline-flex items-center space-x-1 ${
+                          skill.level >= 4 
+                            ? 'text-green-600' 
+                            : theme === 'theme-light' ? 'text-amber-600' : 'text-yellow-500'
+                        }`}>
+                          <div className={`w-2 h-2 rounded-full ${
+                            skill.level >= 4 ? 'bg-green-600' : 'bg-yellow-500'
+                          } animate-pulse`} />
+                          <span className="text-xs">
+                            {skill.level >= 4 ? 'EXPERT' : 'ACTIVE'}
+                          </span>
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    {/* Expanded Protocol Details */}
+                    <AnimatePresence>
+                      {expandedProtocol === skill.id && (
+                        <motion.div
+                          className={`px-6 py-4 border-b-2 ${
+                            theme === 'theme-light'
+                              ? 'bg-amber-100/50 border-amber-300'
+                              : 'bg-green-950/20 border-green-700'
+                          }`}
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <div className="space-y-4">
+                            {/* Protocol Overview */}
+                            <div>
+                              <div className={`font-mono text-sm font-bold mb-2 ${
+                                theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
+                              }`}>
+                                >>> PROTOCOL_OVERVIEW:
+                              </div>
+                              <div className={`font-mono text-xs leading-relaxed ${
+                                theme === 'theme-light' ? 'text-amber-800' : 'text-green-300'
+                              }`}>
+                                {getProtocolDetails(skill).description}
+                              </div>
+                            </div>
+
+                            {/* My Usage */}
+                            <div>
+                              <div className={`font-mono text-sm font-bold mb-2 ${
+                                theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
+                              }`}>
+                                >>> HOW_I_USE_IT:
+                              </div>
+                              <div className={`font-mono text-xs leading-relaxed ${
+                                theme === 'theme-light' ? 'text-amber-800' : 'text-green-300'
+                              }`}>
+                                {getProtocolDetails(skill).usage}
+                              </div>
+                            </div>
+
+                            {/* Technical Features */}
+                            {getProtocolDetails(skill).features.length > 0 && (
+                              <div>
+                                <div className={`font-mono text-sm font-bold mb-2 ${
+                                  theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
+                                }`}>
+                                  >>> KEY_FEATURES:
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                  {getProtocolDetails(skill).features.slice(0, 6).map((feature: string, idx: number) => (
+                                    <div 
+                                      key={idx}
+                                      className={`font-mono text-xs px-2 py-1 border ${
+                                        theme === 'theme-light'
+                                          ? 'bg-amber-50 border-amber-600 text-amber-800'
+                                          : 'bg-green-950/30 border-green-600 text-green-400'
+                                      }`}
+                                    >
+                                      • {feature}
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Terminal Action */}
+                            <div className={`pt-2 border-t font-mono text-xs ${
+                              theme === 'theme-light' 
+                                ? 'border-amber-300 text-amber-600' 
+                                : 'border-green-700 text-green-600'
+                            }`}>
+                              > PROTOCOL_STATUS: ANALYZED | CLICK_TO_COLLAPSE
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 ))}
               </div>
             </div>
