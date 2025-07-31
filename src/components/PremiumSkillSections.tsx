@@ -22,11 +22,8 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
   }, []);
 
   const handleScroll = (e: React.WheelEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    e.nativeEvent.preventDefault();
-    e.nativeEvent.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
+    // Don't prevent default - let the browser handle scrolling naturally
+    // We just use the wheel event to detect scroll direction for our custom logic
     
     const delta = e.deltaY > 0 ? 1 : -1;
     setCurrentIndex(prev => {
@@ -36,8 +33,6 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
       if (newIndex >= category.skills.length) return 0;
       return newIndex;
     });
-    
-    return false;
   };
 
   const handleShuffle = () => {
@@ -594,11 +589,14 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
 const DeFiSection = ({ category }: { category: SkillCategory }) => {
   const { theme } = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [currentTime, setCurrentTime] = useState<Date | null>(null);
   const [expandedProtocol, setExpandedProtocol] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   // Update time every second for retro terminal feel
   useEffect(() => {
+    setMounted(true);
+    setCurrentTime(new Date());
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
@@ -682,7 +680,7 @@ const DeFiSection = ({ category }: { category: SkillCategory }) => {
               <div className={`font-mono text-xs ${
                 theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
               }`}>
-                {currentTime.toLocaleTimeString('en-US', { hour12: false })}
+                {mounted && currentTime ? currentTime.toLocaleTimeString('en-US', { hour12: false }) : '--:--:--'}
               </div>
             </div>
           </div>
@@ -1036,16 +1034,46 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
   // Position calculations for network layout
   const centerPos = { x: 50, y: 50 }; // Ethereum at center (percentage)
   const radius = 35; // Distance from center to L2 nodes (percentage) - increased
-  const totalNodes = category.skills.length;
+  const totalNodes = category.skills?.length || 0;
   
-  const nodePositions = category.skills.map((skill, index) => {
+  // Debug: Check if we have valid skills
+  if (!category.skills || totalNodes === 0) {
+    console.warn('Layer2Section: No skills found in category', category);
+    return null;
+  }
+  
+  const nodePositions = (category.skills || []).map((skill, index) => {
     // Calculate angle for each node, starting from top (12 o'clock) and going clockwise
-    const angleInRadians = (index / totalNodes) * 2 * Math.PI - Math.PI / 2;
+    // Prevent division by zero
+    const safeTotal = totalNodes > 0 ? totalNodes : 1;
+    const angleInRadians = (index / safeTotal) * 2 * Math.PI - Math.PI / 2;
     const x = centerPos.x + radius * Math.cos(angleInRadians);
     const y = centerPos.y + radius * Math.sin(angleInRadians);
     
-    return { x, y };
+    // Ensure calculated values are valid numbers
+    const safeX = !isNaN(x) && isFinite(x) ? x : centerPos.x;
+    const safeY = !isNaN(y) && isFinite(y) ? y : centerPos.y;
+    
+    // Debug logging (only for truly invalid cases)
+    if (!isFinite(safeX) || !isFinite(safeY)) {
+      console.error(`Critical: Invalid position calculated for skill ${skill.id}:`, { 
+        index, safeTotal, angleInRadians, x, y, safeX, safeY 
+      });
+    }
+    
+    return { x: safeX, y: safeY };
   });
+
+  // Final safety check: ensure all positions are valid
+  const validPositions = nodePositions.every(pos => 
+    pos && typeof pos.x === 'number' && typeof pos.y === 'number' && 
+    isFinite(pos.x) && isFinite(pos.y)
+  );
+  
+  if (!validPositions) {
+    console.error('Layer2Section: Invalid positions detected', nodePositions);
+    return null;
+  }
 
   return (
     <section className="mb-24">
@@ -1138,6 +1166,8 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
               {/* Connection Lines */}
               {category.skills.map((skill, index) => {
                 const pos = nodePositions[index];
+                // Safety check: ensure pos exists and has valid coordinates
+                if (!pos || typeof pos.x !== 'number' || typeof pos.y !== 'number' || !isFinite(pos.x) || !isFinite(pos.y)) return null;
                 return (
                   <motion.line
                     key={`connection-${skill.id}`}
@@ -1161,14 +1191,20 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
               })}
 
               {/* Data Flow Animation */}
-              {hoveredNode && category.skills.map((skill, index) => {
+              {hoveredNode && category.skills?.map((skill, index) => {
                 if (skill.id !== hoveredNode) return null;
                 const pos = nodePositions[index];
+                // Safety check: ensure pos exists and has valid coordinates
+                if (!pos || typeof pos.x !== 'number' || typeof pos.y !== 'number' || !isFinite(pos.x) || !isFinite(pos.y)) return null;
                 return (
                   <motion.circle
                     key={`flow-${skill.id}`}
                     r="0.5"
                     fill="#10b981"
+                    initial={{
+                      cx: centerPos.x,
+                      cy: centerPos.y
+                    }}
                     animate={{
                       cx: [centerPos.x, pos.x, centerPos.x],
                       cy: [centerPos.y, pos.y, centerPos.y],
@@ -1223,22 +1259,34 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
               {category.skills.map((skill, index) => {
                 const pos = nodePositions[index];
                 const isHovered = hoveredNode === skill.id;
+                // Safety check: ensure pos exists and has valid coordinates
+                if (!pos || typeof pos.x !== 'number' || typeof pos.y !== 'number' || !isFinite(pos.x) || !isFinite(pos.y)) return null;
                 return (
                   <motion.g
                     key={skill.id}
-                    style={{ cursor: 'pointer' }}
+                    style={{ 
+                      cursor: 'pointer',
+                      filter: "drop-shadow(0 0 4px rgba(0, 0, 0, 0.2))"
+                    }}
                     onMouseEnter={() => handleMouseEnter(skill.id)}
                     onMouseLeave={handleMouseLeave}
-                    animate={{
+                    initial={{ 
+                      opacity: 0, 
+                      scale: 0
+                    }}
+                    animate={{ 
+                      opacity: 1, 
                       scale: isHovered ? 1.25 : 1,
                       filter: isHovered 
                         ? "drop-shadow(0 0 8px rgba(99, 102, 241, 0.6))"
                         : "drop-shadow(0 0 4px rgba(0, 0, 0, 0.2))"
                     }}
-                    transition={{ duration: 0.3 }}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: isHovered ? 1.25 : 1 }}
-                    transition={{ delay: index * 0.1, duration: 0.6, type: "spring" }}
+                    transition={{ 
+                      delay: index * 0.1, 
+                      duration: 0.6, 
+                      type: "spring",
+                      filter: { duration: 0.3 }
+                    }}
                   >
                     <circle
                       cx={pos.x}
@@ -1318,6 +1366,8 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
             <AnimatePresence>
               {category.skills.map((skill, index) => {
                 const pos = nodePositions[index];
+                // Safety check: ensure pos exists and has valid coordinates
+                if (!pos || typeof pos.x !== 'number' || typeof pos.y !== 'number' || !isFinite(pos.x) || !isFinite(pos.y)) return null;
                 return hoveredNode === skill.id ? (
                 <motion.div
                   key={`tooltip-${skill.id}`}
@@ -1400,6 +1450,19 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
 // Security - High-End Surveillance Theme
 const SecuritySection = ({ category }: { category: SkillCategory }) => {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Generate deterministic pattern based on index to avoid hydration mismatch
+  const getGridPattern = (index: number) => {
+    // Use deterministic logic instead of Math.random()
+    const isActive = (index * 7) % 13 === 0; // Every ~13th item
+    const isAnimated = (index * 11) % 17 === 0; // Every ~17th item
+    return { isActive, isAnimated };
+  };
 
   return (
     <section className="mb-32">
@@ -1412,29 +1475,32 @@ const SecuritySection = ({ category }: { category: SkillCategory }) => {
         {/* Surveillance grid pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="grid grid-cols-10 grid-rows-6 gap-2 h-full">
-            {Array.from({ length: 60 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className={`border ${
-                  theme === 'theme-light' ? 'border-slate-300' : 'border-slate-700'
-                } ${
-                  Math.random() > 0.9 ? 'bg-red-500/20' : ''
-                }`}
-                animate={{
-                  opacity: [0.3, 1, 0.3],
-                  backgroundColor: Math.random() > 0.95 ? [
-                    "rgba(239, 68, 68, 0.1)",
-                    "rgba(239, 68, 68, 0.3)",
-                    "rgba(239, 68, 68, 0.1)"
-                  ] : undefined
-                }}
-                transition={{
-                  duration: 2 + Math.random() * 3,
-                  repeat: Infinity,
-                  delay: Math.random() * 4,
-                }}
-              />
-            ))}
+            {Array.from({ length: 60 }).map((_, i) => {
+              const { isActive, isAnimated } = getGridPattern(i);
+              return (
+                <motion.div
+                  key={i}
+                  className={`border ${
+                    theme === 'theme-light' ? 'border-slate-300' : 'border-slate-700'
+                  } ${
+                    mounted && isActive ? 'bg-red-500/20' : ''
+                  }`}
+                  animate={mounted && isAnimated ? {
+                    opacity: [0.3, 1, 0.3],
+                    backgroundColor: [
+                      "rgba(239, 68, 68, 0.1)",
+                      "rgba(239, 68, 68, 0.3)",
+                      "rgba(239, 68, 68, 0.1)"
+                    ]
+                  } : {}}
+                  transition={{
+                    duration: 2 + (i % 3), // Deterministic duration based on index
+                    repeat: Infinity,
+                    delay: (i % 5) * 0.8, // Deterministic delay based on index
+                  }}
+                />
+              );
+            })}
           </div>
         </div>
 

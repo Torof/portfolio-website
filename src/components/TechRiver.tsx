@@ -18,6 +18,22 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
     setMounted(true);
   }, []);
 
+  // Generate stable path data to avoid hydration issues
+  const generatePathData = (index: number, phase: number = 0) => {
+    // Ensure all values are numbers and not NaN
+    const safeIndex = typeof index === 'number' && !isNaN(index) ? index : 0;
+    const safePhase = typeof phase === 'number' && !isNaN(phase) ? phase : 0;
+    
+    const baseY = 50 + safeIndex * 40;
+    const controlY = 30 + safeIndex * 40 + Math.sin(safeIndex + safePhase) * 20;
+    
+    // Ensure all calculated values are valid numbers
+    const safeBaseY = !isNaN(baseY) ? baseY : 50;
+    const safeControlY = !isNaN(controlY) ? controlY : 30;
+    
+    return `M0,${safeBaseY} Q250,${safeControlY} 500,${safeBaseY} T1000,${safeBaseY}`;
+  };
+
   // Flatten all tech items and add more diverse technologies
   const techItems: (TechItem & { category: string })[] = [
     // Blockchain technologies
@@ -88,17 +104,20 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
             {Array.from({ length: 8 }).map((_, i) => (
               <motion.path
                 key={i}
-                d={`M0,${50 + i * 40} Q250,${30 + i * 40 + Math.sin(i) * 20} 500,${50 + i * 40} T1000,${50 + i * 40}`}
+                d={generatePathData(i, 0)}
                 fill="none"
                 stroke="url(#riverGradient)"
                 strokeWidth="2"
                 opacity="0.6"
-                animate={{
+                animate={mounted ? {
                   d: [
-                    `M0,${50 + i * 40} Q250,${30 + i * 40 + Math.sin(i) * 20} 500,${50 + i * 40} T1000,${50 + i * 40}`,
-                    `M0,${50 + i * 40} Q250,${70 + i * 40 + Math.sin(i + 1) * 20} 500,${50 + i * 40} T1000,${50 + i * 40}`,
-                    `M0,${50 + i * 40} Q250,${30 + i * 40 + Math.sin(i + 2) * 20} 500,${50 + i * 40} T1000,${50 + i * 40}`
+                    generatePathData(i, 0),
+                    generatePathData(i, 1),
+                    generatePathData(i, 2)
                   ]
+                } : {}}
+                initial={{
+                  d: generatePathData(i, 0)
                 }}
                 transition={{
                   duration: 8 + i * 2,

@@ -1,12 +1,15 @@
 import type { NextConfig } from "next";
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+const enableAPI = process.env.ENABLE_API_ROUTES === 'true' || isDevelopment;
+
 const nextConfig: NextConfig = {
-  // Enable static export for IPFS deployment
-  output: 'export',
+  // Enable static export for IPFS deployment (disable for API routes in development)
+  output: enableAPI ? undefined : 'export',
   
   // Use relative paths for IPFS compatibility - key change for IPFS
   basePath: '',
-  assetPrefix: '.', // Changed from './' to '.' for better IPFS compatibility
+  assetPrefix: enableAPI ? undefined : '.', // Use default for API routes, '.' for static export
   
   // Optimize for static hosting
   trailingSlash: false, // Changed to false to avoid issues with IPFS paths

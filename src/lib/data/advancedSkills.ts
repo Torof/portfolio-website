@@ -699,7 +699,7 @@ export const featuredAnswers: StackOverflowAnswer[] = [
     answerUrl: 'https://ethereum.stackexchange.com/questions/153250/any-materials-to-study-evm/153289#153289',
     score: 2,
     isAccepted: true,
-    excerpt: 'Learning the same thing at the moment, I\'ll be glad to share some amazing resources I found: EVM handbook, playground tools, and deep dive explanations...',
+    excerpt: 'Learning the same thing at the moment, I\'ll be glad to share some amazing resources I found: A awesome list of great EVM learning resources, EVM handbook, playground tools, and deep dive explanations.',
     tags: ['evm']
   },
   {
@@ -709,7 +709,7 @@ export const featuredAnswers: StackOverflowAnswer[] = [
     answerUrl: 'https://ethereum.stackexchange.com/questions/153870/transfer-ownership-of-a-contract-from-one-adress-to-another-problem/153872#153872',
     score: 2,
     isAccepted: true,
-    excerpt: 'Logically, according to the proper functioning of ERC721, if he gave you ownership then normally he cannot get the ownership back unless you willingly give it to him...',
+    excerpt: 'The answer to your question lies in the contract. Which you did not provide. Logically, according the proper functioning of ERC721, if he gave you ownership then normally he cannot get the ownership back unless you willingly give it to him.',
     tags: ['solidity', 'contract-development', 'transactions', 'nft']
   },
   {
@@ -719,7 +719,7 @@ export const featuredAnswers: StackOverflowAnswer[] = [
     answerUrl: 'https://ethereum.stackexchange.com/questions/154048/why-cant-i-send-eth-to-contract/154050#154050',
     score: 2,
     isAccepted: true,
-    excerpt: 'If you want to send ether to a contract through a function you need to define this function as `payable` and simply forward ether with your transaction...',
+    excerpt: 'If you want to send ether to a contract through a function you need to define this function as payable and simply forward ether with your transaction using msg.value.',
     tags: ['solidity']
   },
   {
@@ -729,7 +729,7 @@ export const featuredAnswers: StackOverflowAnswer[] = [
     answerUrl: 'https://ethereum.stackexchange.com/questions/163258/risk-in-using-singleton-call-forwarding/163261#163261',
     score: 2,
     isAccepted: true,
-    excerpt: 'Access controls need to be implemented directly in the contracts themselves. If access controls are not in the contract, anyone can call the contract directly...',
+    excerpt: 'Access control is indeed very important. If the access controls are not implemented in the contract itself, anyone can just call the contract directly without restrictions.',
     tags: ['solidity', 'contract-invocation']
   }
 ];

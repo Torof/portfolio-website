@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
-import { fetchCompleteStackExchangeData } from '@/lib/services/stackexchange';
+import { fetchCompleteStackExchangeData } from '@/lib/services/stackexchange'; // Fallback for static builds
 import { stackOverflowProfile, featuredAnswers } from '@/lib/data/advancedSkills';
 import { StackOverflowProfile, StackOverflowAnswer } from '@/lib/types';
 import Link from 'next/link';
@@ -16,27 +16,85 @@ const LiveStackExchangeCard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLiveData, setIsLiveData] = useState(false);
 
+
+  // Helper function to truncate text
+  const truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) return text;
+    return text.slice(0, maxLength).trim() + '...';
+  };
+
+  // Helper function to clean markdown formatting from text
+  const cleanMarkdown = (text: string) => {
+    return text
+      .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1') // Replace [text](url) with text
+      .replace(/`([^`]*)`/g, '$1') // Replace `code` with code
+      .replace(/\*\*([^*]*)\*\*/g, '$1') // Replace **bold** with bold
+      .replace(/\*([^*]*)\*/g, '$1') // Replace *italic* with italic
+      .trim();
+  };
+
   useEffect(() => {
     const fetchLiveData = async () => {
       try {
-        console.log('Stack Exchange API Key status:', process.env.STACK_EXCHANGE_API_KEY ? 'Present (10k/day limit)' : 'Missing (300/day limit)');
+        // Try internal API first (works in development/server mode)
+        console.log('🔄 Attempting to fetch live Stack Exchange data via internal API...');
         
-        const { profile: liveProfile, answers: liveAnswers } = await fetchCompleteStackExchangeData('52251');
-        
-        if (liveProfile) {
-          setProfile(liveProfile);
-          setIsLiveData(true);
-          console.log('Successfully fetched live Stack Exchange profile data');
+        const response = await fetch('/api/stackexchange?userId=52251', {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          
+          if (data.profile) {
+            setProfile(data.profile);
+            setIsLiveData(true);
+            console.log('✅ Successfully fetched live Stack Exchange profile via API route');
+          }
+          
+          if (data.answers && data.answers.length > 0) {
+            // Check if live answers have excerpts, otherwise use static data
+            const validAnswers = data.answers.filter(answer => answer.excerpt && answer.excerpt.trim().length > 0);
+            if (validAnswers.length > 0) {
+              setAnswers(validAnswers.slice(0, 4));
+              console.log(`✅ Successfully fetched ${validAnswers.length} live Stack Exchange answers via API route`);
+            } else {
+              console.log('⚠️ Live answers have empty excerpts, keeping static data');
+            }
+          }
+
+          console.log(`📊 Data source: ${data.source}, fetched at: ${data.fetchedAt}`);
+          return; // Success, exit early
+        } else {
+          throw new Error(`API route not available (status: ${response.status})`);
         }
         
-        if (liveAnswers && liveAnswers.length > 0) {
-          setAnswers(liveAnswers.slice(0, 4)); // Show top 4 answers
-          console.log(`Successfully fetched ${liveAnswers.length} live Stack Exchange answers`);
-        }
       } catch (error) {
-        console.error('Failed to fetch live Stack Exchange data:', error);
-        console.log('Using fallback Stack Exchange data');
-        // Keep using fallback data
+        console.log('⚠️ API route unavailable, trying direct Stack Exchange API...');
+        
+        try {
+          // Fallback: Direct Stack Exchange API call (may be blocked by CORS)
+          const { profile: liveProfile, answers: liveAnswers } = await fetchCompleteStackExchangeData('52251');
+          
+          if (liveProfile) {
+            setProfile(liveProfile);
+            setIsLiveData(true);
+            console.log('✅ Successfully fetched live Stack Exchange profile via direct API');
+          }
+          
+          if (liveAnswers && liveAnswers.length > 0) {
+            setAnswers(liveAnswers.slice(0, 4));
+            console.log(`✅ Successfully fetched ${liveAnswers.length} live Stack Exchange answers via direct API`);
+          }
+          
+        } catch (directError) {
+          console.error('❌ Both API route and direct Stack Exchange API failed:', directError);
+          console.log('📋 Using static fallback Stack Exchange data');
+          // Keep using fallback data - component will show static data
+        }
       } finally {
         setIsLoading(false);
       }
@@ -225,15 +283,22 @@ const LiveStackExchangeCard = () => {
             <h4 className="text-2xl font-bold light-text mb-6 text-center">Featured Contributions</h4>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {answers.map((answer) => (
-                <motion.div 
+                <Link
                   key={answer.id}
-                  className={`relative p-6 rounded-2xl border transition-all duration-300 group/answer overflow-hidden ${
-                    theme === 'theme-light'
-                      ? 'bg-gradient-to-br from-white/80 to-gray-50/80 border-gray-200 hover:border-orange-300'
-                      : 'bg-gradient-to-br from-slate-800/80 to-slate-900/80 border-slate-700 hover:border-orange-600/50'
-                  }`}
-                  whileHover={{ scale: 1.02 }}
+                  href={answer.answerUrl || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
                 >
+                  <motion.div 
+                    className={`relative p-6 rounded-2xl border transition-all duration-300 group/answer overflow-hidden cursor-pointer ${
+                      theme === 'theme-light'
+                        ? 'bg-gradient-to-br from-white/90 to-gray-50/90 border-gray-200 hover:border-orange-300 hover:shadow-lg'
+                        : 'bg-gradient-to-br from-slate-800/90 to-slate-900/90 border-slate-700 hover:border-orange-600/50 hover:shadow-xl'
+                    }`}
+                    whileHover={{ scale: 1.01, y: -2 }}
+                    transition={{ duration: 0.2 }}
+                  >
                   {/* Score badge */}
                   <div className="absolute top-4 right-4 flex items-center space-x-2">
                     <div className={`flex items-center px-3 py-1 rounded-full ${
@@ -257,20 +322,33 @@ const LiveStackExchangeCard = () => {
                     )}
                   </div>
 
-                  <Link 
-                    href={answer.answerUrl || '#'} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="block"
-                  >
-                    <h5 className="font-bold light-text text-lg mb-3 pr-24 leading-tight hover:text-orange-500 transition-colors">
-                      {answer.questionTitle}
+                  {/* Question Title */}
+                  <div className="mb-4">
+                    <div className={`text-xs font-semibold mb-1 ${
+                      theme === 'theme-light' ? 'text-blue-600' : 'text-blue-400'
+                    }`}>
+                      QUESTION:
+                    </div>
+                    <h5 className="font-bold light-text text-lg pr-24 leading-tight group-hover/answer:text-orange-500 transition-colors">
+                      {truncateText(answer.questionTitle, 65)}
                     </h5>
-                  </Link>
+                  </div>
                   
-                  <p className="text-sm light-text opacity-80 mb-4 leading-relaxed">
-                    {answer.excerpt}
-                  </p>
+                  {/* Answer Preview */}
+                  <div className="mb-4">
+                    <div className={`text-xs font-semibold mb-2 ${
+                      theme === 'theme-light' ? 'text-orange-600' : 'text-orange-400'
+                    }`}>
+                      MY ANSWER:
+                    </div>
+                    <p className={`text-sm leading-relaxed italic transition-colors ${
+                      theme === 'theme-light' 
+                        ? 'text-slate-700 bg-orange-50/50 border-l-4 border-orange-200 group-hover/answer:text-slate-900' 
+                        : 'text-slate-300 bg-orange-900/20 border-l-4 border-orange-600/50 group-hover/answer:text-slate-100'
+                    } pl-4 py-2 rounded-r`}>
+{truncateText(cleanMarkdown(answer.excerpt), 180)}
+                    </p>
+                  </div>
                   
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2">
@@ -288,6 +366,7 @@ const LiveStackExchangeCard = () => {
                     ))}
                   </div>
                 </motion.div>
+                </Link>
               ))}
             </div>
           </div>

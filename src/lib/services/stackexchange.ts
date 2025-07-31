@@ -77,7 +77,7 @@ export interface StackExchangeAnswer {
   is_accepted: boolean;
   title: string;
   tags: string[];
-  body_markdown: string;
+  body: string; // HTML format from Stack Exchange API
   link: string;
   creation_date: number;
 }
@@ -176,6 +176,7 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
     if (!answersData || !answersData.items || answersData.items.length === 0) {
       return [];
     }
+    
 
     // Get question IDs to fetch question details
     const questionIds = answersData.items.map((answer: any) => answer.question_id);
@@ -214,15 +215,23 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
         tags: []
       };
 
-      // Create excerpt from body_markdown (first 150 characters)
+      // Create excerpt from body field (HTML format, needs cleaning)
       let excerpt = '';
-      if (answer.body_markdown) {
-        excerpt = answer.body_markdown
-          .replace(/```[\s\S]*?```/g, '[code]') // Replace code blocks
-          .replace(/`[^`]*`/g, '[code]') // Replace inline code
-          .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1') // Replace markdown links
-          .replace(/[#*_]/g, '') // Remove markdown formatting
-          .slice(0, 150) + '...';
+      if (answer.body) {
+        excerpt = answer.body
+          // Remove HTML tags
+          .replace(/<[^>]*>/g, '')
+          // Replace HTML entities
+          .replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>')
+          .replace(/&amp;/g, '&')
+          .replace(/&quot;/g, '"')
+          .replace(/&#39;/g, "'")
+          .replace(/&nbsp;/g, ' ')
+          // Clean up whitespace
+          .replace(/\s+/g, ' ')
+          .trim()
+          .slice(0, 180) + (answer.body.length > 180 ? '...' : '');
       }
 
       return {
