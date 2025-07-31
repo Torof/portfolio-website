@@ -75,7 +75,7 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
   }
 
   return (
-    <section className={`relative py-24 overflow-hidden ${className}`}>
+    <section className={`relative py-24 overflow-hidden w-full ${className}`}>
       <div className={`absolute inset-0 ${
         theme === 'theme-light'
           ? 'bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20'
@@ -124,7 +124,7 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
 
       <div className="relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 container-custom mx-auto px-6">
           <motion.h2 
             className={`text-5xl font-light mb-6 ${
               theme === 'theme-light' ? 'text-slate-800' : 'text-slate-100'
@@ -133,7 +133,7 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Technology <span className="font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">River</span>
+            My <span className="font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Tech Stack</span>
           </motion.h2>
           
           <motion.p 
@@ -167,8 +167,8 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
 
         {/* Toggle between River View and List View */}
         {!showList ? (
-          /* Tech River Streams */
-          <div className="relative h-96 w-full max-w-7xl mx-auto overflow-hidden">
+          /* Tech River Streams - Full Width */
+          <div className="relative h-96 w-full overflow-hidden">
             {streams.map((streamTechs, streamIndex) => (
               <div 
                 key={streamIndex}
@@ -302,7 +302,7 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
         ) : (
           /* Technology List Table */
           <motion.div 
-            className="w-full max-w-6xl mx-auto"
+            className="w-full max-w-6xl mx-auto container-custom px-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}

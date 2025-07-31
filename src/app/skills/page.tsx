@@ -221,6 +221,15 @@ export default function SkillsPage() {
           </motion.div>
         </motion.div>
 
+      </div>
+      
+      {/* My Tech Stack Section - Full Width */}
+      <div className="mb-20">
+        <TechRiver />
+      </div>
+      
+      <div className="container-custom relative z-10">
+
         {/* Stack Exchange Integration */}
         <div className="mb-20">
           <LiveStackExchangeCard />
@@ -238,11 +247,6 @@ export default function SkillsPage() {
           </div>
 
           <PremiumSkillSections categories={skillCategories} />
-        </div>
-
-        {/* Technology River Section */}
-        <div className="mb-20">
-          <TechRiver />
         </div>
       </div>
     </div>
