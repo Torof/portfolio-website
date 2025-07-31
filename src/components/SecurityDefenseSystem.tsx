@@ -9,16 +9,88 @@ interface SecurityDefenseSystemProps {
   category: SkillCategory;
 }
 
-// Threat types that will fall from the sky
+// Threat types that will fall from the sky - mapped to real security vulnerabilities
 const threatTypes = [
-  { id: 'reentrancy', name: 'Reentrancy', icon: '🔄', color: '#ef4444', defendedBy: 'auditing' },
-  { id: 'overflow', name: 'Integer Overflow', icon: '💯', color: '#f59e0b', defendedBy: 'invariant-testing' },
-  { id: 'flash-loan', name: 'Flash Loan Attack', icon: '⚡', color: '#8b5cf6', defendedBy: 'mev-protection' },
-  { id: 'access-control', name: 'Access Bug', icon: '🔓', color: '#3b82f6', defendedBy: 'attack-vectors' },
-  { id: 'price-manip', name: 'Price Manipulation', icon: '📈', color: '#10b981', defendedBy: 'formal-verification' },
-  { id: 'front-run', name: 'Front-running', icon: '🏃', color: '#ec4899', defendedBy: 'mev-protection' },
-  { id: 'dos', name: 'DoS Attack', icon: '🚫', color: '#6366f1', defendedBy: 'common-vulnerabilities' },
-  { id: 'logic-bug', name: 'Logic Bug', icon: '🐛', color: '#14b8a6', defendedBy: 'formal-verification' },
+  { 
+    id: 'reentrancy', 
+    name: 'Reentrancy Attack', 
+    icon: '🔄', 
+    color: '#ef4444', 
+    defendedBy: 'auditing',
+    description: 'Malicious contract calls back into vulnerable function before state updates complete'
+  },
+  { 
+    id: 'overflow', 
+    name: 'Integer Overflow', 
+    icon: '💯', 
+    color: '#f59e0b', 
+    defendedBy: 'invariant-testing',
+    description: 'Arithmetic operations exceed maximum values causing unexpected behavior'
+  },
+  { 
+    id: 'flash-loan', 
+    name: 'Flash Loan Attack', 
+    icon: '⚡', 
+    color: '#8b5cf6', 
+    defendedBy: 'mev-protection',
+    description: 'Exploits using large uncollateralized loans to manipulate DeFi protocols'
+  },
+  { 
+    id: 'access-control', 
+    name: 'Access Control Bug', 
+    icon: '🔓', 
+    color: '#3b82f6', 
+    defendedBy: 'attack-vectors',
+    description: 'Unauthorized users gain access to restricted functions or data'
+  },
+  { 
+    id: 'price-manip', 
+    name: 'Price Oracle Attack', 
+    icon: '📈', 
+    color: '#10b981', 
+    defendedBy: 'formal-verification',
+    description: 'Manipulation of price feeds to exploit DeFi lending and trading protocols'
+  },
+  { 
+    id: 'front-run', 
+    name: 'Front-running', 
+    icon: '🏃', 
+    color: '#ec4899', 
+    defendedBy: 'mev-protection',
+    description: 'Malicious actors front-run transactions for profit extraction'
+  },
+  { 
+    id: 'dos', 
+    name: 'DoS Attack', 
+    icon: '🚫', 
+    color: '#6366f1', 
+    defendedBy: 'common-vulnerabilities',
+    description: 'Denial of service attacks that prevent normal contract operations'
+  },
+  { 
+    id: 'logic-bug', 
+    name: 'Logic Vulnerability', 
+    icon: '🐛', 
+    color: '#14b8a6', 
+    defendedBy: 'formal-verification',
+    description: 'Flawed business logic that leads to unintended contract behavior'
+  },
+  {
+    id: 'sandwich',
+    name: 'Sandwich Attack',
+    icon: '🥪',
+    color: '#f97316',
+    defendedBy: 'mev-protection',
+    description: 'MEV attack sandwiching user transactions to extract value'
+  },
+  {
+    id: 'governance',
+    name: 'Governance Attack',
+    icon: '🗳️',
+    color: '#8b5cf6',
+    defendedBy: 'attack-vectors',
+    description: 'Malicious governance proposals or vote manipulation attacks'
+  }
 ];
 
 // Active threat instance
@@ -56,6 +128,8 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
   const [explosions, setExplosions] = useState<Explosion[]>([]);
   const [score, setScore] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const [hoveredThreat, setHoveredThreat] = useState<string | null>(null);
+  const [hoveredTurret, setHoveredTurret] = useState<string | null>(null);
   const gameAreaRef = useRef<HTMLDivElement>(null);
   const threatIdCounter = useRef(0);
   const laserIdCounter = useRef(0);
@@ -243,58 +317,106 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
         >
           {/* Threats */}
           <AnimatePresence>
-            {threats.map(threat => (
-              <motion.div
-                key={threat.id}
-                className="absolute"
-                style={{
-                  left: `${threat.x}%`,
-                  top: `${threat.y}%`,
-                  transform: 'translate(-50%, -50%)',
-                }}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
-              >
-                <div className={`relative ${
-                  theme === 'theme-light' ? 'text-slate-800' : 'text-white'
-                }`}>
-                  {/* Threat icon */}
-                  <motion.div
-                    className="text-3xl mb-1"
-                    animate={{
-                      rotate: [0, 5, -5, 0],
-                      scale: [1, 1.1, 1],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                    }}
-                  >
-                    {threat.type.icon}
-                  </motion.div>
-                  
-                  {/* Threat name */}
-                  <div className={`text-xs font-mono text-center px-2 py-1 rounded whitespace-nowrap ${
-                    theme === 'theme-light' 
-                      ? 'bg-red-100 text-red-800 border border-red-300' 
-                      : 'bg-red-900/50 text-red-300 border border-red-500'
+            {threats.map(threat => {
+              const isHovered = hoveredThreat === threat.id;
+              return (
+                <motion.div
+                  key={threat.id}
+                  className="absolute cursor-pointer z-10"
+                  style={{
+                    left: `${threat.x}%`,
+                    top: `${threat.y}%`,
+                    transform: 'translate(-50%, -50%)',
+                    transformOrigin: 'center center',
+                  }}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ 
+                    opacity: 1, 
+                    scale: isHovered ? 1.2 : 1,
+                  }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  onMouseEnter={() => setHoveredThreat(threat.id)}
+                  onMouseLeave={() => setHoveredThreat(null)}
+                  whileHover={{ 
+                    scale: 1.2,
+                    filter: 'brightness(1.3)',
+                  }}
+                >
+                  <div className={`relative ${
+                    theme === 'theme-light' ? 'text-slate-800' : 'text-white'
                   }`}>
-                    {threat.type.name}
-                  </div>
-                  
-                  {/* Health bar */}
-                  <div className="mt-1 w-full h-1 bg-gray-700 rounded-full overflow-hidden">
+                    {/* Threat icon */}
                     <motion.div
-                      className="h-full bg-gradient-to-r from-red-500 to-red-600"
-                      initial={{ width: '100%' }}
-                      animate={{ width: `${threat.health}%` }}
-                      transition={{ duration: 0.2 }}
-                    />
+                      className="text-3xl mb-1"
+                      animate={{
+                        rotate: [0, 5, -5, 0],
+                        scale: [1, 1.1, 1],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                      }}
+                      style={{
+                        filter: isHovered 
+                          ? theme === 'theme-light'
+                            ? 'drop-shadow(0 0 8px rgba(239, 68, 68, 0.8))'
+                            : 'drop-shadow(0 0 12px rgba(239, 68, 68, 1))'
+                          : 'none'
+                      }}
+                    >
+                      {threat.type.icon}
+                    </motion.div>
+                    
+                    {/* Threat name */}
+                    <div className={`text-xs font-mono text-center px-2 py-1 rounded whitespace-nowrap transition-all ${
+                      isHovered
+                        ? theme === 'theme-light' 
+                          ? 'bg-red-200 text-red-900 border-2 border-red-400 shadow-lg' 
+                          : 'bg-red-800/80 text-red-200 border-2 border-red-400 shadow-lg shadow-red-500/50'
+                        : theme === 'theme-light' 
+                          ? 'bg-red-100 text-red-800 border border-red-300' 
+                          : 'bg-red-900/50 text-red-300 border border-red-500'
+                    }`}>
+                      {threat.type.name}
+                    </div>
+                    
+                    {/* Health bar */}
+                    <div className="mt-1 w-full h-1 bg-gray-700 rounded-full overflow-hidden">
+                      <motion.div
+                        className="h-full bg-gradient-to-r from-red-500 to-red-600"
+                        initial={{ width: '100%' }}
+                        animate={{ width: `${threat.health}%` }}
+                        transition={{ duration: 0.2 }}
+                      />
+                    </div>
+
+                    {/* Hover tooltip */}
+                    {isHovered && (
+                      <motion.div
+                        className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 p-3 rounded-lg shadow-xl border max-w-xs whitespace-normal text-center z-50 ${
+                          theme === 'theme-light'
+                            ? 'bg-white border-red-300 text-slate-700'
+                            : 'bg-slate-800 border-red-500 text-red-200'
+                        }`}
+                        initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="font-bold text-sm mb-1">{threat.type.name}</div>
+                        <div className="text-xs leading-relaxed">{threat.type.description}</div>
+                        
+                        {/* Tooltip arrow */}
+                        <div className={`absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 ${
+                          theme === 'theme-light'
+                            ? 'border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-white'
+                            : 'border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-slate-800'
+                        }`} />
+                      </motion.div>
+                    )}
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </AnimatePresence>
 
           {/* Laser beams */}
@@ -347,24 +469,30 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
 
           {/* Security Turrets */}
           <div className="absolute bottom-0 left-0 right-0 h-32">
-            <div className="relative h-full flex items-end justify-around px-8 pb-4">
+            <div className="relative h-full px-8 pb-4">
               {category.skills.map((skill, index) => {
                 const turretX = 15 + (index * 70 / (category.skills.length - 1));
                 const isActive = lasers.some(laser => laser.turretId === skill.id);
+                const isHovered = hoveredTurret === skill.id;
                 
                 return (
                   <motion.div
                     key={skill.id}
-                    className="relative"
+                    className="absolute cursor-pointer z-20"
                     style={{
-                      position: 'absolute',
                       left: `${turretX}%`,
                       bottom: '20px',
-                      transform: 'translateX(-50%)',
+                      x: '-50%',
+                      transformOrigin: 'center center',
                     }}
+                    initial={{ scale: 1, x: '-50%' }}
+                    onMouseEnter={() => setHoveredTurret(skill.id)}
+                    onMouseLeave={() => setHoveredTurret(null)}
+                    whileHover={mounted ? { scale: 1.1, x: '-50%' } : {}}
+                    transition={{ duration: 0.2 }}
                   >
                     {/* Turret base */}
-                    <div className={`relative ${
+                    <div className={`relative transition-all duration-300 flex flex-col items-center ${
                       theme === 'theme-light' 
                         ? 'text-slate-700' 
                         : 'text-green-400'
@@ -372,7 +500,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                       {/* Turret cannon */}
                       <motion.div
                         className="text-4xl mb-2"
-                        animate={isActive ? {
+                        animate={mounted && isActive ? {
                           scale: [1, 1.2, 1],
                           filter: [
                             'brightness(1)',
@@ -382,19 +510,28 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                         } : {}}
                         transition={{ duration: 0.2 }}
                         style={{
-                          filter: theme === 'theme-light'
-                            ? 'drop-shadow(0 0 4px rgba(59, 130, 246, 0.6))'
-                            : 'drop-shadow(0 0 8px rgba(0, 255, 0, 0.8))'
+                          transformOrigin: 'center center',
+                          filter: isHovered
+                            ? theme === 'theme-light'
+                              ? 'drop-shadow(0 0 12px rgba(59, 130, 246, 1))'
+                              : 'drop-shadow(0 0 16px rgba(0, 255, 0, 1))'
+                            : theme === 'theme-light'
+                              ? 'drop-shadow(0 0 4px rgba(59, 130, 246, 0.6))'
+                              : 'drop-shadow(0 0 8px rgba(0, 255, 0, 0.8))'
                         }}
                       >
                         {skill.icon}
                       </motion.div>
                       
                       {/* Skill name */}
-                      <div className={`text-xs font-mono text-center px-2 py-1 rounded whitespace-nowrap ${
-                        theme === 'theme-light' 
-                          ? 'bg-blue-100 text-blue-800 border border-blue-300' 
-                          : 'bg-green-900/50 text-green-300 border border-green-500'
+                      <div className={`text-xs font-mono text-center px-2 py-1 rounded whitespace-nowrap transition-all ${
+                        isHovered
+                          ? theme === 'theme-light' 
+                            ? 'bg-blue-200 text-blue-900 border-2 border-blue-400 shadow-lg' 
+                            : 'bg-green-800/80 text-green-200 border-2 border-green-400 shadow-lg shadow-green-500/50'
+                          : theme === 'theme-light' 
+                            ? 'bg-blue-100 text-blue-800 border-2 border-blue-300' 
+                            : 'bg-green-900/50 text-green-300 border-2 border-green-500'
                       }`}>
                         {skill.name.split(' ')[0]}
                       </div>
@@ -402,16 +539,93 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                       {/* Power level */}
                       <div className="flex justify-center mt-1 space-x-0.5">
                         {Array.from({ length: 5 }).map((_, i) => (
-                          <div
+                          <motion.div
                             key={i}
-                            className={`w-1.5 h-1.5 rounded-full ${
+                            className={`w-1.5 h-1.5 rounded-full transition-all ${
                               i < skill.level 
-                                ? theme === 'theme-light' ? 'bg-blue-500' : 'bg-green-400'
+                                ? isHovered
+                                  ? theme === 'theme-light' ? 'bg-blue-600 shadow-sm' : 'bg-green-300 shadow-sm'
+                                  : theme === 'theme-light' ? 'bg-blue-500' : 'bg-green-400'
                                 : theme === 'theme-light' ? 'bg-gray-300' : 'bg-gray-600'
                             }`}
+                            animate={mounted && isHovered && i < skill.level ? {
+                              scale: [1, 1.2, 1],
+                            } : {}}
+                            transition={{ duration: 0.3, delay: i * 0.1 }}
                           />
                         ))}
                       </div>
+
+                      {/* Turret hover tooltip */}
+                      <AnimatePresence>
+                        {isHovered && (
+                          <motion.div
+                            className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 p-4 rounded-lg shadow-xl border max-w-sm whitespace-normal z-50 ${
+                              theme === 'theme-light'
+                                ? 'bg-white border-blue-300 text-slate-700'
+                                : 'bg-slate-800 border-green-500 text-green-200'
+                            }`}
+                            initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 10, scale: 0.8 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <div className="text-center">
+                              <div className="font-bold text-lg mb-2">{skill.name}</div>
+                              <div className="text-sm leading-relaxed mb-3">{skill.description}</div>
+                              
+                              {/* Expertise Level */}
+                              <div className="flex items-center justify-center space-x-2 mb-3">
+                                <span className="text-xs font-medium">Expertise:</span>
+                                <div className="flex space-x-1">
+                                  {Array.from({ length: 5 }).map((_, i) => (
+                                    <div
+                                      key={i}
+                                      className={`w-2 h-2 rounded-full ${
+                                        i < skill.level 
+                                          ? theme === 'theme-light' ? 'bg-blue-500' : 'bg-green-400'
+                                          : theme === 'theme-light' ? 'bg-gray-300' : 'bg-gray-600'
+                                      }`}
+                                    />
+                                  ))}
+                                </div>
+                                <span className="text-xs font-bold">
+                                  Level {skill.level}
+                                </span>
+                              </div>
+
+                              {/* Defending Against */}
+                              <div className="text-xs">
+                                <div className="font-medium mb-1">Defends Against:</div>
+                                <div className="flex flex-wrap gap-1 justify-center">
+                                  {threatTypes
+                                    .filter(threat => threat.defendedBy === skill.id)
+                                    .map(threat => (
+                                      <span
+                                        key={threat.id}
+                                        className={`px-2 py-1 rounded text-xs ${
+                                          theme === 'theme-light'
+                                            ? 'bg-red-100 text-red-700'
+                                            : 'bg-red-900/50 text-red-300'
+                                        }`}
+                                      >
+                                        {threat.icon} {threat.name}
+                                      </span>
+                                    ))
+                                  }
+                                </div>
+                              </div>
+                            </div>
+                            
+                            {/* Tooltip arrow */}
+                            <div className={`absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 ${
+                              theme === 'theme-light'
+                                ? 'border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-white'
+                                : 'border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-slate-800'
+                            }`} />
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
                   </motion.div>
                 );

@@ -873,7 +873,7 @@ const DeFiSection = ({ category }: { category: SkillCategory }) => {
                               <div className={`font-mono text-sm font-bold mb-2 ${
                                 theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
                               }`}>
-                                >>> PROTOCOL_OVERVIEW:
+                                {'>>>'} PROTOCOL_OVERVIEW:
                               </div>
                               <div className={`font-mono text-xs leading-relaxed ${
                                 theme === 'theme-light' ? 'text-amber-800' : 'text-green-300'
@@ -887,7 +887,7 @@ const DeFiSection = ({ category }: { category: SkillCategory }) => {
                               <div className={`font-mono text-sm font-bold mb-2 ${
                                 theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
                               }`}>
-                                >>> HOW_I_USE_IT:
+                                {'>>>'} HOW_I_USE_IT:
                               </div>
                               <div className={`font-mono text-xs leading-relaxed ${
                                 theme === 'theme-light' ? 'text-amber-800' : 'text-green-300'
@@ -902,7 +902,7 @@ const DeFiSection = ({ category }: { category: SkillCategory }) => {
                                 <div className={`font-mono text-sm font-bold mb-2 ${
                                   theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
                                 }`}>
-                                  >>> KEY_FEATURES:
+                                  {'>>>'} KEY_FEATURES:
                                 </div>
                                 <div className="grid grid-cols-2 gap-2">
                                   {getProtocolDetails(skill).features.slice(0, 6).map((feature: string, idx: number) => (
@@ -927,7 +927,7 @@ const DeFiSection = ({ category }: { category: SkillCategory }) => {
                                 ? 'border-amber-300 text-amber-600' 
                                 : 'border-green-700 text-green-600'
                             }`}>
-                              > PROTOCOL_STATUS: ANALYZED | CLICK_TO_COLLAPSE
+                              {'>'} PROTOCOL_STATUS: ANALYZED | CLICK_TO_COLLAPSE
                             </div>
                           </div>
                         </motion.div>
