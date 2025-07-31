@@ -123,6 +123,25 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
       </div>
 
       <div className="relative z-10">
+        {/* Section Toggle Button - Top Right Corner */}
+        <motion.button
+          onClick={() => setShowList(!showList)}
+          className={`absolute top-12 right-12 z-20 px-4 py-2 rounded-full border transition-all duration-300 backdrop-blur-sm ${
+            theme === 'theme-light'
+              ? 'bg-white/80 border-gray-300 hover:bg-white hover:border-gray-400 text-gray-700 shadow-lg hover:shadow-xl'
+              : 'bg-slate-800/80 border-slate-600 hover:bg-slate-800 hover:border-slate-500 text-gray-200 shadow-lg hover:shadow-xl'
+          }`}
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <div className="flex items-center space-x-2 text-sm font-medium">
+            <span>{showList ? '🌊 Click to see River View' : '📋 Click to see List View'}</span>
+          </div>
+        </motion.button>
+
         {/* Header */}
         <div className="text-center mb-16 container-custom mx-auto px-6">
           <motion.h2 
@@ -144,25 +163,6 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
           >
             A flowing showcase of all the technologies I use to build amazing digital experiences
           </motion.p>
-
-          {/* Toggle Button */}
-          <motion.button
-            onClick={() => setShowList(!showList)}
-            className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-              theme === 'theme-light'
-                ? 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-lg hover:shadow-xl'
-                : 'bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 text-white shadow-lg hover:shadow-xl'
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <div className="flex items-center space-x-2">
-              <span>{showList ? '🌊 River View' : '📋 List View'}</span>
-            </div>
-          </motion.button>
         </div>
 
         {/* Toggle between River View and List View */}
