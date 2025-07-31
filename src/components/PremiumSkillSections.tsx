@@ -476,138 +476,277 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
   );
 };
 
-// DeFi - Simple List with View More
+// DeFi - Retro Trading Terminal Theme
 const DeFiSection = ({ category }: { category: SkillCategory }) => {
   const { theme } = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  // Update time every second for retro terminal feel
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Mock price data for retro feel
+  const getPriceChange = (index: number) => {
+    const changes = ['+2.34%', '-0.89%', '+5.12%', '-1.23%', '+0.45%', '+3.67%', '-2.11%', '+1.89%'];
+    return changes[index % changes.length];
+  };
+
+  const getTVL = (level: number) => {
+    const base = level * 250;
+    return `$${base}M`;
+  };
 
   return (
     <section className="mb-24">
-      <div className={`relative p-8 rounded-lg border ${
+      <div className={`relative overflow-hidden rounded-lg border-2 ${
         theme === 'theme-light'
-          ? 'bg-white border-gray-200 shadow-lg'
-          : 'bg-slate-800 border-slate-700 shadow-lg'
+          ? 'bg-amber-50 border-amber-900 shadow-xl'
+          : 'bg-black border-green-500 shadow-2xl shadow-green-500/20'
       }`}>
         
-        {/* Header */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center">
-              <div className={`p-3 rounded-xl mr-4 ${
-                theme === 'theme-light' 
-                  ? 'bg-gradient-to-br from-emerald-500 to-teal-600' 
-                  : 'bg-gradient-to-br from-emerald-600 to-teal-700'
-              }`}>
-                <span className="text-2xl text-white">💰</span>
-              </div>
-              <div>
-                <h3 className={`text-2xl font-bold ${
-                  theme === 'theme-light' ? 'text-slate-800' : 'text-white'
-                }`}>
-                  DeFi Protocol Expertise
-                </h3>
-                <p className={`text-sm ${
-                  theme === 'theme-light' ? 'text-slate-600' : 'text-slate-300'
-                }`}>
-                  Scroll to explore decentralized finance protocols
-                </p>
-              </div>
-            </div>
-            
-            {/* Stats */}
-            <div className={`text-sm px-3 py-1 rounded-full ${
-              theme === 'theme-light' 
-                ? 'bg-emerald-100 text-emerald-800' 
-                : 'bg-emerald-900/50 text-emerald-300'
-            }`}>
-              {category.skills.length} protocols
-            </div>
-          </div>
+        {/* CRT Screen Effect Overlay */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className={`absolute inset-0 ${
+            theme === 'theme-light' 
+              ? 'bg-gradient-to-b from-transparent via-amber-900/5 to-transparent' 
+              : 'bg-gradient-to-b from-transparent via-green-500/10 to-transparent'
+          } animate-pulse`} style={{ animationDuration: '4s' }} />
+          
+          {/* Scanlines */}
+          <div className="absolute inset-0" style={{
+            backgroundImage: `repeating-linear-gradient(
+              0deg,
+              transparent,
+              transparent 2px,
+              ${theme === 'theme-light' ? 'rgba(139, 69, 19, 0.03)' : 'rgba(0, 255, 0, 0.03)'} 2px,
+              ${theme === 'theme-light' ? 'rgba(139, 69, 19, 0.03)' : 'rgba(0, 255, 0, 0.03)'} 4px
+            )`
+          }} />
         </div>
 
-        {/* Protocol List */}
-        <div 
-          className={`space-y-3 pr-2 transition-all duration-500 ease-in-out ${
-            isExpanded 
-              ? 'max-h-none overflow-visible' 
-              : 'max-h-[400px] overflow-y-auto'
-          } scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-600 dark:scrollbar-track-gray-800`}
-        >
-          {category.skills.map((skill, index) => (
-            <motion.div
-              key={skill.id}
-              className={`p-4 rounded-lg border transition-all duration-200 ${
-                theme === 'theme-light'
-                  ? 'bg-gradient-to-r from-white to-emerald-50/30 border-gray-200 hover:border-emerald-300 hover:shadow-md'
-                  : 'bg-gradient-to-r from-slate-700 to-emerald-950/20 border-slate-600 hover:border-emerald-600 hover:shadow-md'
-              }`}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.05, duration: 0.3 }}
-              whileHover={{ x: 5 }}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4 flex-1">
-                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                    theme === 'theme-light' 
-                      ? 'bg-emerald-100' 
-                      : 'bg-emerald-900/30'
-                  }`}>
-                    <span className="text-xl">{skill.icon}</span>
-                  </div>
-                  
-                  <div className="flex-1">
-                    <h4 className={`font-semibold ${
-                      theme === 'theme-light' ? 'text-slate-800' : 'text-white'
-                    }`}>
-                      {skill.name}
-                    </h4>
-                    <p className={`text-sm ${
-                      theme === 'theme-light' ? 'text-slate-600' : 'text-slate-300'
-                    }`}>
-                      {skill.subcategory} • {skill.description}
-                    </p>
-                  </div>
-                  
-                  <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    skill.level >= 4 
-                      ? (theme === 'theme-light' ? 'bg-emerald-100 text-emerald-800' : 'bg-emerald-900/50 text-emerald-300')
-                      : (theme === 'theme-light' ? 'bg-yellow-100 text-yellow-800' : 'bg-yellow-900/50 text-yellow-300')
-                  }`}>
-                    Level {skill.level}
-                  </div>
+        <div className="relative z-10">
+          {/* Terminal Header */}
+          <div className={`px-6 py-3 border-b-2 ${
+            theme === 'theme-light' 
+              ? 'bg-amber-100 border-amber-900' 
+              : 'bg-green-950/50 border-green-500'
+          }`}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <div className={`font-mono text-xs ${
+                  theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
+                }`}>
+                  DEFI_TERMINAL_v2.0
+                </div>
+                <div className={`font-mono text-xs ${
+                  theme === 'theme-light' ? 'text-amber-700' : 'text-green-500'
+                }`}>
+                  [CONNECTED]
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* View More Button */}
-        <div className="mt-6 text-center">
-          <motion.button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-              theme === 'theme-light'
-                ? 'bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white shadow-lg hover:shadow-xl'
-                : 'bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white shadow-lg hover:shadow-xl'
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <div className="flex items-center space-x-2">
-              <span>{isExpanded ? 'Show Less' : 'View All Protocols'}</span>
-              <motion.svg 
-                className="w-4 h-4" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-                animate={{ rotate: isExpanded ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </motion.svg>
+              <div className={`font-mono text-xs ${
+                theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
+              }`}>
+                {currentTime.toLocaleTimeString('en-US', { hour12: false })}
+              </div>
             </div>
-          </motion.button>
+          </div>
+
+          {/* Main Terminal Content */}
+          <div className="p-6">
+            {/* Title Section */}
+            <div className="mb-6 text-center">
+              <motion.h3 
+                className={`font-mono text-3xl font-bold mb-2 ${
+                  theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
+                }`}
+                animate={{ opacity: [1, 0.8, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                ═══ DEFI PROTOCOL EXPERTISE ═══
+              </motion.h3>
+              <div className={`font-mono text-sm ${
+                theme === 'theme-light' ? 'text-amber-700' : 'text-green-500'
+              }`}>
+                SYSTEM: {category.skills.length} PROTOCOLS LOADED | STATUS: OPERATIONAL
+              </div>
+            </div>
+
+            {/* Market Stats Bar */}
+            <div className={`grid grid-cols-3 gap-4 mb-6 p-3 border ${
+              theme === 'theme-light' 
+                ? 'bg-amber-100/50 border-amber-800' 
+                : 'bg-green-950/30 border-green-600'
+            }`}>
+              <div className="text-center">
+                <div className={`font-mono text-xs mb-1 ${
+                  theme === 'theme-light' ? 'text-amber-700' : 'text-green-600'
+                }`}>
+                  TOTAL TVL
+                </div>
+                <motion.div 
+                  className={`font-mono font-bold ${
+                    theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
+                  }`}
+                  animate={{ opacity: [1, 0.7, 1] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                >
+                  $2.5B
+                </motion.div>
+              </div>
+              <div className="text-center">
+                <div className={`font-mono text-xs mb-1 ${
+                  theme === 'theme-light' ? 'text-amber-700' : 'text-green-600'
+                }`}>
+                  AVG APY
+                </div>
+                <div className={`font-mono font-bold ${
+                  theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
+                }`}>
+                  12.8%
+                </div>
+              </div>
+              <div className="text-center">
+                <div className={`font-mono text-xs mb-1 ${
+                  theme === 'theme-light' ? 'text-amber-700' : 'text-green-600'
+                }`}>
+                  GAS SAVED
+                </div>
+                <div className={`font-mono font-bold ${
+                  theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
+                }`}>
+                  $124K
+                </div>
+              </div>
+            </div>
+
+            {/* Protocol List - Trading Style */}
+            <div className={`border-2 ${
+              theme === 'theme-light' 
+                ? 'border-amber-800 bg-amber-50/50' 
+                : 'border-green-600 bg-black/50'
+            }`}>
+              {/* Table Header */}
+              <div className={`grid grid-cols-12 gap-2 px-4 py-2 border-b-2 font-mono text-xs ${
+                theme === 'theme-light' 
+                  ? 'bg-amber-100 border-amber-800 text-amber-900' 
+                  : 'bg-green-950/50 border-green-600 text-green-500'
+              }`}>
+                <div className="col-span-1">ID</div>
+                <div className="col-span-3">PROTOCOL</div>
+                <div className="col-span-2">TYPE</div>
+                <div className="col-span-2">TVL</div>
+                <div className="col-span-2">24H</div>
+                <div className="col-span-2">STATUS</div>
+              </div>
+
+              {/* Protocol Rows */}
+              <div 
+                className={`transition-all duration-500 ease-in-out ${
+                  isExpanded 
+                    ? 'max-h-none' 
+                    : 'max-h-[320px] overflow-y-auto'
+                } ${
+                  theme === 'theme-light'
+                    ? 'scrollbar-thin scrollbar-thumb-amber-700 scrollbar-track-amber-100'
+                    : 'scrollbar-thin scrollbar-thumb-green-600 scrollbar-track-green-950'
+                }`}
+              >
+                {category.skills.map((skill, index) => (
+                  <motion.div
+                    key={skill.id}
+                    className={`grid grid-cols-12 gap-2 px-4 py-3 border-b font-mono text-sm transition-all ${
+                      theme === 'theme-light'
+                        ? 'border-amber-200 hover:bg-amber-100'
+                        : 'border-green-900 hover:bg-green-950/30'
+                    }`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <div className={`col-span-1 ${
+                      theme === 'theme-light' ? 'text-amber-700' : 'text-green-600'
+                    }`}>
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
+                    <div className={`col-span-3 font-bold ${
+                      theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
+                    }`}>
+                      {skill.name}
+                    </div>
+                    <div className={`col-span-2 text-xs ${
+                      theme === 'theme-light' ? 'text-amber-700' : 'text-green-500'
+                    }`}>
+                      {skill.subcategory}
+                    </div>
+                    <div className={`col-span-2 ${
+                      theme === 'theme-light' ? 'text-amber-800' : 'text-green-400'
+                    }`}>
+                      {getTVL(skill.level)}
+                    </div>
+                    <div className={`col-span-2 font-bold ${
+                      getPriceChange(index).startsWith('+') 
+                        ? 'text-green-600' 
+                        : 'text-red-600'
+                    }`}>
+                      {getPriceChange(index)}
+                    </div>
+                    <div className="col-span-2">
+                      <div className={`inline-flex items-center space-x-1 ${
+                        skill.level >= 4 
+                          ? 'text-green-600' 
+                          : theme === 'theme-light' ? 'text-amber-600' : 'text-yellow-500'
+                      }`}>
+                        <div className={`w-2 h-2 rounded-full ${
+                          skill.level >= 4 ? 'bg-green-600' : 'bg-yellow-500'
+                        } animate-pulse`} />
+                        <span className="text-xs">
+                          {skill.level >= 4 ? 'EXPERT' : 'ACTIVE'}
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Terminal Commands */}
+            <div className="mt-6 flex items-center justify-between">
+              <div className={`font-mono text-xs ${
+                theme === 'theme-light' ? 'text-amber-700' : 'text-green-600'
+              }`}>
+                {'>'} EXECUTE: list --protocols --status=active
+              </div>
+              
+              <motion.button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className={`px-4 py-2 font-mono text-sm border-2 transition-all ${
+                  theme === 'theme-light'
+                    ? 'bg-amber-100 border-amber-800 text-amber-900 hover:bg-amber-200'
+                    : 'bg-green-950/50 border-green-500 text-green-400 hover:bg-green-900/50'
+                }`}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                [{isExpanded ? 'COLLAPSE' : 'EXPAND'}]
+              </motion.button>
+            </div>
+
+            {/* Footer Status */}
+            <div className={`mt-4 pt-4 border-t font-mono text-xs ${
+              theme === 'theme-light' 
+                ? 'border-amber-300 text-amber-700' 
+                : 'border-green-800 text-green-600'
+            }`}>
+              <div className="flex justify-between">
+                <div>SESSION: AUTHENTICATED | USER: BLOCKCHAIN_DEV</div>
+                <div>NETWORK: ETHEREUM MAINNET</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
