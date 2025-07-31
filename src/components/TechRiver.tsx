@@ -12,6 +12,7 @@ interface TechRiverProps {
 export default function TechRiver({ className = '' }: TechRiverProps) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [showList, setShowList] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -124,21 +125,6 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
       <div className="relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <motion.div
-            className="inline-block mb-6"
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-          >
-            <div className={`p-8 rounded-3xl ${
-              theme === 'theme-light' 
-                ? 'bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 shadow-2xl shadow-purple-500/25' 
-                : 'bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 shadow-2xl shadow-purple-500/40'
-            }`}>
-              <span className="text-6xl text-white">🌈</span>
-            </div>
-          </motion.div>
-          
           <motion.h2 
             className={`text-5xl font-light mb-6 ${
               theme === 'theme-light' ? 'text-slate-800' : 'text-slate-100'
@@ -151,147 +137,260 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
           </motion.h2>
           
           <motion.p 
-            className="text-xl light-text opacity-70 max-w-3xl mx-auto font-light leading-relaxed"
+            className="text-xl light-text opacity-70 max-w-3xl mx-auto font-light leading-relaxed mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             A flowing showcase of all the technologies I use to build amazing digital experiences
           </motion.p>
+
+          {/* Toggle Button */}
+          <motion.button
+            onClick={() => setShowList(!showList)}
+            className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+              theme === 'theme-light'
+                ? 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-lg hover:shadow-xl'
+                : 'bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 text-white shadow-lg hover:shadow-xl'
+            }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <div className="flex items-center space-x-2">
+              <span>{showList ? '🌊 River View' : '📋 List View'}</span>
+            </div>
+          </motion.button>
         </div>
 
-        {/* Tech River Streams */}
-        <div className="relative h-96 w-full max-w-7xl mx-auto overflow-hidden">
-          {streams.map((streamTechs, streamIndex) => (
-            <div 
-              key={streamIndex}
-              className="absolute w-full"
-              style={{ 
-                top: `${streamIndex * 50}%`,
-                height: '40%'
-              }}
-            >
-              {/* Stream background flow */}
-              <motion.div
-                className={`absolute inset-0 rounded-full opacity-10 ${
-                  theme === 'theme-light' 
-                    ? 'bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200'
-                    : 'bg-gradient-to-r from-blue-800 via-purple-800 to-pink-800'
-                }`}
-                animate={{
-                  x: ['-100%', '100%']
+        {/* Toggle between River View and List View */}
+        {!showList ? (
+          /* Tech River Streams */
+          <div className="relative h-96 w-full max-w-7xl mx-auto overflow-hidden">
+            {streams.map((streamTechs, streamIndex) => (
+              <div 
+                key={streamIndex}
+                className="absolute w-full"
+                style={{ 
+                  top: `${streamIndex * 50}%`,
+                  height: '40%'
                 }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              />
+              >
+                {/* Stream background flow */}
+                <motion.div
+                  className={`absolute inset-0 rounded-full opacity-10 ${
+                    theme === 'theme-light' 
+                      ? 'bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200'
+                      : 'bg-gradient-to-r from-blue-800 via-purple-800 to-pink-800'
+                  }`}
+                  animate={{
+                    x: ['-100%', '100%']
+                  }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                />
 
-              {/* Flowing tech logos */}
-              <div className="relative h-full flex items-center">
-                {/* Create multiple copies for seamless loop */}
-                {Array.from({ length: 3 }).map((_, copyIndex) => (
-                  <motion.div
-                    key={copyIndex}
-                    className="absolute flex items-center"
-                    animate={{
-                      x: [`${copyIndex * 100}%`, `${(copyIndex - 1) * 100}%`],
-                    }}
-                    transition={{
-                      duration: 20 + streamIndex * 3,
-                      repeat: Infinity,
-                      ease: "linear"
-                    }}
-                    style={{
-                      left: 0,
-                    }}
-                  >
-                    {streamTechs.map((tech, techIndex) => (
-                      <motion.div
-                        key={`${tech.name}-${copyIndex}`}
-                        className={`relative group cursor-pointer mx-6 ${
-                          techIndex === streamTechs.length - 1 ? 'mr-12' : ''
-                        }`}
-                        whileHover={{ 
-                          scale: 1.15, 
-                          zIndex: 10,
-                          y: -10 
-                        }}
-                        initial={{ 
-                          opacity: 0, 
-                          scale: 0.5
-                        }}
-                        animate={{ 
-                          opacity: 1, 
-                          scale: 1
-                        }}
-                        transition={{
-                          opacity: { duration: 0.6, delay: techIndex * 0.1 },
-                          scale: { duration: 0.6, delay: techIndex * 0.1 }
-                        }}
-                      >
-                        {/* Tech logo container */}
-                        <div className={`relative p-5 rounded-2xl backdrop-blur-sm border transition-all duration-300 ${
-                          theme === 'theme-light'
-                            ? 'bg-white/80 border-white/50 group-hover:bg-white group-hover:border-gray-200 group-hover:shadow-xl'
-                            : 'bg-slate-800/80 border-slate-700/50 group-hover:bg-slate-800 group-hover:border-slate-600 group-hover:shadow-xl'
-                        }`}>
-                          {/* Logo */}
-                          <div className="relative w-16 h-16 flex items-center justify-center">
-                            <img 
-                              src={tech.logo} 
-                              alt={tech.name}
-                              className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
-                              onError={(e) => {
-                                // Fallback to emoji if logo fails to load
-                                const target = e.target as HTMLImageElement;
-                                target.style.display = 'none';
-                                const nextSibling = target.nextElementSibling;
-                                if (nextSibling && nextSibling instanceof HTMLElement) {
-                                  nextSibling.style.display = 'block';
-                                }
-                              }}
-                            />
-                            <span className="text-2xl hidden">{tech.icon}</span>
+                {/* Flowing tech logos */}
+                <div className="relative h-full flex items-center">
+                  {/* Create multiple copies for seamless loop */}
+                  {Array.from({ length: 3 }).map((_, copyIndex) => (
+                    <motion.div
+                      key={copyIndex}
+                      className="absolute flex items-center"
+                      animate={{
+                        x: [`${copyIndex * 100}%`, `${(copyIndex - 1) * 100}%`],
+                      }}
+                      transition={{
+                        duration: 20 + streamIndex * 3,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                      style={{
+                        left: 0,
+                      }}
+                    >
+                      {streamTechs.map((tech, techIndex) => (
+                        <motion.div
+                          key={`${tech.name}-${copyIndex}`}
+                          className={`relative group cursor-pointer mx-6 ${
+                            techIndex === streamTechs.length - 1 ? 'mr-12' : ''
+                          }`}
+                          whileHover={{ 
+                            scale: 1.15, 
+                            zIndex: 10,
+                            y: -10 
+                          }}
+                          initial={{ 
+                            opacity: 0, 
+                            scale: 0.5
+                          }}
+                          animate={{ 
+                            opacity: 1, 
+                            scale: 1
+                          }}
+                          transition={{
+                            opacity: { duration: 0.6, delay: techIndex * 0.1 },
+                            scale: { duration: 0.6, delay: techIndex * 0.1 }
+                          }}
+                        >
+                          {/* Tech logo container */}
+                          <div className={`relative p-5 rounded-2xl backdrop-blur-sm border transition-all duration-300 ${
+                            theme === 'theme-light'
+                              ? 'bg-white/80 border-white/50 group-hover:bg-white group-hover:border-gray-200 group-hover:shadow-xl'
+                              : 'bg-slate-800/80 border-slate-700/50 group-hover:bg-slate-800 group-hover:border-slate-600 group-hover:shadow-xl'
+                          }`}>
+                            {/* Logo */}
+                            <div className="relative w-16 h-16 flex items-center justify-center">
+                              <img 
+                                src={tech.logo} 
+                                alt={tech.name}
+                                className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                                onError={(e) => {
+                                  // Fallback to emoji if logo fails to load
+                                  const target = e.target as HTMLImageElement;
+                                  target.style.display = 'none';
+                                  const nextSibling = target.nextElementSibling;
+                                  if (nextSibling && nextSibling instanceof HTMLElement) {
+                                    nextSibling.style.display = 'block';
+                                  }
+                                }}
+                              />
+                              <span className="text-2xl hidden">{tech.icon}</span>
+                            </div>
+
+                            {/* Hover tooltip */}
+                            <motion.div
+                              className={`absolute ${
+                                streamIndex === 0 ? 'top-full mt-4' : '-top-16'
+                              } left-1/2 transform -translate-x-1/2 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap pointer-events-none ${
+                                theme === 'theme-light'
+                                  ? 'bg-gray-900 text-white'
+                                  : 'bg-white text-gray-900'
+                              } shadow-lg opacity-0 group-hover:opacity-100 z-50`}
+                              initial={{ scale: 0.8, y: streamIndex === 0 ? -10 : 10 }}
+                              whileHover={{ scale: 1, y: 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              {tech.name}
+                              <div className={`absolute ${
+                                streamIndex === 0 ? 'bottom-full' : 'top-full'
+                              } left-1/2 transform -translate-x-1/2 w-0 h-0 ${
+                                theme === 'theme-light'
+                                  ? streamIndex === 0 
+                                    ? 'border-l-4 border-r-4 border-b-4 border-transparent border-b-gray-900'
+                                    : 'border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900'
+                                  : streamIndex === 0
+                                    ? 'border-l-4 border-r-4 border-b-4 border-transparent border-b-white'
+                                    : 'border-l-4 border-r-4 border-t-4 border-transparent border-t-white'
+                              }`} />
+                            </motion.div>
                           </div>
 
-                          {/* Hover tooltip */}
-                          <motion.div
-                            className={`absolute ${
-                              streamIndex === 0 ? 'top-full mt-4' : '-top-16'
-                            } left-1/2 transform -translate-x-1/2 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap pointer-events-none ${
-                              theme === 'theme-light'
-                                ? 'bg-gray-900 text-white'
-                                : 'bg-white text-gray-900'
-                            } shadow-lg opacity-0 group-hover:opacity-100 z-50`}
-                            initial={{ scale: 0.8, y: streamIndex === 0 ? -10 : 10 }}
-                            whileHover={{ scale: 1, y: 0 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            {tech.name}
-                            <div className={`absolute ${
-                              streamIndex === 0 ? 'bottom-full' : 'top-full'
-                            } left-1/2 transform -translate-x-1/2 w-0 h-0 ${
-                              theme === 'theme-light'
-                                ? streamIndex === 0 
-                                  ? 'border-l-4 border-r-4 border-b-4 border-transparent border-b-gray-900'
-                                  : 'border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900'
-                                : streamIndex === 0
-                                  ? 'border-l-4 border-r-4 border-b-4 border-transparent border-b-white'
-                                  : 'border-l-4 border-r-4 border-t-4 border-transparent border-t-white'
-                            }`} />
-                          </motion.div>
-                        </div>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          /* Technology List Table */
+          <motion.div 
+            className="w-full max-w-6xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className={`rounded-2xl border backdrop-blur-sm ${
+              theme === 'theme-light'
+                ? 'bg-white/80 border-white/50 shadow-xl'
+                : 'bg-slate-800/80 border-slate-700/50 shadow-xl'
+            }`}>
+              {/* Table Header */}
+              <div className={`px-6 py-4 border-b ${
+                theme === 'theme-light'
+                  ? 'bg-gradient-to-r from-blue-50 to-purple-50 border-gray-200'
+                  : 'bg-gradient-to-r from-blue-950/50 to-purple-950/50 border-slate-700'
+              }`}>
+                <h3 className={`text-2xl font-bold ${
+                  theme === 'theme-light' ? 'text-slate-800' : 'text-white'
+                }`}>
+                  Technology Stack ({techItems.length} Technologies)
+                </h3>
+              </div>
 
-                      </motion.div>
-                    ))}
-                  </motion.div>
+              {/* Table Content */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1 p-1">
+                {['blockchain', 'frontend', 'backend', 'ai'].map((category) => (
+                  <div key={category} className={`p-4 rounded-xl ${
+                    theme === 'theme-light' ? 'bg-gray-50/50' : 'bg-slate-900/30'
+                  }`}>
+                    {/* Category Header */}
+                    <div className="mb-4">
+                      <h4 className={`text-lg font-semibold capitalize mb-2 ${
+                        theme === 'theme-light' ? 'text-slate-800' : 'text-white'
+                      }`}>
+                        {category === 'ai' ? 'AI Tools' : category}
+                      </h4>
+                      <div className={`w-full h-1 rounded-full bg-gradient-to-r ${getCategoryColor(category)}`} />
+                    </div>
+
+                    {/* Category Items */}
+                    <div className="space-y-3">
+                      {techItems
+                        .filter(tech => tech.category === category)
+                        .map((tech, index) => (
+                          <motion.div
+                            key={tech.name}
+                            className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-200 ${
+                              theme === 'theme-light'
+                                ? 'hover:bg-white hover:shadow-md'
+                                : 'hover:bg-slate-800 hover:shadow-md'
+                            }`}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.1, duration: 0.4 }}
+                            whileHover={{ x: 5 }}
+                          >
+                            {/* Tech Logo */}
+                            <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
+                              <img 
+                                src={tech.logo} 
+                                alt={tech.name}
+                                className="w-full h-full object-contain"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.style.display = 'none';
+                                  const nextSibling = target.nextElementSibling;
+                                  if (nextSibling && nextSibling instanceof HTMLElement) {
+                                    nextSibling.style.display = 'block';
+                                  }
+                                }}
+                              />
+                              <span className="text-lg hidden">{tech.icon}</span>
+                            </div>
+                            
+                            {/* Tech Name */}
+                            <span className={`font-medium ${
+                              theme === 'theme-light' ? 'text-slate-700' : 'text-slate-200'
+                            }`}>
+                              {tech.name}
+                            </span>
+                          </motion.div>
+                        ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
-          ))}
-        </div>
+          </motion.div>
+        )}
 
       </div>
     </section>

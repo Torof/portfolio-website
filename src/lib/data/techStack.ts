@@ -41,7 +41,9 @@ export const techStack: TechStackData = {
   backend: [
     { name: 'Typescript', icon: '⚛️', logo: getAssetUrl('/logos/typescript.svg') },
     { name: 'Node.js', icon: '🟢', logo: getAssetUrl('/logos/nodejs.svg') },
+    { name: 'Git', icon: '🔀', logo: getAssetUrl('/logos/git.svg') },
     { name: 'IPFS', icon: '🌐', logo: getAssetUrl('/logos/ipfs-seeklogo.svg') },
+    { name: 'Pinata', icon: '📌', logo: getAssetUrl('/logos/pinata.svg') },
     { name: 'Yarn', icon: '🧶', logo: getAssetUrl('/logos/yarn.svg') },
     { name: 'NPM', icon: '📦', logo: getAssetUrl('/logos/npm.svg') },
     { name: 'Bash', icon: '💻', logo: getAssetUrl('/logos/bash.svg') },
