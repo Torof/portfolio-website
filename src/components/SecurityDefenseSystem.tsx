@@ -75,22 +75,6 @@ const threatTypes = [
     defendedBy: 'formal-verification',
     description: 'Flawed business logic that leads to unintended contract behavior'
   },
-  {
-    id: 'sandwich',
-    name: 'Sandwich Attack',
-    icon: '🥪',
-    color: '#f97316',
-    defendedBy: 'mev-protection',
-    description: 'MEV attack sandwiching user transactions to extract value'
-  },
-  {
-    id: 'governance',
-    name: 'Governance Attack',
-    icon: '🗳️',
-    color: '#8b5cf6',
-    defendedBy: 'attack-vectors',
-    description: 'Malicious governance proposals or vote manipulation attacks'
-  }
 ];
 
 // Active threat instance
@@ -128,8 +112,6 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
   const [explosions, setExplosions] = useState<Explosion[]>([]);
   const [score, setScore] = useState(0);
   const [mounted, setMounted] = useState(false);
-  const [hoveredThreat, setHoveredThreat] = useState<string | null>(null);
-  const [hoveredTurret, setHoveredTurret] = useState<string | null>(null);
   const gameAreaRef = useRef<HTMLDivElement>(null);
   const threatIdCounter = useRef(0);
   const laserIdCounter = useRef(0);
@@ -151,7 +133,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
         x: 10 + Math.random() * 80, // 10-90% of width
         y: 0,
         health: 100,
-        speed: 0.5 + Math.random() * 0.5, // Variable speed
+        speed: 0.2 + Math.random() * 0.3, // Variable speed
       };
       setThreats(prev => [...prev, newThreat]);
     };
@@ -215,7 +197,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
               // Remove laser after animation
               setTimeout(() => {
                 setLasers(prev => prev.filter(l => l.id !== laser.id));
-              }, 200);
+              }, 400);
 
               // If threat is destroyed
               if (threat.health <= 0) {
@@ -231,7 +213,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                 // Remove explosion after animation
                 setTimeout(() => {
                   setExplosions(prev => prev.filter(e => e.id !== explosion.id));
-                }, 500);
+                }, 800);
               }
             }
           }
@@ -239,22 +221,24 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
 
         return updatedThreats;
       });
-    }, 50); // 20 FPS
+    }, 80); // ~12 FPS
 
     return () => clearInterval(gameLoop);
   }, [mounted, category.skills]);
 
   if (!mounted) {
-    return <div className="h-[600px]" />;
+    return <div className="h-[800px]" />;
   }
 
   return (
     <section className="mb-24">
-      <div className={`relative overflow-hidden rounded-2xl border-4 ${
-        theme === 'theme-light'
-          ? 'bg-gradient-to-b from-blue-100 to-slate-200 border-slate-400'
-          : 'bg-gradient-to-b from-slate-900 via-slate-800 to-black border-green-500'
-      }`}>
+      <div className="flex gap-6">
+        {/* Main Game Area */}
+        <div className={`flex-1 relative overflow-hidden rounded-2xl border-4 ${
+          theme === 'theme-light'
+            ? 'bg-gradient-to-b from-blue-100 to-slate-200 border-slate-400'
+            : 'bg-gradient-to-b from-slate-900 via-slate-800 to-black border-green-500'
+        }`}>
         
         {/* Retro CRT effect */}
         <div className="absolute inset-0 pointer-events-none">
@@ -310,113 +294,67 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
           </div>
         </div>
 
-        {/* Game Area */}
-        <div 
-          ref={gameAreaRef}
-          className="relative h-[500px] overflow-hidden"
-        >
+        {/* Main Content Area */}
+        <div className="h-[700px]">
+          {/* Game Area */}
+          <div 
+            ref={gameAreaRef}
+            className="relative w-full h-full overflow-hidden"
+          >
           {/* Threats */}
           <AnimatePresence>
-            {threats.map(threat => {
-              const isHovered = hoveredThreat === threat.id;
-              return (
-                <motion.div
-                  key={threat.id}
-                  className="absolute cursor-pointer z-10"
-                  style={{
-                    left: `${threat.x}%`,
-                    top: `${threat.y}%`,
-                    transform: 'translate(-50%, -50%)',
-                    transformOrigin: 'center center',
-                  }}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ 
-                    opacity: 1, 
-                    scale: isHovered ? 1.2 : 1,
-                  }}
-                  exit={{ opacity: 0, scale: 0 }}
-                  onMouseEnter={() => setHoveredThreat(threat.id)}
-                  onMouseLeave={() => setHoveredThreat(null)}
-                  whileHover={{ 
-                    scale: 1.2,
-                    filter: 'brightness(1.3)',
-                  }}
-                >
-                  <div className={`relative ${
-                    theme === 'theme-light' ? 'text-slate-800' : 'text-white'
+            {threats.map(threat => (
+              <motion.div
+                key={threat.id}
+                className="absolute"
+                style={{
+                  left: `${threat.x}%`,
+                  top: `${threat.y}%`,
+                  transform: 'translate(-50%, -50%)',
+                }}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+              >
+                <div className={`relative ${
+                  theme === 'theme-light' ? 'text-slate-800' : 'text-white'
+                }`}>
+                  {/* Threat icon */}
+                  <motion.div
+                    className="text-3xl mb-1"
+                    animate={{
+                      rotate: [0, 5, -5, 0],
+                      scale: [1, 1.1, 1],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                    }}
+                  >
+                    {threat.type.icon}
+                  </motion.div>
+                  
+                  {/* Threat name */}
+                  <div className={`text-xs font-mono text-center px-2 py-1 rounded whitespace-nowrap ${
+                    theme === 'theme-light' 
+                      ? 'bg-red-100 text-red-800 border border-red-300' 
+                      : 'bg-red-900/50 text-red-300 border border-red-500'
                   }`}>
-                    {/* Threat icon */}
-                    <motion.div
-                      className="text-3xl mb-1"
-                      animate={{
-                        rotate: [0, 5, -5, 0],
-                        scale: [1, 1.1, 1],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                      }}
-                      style={{
-                        filter: isHovered 
-                          ? theme === 'theme-light'
-                            ? 'drop-shadow(0 0 8px rgba(239, 68, 68, 0.8))'
-                            : 'drop-shadow(0 0 12px rgba(239, 68, 68, 1))'
-                          : 'none'
-                      }}
-                    >
-                      {threat.type.icon}
-                    </motion.div>
-                    
-                    {/* Threat name */}
-                    <div className={`text-xs font-mono text-center px-2 py-1 rounded whitespace-nowrap transition-all ${
-                      isHovered
-                        ? theme === 'theme-light' 
-                          ? 'bg-red-200 text-red-900 border-2 border-red-400 shadow-lg' 
-                          : 'bg-red-800/80 text-red-200 border-2 border-red-400 shadow-lg shadow-red-500/50'
-                        : theme === 'theme-light' 
-                          ? 'bg-red-100 text-red-800 border border-red-300' 
-                          : 'bg-red-900/50 text-red-300 border border-red-500'
-                    }`}>
-                      {threat.type.name}
-                    </div>
-                    
-                    {/* Health bar */}
-                    <div className="mt-1 w-full h-1 bg-gray-700 rounded-full overflow-hidden">
-                      <motion.div
-                        className="h-full bg-gradient-to-r from-red-500 to-red-600"
-                        initial={{ width: '100%' }}
-                        animate={{ width: `${threat.health}%` }}
-                        transition={{ duration: 0.2 }}
-                      />
-                    </div>
-
-                    {/* Hover tooltip */}
-                    {isHovered && (
-                      <motion.div
-                        className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 p-3 rounded-lg shadow-xl border max-w-xs whitespace-normal text-center z-50 ${
-                          theme === 'theme-light'
-                            ? 'bg-white border-red-300 text-slate-700'
-                            : 'bg-slate-800 border-red-500 text-red-200'
-                        }`}
-                        initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <div className="font-bold text-sm mb-1">{threat.type.name}</div>
-                        <div className="text-xs leading-relaxed">{threat.type.description}</div>
-                        
-                        {/* Tooltip arrow */}
-                        <div className={`absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 ${
-                          theme === 'theme-light'
-                            ? 'border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-white'
-                            : 'border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-slate-800'
-                        }`} />
-                      </motion.div>
-                    )}
+                    {threat.type.name}
                   </div>
-                </motion.div>
-              );
-            })}
+                  
+                  {/* Health bar */}
+                  <div className="mt-1 w-full h-1 bg-gray-700 rounded-full overflow-hidden">
+                    <motion.div
+                      className="h-full bg-gradient-to-r from-red-500 to-red-600"
+                      initial={{ width: '100%' }}
+                      animate={{ width: `${threat.health}%` }}
+                      transition={{ duration: 0.2 }}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </AnimatePresence>
 
           {/* Laser beams */}
@@ -432,7 +370,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                 strokeWidth="3"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: [0, 1, 0] }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.4 }}
                 style={{
                   filter: theme === 'theme-light' 
                     ? 'drop-shadow(0 0 4px rgba(59, 130, 246, 0.8))' 
@@ -456,7 +394,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                 initial={{ scale: 0, opacity: 1 }}
                 animate={{ scale: 3, opacity: 0 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.8 }}
               >
                 <div className={`text-4xl ${
                   theme === 'theme-light' ? 'text-orange-500' : 'text-yellow-400'
@@ -469,30 +407,24 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
 
           {/* Security Turrets */}
           <div className="absolute bottom-0 left-0 right-0 h-32">
-            <div className="relative h-full px-8 pb-4">
+            <div className="relative h-full flex items-end justify-around px-8 pb-4">
               {category.skills.map((skill, index) => {
                 const turretX = 15 + (index * 70 / (category.skills.length - 1));
                 const isActive = lasers.some(laser => laser.turretId === skill.id);
-                const isHovered = hoveredTurret === skill.id;
                 
                 return (
                   <motion.div
                     key={skill.id}
-                    className="absolute cursor-pointer z-20"
+                    className="relative group"
                     style={{
+                      position: 'absolute',
                       left: `${turretX}%`,
                       bottom: '20px',
-                      x: '-50%',
-                      transformOrigin: 'center center',
+                      transform: 'translateX(-50%)',
                     }}
-                    initial={{ scale: 1, x: '-50%' }}
-                    onMouseEnter={() => setHoveredTurret(skill.id)}
-                    onMouseLeave={() => setHoveredTurret(null)}
-                    whileHover={mounted ? { scale: 1.1, x: '-50%' } : {}}
-                    transition={{ duration: 0.2 }}
                   >
                     {/* Turret base */}
-                    <div className={`relative transition-all duration-300 flex flex-col items-center ${
+                    <div className={`relative ${
                       theme === 'theme-light' 
                         ? 'text-slate-700' 
                         : 'text-green-400'
@@ -500,7 +432,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                       {/* Turret cannon */}
                       <motion.div
                         className="text-4xl mb-2"
-                        animate={mounted && isActive ? {
+                        animate={isActive ? {
                           scale: [1, 1.2, 1],
                           filter: [
                             'brightness(1)',
@@ -508,30 +440,21 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                             'brightness(1)'
                           ]
                         } : {}}
-                        transition={{ duration: 0.2 }}
+                        transition={{ duration: 0.4 }}
                         style={{
-                          transformOrigin: 'center center',
-                          filter: isHovered
-                            ? theme === 'theme-light'
-                              ? 'drop-shadow(0 0 12px rgba(59, 130, 246, 1))'
-                              : 'drop-shadow(0 0 16px rgba(0, 255, 0, 1))'
-                            : theme === 'theme-light'
-                              ? 'drop-shadow(0 0 4px rgba(59, 130, 246, 0.6))'
-                              : 'drop-shadow(0 0 8px rgba(0, 255, 0, 0.8))'
+                          filter: theme === 'theme-light'
+                            ? 'drop-shadow(0 0 4px rgba(59, 130, 246, 0.6))'
+                            : 'drop-shadow(0 0 8px rgba(0, 255, 0, 0.8))'
                         }}
                       >
                         {skill.icon}
                       </motion.div>
                       
                       {/* Skill name */}
-                      <div className={`text-xs font-mono text-center px-2 py-1 rounded whitespace-nowrap transition-all ${
-                        isHovered
-                          ? theme === 'theme-light' 
-                            ? 'bg-blue-200 text-blue-900 border-2 border-blue-400 shadow-lg' 
-                            : 'bg-green-800/80 text-green-200 border-2 border-green-400 shadow-lg shadow-green-500/50'
-                          : theme === 'theme-light' 
-                            ? 'bg-blue-100 text-blue-800 border-2 border-blue-300' 
-                            : 'bg-green-900/50 text-green-300 border-2 border-green-500'
+                      <div className={`text-xs font-mono text-center px-2 py-1 rounded whitespace-nowrap ${
+                        theme === 'theme-light' 
+                          ? 'bg-blue-100 text-blue-800 border border-blue-300' 
+                          : 'bg-green-900/50 text-green-300 border border-green-500'
                       }`}>
                         {skill.name.split(' ')[0]}
                       </div>
@@ -539,93 +462,139 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                       {/* Power level */}
                       <div className="flex justify-center mt-1 space-x-0.5">
                         {Array.from({ length: 5 }).map((_, i) => (
-                          <motion.div
+                          <div
                             key={i}
-                            className={`w-1.5 h-1.5 rounded-full transition-all ${
+                            className={`w-1.5 h-1.5 rounded-full ${
                               i < skill.level 
-                                ? isHovered
-                                  ? theme === 'theme-light' ? 'bg-blue-600 shadow-sm' : 'bg-green-300 shadow-sm'
-                                  : theme === 'theme-light' ? 'bg-blue-500' : 'bg-green-400'
+                                ? theme === 'theme-light' ? 'bg-blue-500' : 'bg-green-400'
                                 : theme === 'theme-light' ? 'bg-gray-300' : 'bg-gray-600'
                             }`}
-                            animate={mounted && isHovered && i < skill.level ? {
-                              scale: [1, 1.2, 1],
-                            } : {}}
-                            transition={{ duration: 0.3, delay: i * 0.1 }}
                           />
                         ))}
                       </div>
+                    </div>
 
-                      {/* Turret hover tooltip */}
-                      <AnimatePresence>
-                        {isHovered && (
-                          <motion.div
-                            className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 p-4 rounded-lg shadow-xl border max-w-sm whitespace-normal z-50 ${
-                              theme === 'theme-light'
-                                ? 'bg-white border-blue-300 text-slate-700'
-                                : 'bg-slate-800 border-green-500 text-green-200'
-                            }`}
-                            initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 10, scale: 0.8 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            <div className="text-center">
-                              <div className="font-bold text-lg mb-2">{skill.name}</div>
-                              <div className="text-sm leading-relaxed mb-3">{skill.description}</div>
-                              
-                              {/* Expertise Level */}
-                              <div className="flex items-center justify-center space-x-2 mb-3">
-                                <span className="text-xs font-medium">Expertise:</span>
-                                <div className="flex space-x-1">
-                                  {Array.from({ length: 5 }).map((_, i) => (
-                                    <div
-                                      key={i}
-                                      className={`w-2 h-2 rounded-full ${
-                                        i < skill.level 
-                                          ? theme === 'theme-light' ? 'bg-blue-500' : 'bg-green-400'
-                                          : theme === 'theme-light' ? 'bg-gray-300' : 'bg-gray-600'
-                                      }`}
-                                    />
-                                  ))}
-                                </div>
-                                <span className="text-xs font-bold">
-                                  Level {skill.level}
-                                </span>
-                              </div>
+                    {/* Comprehensive Tooltip */}
+                    <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-96 p-4 rounded-lg text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 ${
+                      theme === 'theme-light'
+                        ? 'bg-slate-900 text-white border-2 border-slate-600 shadow-xl'
+                        : 'bg-black text-green-400 border-2 border-green-500 shadow-xl shadow-green-900/30'
+                    }`}>
+                      {/* Header */}
+                      <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-600">
+                        <div className="flex items-center space-x-2">
+                          <span className="text-lg">{skill.icon}</span>
+                          <div className={`font-bold text-sm ${
+                            theme === 'theme-light' ? 'text-blue-300' : 'text-green-300'
+                          }`}>
+                            {skill.name}
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <span className="text-xs opacity-60">LEVEL</span>
+                          <div className="flex space-x-0.5">
+                            {Array.from({ length: 5 }).map((_, i) => (
+                              <div
+                                key={i}
+                                className={`w-2 h-2 rounded-full ${
+                                  i < skill.level 
+                                    ? theme === 'theme-light' ? 'bg-blue-400' : 'bg-green-400'
+                                    : 'bg-gray-600'
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
 
-                              {/* Defending Against */}
-                              <div className="text-xs">
-                                <div className="font-medium mb-1">Defends Against:</div>
-                                <div className="flex flex-wrap gap-1 justify-center">
-                                  {threatTypes
-                                    .filter(threat => threat.defendedBy === skill.id)
-                                    .map(threat => (
-                                      <span
-                                        key={threat.id}
-                                        className={`px-2 py-1 rounded text-xs ${
-                                          theme === 'theme-light'
-                                            ? 'bg-red-100 text-red-700'
-                                            : 'bg-red-900/50 text-red-300'
-                                        }`}
-                                      >
-                                        {threat.icon} {threat.name}
-                                      </span>
-                                    ))
-                                  }
+                      {/* Description */}
+                      <div className="mb-3">
+                        <div className={`font-semibold mb-1 ${
+                          theme === 'theme-light' ? 'text-slate-200' : 'text-green-200'
+                        }`}>
+                          DEFENSE CAPABILITY:
+                        </div>
+                        <div className="text-xs leading-relaxed opacity-90">
+                          {skill.description}
+                        </div>
+                      </div>
+
+                      {/* Threat Defense Matrix */}
+                      <div className="mb-3">
+                        <div className={`font-semibold mb-2 ${
+                          theme === 'theme-light' ? 'text-slate-200' : 'text-green-200'
+                        }`}>
+                          THREAT DEFENSE MATRIX:
+                        </div>
+                        <div className="grid grid-cols-1 gap-1">
+                          {threatTypes
+                            .filter(threat => threat.defendedBy === skill.id)
+                            .map(threat => (
+                              <div 
+                                key={threat.id}
+                                className={`flex items-center space-x-2 p-2 rounded border ${
+                                  theme === 'theme-light' 
+                                    ? 'bg-slate-800 border-slate-600' 
+                                    : 'bg-slate-900 border-slate-700'
+                                }`}
+                              >
+                                <span className="text-sm">{threat.icon}</span>
+                                <div className="flex-1">
+                                  <div className={`font-medium text-xs ${
+                                    theme === 'theme-light' ? 'text-red-300' : 'text-red-400'
+                                  }`}>
+                                    {threat.name}
+                                  </div>
+                                  <div className="text-xs opacity-70 leading-tight">
+                                    {threat.description}
+                                  </div>
                                 </div>
                               </div>
+                            ))}
+                          {threatTypes.filter(threat => threat.defendedBy === skill.id).length === 0 && (
+                            <div className="text-xs opacity-60 italic">
+                              General purpose security skill - defends against various threats
                             </div>
-                            
-                            {/* Tooltip arrow */}
-                            <div className={`absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 ${
-                              theme === 'theme-light'
-                                ? 'border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-white'
-                                : 'border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-slate-800'
-                            }`} />
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Combat Stats */}
+                      <div className={`text-xs opacity-70 pt-2 border-t ${
+                        theme === 'theme-light' ? 'border-slate-600' : 'border-slate-700'
+                      }`}>
+                        <div className="flex justify-between items-center">
+                          <span>DAMAGE OUTPUT:</span>
+                          <span className={`font-mono ${
+                            theme === 'theme-light' ? 'text-blue-300' : 'text-green-300'
+                          }`}>
+                            {25 * skill.level} DMG/hit
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-center mt-1">
+                          <span>TARGETING RANGE:</span>
+                          <span className={`font-mono ${
+                            theme === 'theme-light' ? 'text-blue-300' : 'text-green-300'
+                          }`}>
+                            20-70% altitude
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-center mt-1">
+                          <span>FIRE RATE:</span>
+                          <span className={`font-mono ${
+                            theme === 'theme-light' ? 'text-blue-300' : 'text-green-300'
+                          }`}>
+                            ~10% chance/frame
+                          </span>
+                        </div>
+                      </div>
+                      
+                      {/* Tooltip arrow */}
+                      <div className={`absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-6 border-transparent ${
+                        theme === 'theme-light' 
+                          ? 'border-t-slate-900' 
+                          : 'border-t-black'
+                      }`} />
                     </div>
                   </motion.div>
                 );
@@ -648,6 +617,113 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                 </div>
               ))}
               <div className="opacity-60">...and more</div>
+            </div>
+          </div>
+
+          </div>
+        </div>
+        </div>
+
+        {/* Threat Display Card - Outside the main game area */}
+        <div className="w-80">
+          <div className={`rounded-2xl border-4 h-full ${
+            theme === 'theme-light'
+              ? 'bg-gradient-to-b from-red-50 to-red-100 border-red-300'
+              : 'bg-gradient-to-b from-red-950 via-red-900 to-black border-red-500'
+          }`}>
+            <div className={`p-4 border-b-2 ${
+              theme === 'theme-light' 
+                ? 'bg-red-100 border-red-300' 
+                : 'bg-black border-red-500'
+            }`}>
+              <h4 className={`text-lg font-bold font-mono ${
+                theme === 'theme-light' ? 'text-red-800' : 'text-red-400'
+              }`}>
+                THREAT MONITOR
+              </h4>
+              <p className={`text-xs font-mono ${
+                theme === 'theme-light' ? 'text-red-600' : 'text-red-500'
+              }`}>
+                ACTIVE INCOMING THREATS
+              </p>
+            </div>
+            
+            <div className="p-4 h-[calc(100%-80px)] overflow-y-auto">
+              {threats.length === 0 ? (
+                <div className={`text-center py-8 ${
+                  theme === 'theme-light' ? 'text-red-600' : 'text-red-400'
+                }`}>
+                  <div className="text-4xl mb-2">🛡️</div>
+                  <div className="text-sm font-mono">
+                    All Clear
+                  </div>
+                  <div className={`text-xs font-mono opacity-60 ${
+                    theme === 'theme-light' ? 'text-red-500' : 'text-red-500'
+                  }`}>
+                    No threats detected
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <AnimatePresence>
+                    {threats.map(threat => (
+                      <motion.div
+                        key={threat.id}
+                        className={`p-4 rounded-lg border-2 ${
+                          theme === 'theme-light'
+                            ? 'bg-white border-red-200'
+                            : 'bg-red-950/50 border-red-800'
+                        }`}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="flex items-start space-x-3">
+                          <div className="text-2xl flex-shrink-0">
+                            {threat.type.icon}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className={`text-sm font-mono font-bold mb-2 ${
+                              theme === 'theme-light' ? 'text-red-700' : 'text-red-300'
+                            }`}>
+                              {threat.type.name}
+                            </div>
+                            <div className={`text-xs leading-relaxed mb-3 ${
+                              theme === 'theme-light' ? 'text-red-600' : 'text-red-400'
+                            }`}>
+                              {threat.type.description}
+                            </div>
+                            
+                            {/* Health bar */}
+                            <div className="mb-2">
+                              <div className={`text-xs font-mono mb-1 ${
+                                theme === 'theme-light' ? 'text-red-500' : 'text-red-400'
+                              }`}>
+                                Integrity: {threat.health}%
+                              </div>
+                              <div className="w-full h-2 bg-gray-600 rounded-full overflow-hidden">
+                                <motion.div
+                                  className="h-full bg-gradient-to-r from-red-500 to-red-600"
+                                  animate={{ width: `${threat.health}%` }}
+                                  transition={{ duration: 0.2 }}
+                                />
+                              </div>
+                            </div>
+
+                            {/* Defended by */}
+                            <div className={`text-xs font-mono ${
+                              theme === 'theme-light' ? 'text-blue-600' : 'text-green-400'
+                            }`}>
+                              🎯 Defended by: {threat.type.defendedBy}
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </div>
+              )}
             </div>
           </div>
         </div>
