@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
 import { SkillCategory, AdvancedSkill } from '@/lib/types';
+import SecurityDefenseSystem from './SecurityDefenseSystem';
 
 interface PremiumSkillSectionsProps {
   categories: SkillCategory[];
@@ -1659,7 +1660,7 @@ export default function PremiumSkillSections({ categories }: PremiumSkillSection
     'smart-contracts': SmartContractsSection,
     'defi': DeFiSection,
     'layer2': Layer2Section,
-    'security': SecuritySection,
+    'security': SecurityDefenseSystem,
   };
 
   return (
