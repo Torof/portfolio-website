@@ -96,15 +96,12 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
         className={`relative p-8 rounded-2xl border-4 backdrop-blur-xl overflow-hidden ${
           theme === 'theme-light'
             ? 'bg-gradient-to-br from-slate-300 via-gray-200 to-slate-400 border-gray-400 shadow-2xl'
-            : 'bg-gradient-to-br from-slate-900 via-gray-800 to-slate-900 border-gray-400 shadow-2xl shadow-cyan-500/20'
+            : 'bg-gradient-to-br from-slate-900 via-gray-800 to-slate-900 border-gray-400 shadow-2xl'
         }`}
         animate={isShuffling ? {
           borderColor: theme === 'theme-light' 
             ? ['rgba(56, 189, 248, 0.8)', 'rgba(236, 72, 153, 0.8)', 'rgba(56, 189, 248, 0.8)']
-            : ['rgba(56, 189, 248, 0.6)', 'rgba(236, 72, 153, 0.6)', 'rgba(56, 189, 248, 0.6)'],
-          boxShadow: theme === 'theme-light'
-            ? ['0 25px 50px -12px rgba(56, 189, 248, 0.4)', '0 25px 50px -12px rgba(236, 72, 153, 0.4)', '0 25px 50px -12px rgba(56, 189, 248, 0.4)']
-            : ['0 25px 50px -12px rgba(56, 189, 248, 0.6)', '0 25px 50px -12px rgba(236, 72, 153, 0.6)', '0 25px 50px -12px rgba(56, 189, 248, 0.6)']
+            : ['rgba(56, 189, 248, 0.6)', 'rgba(236, 72, 153, 0.6)', 'rgba(56, 189, 248, 0.6)']
         } : {}}
         transition={{
           duration: 0.4,
@@ -113,51 +110,30 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
         }}
       >
         
-        {/* Retro Metallic Grid Pattern */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `
-              repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 24px,
-                ${theme === 'theme-light' ? 'rgba(100, 116, 139, 0.3)' : 'rgba(148, 163, 184, 0.2)'} 25px,
-                ${theme === 'theme-light' ? 'rgba(100, 116, 139, 0.3)' : 'rgba(148, 163, 184, 0.2)'} 26px
-              ),
-              repeating-linear-gradient(
-                90deg,
-                transparent,
-                transparent 24px,
-                ${theme === 'theme-light' ? 'rgba(100, 116, 139, 0.3)' : 'rgba(148, 163, 184, 0.2)'} 25px,
-                ${theme === 'theme-light' ? 'rgba(100, 116, 139, 0.3)' : 'rgba(148, 163, 184, 0.2)'} 26px
-              )
-            `
-          }} />
-          
-          {/* Retro neon pulse effects */}
-          {isShuffling && (
-            <motion.div
-              className="absolute inset-0"
-              animate={{
-                background: [
-                  'radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.2) 0%, transparent 50%)',
-                  'radial-gradient(circle at 80% 50%, rgba(255, 20, 147, 0.2) 0%, transparent 50%)',
-                  'radial-gradient(circle at 50% 20%, rgba(255, 255, 0, 0.2) 0%, transparent 50%)',
-                  'radial-gradient(circle at 50% 80%, rgba(0, 255, 255, 0.2) 0%, transparent 50%)',
-                ]
-              }}
-              transition={{
-                duration: 0.3,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
-          )}
-        </div>
+        {/* Retro neon pulse effects during shuffle */}
+        {isShuffling && (
+          <motion.div
+            className="absolute inset-0"
+            animate={{
+              background: [
+                'radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.2) 0%, transparent 50%)',
+                'radial-gradient(circle at 80% 50%, rgba(255, 20, 147, 0.2) 0%, transparent 50%)',
+                'radial-gradient(circle at 50% 20%, rgba(255, 255, 0, 0.2) 0%, transparent 50%)',
+                'radial-gradient(circle at 50% 80%, rgba(0, 255, 255, 0.2) 0%, transparent 50%)',
+              ]
+            }}
+            transition={{
+              duration: 0.3,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+        )}
         
         {/* Header */}
         <div className="mb-6 relative z-10">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-6">
+            {/* Left: Title and Icon */}
             <div className="flex items-center">
               <div className={`p-3 rounded-xl mr-4 relative ${
                 theme === 'theme-light' 
@@ -194,66 +170,64 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
                 }}>
                   Smart Contract Standards
                 </h3>
-                <p className={`text-sm font-medium ${
-                  theme === 'theme-light' ? 'text-slate-600' : 'text-slate-300'
+                <p className={`text-xs font-normal opacity-60 ${
+                  theme === 'theme-light' ? 'text-slate-500' : 'text-slate-400'
                 }`}>
-                  🎮 {category.skills.length} standards • 🎯 Retro Spin • ⚡ Feel the Power
+                  {category.skills.length} standards • Scroll wheel to navigate • Use arrows to browse
                 </p>
               </div>
             </div>
             
-            {/* Retro Casino Shuffle Button */}
-            <div className="flex items-center space-x-4">
-              <div className="text-center">
-                <div className={`text-xs font-bold mb-2 ${
-                  theme === 'theme-light' ? 'text-cyan-600' : 'text-cyan-400'
-                }`} style={{ 
-                  textShadow: theme === 'theme-light' 
-                    ? '0 0 5px rgba(56, 189, 248, 0.5)' 
-                    : '0 0 5px rgba(56, 189, 248, 0.8)' 
-                }}>
-                  🚀 RETRO SPIN! ↓
-                </div>
-                <motion.button
-                  onClick={handleShuffle}
-                  disabled={isShuffling}
-                  className={`relative px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 overflow-hidden border-2 ${
-                    theme === 'theme-light'
-                      ? 'bg-gradient-to-r from-slate-400 via-gray-300 to-slate-500 hover:from-slate-500 hover:via-gray-400 hover:to-slate-600 text-white shadow-lg shadow-slate-400/40 border-cyan-400'
-                      : 'bg-gradient-to-r from-slate-600 via-gray-500 to-slate-700 hover:from-slate-700 hover:via-gray-600 hover:to-slate-800 text-white shadow-lg shadow-slate-500/50 border-cyan-400'
-                  } ${isShuffling ? 'opacity-75 cursor-not-allowed' : 'hover:shadow-2xl hover:shadow-cyan-500/60'}`}
-                  whileHover={!isShuffling ? { scale: 1.08 } : {}}
-                  whileTap={!isShuffling ? { scale: 0.92 } : {}}
-                  title="Spin the retro wheel to randomly select a standard"
-                >
-                  {/* Chrome shine overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent transform -skew-x-12 -translate-x-full animate-pulse" />
-                  
-                  {/* Neon border effect during spinning */}
-                  {isShuffling && (
-                    <div className="absolute inset-0 rounded-xl border-2 border-pink-500 animate-pulse">
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/20 via-pink-500/20 to-cyan-500/20 animate-pulse" />
-                    </div>
-                  )}
-                  
-                  <span className="relative z-10 flex items-center space-x-2">
-                    <span>{isShuffling ? '⚡ SPINNING...' : '🎯 ENGAGE'}</span>
-                  </span>
-                </motion.button>
-              </div>
-              
-              {/* Retro Digital Counter */}
-              <div className={`text-sm px-4 py-2 rounded-xl font-bold border-2 ${
-                theme === 'theme-light' 
-                  ? 'bg-gradient-to-r from-slate-200 to-slate-300 border-cyan-400 text-slate-800 shadow-lg shadow-cyan-400/30' 
-                  : 'bg-gradient-to-r from-slate-800 to-slate-900 border-cyan-400 text-cyan-300 shadow-lg shadow-cyan-400/40'
-              }`} style={{
+            {/* Center: Shuffle Button */}
+            <div className="text-center">
+              <div className={`text-xs font-bold mb-2 ${
+                theme === 'theme-light' ? 'text-cyan-600' : 'text-cyan-400'
+              }`} style={{ 
                 textShadow: theme === 'theme-light' 
-                  ? '0 0 5px rgba(56, 189, 248, 0.6)' 
-                  : '0 0 8px rgba(56, 189, 248, 0.8)'
+                  ? '0 0 5px rgba(56, 189, 248, 0.5)' 
+                  : '0 0 5px rgba(56, 189, 248, 0.8)' 
               }}>
-                <span className="font-mono">⚡ {String(currentIndex + 1).padStart(2, '0')} / {String(category.skills.length).padStart(2, '0')}</span>
+                Try your luck! ↓
               </div>
+              <motion.button
+                onClick={handleShuffle}
+                disabled={isShuffling}
+                className={`relative px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 overflow-hidden border-2 ${
+                  theme === 'theme-light'
+                    ? 'bg-gradient-to-r from-slate-400 via-gray-300 to-slate-500 hover:from-slate-500 hover:via-gray-400 hover:to-slate-600 text-white shadow-lg shadow-slate-400/40 border-cyan-400'
+                    : 'bg-gradient-to-r from-slate-600 via-gray-500 to-slate-700 hover:from-slate-700 hover:via-gray-600 hover:to-slate-800 text-white shadow-lg shadow-slate-500/50 border-cyan-400'
+                } ${isShuffling ? 'opacity-75 cursor-not-allowed' : 'hover:shadow-2xl hover:shadow-cyan-500/60'}`}
+                whileHover={!isShuffling ? { scale: 1.08 } : {}}
+                whileTap={!isShuffling ? { scale: 0.92 } : {}}
+                title="Spin the retro wheel to randomly select a standard"
+              >
+                {/* Chrome shine overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent transform -skew-x-12 -translate-x-full animate-pulse" />
+                
+                {/* Neon border effect during spinning */}
+                {isShuffling && (
+                  <div className="absolute inset-0 rounded-xl border-2 border-pink-500 animate-pulse">
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/20 via-pink-500/20 to-cyan-500/20 animate-pulse" />
+                  </div>
+                )}
+                
+                <span className="relative z-10 flex items-center space-x-2">
+                  <span>{isShuffling ? '⚡ SPINNING...' : '🎲 RANDOM'}</span>
+                </span>
+              </motion.button>
+            </div>
+            
+            {/* Right: Counter */}
+            <div className={`text-sm px-4 py-2 rounded-xl font-bold border-2 ${
+              theme === 'theme-light' 
+                ? 'bg-gradient-to-r from-slate-200 to-slate-300 border-cyan-400 text-slate-800 shadow-lg shadow-cyan-400/30' 
+                : 'bg-gradient-to-r from-slate-800 to-slate-900 border-cyan-400 text-cyan-300 shadow-lg shadow-cyan-400/40'
+            }`} style={{
+              textShadow: theme === 'theme-light' 
+                ? '0 0 5px rgba(56, 189, 248, 0.6)' 
+                : '0 0 8px rgba(56, 189, 248, 0.8)'
+            }}>
+              <span className="font-mono">⚡ {String(currentIndex + 1).padStart(2, '0')} / {String(category.skills.length).padStart(2, '0')}</span>
             </div>
           </div>
         </div>
@@ -347,8 +321,8 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
                     <div className={`p-4 rounded-xl border-2 backdrop-blur-sm transition-all duration-300 h-full relative overflow-hidden ${
                       isCenter
                         ? theme === 'theme-light'
-                          ? 'bg-gradient-to-br from-slate-200 via-gray-200 to-slate-300 border-cyan-400 shadow-2xl shadow-cyan-500/40'
-                          : 'bg-gradient-to-br from-slate-700 via-gray-600 to-slate-800 border-cyan-400 shadow-2xl shadow-cyan-500/60'
+                          ? 'bg-gradient-to-br from-slate-200 via-gray-200 to-slate-300 border-cyan-400 shadow-2xl'
+                          : 'bg-gradient-to-br from-slate-700 via-gray-600 to-slate-800 border-cyan-400 shadow-2xl'
                         : theme === 'theme-light'
                           ? 'bg-gradient-to-br from-gray-100 to-gray-200 border-gray-400'
                           : 'bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600'
@@ -525,16 +499,11 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
           <div className="absolute right-0 top-0 bottom-0 w-1/2 p-6 flex items-center">
             <div className={`w-full h-full rounded-lg border-2 p-6 backdrop-blur-sm relative overflow-hidden ${
               theme === 'theme-light'
-                ? 'bg-gradient-to-br from-slate-200 via-gray-100 to-slate-300 border-cyan-400 shadow-xl shadow-cyan-500/30'
-                : 'bg-gradient-to-br from-slate-800 via-gray-700 to-slate-900 border-cyan-400 shadow-xl shadow-cyan-500/40'
+                ? 'bg-gradient-to-br from-slate-200 via-gray-100 to-slate-300 border-cyan-400 shadow-xl'
+                : 'bg-gradient-to-br from-slate-800 via-gray-700 to-slate-900 border-cyan-400 shadow-xl'
             }`}>
               {/* Retro chrome shine effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 animate-pulse opacity-60" />
-              
-              {/* Subtle neon border accent */}
-              <div className={`absolute inset-0 rounded-lg border ${
-                theme === 'theme-light' ? 'border-pink-400/30' : 'border-pink-400/50'
-              } animate-pulse`} />
             {(() => {
               const selectedSkill = category.skills[currentIndex];
               return (
