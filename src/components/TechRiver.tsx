@@ -45,9 +45,6 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
     { name: 'GitHub Copilot', icon: '🤖', logo: '/logos/github-copilot.svg', category: 'ai' },
     { name: 'ChatGPT', icon: '💬', logo: '/logos/chatgpt.svg', category: 'ai' },
     { name: 'Claude', icon: '🧠', logo: '/logos/claude.svg', category: 'ai' },
-    { name: 'Cursor', icon: '👆', logo: '/logos/cursor.svg', category: 'ai' },
-    { name: 'Perplexity', icon: '🔍', logo: '/logos/perplexity.svg', category: 'ai' },
-    { name: 'V0 Vercel', icon: '⚡', logo: '/logos/v0-vercel.svg', category: 'ai' },
   ];
 
   // Distribute techs across streams alternating to avoid adjacency
