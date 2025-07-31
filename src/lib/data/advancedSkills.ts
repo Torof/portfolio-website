@@ -680,36 +680,56 @@ export const stackOverflowProfile: StackOverflowProfile = {
   userId: '52251',
   displayName: 'Torof',
   profileImage: '/logos/ethereum_stackexchange_profile_pic.png',
-  reputation: 1285, // Update with current reputation
+  reputation: 836,
   badges: {
     gold: 0,
-    silver: 2,
-    bronze: 10
+    silver: 5,
+    bronze: 19
   },
-  topTags: ['solidity', 'ethereum', 'smart-contracts', 'web3'],
+  topTags: ['solidity', 'evm', 'nft', 'ethereum', 'smart-contracts'],
   profileUrl: 'https://ethereum.stackexchange.com/users/52251/torof'
 };
 
-// Manually selected best answers (you'll need to provide the specific ones you want to showcase)
+// Real featured answers from Stack Exchange profile
 export const featuredAnswers: StackOverflowAnswer[] = [
   {
     id: 'answer-1',
-    questionTitle: 'How to implement ERC-4626 vault with custom yield strategy?',
-    questionUrl: 'https://ethereum.stackexchange.com/questions/example1',
-    answerUrl: 'https://ethereum.stackexchange.com/questions/example1#answer1',
-    score: 15,
+    questionTitle: 'Any materials to study EVM?',
+    questionUrl: 'https://ethereum.stackexchange.com/questions/153250/any-materials-to-study-evm',
+    answerUrl: 'https://ethereum.stackexchange.com/questions/153250/any-materials-to-study-evm/153289#153289',
+    score: 2,
     isAccepted: true,
-    excerpt: 'To implement an ERC-4626 vault with custom yield strategy, you need to override the _invest and _divest functions...',
-    tags: ['solidity', 'erc-4626', 'defi', 'yield-farming']
+    excerpt: 'Learning the same thing at the moment, I\'ll be glad to share some amazing resources I found: EVM handbook, playground tools, and deep dive explanations...',
+    tags: ['evm']
   },
   {
     id: 'answer-2',
-    questionTitle: 'Gas optimization techniques for smart contracts',
-    questionUrl: 'https://ethereum.stackexchange.com/questions/example2',
-    answerUrl: 'https://ethereum.stackexchange.com/questions/example2#answer2',
-    score: 23,
+    questionTitle: 'Transfer Ownership of a Contract from one address to another problem',
+    questionUrl: 'https://ethereum.stackexchange.com/questions/153870/transfer-ownership-of-a-contract-from-one-adress-to-another-problem',
+    answerUrl: 'https://ethereum.stackexchange.com/questions/153870/transfer-ownership-of-a-contract-from-one-adress-to-another-problem/153872#153872',
+    score: 2,
     isAccepted: true,
-    excerpt: 'Several gas optimization techniques can significantly reduce transaction costs: 1. Use packed structs, 2. Minimize storage operations...',
-    tags: ['solidity', 'gas-optimization', 'ethereum', 'evm']
+    excerpt: 'Logically, according to the proper functioning of ERC721, if he gave you ownership then normally he cannot get the ownership back unless you willingly give it to him...',
+    tags: ['solidity', 'contract-development', 'transactions', 'nft']
+  },
+  {
+    id: 'answer-3',
+    questionTitle: 'Why can\'t I send eth to contract?',
+    questionUrl: 'https://ethereum.stackexchange.com/questions/154048/why-cant-i-send-eth-to-contract',
+    answerUrl: 'https://ethereum.stackexchange.com/questions/154048/why-cant-i-send-eth-to-contract/154050#154050',
+    score: 2,
+    isAccepted: true,
+    excerpt: 'If you want to send ether to a contract through a function you need to define this function as `payable` and simply forward ether with your transaction...',
+    tags: ['solidity']
+  },
+  {
+    id: 'answer-4',
+    questionTitle: 'Risk in using Singleton Call forwarding',
+    questionUrl: 'https://ethereum.stackexchange.com/questions/163258/risk-in-using-singleton-call-forwarding',
+    answerUrl: 'https://ethereum.stackexchange.com/questions/163258/risk-in-using-singleton-call-forwarding/163261#163261',
+    score: 2,
+    isAccepted: true,
+    excerpt: 'Access controls need to be implemented directly in the contracts themselves. If access controls are not in the contract, anyone can call the contract directly...',
+    tags: ['solidity', 'contract-invocation']
   }
 ];

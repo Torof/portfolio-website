@@ -19,18 +19,23 @@ const LiveStackExchangeCard = () => {
   useEffect(() => {
     const fetchLiveData = async () => {
       try {
+        console.log('Stack Exchange API Key status:', process.env.STACK_EXCHANGE_API_KEY ? 'Present (10k/day limit)' : 'Missing (300/day limit)');
+        
         const { profile: liveProfile, answers: liveAnswers } = await fetchCompleteStackExchangeData('52251');
         
         if (liveProfile) {
           setProfile(liveProfile);
           setIsLiveData(true);
+          console.log('Successfully fetched live Stack Exchange profile data');
         }
         
         if (liveAnswers && liveAnswers.length > 0) {
           setAnswers(liveAnswers.slice(0, 4)); // Show top 4 answers
+          console.log(`Successfully fetched ${liveAnswers.length} live Stack Exchange answers`);
         }
       } catch (error) {
         console.error('Failed to fetch live Stack Exchange data:', error);
+        console.log('Using fallback Stack Exchange data');
         // Keep using fallback data
       } finally {
         setIsLoading(false);
