@@ -9,6 +9,7 @@ import { AdvancedSkill } from '@/lib/types';
 import AnimatedTitle from '@/components/AnimatedTitle';
 import BlockchainNetwork from '@/components/BlockchainNetwork';
 import PremiumSkillSections from '@/components/PremiumSkillSections';
+import TechRiver from '@/components/TechRiver';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -466,6 +467,11 @@ export default function SkillsPage() {
           </div>
 
           <PremiumSkillSections categories={skillCategories} />
+        </div>
+
+        {/* Technology River Section */}
+        <div className="mb-20">
+          <TechRiver />
         </div>
       </div>
     </div>

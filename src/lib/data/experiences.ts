@@ -23,6 +23,25 @@ export const experiences: Experience[] = [
     website: "https://ledgity.finance/"
   },
   {
+    id: "alyra-jury",
+    company: "Alyra Blockchain School",
+    position: "Certification Jury Member",
+    startDate: "Jan 2023",
+    endDate: "Present",
+    description: "Regular jury member evaluating final projects for blockchain developer certification program (RS6515).",
+    achievements: [
+      "September 2023 - Finney Jury - POAP: https://collectors.poap.xyz/token/6970868",
+      "April 2024 - Lovelace Jury - POAP: https://collectors.poap.xyz/token/7112109",
+      "July 2024 - Turing Jury - POAP: https://collectors.poap.xyz/token/7191799",
+      "April 2025 - Galilée Jury - POAP: https://collectors.poap.xyz/token/7390138",
+      "January 2025 - Hamilton Jury - POAP: https://collectors.poap.xyz/token/7390139"
+    ],
+    skills: ["Technical Assessment", "Blockchain Education", "Smart Contract Review", "Mentoring", "Ethereum"],
+    logo: getAssetUrl('/logos/alyra.png'),
+    type: "work",
+    website: "https://www.alyra.fr/"
+  },
+  {
     id: "freelance",
     company: "Freelance",
     position: "Freelance Smart Contract Developer",

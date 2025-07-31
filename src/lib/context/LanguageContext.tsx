@@ -308,6 +308,14 @@ const translations = {
     'exp.bitcoin-vietnam.achievement.3': 'Assisted in smart contract development using Solidity to automate processes and enhance security.',
     'exp.bitcoin-vietnam.achievement.4': 'Maintained the front-end of the website',
 
+    'exp.alyra-jury.position': 'Technical Jury',
+    'exp.alyra-jury.description': 'Evaluating and certifying the next generation of blockchain developers by assessing their final DApp projects, ensuring they meet industry standards for smart contract security, architecture, and innovation.',
+    'exp.alyra-jury.achievement.1': 'September 2023 - Finney Jury - POAP: https://collectors.poap.xyz/token/6970868',
+    'exp.alyra-jury.achievement.2': 'April 2024 - Lovelace Jury - POAP: https://collectors.poap.xyz/token/7112109',
+    'exp.alyra-jury.achievement.3': 'July 2024 - Turing Jury - POAP: https://collectors.poap.xyz/token/7191799',
+    'exp.alyra-jury.achievement.4': 'April 2025 - Galilée Jury - POAP: https://collectors.poap.xyz/token/7390138',
+    'exp.alyra-jury.achievement.5': 'January 2025 - Hamilton Jury - POAP: https://collectors.poap.xyz/token/7390139',
+
     'exp.chiliz-hackathon.position': 'Hackathon Participant',
     'exp.chiliz-hackathon.description': 'Built "Chiliz Got Talent" - an innovative platform for sports talent discovery on Chiliz blockchain.',
     'exp.chiliz-hackathon.achievement.1': 'Developed full-stack dApp with React TypeScript frontend',
@@ -629,6 +637,14 @@ const translations = {
     'exp.bitcoin-vietnam.achievement.2': 'Collaboré avec une équipe pour développer des applications décentralisées (dApps) utilisant la blockchain Ethereum.',
     'exp.bitcoin-vietnam.achievement.3': 'Assisté dans le développement de contrats intelligents utilisant Solidity pour automatiser les processus et améliorer la sécurité.',
     'exp.bitcoin-vietnam.achievement.4': 'Maintenu le front-end du site web',
+
+    'exp.alyra-jury.position': 'Jury Technique',
+    'exp.alyra-jury.description': 'Évaluation et certification de la prochaine génération de développeurs blockchain en évaluant leurs projets DApp finaux, s\'assurant qu\'ils respectent les standards de l\'industrie pour la sécurité, l\'architecture et l\'innovation des contrats intelligents.',
+    'exp.alyra-jury.achievement.1': 'Septembre 2023 - Jury Finney - POAP : https://collectors.poap.xyz/token/6970868',
+    'exp.alyra-jury.achievement.2': 'Avril 2024 - Jury Lovelace - POAP : https://collectors.poap.xyz/token/7112109',
+    'exp.alyra-jury.achievement.3': 'Juillet 2024 - Jury Turing - POAP : https://collectors.poap.xyz/token/7191799',
+    'exp.alyra-jury.achievement.4': 'Avril 2025 - Jury Galilée - POAP : https://collectors.poap.xyz/token/7390138',
+    'exp.alyra-jury.achievement.5': 'Janvier 2025 - Jury Hamilton - POAP : https://collectors.poap.xyz/token/7390139',
 
     'exp.chiliz-hackathon.position': 'Participant Hackathon',
     'exp.chiliz-hackathon.description': 'Construit Chiliz Got Talent - une plateforme innovante pour la découverte de talents sportifs sur la blockchain Chiliz.',

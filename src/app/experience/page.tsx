@@ -192,7 +192,24 @@ export default function ExperiencePage() {
                                   <span className="text-white text-xs font-bold">{idx + 1}</span>
                                 </div>
                                 <span className="text-sm leading-relaxed break-words light-text font-medium opacity-95 group-hover:opacity-100 transition-opacity duration-200">
-                                  {t(`exp.${exp.id}.achievement.${idx + 1}`)}
+                                  {exp.id === 'alyra-jury' && achievement.includes('https://') ? (
+                                    <span>
+                                      {achievement.split(' - POAP: ')[0]} - 
+                                      <a 
+                                        href={achievement.split('POAP: ')[1]} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="text-[var(--primary-400)] hover:text-[var(--primary-500)] underline ml-1"
+                                        onClick={(e) => e.stopPropagation()}
+                                      >
+                                        View POAP
+                                      </a>
+                                    </span>
+                                  ) : (
+                                    t(`exp.${exp.id}.achievement.${idx + 1}`) !== `exp.${exp.id}.achievement.${idx + 1}` 
+                                      ? t(`exp.${exp.id}.achievement.${idx + 1}`)
+                                      : achievement
+                                  )}
                                 </span>
                               </li>
                             ))}

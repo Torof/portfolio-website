@@ -1067,73 +1067,176 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
   );
 };
 
-// Security - High-End Surveillance Theme
+// Security - Cybersecurity Fortress & Hacking Simulation Theme
 const SecuritySection = ({ category }: { category: SkillCategory }) => {
   const { theme } = useTheme();
+  const [scanningActive, setScanningActive] = useState(false);
+  const [simulationRunning, setSimulationRunning] = useState(false);
+
+  // Trigger security scan simulation
+  useEffect(() => {
+    const scanInterval = setInterval(() => {
+      setScanningActive(true);
+      setTimeout(() => setScanningActive(false), 3000);
+    }, 8000);
+
+    const simInterval = setInterval(() => {
+      setSimulationRunning(true);
+      setTimeout(() => setSimulationRunning(false), 5000);
+    }, 12000);
+
+    return () => {
+      clearInterval(scanInterval);
+      clearInterval(simInterval);
+    };
+  }, []);
+
+  const hackingAttempts = [
+    { ip: "192.168.1.100", type: "SQL_INJECTION", blocked: true },
+    { ip: "10.0.0.42", type: "XSS_ATTACK", blocked: true },
+    { ip: "172.16.0.15", type: "BRUTE_FORCE", blocked: true },
+    { ip: "203.0.113.5", type: "DDOS_ATTEMPT", blocked: true },
+  ];
 
   return (
     <section className="mb-32">
       <div className={`relative p-12 rounded-3xl border backdrop-blur-xl overflow-hidden ${
         theme === 'theme-light'
-          ? 'bg-gradient-to-br from-slate-50/80 via-red-50/40 to-orange-50/30 border-slate-200/30 shadow-2xl shadow-red-500/5'
-          : 'bg-gradient-to-br from-slate-900/90 via-red-900/10 to-orange-900/10 border-slate-700/50 shadow-2xl shadow-red-500/5'
+          ? 'bg-gradient-to-br from-slate-50/90 via-red-50/30 to-amber-50/20 border-red-200/40 shadow-2xl shadow-red-500/10'
+          : 'bg-gradient-to-br from-slate-900/95 via-red-950/20 to-amber-950/10 border-red-900/50 shadow-2xl shadow-red-500/20'
       }`}>
         
-        {/* Surveillance grid pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="grid grid-cols-10 grid-rows-6 gap-2 h-full">
-            {Array.from({ length: 60 }).map((_, i) => (
+        {/* Cybersecurity Matrix Background */}
+        <div className="absolute inset-0 opacity-10 overflow-hidden">
+          <div className="grid grid-cols-16 grid-rows-10 gap-px h-full w-full">
+            {Array.from({ length: 160 }).map((_, i) => (
               <motion.div
                 key={i}
                 className={`border ${
-                  theme === 'theme-light' ? 'border-slate-300' : 'border-slate-700'
-                } ${
-                  Math.random() > 0.9 ? 'bg-red-500/20' : ''
+                  theme === 'theme-light' ? 'border-red-300/30' : 'border-red-700/30'
                 }`}
                 animate={{
-                  opacity: [0.3, 1, 0.3],
-                  backgroundColor: Math.random() > 0.95 ? [
+                  backgroundColor: Math.random() > 0.97 ? [
                     "rgba(239, 68, 68, 0.1)",
-                    "rgba(239, 68, 68, 0.3)",
+                    "rgba(34, 197, 94, 0.3)",
                     "rgba(239, 68, 68, 0.1)"
-                  ] : undefined
+                  ] : scanningActive && Math.random() > 0.9 ? [
+                    "rgba(34, 197, 94, 0.2)",
+                    "rgba(34, 197, 94, 0.6)",
+                    "rgba(34, 197, 94, 0.2)"
+                  ] : undefined,
                 }}
                 transition={{
-                  duration: 2 + Math.random() * 3,
+                  duration: 1.5 + Math.random() * 2,
                   repeat: Infinity,
-                  delay: Math.random() * 4,
+                  delay: Math.random() * 3,
                 }}
               />
             ))}
           </div>
         </div>
 
+        {/* Floating Security Alerts */}
+        <AnimatePresence>
+          {simulationRunning && (
+            <div className="absolute top-6 right-6 z-30">
+              <motion.div
+                className={`p-4 rounded-lg border backdrop-blur-sm ${
+                  theme === 'theme-light'
+                    ? 'bg-red-100/90 border-red-300 text-red-800'
+                    : 'bg-red-900/80 border-red-700 text-red-200'
+                }`}
+                initial={{ opacity: 0, x: 50, scale: 0.9 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: 50, scale: 0.9 }}
+              >
+                <div className="text-xs font-mono space-y-1">
+                  <div className="font-bold">🚨 THREAT DETECTED</div>
+                  {hackingAttempts.slice(0, 2).map((attempt, i) => (
+                    <motion.div
+                      key={i}
+                      className="text-xs opacity-80"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: i * 0.5 }}
+                    >
+                      {attempt.ip} - {attempt.type} - BLOCKED ✅
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
         <div className="relative z-10">
           <div className="text-center mb-16">
             <motion.div 
-              className="inline-block mb-6"
+              className="inline-block mb-6 relative"
               whileHover={{ scale: 1.1 }}
-              animate={{
-                rotateY: [0, 5, 0, -5, 0],
-              }}
-              transition={{ duration: 4, repeat: Infinity }}
             >
-              <div className={`p-6 rounded-2xl ${
+              {/* Fortress Shield Icon */}
+              <div className={`p-8 rounded-2xl relative ${
                 theme === 'theme-light' 
-                  ? 'bg-gradient-to-br from-slate-700 to-red-600 shadow-xl shadow-red-500/25' 
-                  : 'bg-gradient-to-br from-slate-800 to-red-700 shadow-xl shadow-red-500/25'
+                  ? 'bg-gradient-to-br from-red-600 to-amber-600 shadow-xl shadow-red-500/30' 
+                  : 'bg-gradient-to-br from-red-700 to-amber-700 shadow-xl shadow-red-500/40'
               }`}>
-                <span className="text-6xl text-white">🛡️</span>
+                <motion.div
+                  animate={{
+                    rotateY: scanningActive ? [0, 360] : 0,
+                    scale: scanningActive ? [1, 1.1, 1] : 1,
+                  }}
+                  transition={{ duration: 3, ease: "easeInOut" }}
+                >
+                  <span className="text-6xl text-white">🏰</span>
+                </motion.div>
+                
+                {/* Scanning Beam Effect */}
+                <AnimatePresence>
+                  {scanningActive && (
+                    <motion.div
+                      className="absolute inset-0 rounded-2xl"
+                      initial={{ opacity: 0 }}
+                      animate={{ 
+                        opacity: [0, 0.8, 0],
+                        background: [
+                          "conic-gradient(from 0deg, transparent, rgba(34, 197, 94, 0.3), transparent)",
+                          "conic-gradient(from 180deg, transparent, rgba(34, 197, 94, 0.3), transparent)",
+                          "conic-gradient(from 360deg, transparent, rgba(34, 197, 94, 0.3), transparent)"
+                        ]
+                      }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 3 }}
+                    />
+                  )}
+                </AnimatePresence>
               </div>
             </motion.div>
+            
             <h3 className={`text-4xl font-light mb-4 ${
               theme === 'theme-light' ? 'text-slate-800' : 'text-slate-100'
             }`}>
-              Security <span className="font-bold bg-gradient-to-r from-slate-700 to-red-600 bg-clip-text text-transparent">& Auditing</span>
+              Cybersecurity <span className="font-bold bg-gradient-to-r from-red-600 to-amber-600 bg-clip-text text-transparent">Fortress</span>
             </h3>
             <p className="text-xl light-text opacity-70 max-w-3xl mx-auto font-light leading-relaxed">
-              Military-grade security protocols and comprehensive vulnerability assessment
+              Advanced penetration testing, smart contract auditing, and real-time threat detection
             </p>
+
+            {/* Security Status Board */}
+            <div className={`mt-8 inline-flex items-center px-6 py-3 rounded-full ${
+              theme === 'theme-light'
+                ? 'bg-green-100 text-green-800 border border-green-200'
+                : 'bg-green-900/30 text-green-300 border border-green-800'
+            }`}>
+              <motion.div 
+                className="w-3 h-3 bg-green-500 rounded-full mr-3"
+                animate={{ scale: [1, 1.3, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              <span className="font-mono text-sm font-medium">
+                DEFENSE SYSTEMS OPERATIONAL • {category.skills.reduce((acc, s) => acc + s.level * 47, 0)}+ VULNERABILITIES PATCHED
+              </span>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -1142,79 +1245,116 @@ const SecuritySection = ({ category }: { category: SkillCategory }) => {
                 key={skill.id}
                 className={`group relative p-8 rounded-2xl backdrop-blur-xl border-2 transition-all duration-500 overflow-hidden ${
                   theme === 'theme-light'
-                    ? 'bg-gradient-to-br from-white/90 to-slate-50/60 border-slate-200/50 hover:border-red-300/50 hover:shadow-2xl hover:shadow-red-500/10'
-                    : 'bg-gradient-to-br from-slate-800/90 to-slate-900/60 border-slate-700/50 hover:border-red-500/50 hover:shadow-2xl hover:shadow-red-500/10'
+                    ? 'bg-gradient-to-br from-white/95 to-red-50/70 border-red-200/60 hover:border-red-400/60 hover:shadow-2xl hover:shadow-red-500/20'
+                    : 'bg-gradient-to-br from-slate-800/95 to-red-950/40 border-red-800/60 hover:border-red-600/60 hover:shadow-2xl hover:shadow-red-500/20'
                 }`}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.15, duration: 0.6, type: "spring" }}
                 whileHover={{ y: -8, scale: 1.02 }}
               >
-                {/* Security scan line effect */}
+                {/* Penetration Testing Scanner */}
                 <motion.div
-                  className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-transparent via-red-500 to-transparent opacity-0 group-hover:opacity-100"
+                  className="absolute left-0 top-0 w-2 h-full bg-gradient-to-b from-transparent via-green-500 to-transparent opacity-0 group-hover:opacity-100"
                   animate={{
-                    y: ["-100%", "100%"],
+                    y: ["-100%", "100%", "-100%"],
                   }}
                   transition={{
-                    duration: 1.5,
+                    duration: 2,
                     repeat: Infinity,
                     repeatType: "loop",
                   }}
                 />
 
+                {/* Honeypot Detection Pattern */}
+                <motion.div
+                  className="absolute top-2 right-2 w-20 h-20 opacity-5 group-hover:opacity-20"
+                  animate={{
+                    rotate: 360,
+                  }}
+                  transition={{
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                >
+                  <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="10,5"/>
+                    <circle cx="50" cy="50" r="25" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="5,3"/>
+                    <circle cx="50" cy="50" r="10" fill="currentColor" opacity="0.5"/>
+                  </svg>
+                </motion.div>
+
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex items-center">
                     <motion.div 
-                      className={`p-4 rounded-xl mr-4 ${
+                      className={`p-4 rounded-xl mr-4 relative ${
                         theme === 'theme-light' 
-                          ? 'bg-gradient-to-br from-slate-100 to-red-100' 
-                          : 'bg-gradient-to-br from-slate-700 to-red-900/50'
+                          ? 'bg-gradient-to-br from-red-100 to-amber-100' 
+                          : 'bg-gradient-to-br from-red-900/50 to-amber-900/50'
                       }`}
                       whileHover={{ rotateX: 15, rotateY: 15 }}
                     >
-                      <span className="text-2xl">{skill.icon}</span>
+                      <span className="text-2xl relative z-10">{skill.icon}</span>
+                      {/* Security Badge Overlay */}
+                      <motion.div
+                        className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full flex items-center justify-center"
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        <span className="text-xs text-white">✓</span>
+                      </motion.div>
                     </motion.div>
                     <div>
-                      <h4 className="text-xl font-semibold light-text mb-2 group-hover:text-blue-600 transition-colors">
+                      <h4 className="text-xl font-semibold light-text mb-2 group-hover:text-green-600 transition-colors">
                         {skill.name}
                       </h4>
                       <div className="flex items-center space-x-3">
-                        <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          skill.level >= 4 ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-white'
+                        <div className={`px-3 py-1 rounded-full text-xs font-medium font-mono ${
+                          skill.level >= 4 ? 'bg-green-500 text-white' : 'bg-amber-500 text-white'
                         } shadow-sm`}>
-                          {skill.level >= 4 ? 'SECURE' : 'MONITORING'}
+                          {skill.level >= 4 ? 'FORTIFIED' : 'SECURING'}
                         </div>
                         <div className={`px-3 py-1 rounded-full text-xs font-medium ${
                           theme === 'theme-light' 
                             ? 'bg-slate-100 text-slate-800' 
                             : 'bg-slate-800 text-slate-300'
                         }`}>
-                          Level {skill.level}
+                          Level {skill.level} Security
                         </div>
                       </div>
                     </div>
                   </div>
                   
-                  {/* Threat assessment display */}
+                  {/* Real-time Threat Monitor */}
                   <div className="text-right">
                     <motion.div 
-                      className="text-xs font-medium text-emerald-500 mb-2"
+                      className="text-xs font-medium font-mono text-green-500 mb-2"
                       animate={{ opacity: [0.7, 1, 0.7] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
-                      THREAT LEVEL: LOW
+                      PERIMETER: SECURE
                     </motion.div>
                     <div className="flex justify-end space-x-1">
                       {[...Array(5)].map((_, i) => (
                         <motion.div 
                           key={i}
                           className={`w-2 h-2 rounded-full ${
-                            i < skill.level ? 'bg-emerald-500' : 'bg-gray-300'
+                            i < skill.level ? 'bg-green-500' : 'bg-red-300'
                           }`}
                           initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: index * 0.1 + i * 0.1 }}
+                          animate={{ 
+                            scale: 1,
+                            boxShadow: i < skill.level ? [
+                              "0 0 0 rgba(34, 197, 94, 0)",
+                              "0 0 8px rgba(34, 197, 94, 0.6)",
+                              "0 0 0 rgba(34, 197, 94, 0)"
+                            ] : undefined
+                          }}
+                          transition={{ 
+                            delay: index * 0.1 + i * 0.1,
+                            boxShadow: { duration: 2, repeat: Infinity }
+                          }}
                         />
                       ))}
                     </div>
@@ -1225,27 +1365,55 @@ const SecuritySection = ({ category }: { category: SkillCategory }) => {
                   {skill.description}
                 </p>
 
-                {/* Security metrics dashboard */}
-                <div className="grid grid-cols-2 gap-6">
+                {/* Advanced Security Metrics */}
+                <div className="grid grid-cols-3 gap-4">
                   <div className="text-center">
                     <motion.div 
-                      className="text-2xl font-bold text-emerald-500 mb-1"
+                      className="text-xl font-bold text-green-500 mb-1"
                       animate={{ scale: [1, 1.05, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
-                      {skill.level * 50}+
+                      {skill.level * 89}+
                     </motion.div>
-                    <div className="text-xs light-text opacity-50 uppercase tracking-wider">Audits Complete</div>
+                    <div className="text-xs light-text opacity-50 uppercase tracking-wider font-mono">Penetration Tests</div>
                   </div>
                   <div className="text-center">
                     <motion.div 
-                      className="text-2xl font-bold text-red-500 mb-1"
+                      className="text-xl font-bold text-blue-500 mb-1"
                       animate={{ scale: [1, 1.05, 1] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
                     >
-                      {Math.max(0, 5 - skill.level)}
+                      {skill.level * 156}+
                     </motion.div>
-                    <div className="text-xs light-text opacity-50 uppercase tracking-wider">Critical Issues</div>
+                    <div className="text-xs light-text opacity-50 uppercase tracking-wider font-mono">Vulnerabilities Fixed</div>
+                  </div>
+                  <div className="text-center">
+                    <motion.div 
+                      className="text-xl font-bold text-amber-500 mb-1"
+                      animate={{ scale: [1, 1.05, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+                    >
+                      {Math.max(0, 3 - skill.level)}
+                    </motion.div>
+                    <div className="text-xs light-text opacity-50 uppercase tracking-wider font-mono">Critical Threats</div>
+                  </div>
+                </div>
+
+                {/* Honeypot Attack Simulation */}
+                <div className={`mt-4 p-3 rounded-lg font-mono text-xs ${
+                  theme === 'theme-light'
+                    ? 'bg-slate-100 text-slate-700'
+                    : 'bg-slate-800 text-green-400'
+                }`}>
+                  <div className="flex justify-between items-center">
+                    <span>HONEYPOT STATUS:</span>
+                    <motion.span
+                      animate={{ opacity: [0.5, 1, 0.5] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                      className="text-green-500"
+                    >
+                      ACTIVE • {Math.floor(Math.random() * 50) + 10} ATTEMPTS BLOCKED
+                    </motion.span>
                   </div>
                 </div>
               </motion.div>
@@ -1257,103 +1425,318 @@ const SecuritySection = ({ category }: { category: SkillCategory }) => {
   );
 };
 
-// Development Tools - Modern IDE Theme
+// Development Tools - DevOps Pipeline & Workflow Visualization
 const DevelopmentSection = ({ category }: { category: SkillCategory }) => {
   const { theme } = useTheme();
-  const [activeTab, setActiveTab] = useState('all');
+  const [activeStage, setActiveStage] = useState(0);
+  const [pipelineRunning, setPipelineRunning] = useState(false);
+  const [buildProgress, setBuildProgress] = useState(0);
 
-  const toolCategories = {
-    all: category.skills,
-    testing: category.skills.filter(s => s.subcategory === 'Testing'),
-    deployment: category.skills.filter(s => s.subcategory === 'Deployment'),
-    integration: category.skills.filter(s => s.subcategory === 'Frontend Integration'),
-    storage: category.skills.filter(s => s.subcategory === 'Storage' || s.subcategory === 'Storage Services'),
-  };
+  // Pipeline stages
+  const pipelineStages = [
+    { 
+      name: 'Development', 
+      icon: '💻', 
+      color: 'blue',
+      tools: category.skills.filter(s => s.subcategory === 'Frontend Integration' || s.subcategory === 'Storage')
+    },
+    { 
+      name: 'Testing', 
+      icon: '🧪', 
+      color: 'green',
+      tools: category.skills.filter(s => s.subcategory === 'Testing')
+    },
+    { 
+      name: 'Build', 
+      icon: '🔨', 
+      color: 'orange',
+      tools: category.skills.filter(s => s.subcategory === 'Storage Services')
+    },
+    { 
+      name: 'Deploy', 
+      icon: '🚀', 
+      color: 'purple',
+      tools: category.skills.filter(s => s.subcategory === 'Deployment')
+    }
+  ];
+
+  // Auto-progress pipeline
+  useEffect(() => {
+    const progressInterval = setInterval(() => {
+      setActiveStage(prev => (prev + 1) % pipelineStages.length);
+    }, 4000);
+
+    const buildInterval = setInterval(() => {
+      setPipelineRunning(true);
+      setBuildProgress(0);
+      
+      const buildTimer = setInterval(() => {
+        setBuildProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(buildTimer);
+            setTimeout(() => setPipelineRunning(false), 1000);
+            return 100;
+          }
+          return prev + Math.random() * 15;
+        });
+      }, 200);
+    }, 15000);
+
+    return () => {
+      clearInterval(progressInterval);
+      clearInterval(buildInterval);
+    };
+  }, []);
 
   return (
     <section className="mb-32">
       <div className={`relative p-12 rounded-3xl border backdrop-blur-xl overflow-hidden ${
         theme === 'theme-light'
-          ? 'bg-gradient-to-br from-slate-50/80 via-blue-50/40 to-indigo-50/30 border-slate-200/30 shadow-2xl shadow-blue-500/5'
-          : 'bg-gradient-to-br from-slate-900/90 via-blue-900/10 to-indigo-900/10 border-slate-700/50 shadow-2xl shadow-blue-500/5'
+          ? 'bg-gradient-to-br from-slate-50/90 via-blue-50/30 to-purple-50/20 border-blue-200/40 shadow-2xl shadow-blue-500/10'
+          : 'bg-gradient-to-br from-slate-900/95 via-blue-950/20 to-purple-950/10 border-blue-900/50 shadow-2xl shadow-blue-500/20'
       }`}>
         
-        {/* Code editor background */}
-        <div className="absolute inset-0 opacity-5 font-mono text-xs overflow-hidden p-4">
-          <div className="whitespace-pre-wrap leading-6">
-            <span className="text-purple-500">import</span> <span className="text-blue-500">{'{ useState, useEffect }'}</span> <span className="text-purple-500">from</span> <span className="text-green-500">&apos;react&apos;</span><br/>
-            <span className="text-purple-500">import</span> <span className="text-blue-500">ethers</span> <span className="text-purple-500">from</span> <span className="text-green-500">&apos;ethers&apos;</span><br/><br/>
-            <span className="text-blue-500">function</span> <span className="text-yellow-500">useContract</span>() {'{'}<br/>
-            &nbsp;&nbsp;<span className="text-purple-500">const</span> [<span className="text-blue-500">contract</span>, <span className="text-blue-500">setContract</span>] = <span className="text-yellow-500">useState</span>(<span className="text-orange-500">null</span>)<br/>
-            &nbsp;&nbsp;<span className="text-purple-500">return</span> <span className="text-blue-500">contract</span><br/>
-            {'}'}
-          </div>
+        {/* Circuit Board Background */}
+        <div className="absolute inset-0 opacity-5 overflow-hidden">
+          <svg className="w-full h-full" viewBox="0 0 400 300">
+            {/* Horizontal lines */}
+            {Array.from({ length: 12 }).map((_, i) => (
+              <motion.line
+                key={`h-${i}`}
+                x1="0"
+                y1={i * 25}
+                x2="400"
+                y2={i * 25}
+                stroke="currentColor"
+                strokeWidth="0.5"
+                animate={{
+                  opacity: [0.3, 0.8, 0.3],
+                  strokeDasharray: ["5,5", "10,2", "5,5"]
+                }}
+                transition={{
+                  duration: 3 + Math.random() * 2,
+                  repeat: Infinity,
+                  delay: Math.random() * 2
+                }}
+              />
+            ))}
+            {/* Vertical lines */}
+            {Array.from({ length: 16 }).map((_, i) => (
+              <motion.line
+                key={`v-${i}`}
+                x1={i * 25}
+                y1="0"
+                x2={i * 25}
+                y2="300"
+                stroke="currentColor"
+                strokeWidth="0.5"
+                animate={{
+                  opacity: [0.2, 0.6, 0.2],
+                }}
+                transition={{
+                  duration: 4 + Math.random() * 3,
+                  repeat: Infinity,
+                  delay: Math.random() * 3
+                }}
+              />
+            ))}
+            {/* Connection nodes */}
+            {Array.from({ length: 20 }).map((_, i) => (
+              <motion.circle
+                key={`node-${i}`}
+                cx={Math.random() * 400}
+                cy={Math.random() * 300}
+                r="2"
+                fill="currentColor"
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.4, 0.9, 0.4]
+                }}
+                transition={{
+                  duration: 2 + Math.random() * 3,
+                  repeat: Infinity,
+                  delay: Math.random() * 4
+                }}
+              />
+            ))}
+          </svg>
         </div>
+
+        {/* Pipeline Status Display */}
+        <AnimatePresence>
+          {pipelineRunning && (
+            <div className="absolute top-6 right-6 z-30">
+              <motion.div
+                className={`p-4 rounded-lg border backdrop-blur-sm ${
+                  theme === 'theme-light'
+                    ? 'bg-blue-100/90 border-blue-300 text-blue-800'
+                    : 'bg-blue-900/80 border-blue-700 text-blue-200'
+                }`}
+                initial={{ opacity: 0, x: 50, scale: 0.9 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: 50, scale: 0.9 }}
+              >
+                <div className="text-xs font-mono space-y-2">
+                  <div className="font-bold">🔄 PIPELINE RUNNING</div>
+                  <div className="w-40 bg-gray-200 rounded-full h-2">
+                    <motion.div
+                      className="bg-blue-600 h-2 rounded-full"
+                      animate={{ width: `${buildProgress}%` }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </div>
+                  <div className="text-xs">Building... {Math.floor(buildProgress)}%</div>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
 
         <div className="relative z-10">
           <div className="text-center mb-16">
             <motion.div 
-              className="inline-block mb-6"
+              className="inline-block mb-6 relative"
               whileHover={{ scale: 1.1 }}
-              animate={{
-                rotateZ: [0, 1, 0, -1, 0],
-              }}
-              transition={{ duration: 6, repeat: Infinity }}
             >
-              <div className={`p-6 rounded-2xl ${
+              {/* DevOps Pipeline Icon */}
+              <div className={`p-8 rounded-2xl relative ${
                 theme === 'theme-light' 
-                  ? 'bg-gradient-to-br from-slate-700 to-blue-600 shadow-xl shadow-blue-500/25' 
-                  : 'bg-gradient-to-br from-slate-800 to-blue-700 shadow-xl shadow-blue-500/25'
+                  ? 'bg-gradient-to-br from-blue-600 to-purple-600 shadow-xl shadow-blue-500/30' 
+                  : 'bg-gradient-to-br from-blue-700 to-purple-700 shadow-xl shadow-blue-500/40'
               }`}>
-                <span className="text-6xl text-white">⚙️</span>
+                <motion.div
+                  animate={{
+                    rotateX: pipelineRunning ? [0, 360] : 0,
+                    scale: pipelineRunning ? [1, 1.1, 1] : 1,
+                  }}
+                  transition={{ duration: 2, ease: "easeInOut" }}
+                >
+                  <span className="text-6xl text-white">⚡</span>
+                </motion.div>
+                
+                {/* Data Flow Animation */}
+                <AnimatePresence>
+                  {pipelineRunning && (
+                    <motion.div
+                      className="absolute inset-0 rounded-2xl"
+                      initial={{ opacity: 0 }}
+                      animate={{ 
+                        opacity: [0, 0.8, 0],
+                        background: [
+                          "conic-gradient(from 0deg, transparent, rgba(59, 130, 246, 0.3), transparent)",
+                          "conic-gradient(from 180deg, transparent, rgba(147, 51, 234, 0.3), transparent)",
+                          "conic-gradient(from 360deg, transparent, rgba(59, 130, 246, 0.3), transparent)"
+                        ]
+                      }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 2 }}
+                    />
+                  )}
+                </AnimatePresence>
               </div>
             </motion.div>
+            
             <h3 className={`text-4xl font-light mb-4 ${
               theme === 'theme-light' ? 'text-slate-800' : 'text-slate-100'
             }`}>
-              Development <span className="font-bold bg-gradient-to-r from-slate-700 to-blue-600 bg-clip-text text-transparent">Tools</span>
+              DevOps <span className="font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Pipeline</span>
             </h3>
             <p className="text-xl light-text opacity-70 max-w-3xl mx-auto font-light leading-relaxed">
-              Professional-grade development environment and cutting-edge toolchain
+              Automated CI/CD workflows, containerization, and infrastructure as code
             </p>
+
+            {/* Pipeline Status */}
+            <div className={`mt-8 inline-flex items-center px-6 py-3 rounded-full ${
+              theme === 'theme-light'
+                ? 'bg-green-100 text-green-800 border border-green-200'
+                : 'bg-green-900/30 text-green-300 border border-green-800'
+            }`}>
+              <motion.div 
+                className="w-3 h-3 bg-green-500 rounded-full mr-3"
+                animate={{ scale: [1, 1.3, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              <span className="font-mono text-sm font-medium">
+                ALL SYSTEMS OPERATIONAL • {category.skills.reduce((acc, s) => acc + s.level * 127, 0)}+ SUCCESSFUL DEPLOYMENTS
+              </span>
+            </div>
           </div>
 
-          {/* Elegant tab navigation */}
-          <div className="flex justify-center mb-12">
-            <div className={`inline-flex rounded-2xl p-2 backdrop-blur-xl ${
-              theme === 'theme-light' 
-                ? 'bg-white/60 border border-white/30' 
-                : 'bg-slate-800/60 border border-slate-700/30'
-            }`}>
-              {Object.keys(toolCategories).map((tab) => (
-                <motion.button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
-                    activeTab === tab
-                      ? theme === 'theme-light'
-                        ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/25'
-                        : 'bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg shadow-blue-500/25'
-                      : 'light-text opacity-70 hover:opacity-100'
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                </motion.button>
+          {/* Pipeline Stages Visualization */}
+          <div className="mb-12">
+            <div className="flex justify-center items-center space-x-8 mb-8">
+              {pipelineStages.map((stage, index) => (
+                <div key={stage.name} className="flex items-center">
+                  <motion.div
+                    className={`relative p-6 rounded-2xl border backdrop-blur-sm cursor-pointer ${
+                      activeStage === index
+                        ? theme === 'theme-light'
+                          ? 'bg-white border-blue-400 shadow-xl shadow-blue-500/20'
+                          : 'bg-slate-800 border-blue-500 shadow-xl shadow-blue-500/20'
+                        : theme === 'theme-light'
+                          ? 'bg-white/50 border-gray-200 hover:border-gray-300'
+                          : 'bg-slate-800/50 border-slate-600 hover:border-slate-500'
+                    } transition-all duration-300`}
+                    whileHover={{ scale: 1.05, y: -4 }}
+                    animate={{
+                      scale: activeStage === index ? 1.1 : 1,
+                      y: activeStage === index ? -8 : 0
+                    }}
+                    onClick={() => setActiveStage(index)}
+                  >
+                    <div className="text-center">
+                      <div className="text-3xl mb-2">{stage.icon}</div>
+                      <div className={`text-sm font-medium ${
+                        activeStage === index 
+                          ? 'text-blue-600' 
+                          : theme === 'theme-light' ? 'text-slate-700' : 'text-slate-300'
+                      }`}>
+                        {stage.name}
+                      </div>
+                    </div>
+                    
+                    {/* Active stage indicator */}
+                    {activeStage === index && (
+                      <motion.div
+                        className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-500 rounded-full"
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ duration: 1, repeat: Infinity }}
+                      />
+                    )}
+                  </motion.div>
+                  
+                  {/* Pipeline connection arrow */}
+                  {index < pipelineStages.length - 1 && (
+                    <motion.div
+                      className={`mx-4 ${
+                        theme === 'theme-light' ? 'text-slate-400' : 'text-slate-600'
+                      }`}
+                      animate={{
+                        x: activeStage === index ? [0, 8, 0] : 0,
+                        opacity: activeStage === index ? [0.5, 1, 0.5] : 0.3
+                      }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                      </svg>
+                    </motion.div>
+                  )}
+                </div>
               ))}
             </div>
           </div>
 
+          {/* Tools for Active Stage */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <AnimatePresence mode="wait">
-              {toolCategories[activeTab as keyof typeof toolCategories].map((skill, index) => (
+              {pipelineStages[activeStage].tools.map((skill, index) => (
                 <motion.div
-                  key={`${activeTab}-${skill.id}`}
+                  key={`${activeStage}-${skill.id}`}
                   className={`group relative p-6 rounded-2xl backdrop-blur-xl border transition-all duration-500 overflow-hidden ${
                     theme === 'theme-light'
-                      ? 'bg-gradient-to-br from-white/80 to-slate-50/50 border-slate-200/30 hover:border-blue-300/50 hover:shadow-xl hover:shadow-blue-500/10'
-                      : 'bg-gradient-to-br from-slate-800/80 to-slate-900/50 border-slate-700/30 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/10'
+                      ? 'bg-gradient-to-br from-white/90 to-blue-50/60 border-blue-200/50 hover:border-blue-400/60 hover:shadow-xl hover:shadow-blue-500/15'
+                      : 'bg-gradient-to-br from-slate-800/90 to-blue-950/40 border-blue-800/50 hover:border-blue-600/60 hover:shadow-xl hover:shadow-blue-500/15'
                   }`}
                   initial={{ opacity: 0, y: 20, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -1361,10 +1744,23 @@ const DevelopmentSection = ({ category }: { category: SkillCategory }) => {
                   transition={{ delay: index * 0.1, duration: 0.4, type: "spring" }}
                   whileHover={{ y: -8, scale: 1.02 }}
                 >
+                  {/* Pipeline flow indicator */}
+                  <motion.div
+                    className="absolute left-0 top-0 w-2 h-full bg-gradient-to-b from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100"
+                    animate={{
+                      y: ["-100%", "100%", "-100%"],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      repeatType: "loop",
+                    }}
+                  />
+
                   {/* Status indicator */}
                   <div className="absolute top-4 right-4">
                     <motion.div 
-                      className="w-3 h-3 rounded-full bg-emerald-500"
+                      className="w-3 h-3 rounded-full bg-green-500"
                       animate={{ scale: [1, 1.2, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     />
@@ -1373,26 +1769,42 @@ const DevelopmentSection = ({ category }: { category: SkillCategory }) => {
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center">
                       <motion.div 
-                        className={`p-3 rounded-xl mr-4 ${
+                        className={`p-4 rounded-xl mr-4 relative ${
                           theme === 'theme-light' 
-                            ? 'bg-gradient-to-br from-blue-100 to-indigo-100' 
-                            : 'bg-gradient-to-br from-blue-900/50 to-indigo-900/50'
+                            ? 'bg-gradient-to-br from-blue-100 to-purple-100' 
+                            : 'bg-gradient-to-br from-blue-900/50 to-purple-900/50'
                         }`}
-                        whileHover={{ rotateY: 180 }}
-                        transition={{ duration: 0.6 }}
+                        whileHover={{ rotateZ: 15, scale: 1.1 }}
+                        transition={{ duration: 0.3 }}
                       >
-                        <span className="text-xl">{skill.icon}</span>
+                        <span className="text-2xl relative z-10">{skill.icon}</span>
+                        
+                        {/* Integration badge */}
+                        <motion.div
+                          className="absolute -top-1 -right-1 w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center"
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          <span className="text-xs text-white">⚡</span>
+                        </motion.div>
                       </motion.div>
                       <div>
-                        <h4 className="font-semibold light-text mb-1 group-hover:text-green-600 transition-colors">
+                        <h4 className="text-lg font-semibold light-text mb-2 group-hover:text-blue-600 transition-colors">
                           {skill.name}
                         </h4>
-                        <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          theme === 'theme-light' 
-                            ? 'bg-blue-100 text-blue-800' 
-                            : 'bg-blue-900/50 text-blue-300'
-                        }`}>
-                          v{skill.level}.{Math.floor(Math.random() * 10)}.{Math.floor(Math.random() * 10)}
+                        <div className="flex items-center space-x-2">
+                          <div className={`px-3 py-1 rounded-full text-xs font-medium font-mono ${
+                            theme === 'theme-light' 
+                              ? 'bg-blue-100 text-blue-800' 
+                              : 'bg-blue-900/50 text-blue-300'
+                          }`}>
+                            v{skill.level}.{Math.floor(Math.random() * 10)}.{Math.floor(Math.random() * 10)}
+                          </div>
+                          <div className={`px-2 py-1 rounded text-xs font-medium ${
+                            skill.level >= 4 ? 'bg-green-500 text-white' : 'bg-orange-500 text-white'
+                          }`}>
+                            {skill.level >= 4 ? 'STABLE' : 'BETA'}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1402,21 +1814,45 @@ const DevelopmentSection = ({ category }: { category: SkillCategory }) => {
                     {skill.description}
                   </p>
 
-                  {/* Package stats */}
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="light-text opacity-50">
-                      {(skill.level * 250).toLocaleString()}k+ downloads
-                    </span>
-                    <div className="flex items-center space-x-1">
-                      {[...Array(skill.level)].map((_, i) => (
-                        <motion.div 
-                          key={i}
-                          className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600"
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: index * 0.1 + i * 0.1 }}
-                        />
-                      ))}
+                  {/* DevOps metrics */}
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div className="text-center">
+                      <motion.div 
+                        className="text-lg font-bold text-green-500 mb-1"
+                        animate={{ scale: [1, 1.05, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        {skill.level * 98}%
+                      </motion.div>
+                      <div className="text-xs light-text opacity-50 uppercase tracking-wider font-mono">Success Rate</div>
+                    </div>
+                    <div className="text-center">
+                      <motion.div 
+                        className="text-lg font-bold text-blue-500 mb-1"
+                        animate={{ scale: [1, 1.05, 1] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                      >
+                        {skill.level * 45}s
+                      </motion.div>
+                      <div className="text-xs light-text opacity-50 uppercase tracking-wider font-mono">Build Time</div>
+                    </div>
+                  </div>
+
+                  {/* Pipeline integration status */}
+                  <div className={`p-3 rounded-lg font-mono text-xs ${
+                    theme === 'theme-light'
+                      ? 'bg-slate-100 text-slate-700'
+                      : 'bg-slate-800 text-green-400'
+                  }`}>
+                    <div className="flex justify-between items-center">
+                      <span>INTEGRATION:</span>
+                      <motion.span
+                        animate={{ opacity: [0.5, 1, 0.5] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                        className="text-green-500"
+                      >
+                        ACTIVE • {Math.floor(Math.random() * 999) + 100} BUILDS
+                      </motion.span>
                     </div>
                   </div>
                 </motion.div>
