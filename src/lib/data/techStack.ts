@@ -17,8 +17,12 @@ export const techStack: TechStackData = {
     { name: 'Solidity', icon: '🔷', logo: getAssetUrl('/logos/solidity.svg') },
     { name: 'Hardhat', icon: '🔨', logo: getAssetUrl('/logos/hardhat.svg') },
     { name: 'Foundry', icon: '🛠️', logo: getAssetUrl('/logos/foundry.svg') },
+    { name: 'Remix', icon: '🎛️', logo: getAssetUrl('/logos/remix.ico') },
     { name: 'Ethereum', icon: '⚡', logo: getAssetUrl('/logos/ethereum.svg') },
+    { name: 'Chainlink', icon: '🔗', logo: getAssetUrl('/logos/chainlink.svg') },
     { name: 'Solana', icon: '☀️', logo: getAssetUrl('/logos/solana.svg') },
+    { name: 'Anchor', icon: '⚓', logo: getAssetUrl('/logos/anchor.webp') },
+    { name: 'Metaplex', icon: '🎨', logo: getAssetUrl('/logos/metaplex.svg') },
     { name: 'Polkadot', icon: '⚫', logo: getAssetUrl('/logos/polkadot.svg') },
     { name: 'Rust', icon: '🦀', logo: getAssetUrl('/logos/rust.svg') }
   ],
@@ -28,12 +32,16 @@ export const techStack: TechStackData = {
     { name: 'Typescript', icon: '⚛️', logo: getAssetUrl('/logos/typescript.svg') },
     { name: 'HTML', icon: '📄', logo: getAssetUrl('/logos/html-5.svg') },
     { name: 'CSS', icon: '🎨', logo: getAssetUrl('/logos/css-3.svg') },
-    { name: 'TailwindCSS', icon: '🎨', logo: getAssetUrl('/logos/tailwindcss.svg') }
+    { name: 'TailwindCSS', icon: '🎨', logo: getAssetUrl('/logos/tailwindcss.svg') },
+    { name: 'Claude', icon: '🧠', logo: getAssetUrl('/logos/claude.svg') }
   ],
   backend: [
     { name: 'Typescript', icon: '⚛️', logo: getAssetUrl('/logos/typescript.svg') },
     { name: 'Node.js', icon: '🟢', logo: getAssetUrl('/logos/nodejs.svg') },
+    { name: 'Yarn', icon: '🧶', logo: getAssetUrl('/logos/yarn.svg') },
+    { name: 'NPM', icon: '📦', logo: getAssetUrl('/logos/npm.svg') },
     { name: 'Bash', icon: '💻', logo: getAssetUrl('/logos/bash.svg') },
-    { name: 'theGraph', icon: '📊', logo: getAssetUrl('/logos/thegraph.svg') }
+    { name: 'theGraph', icon: '📊', logo: getAssetUrl('/logos/thegraph.svg') },
+    { name: 'Claude', icon: '🧠', logo: getAssetUrl('/logos/claude.svg') }
   ]
 };

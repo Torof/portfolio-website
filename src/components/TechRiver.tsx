@@ -176,17 +176,16 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
             >
               {/* Stream background flow */}
               <motion.div
-                className={`absolute inset-0 rounded-full opacity-20 ${
+                className={`absolute inset-0 rounded-full opacity-10 ${
                   theme === 'theme-light' 
                     ? 'bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200'
                     : 'bg-gradient-to-r from-blue-800 via-purple-800 to-pink-800'
                 }`}
                 animate={{
-                  x: ['-100%', '100%'],
-                  scaleX: [0.8, 1.2, 0.8],
+                  x: ['-100%', '100%']
                 }}
                 transition={{
-                  duration: 15 + streamIndex * 2,
+                  duration: 20,
                   repeat: Infinity,
                   ease: "linear"
                 }}
@@ -224,26 +223,15 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
                         }}
                         initial={{ 
                           opacity: 0, 
-                          scale: 0.5,
-                          y: Math.random() * 20 - 10
+                          scale: 0.5
                         }}
                         animate={{ 
                           opacity: 1, 
-                          scale: 1,
-                          y: [
-                            Math.sin((techIndex + streamIndex) * 0.5) * 10,
-                            Math.sin((techIndex + streamIndex) * 0.5 + Math.PI) * 10,
-                            Math.sin((techIndex + streamIndex) * 0.5) * 10
-                          ]
+                          scale: 1
                         }}
                         transition={{
                           opacity: { duration: 0.6, delay: techIndex * 0.1 },
-                          scale: { duration: 0.6, delay: techIndex * 0.1 },
-                          y: { 
-                            duration: 4 + Math.random() * 2, 
-                            repeat: Infinity, 
-                            ease: "easeInOut" 
-                          }
+                          scale: { duration: 0.6, delay: techIndex * 0.1 }
                         }}
                       >
                         {/* Tech logo container */}
@@ -299,39 +287,6 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
                           </motion.div>
                         </div>
 
-                        {/* Floating particles */}
-                        <motion.div
-                          className="absolute inset-0 pointer-events-none"
-                          animate={{
-                            opacity: [0, 1, 0],
-                          }}
-                          transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            delay: Math.random() * 3
-                          }}
-                        >
-                          {Array.from({ length: 3 }).map((_, particleIndex) => (
-                            <motion.div
-                              key={particleIndex}
-                              className={`absolute w-1 h-1 rounded-full bg-gradient-to-r ${getCategoryColor(tech.category)}`}
-                              animate={{
-                                x: [0, Math.random() * 40 - 20],
-                                y: [0, Math.random() * 40 - 20],
-                                scale: [0, 1, 0],
-                              }}
-                              transition={{
-                                duration: 2 + Math.random(),
-                                repeat: Infinity,
-                                delay: particleIndex * 0.3
-                              }}
-                              style={{
-                                left: `${Math.random() * 100}%`,
-                                top: `${Math.random() * 100}%`,
-                              }}
-                            />
-                          ))}
-                        </motion.div>
                       </motion.div>
                     ))}
                   </motion.div>

@@ -56,10 +56,10 @@ const SequentialLayout: React.FC<SequentialLayoutProps> = ({ projects }) => {
       <section className={`relative overflow-hidden border-b ${
         theme === 'theme-light' 
           ? 'section-bg-secondary theme-light:border-warm-300' 
-          : 'bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 border-gray-700'
+          : 'bg-gradient-to-br from-blue-900 via-slate-800 to-blue-900 border-gray-700'
       }`} style={{ 
         minHeight: '90vh', 
-        backgroundColor: theme === 'theme-light' ? 'var(--warm-100)' : undefined 
+        backgroundColor: theme === 'theme-light' ? '#FFF8E1' : undefined 
       }}>
         {/* Ethereum Logo Columns Background */}
         <div className="absolute inset-0 opacity-100">
@@ -77,22 +77,22 @@ const SequentialLayout: React.FC<SequentialLayoutProps> = ({ projects }) => {
             }
             
             .ethereum-logo polygon:nth-child(1) {
-              animation: ethereumColor1 20s ease-in-out infinite;
+              animation: ethereumColor1 12s ease-in-out infinite;
             }
             .ethereum-logo polygon:nth-child(2) {
-              animation: ethereumColor2 20s ease-in-out infinite;
+              animation: ethereumColor2 12s ease-in-out infinite;
             }
             .ethereum-logo polygon:nth-child(3) {
-              animation: ethereumColor3 20s ease-in-out infinite;
+              animation: ethereumColor3 12s ease-in-out infinite;
             }
             .ethereum-logo polygon:nth-child(4) {
-              animation: ethereumColor4 20s ease-in-out infinite;
+              animation: ethereumColor4 12s ease-in-out infinite;
             }
             .ethereum-logo polygon:nth-child(5) {
-              animation: ethereumColor5 20s ease-in-out infinite;
+              animation: ethereumColor5 12s ease-in-out infinite;
             }
             .ethereum-logo polygon:nth-child(6) {
-              animation: ethereumColor6 20s ease-in-out infinite;
+              animation: ethereumColor6 12s ease-in-out infinite;
             }
             
             @keyframes ethereumColor1 {

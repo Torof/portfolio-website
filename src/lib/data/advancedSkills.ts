@@ -679,7 +679,7 @@ export const skillCategories: SkillCategory[] = [
 export const stackOverflowProfile: StackOverflowProfile = {
   userId: '52251',
   displayName: 'Torof',
-  profileImage: 'https://i.stack.imgur.com/kCtq5.jpg?s=256&g=1', // You'll need to update this with your actual profile image
+  profileImage: '/logos/ethereum_stackexchange_profile_pic.png',
   reputation: 1285, // Update with current reputation
   badges: {
     gold: 0,
