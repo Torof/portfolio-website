@@ -62,7 +62,7 @@ export default function SkillsPage() {
           </div>
 
           {/* Service Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Full System Architecture */}
             <motion.div
               className={`relative p-8 rounded-2xl border backdrop-blur-md transition-all duration-300 group hover:scale-105 ${
@@ -232,11 +232,6 @@ export default function SkillsPage() {
       
       <div className="container-custom relative z-10">
 
-        {/* Stack Exchange Integration */}
-        <div className="mb-20">
-          <LiveStackExchangeCard />
-        </div>
-
         {/* Themed Skills Sections */}
         <div className="mb-20">
           <div className="text-center mb-16">
@@ -248,7 +243,17 @@ export default function SkillsPage() {
             </p>
           </div>
 
-          <PremiumSkillSections categories={skillCategories} />
+          <PremiumSkillSections categories={[
+            skillCategories.find(cat => cat.id === 'smart-contracts')!,
+            skillCategories.find(cat => cat.id === 'security')!,
+            skillCategories.find(cat => cat.id === 'defi')!,
+            skillCategories.find(cat => cat.id === 'layer2')!
+          ]} />
+        </div>
+
+        {/* Stack Exchange Integration */}
+        <div className="mb-20">
+          <LiveStackExchangeCard />
         </div>
       </div>
     </div>
