@@ -198,8 +198,8 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
 
     const spawnThreat = () => {
       setThreats(prev => {
-        // Don't spawn if we already have 3 or more threats
-        if (prev.length >= 3) {
+        // Don't spawn if we already have 2 or more threats
+        if (prev.length >= 2) {
           return prev;
         }
         
@@ -436,7 +436,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
         </div>
 
         {/* Main Content Area */}
-        <div className="h-[700px]">
+        <div className="h-[525px]">
           {/* Game Area */}
           <div 
             ref={gameAreaRef}
