@@ -81,6 +81,7 @@ const threatTypes = [
     name: 'Front-running', 
     icon: '🏃', 
     color: '#ec4899', 
+    defendedBy: 'mev-protection',
     description: 'Malicious actors front-run transactions for profit extraction',
     process: {
       detect: 'Analyze mempool for transaction ordering attacks and MEV patterns',
@@ -106,6 +107,7 @@ const threatTypes = [
     name: 'Logic Vulnerability', 
     icon: '🐛', 
     color: '#14b8a6', 
+    defendedBy: 'formal-verification',
     description: 'Flawed business logic that leads to unintended contract behavior',
     process: {
       detect: 'Use formal verification tools and comprehensive property testing',
@@ -131,6 +133,7 @@ const threatTypes = [
     name: 'Signature Replay Attack',
     icon: '🔁',
     color: '#0891b2',
+    defendedBy: 'auditing',
     description: 'Reusing valid signatures across different contexts or chains',
     process: {
       detect: 'Check for nonce usage and domain separation in signature schemes',
@@ -143,6 +146,7 @@ const threatTypes = [
     name: 'Sandwich Attack',
     icon: '🥪',
     color: '#dc2626',
+    defendedBy: 'mev-protection',
     description: 'MEV bots front-run and back-run user transactions for profit',
     process: {
       detect: 'Monitor for transaction ordering patterns and slippage exploitation',
@@ -168,6 +172,7 @@ const threatTypes = [
     name: 'Storage Collision',
     icon: '💥',
     color: '#e11d48',
+    defendedBy: 'auditing',
     description: 'Proxy storage slots overwriting implementation storage',
     process: {
       detect: 'Use storage layout analysis tools and automated slot collision detection',
@@ -180,6 +185,7 @@ const threatTypes = [
     name: 'Unchecked Return Values',
     icon: '❌',
     color: '#64748b',
+    defendedBy: 'common-vulnerabilities',
     description: 'Failed external calls going unnoticed leading to state corruption',
     process: {
       detect: 'Use static analysis to find unchecked low-level calls',
@@ -192,6 +198,7 @@ const threatTypes = [
     name: 'Randomness Manipulation',
     icon: '🎲',
     color: '#06b6d4',
+    defendedBy: 'attack-vectors',
     description: 'Predictable on-chain randomness exploited for unfair advantage',
     process: {
       detect: 'Audit randomness sources for predictability and miner influence',
@@ -204,6 +211,7 @@ const threatTypes = [
     name: 'Centralization Risk',
     icon: '👑',
     color: '#eab308',
+    defendedBy: 'attack-vectors',
     description: 'Single points of failure through admin keys or privileged roles',
     process: {
       detect: 'Audit admin functions and single points of control in governance',
@@ -328,10 +336,29 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
           y: threat.y + threat.speed,
         })).filter(threat => threat.y < 100 && threat.health > 0);
 
-        // Auto-targeting system
+        // Auto-targeting system with specific turret-threat mapping
         updatedThreats.forEach(threat => {
-          // Any turret can target any threat (simplified for debugging)
-          const turret = category.skills[Math.floor(Math.random() * category.skills.length)];
+          // The threat.type is already the full threat type object, not just an id
+          const threatType = threat.type;
+          let turret = null;
+          
+          if (threatType?.defendedBy) {
+            // Find turret by defendedBy property
+            turret = category.skills.find(skill => skill.id === threatType.defendedBy);
+            
+            // Debug logging
+            if (process.env.NODE_ENV === 'development') {
+              console.log(`Threat ${threatType.name} (${threatType.id}) should be defended by ${threatType.defendedBy}, found turret: ${turret?.name || 'none'}`);
+            }
+          }
+          
+          // Fallback - use auditing as default if turret not found
+          if (!turret) {
+            turret = category.skills.find(skill => skill.id === 'auditing');
+            if (process.env.NODE_ENV === 'development') {
+              console.log(`No turret found for ${threatType?.name}, using auditing fallback`);
+            }
+          }
 
           if (turret && threat.health > 0 && threat.y > 20 && threat.y < 70) {
             // Calculate turret position
