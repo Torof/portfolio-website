@@ -1,5 +1,4 @@
 import { Education, Certification } from '../types';
-import { getAssetUrl } from '../utils/assetLoader';
 
 export const educations: Education[] = [
   {
@@ -11,7 +10,7 @@ export const educations: Education[] = [
     endDate: "Mar 2024",
     description: "RareSkills is a premium blockchain education platform founded by Jeffrey Scholz, focusing on advanced smart contract security and optimization. This intensive program covers cutting-edge DeFi protocols, advanced ERC standards implementation, comprehensive testing methodologies, security auditing practices, and low-level EVM programming including Yul and assembly language. The curriculum is designed for experienced developers seeking expertise in blockchain security and gas optimization.",
     skills: ["DeFi", "NFT", "ERC20", "Testing", "Auditing", "EVM", "Yul", "Assembly", "HUFF"],
-    logo: getAssetUrl('/logos/rareskills.svg'),
+    logo: '/logos/rareskills.svg',
     website: "https://rareskills.io"
   },
   {
@@ -23,7 +22,7 @@ export const educations: Education[] = [
     endDate: "Feb 2022",
     description: "ConsenSys Academy is the educational arm of ConsenSys, the leading Ethereum software company founded by Joseph Lubin. This comprehensive program provides enterprise-grade blockchain education, covering full-stack decentralized application development, Ethereum ecosystem architecture, advanced Solidity programming, React.js integration for Web3 frontends, and blockchain client implementation. The academy is recognized for producing industry-ready blockchain developers.",
     skills: ["Dapp", "Ethereum", "Solidity", "React.js", "Blockchain"],
-    logo: getAssetUrl('/logos/consensys.svg'),
+    logo: '/logos/consensys.svg',
     website: "https://consensys.net/academy"
   },
   {
@@ -35,7 +34,7 @@ export const educations: Education[] = [
     endDate: "Jan 2021",
     description: "Alyra is France's leading blockchain school, offering comprehensive training programs in blockchain technology and smart contract development. This foundational program provides hands-on experience with Ethereum blockchain, smart contract architecture and deployment, decentralized application development, and blockchain fundamentals. Alyra is known for its practical approach to blockchain education and strong industry connections in the European blockchain ecosystem.",
     skills: ["Ethereum", "Smart Contracts", "Dapp"],
-    logo: getAssetUrl('/logos/alyra.png'),
+    logo: '/logos/alyra.png',
     website: "https://alyra.fr"
   },
   {
@@ -47,7 +46,7 @@ export const educations: Education[] = [
     endDate: "Apr 2025",
     description: "Advanced Solana development program at Alyra focusing on high-performance blockchain development. This specialized course covers Solana's unique architecture, Rust programming for blockchain applications, the Anchor development framework, and SPL token creation. Students learn to build scalable decentralized applications on one of the fastest blockchains, mastering Solana's account model, program deployment, and integration with Web3 frontends.",
     skills: ["Solana", "Rust", "Anchor", "SPL Tokens", "Program Development", "Web3"],
-    logo: getAssetUrl('/logos/alyra.png'),
+    logo: '/logos/alyra.png',
     website: "https://alyra.fr"
   },
   {
@@ -59,7 +58,7 @@ export const educations: Education[] = [
     endDate: "Jun 2023",
     description: "An advanced course focusing on low-level Solidity optimization techniques using Yul intermediate language and EVM assembly programming. Students learn to write highly optimized smart contracts, understand EVM internals, implement custom opcodes, and achieve significant gas savings. Critical knowledge for professional smart contract development and auditing in the DeFi space.",
     skills: ["Solidity", "Yul", "Assembly", "EVM", "Gas Optimization", "Low-level Programming"],
-    logo: getAssetUrl('/logos/udemy.webp'),
+    logo: '/logos/udemy.webp',
     website: "https://www.udemy.com/course/advanced-solidity-yul-and-assembly/"
   },
   {
@@ -71,7 +70,7 @@ export const educations: Education[] = [
     endDate: "Jun 2023",
     description: "A specialized course dedicated to smart contract gas optimization and EVM efficiency. Covers advanced techniques for reducing transaction costs, storage optimization patterns, function call efficiency, and EVM-level optimizations. Students learn to analyze gas consumption, implement cost-effective design patterns, and build economically sustainable smart contracts for production DeFi protocols.",
     skills: ["Solidity", "Gas Optimization", "EVM Internals", "Smart Contracts", "Efficiency", "Cost Reduction"],
-    logo: getAssetUrl('/logos/udemy.webp'),
+    logo: '/logos/udemy.webp',
     website: "https://www.udemy.com/course/advanced-solidity-understanding-and-optimizing-gas-costs/"
   },
   {
@@ -83,7 +82,7 @@ export const educations: Education[] = [
     endDate: "Mar 2025",
     description: "A comprehensive Rust programming course that covers the language from fundamentals to advanced concepts. The course focuses on Rust's unique ownership system, memory safety without garbage collection, and systems programming capabilities. Students learn to build high-performance applications with zero-cost abstractions, concurrent programming, and robust error handling patterns that make Rust ideal for blockchain and systems development.",
     skills: ["Rust", "Systems Programming", "Memory Management", "Cargo", "Error Handling"],
-    logo: getAssetUrl('/logos/udemy.webp'),
+    logo: '/logos/udemy.webp',
     website: "https://www.udemy.com/course/rust-coding-for-beginners/"
   },
   {
@@ -95,7 +94,7 @@ export const educations: Education[] = [
     endDate: "Mar 2025",
     description: "An intensive Rust programming bootcamp designed for rapid skill acquisition. The course focuses on Rust's unique ownership model, borrowing and lifetime concepts, trait system for code reuse, and concurrent programming patterns. Emphasizes practical applications and industry best practices, making it perfect for developers transitioning to blockchain development where performance and safety are critical.",
     skills: ["Rust", "Ownership", "Borrowing", "Lifetimes", "Traits", "Concurrency"],
-    logo: getAssetUrl('/logos/udemy.webp'),
+    logo: '/logos/udemy.webp',
     website: "https://www.udemy.com/course/ultimate-rust-crash-course/"
   },
   {
@@ -107,7 +106,7 @@ export const educations: Education[] = [
     endDate: "2022",
     description: "An in-depth React course covering modern React development patterns and best practices. The course includes advanced state management with Redux and Context API, modern React Hooks for functional programming, component lifecycle optimization, and performance techniques. Essential for building sophisticated Web3 frontends and decentralized applications with React.",
     skills: ["React", "Redux", "Hooks", "Context API", "JSX", "State Management"],
-    logo: getAssetUrl('/logos/udemy.webp'),
+    logo: '/logos/udemy.webp',
     website: "https://www.udemy.com/course/react-the-complete-guide-incl-redux/"
   },
   {
@@ -119,7 +118,7 @@ export const educations: Education[] = [
     endDate: "2021",
     description: "A comprehensive Node.js course covering server-side JavaScript development, RESTful API design, database integration with MongoDB, authentication systems, and deployment strategies. The course emphasizes building scalable backend services that can support blockchain applications and integrate with Web3 infrastructure for complete full-stack development.",
     skills: ["Node.js", "Express", "MongoDB", "REST APIs", "Authentication", "NPM"],
-    logo: getAssetUrl('/logos/udemy.webp'),
+    logo: '/logos/udemy.webp',
     website: "https://www.udemy.com/course/the-complete-nodejs-developer-course-2/"
   },
   {
@@ -131,7 +130,7 @@ export const educations: Education[] = [
     endDate: "2022", 
     description: "An advanced React development course that takes students from beginner to expert level. Covers TypeScript integration for type-safe React applications, comprehensive testing strategies, performance optimization techniques, and production deployment workflows. Particularly valuable for building robust Web3 interfaces and decentralized application frontends with professional-grade code quality.",
     skills: ["React", "TypeScript", "Testing", "Performance", "Deployment", "Modern React"],
-    logo: getAssetUrl('/logos/udemy.webp'),
+    logo: '/logos/udemy.webp',
     website: "https://www.udemy.com/course/complete-react-developer-zero-to-mastery/"
   },
   {
@@ -143,7 +142,7 @@ export const educations: Education[] = [
     endDate: "2020",
     description: "A comprehensive Linux administration course covering command-line mastery, system administration, server management, and DevOps practices. The course includes shell scripting automation, network configuration, security hardening, and deployment strategies. Essential skills for managing blockchain node infrastructure and deploying decentralized applications in production environments.",
     skills: ["Linux", "Bash", "System Administration", "DevOps", "Shell Scripting", "Networking"],
-    logo: getAssetUrl('/logos/udemy.webp'),
+    logo: '/logos/udemy.webp',
     website: "https://www.udemy.com/course/complete-linux-training-course-to-get-your-dream-it-job/"
   }
 ];

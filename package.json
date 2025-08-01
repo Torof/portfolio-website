@@ -4,23 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "dev:web2": "NEXT_PUBLIC_DEPLOYMENT_TARGET=web2 next dev --turbopack",
-    "dev:ipfs": "NEXT_PUBLIC_DEPLOYMENT_TARGET=ipfs next dev --turbopack",
     "build": "next build",
-    "build:web2": "NEXT_PUBLIC_DEPLOYMENT_TARGET=web2 next build",
-    "build:ipfs": "NEXT_PUBLIC_DEPLOYMENT_TARGET=ipfs next build && node scripts/ipfs-post-build.js",
     "start": "next start",
     "export": "next build",
     "preview": "npx serve out",
-    "preview:web2": "NEXT_PUBLIC_DEPLOYMENT_TARGET=web2 npx serve out",
-    "preview:ipfs": "NEXT_PUBLIC_DEPLOYMENT_TARGET=ipfs npx serve out",
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:ci": "jest --ci --coverage --watchAll=false",
-    "generate-ipfs-map": "node scripts/generate-ipfs-asset-map.js",
-    "apply-ipfs-assets": "node scripts/apply-ipfs-assets.js"
+    "test:ci": "jest --ci --coverage --watchAll=false"
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "^5.2.6",
@@ -46,7 +38,6 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
     "glob": "^11.0.3",
-    "ipfs-http-client": "^60.0.1",
     "jest": "^30.0.5",
     "jest-environment-jsdom": "^30.0.5",
     "tailwindcss": "^4",

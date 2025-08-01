@@ -1,5 +1,4 @@
 import { Project } from '../types';
-import { getAssetUrl } from '../utils/assetLoader';
 
 export const projects: Project[] = [
   {
@@ -7,7 +6,7 @@ export const projects: Project[] = [
     title: "NFT Staking Platform",
     description: "A platform for staking NFTs to earn ERC20 tokens",
     longDescription: "Developed a smart contract for staking NFTs that has successfully minted over 21 million ERC20 tokens and currently holding 1400+ NFTs in staking.",
-    thumbnail: getAssetUrl('/projects/nft-staking.jpg'),
+    thumbnail: '/projects/nft-staking.jpg',
     technologies: ["Solidity", "ERC721", "ERC20", "React", "Hardhat"],
     githubUrl: "https://github.com/Torof/nft-staking",
     featured: true
@@ -17,7 +16,7 @@ export const projects: Project[] = [
     title: "DeFi Yield Aggregator",
     description: "A DeFi application that optimizes yield farming across multiple protocols",
     longDescription: "Built a smart contract system that automatically allocates funds across different DeFi protocols to maximize yields while minimizing gas costs and risks.",
-    thumbnail: getAssetUrl('/projects/defi-yield.jpg'),
+    thumbnail: '/projects/defi-yield.jpg',
     technologies: ["Solidity", "DeFi", "Foundry", "Next.js", "TypeScript"],
     githubUrl: "https://github.com/Torof/defi-yield",
     featured: true
@@ -27,7 +26,7 @@ export const projects: Project[] = [
     title: "P2E Blockchain Game",
     description: "Play-to-Earn blockchain game with NFT characters and token rewards",
     longDescription: "Developed the smart contract infrastructure for a blockchain game that allows players to earn tokens by competing with NFT characters.",
-    thumbnail: getAssetUrl('/projects/p2e-game.jpg'),
+    thumbnail: '/projects/p2e-game.jpg',
     technologies: ["Solidity", "ERC721", "ERC20", "Unity", "React"],
     githubUrl: "https://github.com/Torof/p2e-game",
     featured: true
