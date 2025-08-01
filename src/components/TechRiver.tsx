@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, memo } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
 import { techStack, TechItem } from '@/lib/data/techStack';
@@ -9,10 +9,20 @@ interface TechRiverProps {
   className?: string;
 }
 
-export default function TechRiver({ className = '' }: TechRiverProps) {
+const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [showList, setShowList] = useState(false);
+  
+  // Memoize theme-dependent values to prevent unnecessary re-renders
+  const themeClasses = useMemo(() => ({
+    container: theme === 'theme-light'
+      ? 'bg-gradient-to-br from-gray-50 to-blue-50'
+      : 'bg-gradient-to-br from-slate-900 to-slate-800',
+    button: theme === 'theme-light'
+      ? 'bg-white/80 border-gray-200 text-gray-800 hover:bg-white hover:border-gray-300'
+      : 'bg-slate-800/80 border-slate-700 text-slate-300 hover:bg-slate-800 hover:border-slate-600'
+  }), [theme]);
 
   useEffect(() => {
     setMounted(true);
@@ -91,7 +101,28 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
   }
 
   return (
-    <section className={`relative py-24 overflow-hidden w-full ${className}`}>
+    <>
+      <style jsx>{`
+        @keyframes flow-right {
+          0% { transform: translateX(150%); }
+          100% { transform: translateX(-150%); }
+        }
+        .animate-flow-right {
+          animation: flow-right linear infinite;
+          z-index: 1;
+          position: absolute;
+          display: flex;
+          align-items: center;
+        }
+        .tech-item {
+          z-index: 2;
+          position: relative;
+        }
+        .tech-item:hover {
+          z-index: 10;
+        }
+      `}</style>
+      <section className={`relative py-24 overflow-hidden w-full ${className}`}>
       <div className={`absolute inset-0 ${
         theme === 'theme-light'
           ? 'bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20'
@@ -197,46 +228,35 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
                   height: '40%'
                 }}
               >
-                {/* Stream background flow */}
-                <motion.div
+                {/* Stream background flow - static for testing */}
+                <div
                   className={`absolute inset-0 rounded-full opacity-10 ${
                     theme === 'theme-light' 
                       ? 'bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200'
                       : 'bg-gradient-to-r from-blue-800 via-purple-800 to-pink-800'
                   }`}
-                  animate={{
-                    x: ['-100%', '100%']
-                  }}
-                  transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
                 />
 
                 {/* Flowing tech logos */}
                 <div className="relative h-full flex items-center">
                   {/* Create multiple copies for seamless loop */}
                   {Array.from({ length: 3 }).map((_, copyIndex) => (
-                    <motion.div
+                    <div
                       key={copyIndex}
-                      className="absolute flex items-center"
-                      animate={{
-                        x: [`${copyIndex * 100}%`, `${(copyIndex - 1) * 100}%`],
-                      }}
-                      transition={{
-                        duration: 20 + streamIndex * 3,
-                        repeat: Infinity,
-                        ease: "linear"
-                      }}
+                      className="absolute flex items-center animate-flow-right"
                       style={{
                         left: 0,
+                        willChange: 'transform',
+                        backfaceVisibility: 'hidden',
+                        transform: 'translateZ(0)',
+                        animationDelay: `${copyIndex * -20}s`,
+                        animationDuration: '60s'
                       }}
                     >
                       {streamTechs.map((tech, techIndex) => (
                         <motion.div
                           key={`${tech.name}-${copyIndex}`}
-                          className={`relative group cursor-pointer mx-6 ${
+                          className={`relative group cursor-pointer mx-6 tech-item ${
                             techIndex === streamTechs.length - 1 ? 'mr-12' : ''
                           }`}
                           whileHover={{ 
@@ -253,8 +273,8 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
                             scale: 1
                           }}
                           transition={{
-                            opacity: { duration: 0.6, delay: techIndex * 0.1 },
-                            scale: { duration: 0.6, delay: techIndex * 0.1 }
+                            opacity: { duration: 0.6 },
+                            scale: { duration: 0.6 }
                           }}
                         >
                           {/* Tech logo container */}
@@ -312,7 +332,7 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
 
                         </motion.div>
                       ))}
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -412,6 +432,9 @@ export default function TechRiver({ className = '' }: TechRiverProps) {
         )}
 
       </div>
-    </section>
+      </section>
+    </>
   );
-}
+});
+
+export default TechRiver;
