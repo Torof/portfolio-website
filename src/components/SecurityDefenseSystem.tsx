@@ -769,6 +769,302 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
           </div>
         </div>
       </div>
+
+      {/* Security Arsenal - Tools & Frameworks */}
+      <div className={`mt-6 rounded-2xl border-4 p-6 ${
+        theme === 'theme-light'
+          ? 'bg-gradient-to-r from-amber-50 via-yellow-50 to-orange-50 border-amber-300'
+          : 'bg-gradient-to-r from-amber-950 via-yellow-950 to-orange-950 border-amber-500'
+      }`}>
+        <div className={`text-center mb-6 ${
+          theme === 'theme-light' ? 'text-amber-800' : 'text-amber-300'
+        }`}>
+          <h4 className="text-xl font-bold font-mono mb-2">
+            🛡️ SECURITY ARSENAL 🛡️
+          </h4>
+          <p className="text-sm font-mono opacity-80">
+            LEGENDARY WEAPONS & POWER-UPS FOR THE ULTIMATE SECURITY AUDIT
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {/* OpenZeppelin */}
+          <div className={`relative group text-center p-4 rounded-xl border-2 transition-all duration-300 hover:scale-105 ${
+            theme === 'theme-light'
+              ? 'bg-white border-blue-200 hover:border-blue-400 hover:shadow-lg'
+              : 'bg-slate-800 border-blue-700 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-900/30'
+          }`}>
+            <div className="mb-3">
+              <img 
+                src="/logos/openzeppelin.svg" 
+                alt="OpenZeppelin" 
+                className="w-12 h-12 mx-auto"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling!.style.display = 'block';
+                }}
+              />
+              <div className="text-4xl hidden">🏰</div>
+            </div>
+            <div className={`text-xs font-mono ${
+              theme === 'theme-light' ? 'text-blue-600' : 'text-blue-400'
+            }`}>
+              OpenZeppelin
+            </div>
+            <div className={`text-xs mt-2 opacity-80 ${
+              theme === 'theme-light' ? 'text-slate-600' : 'text-slate-400'
+            }`}>
+              +50% Defense vs Access Control
+            </div>
+
+            {/* Tooltip */}
+            <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-80 p-4 rounded-lg text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 ${
+              theme === 'theme-light'
+                ? 'bg-white text-blue-700 border-2 border-blue-300 shadow-xl'
+                : 'bg-gray-800 text-blue-400 border-2 border-blue-400 shadow-xl shadow-blue-900/20'
+            }`}>
+              <div className="text-center">
+                <div className="flex justify-center mb-3">
+                  <img 
+                    src="/logos/openzeppelin.svg" 
+                    alt="OpenZeppelin" 
+                    className="w-20 h-20"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.nextElementSibling!.style.display = 'block';
+                    }}
+                  />
+                  <div className="text-6xl hidden">🏰</div>
+                </div>
+                <div className="font-bold text-sm mb-3">
+                  OpenZeppelin
+                </div>
+                <div className="text-xs leading-relaxed opacity-90 text-left">
+                  Industry-standard library of secure, reusable smart contract components. Provides battle-tested implementations of ERC standards, access control, and security patterns used by thousands of projects.
+                </div>
+              </div>
+              
+              {/* Tooltip arrow */}
+              <div className={`absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent ${
+                theme === 'theme-light' 
+                  ? 'border-t-slate-900' 
+                  : 'border-t-black'
+              }`} />
+            </div>
+          </div>
+
+          {/* Slither */}
+          <div className={`relative group text-center p-4 rounded-xl border-2 transition-all duration-300 hover:scale-105 ${
+            theme === 'theme-light'
+              ? 'bg-white border-green-200 hover:border-green-400 hover:shadow-lg'
+              : 'bg-slate-800 border-green-700 hover:border-green-500 hover:shadow-xl hover:shadow-green-900/30'
+          }`}>
+            <div className="mb-3">
+              <img 
+                src="/logos/slither.png" 
+                alt="Slither" 
+                className="w-12 h-12 mx-auto"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling!.style.display = 'block';
+                }}
+              />
+              <div className="text-4xl hidden">🐍</div>
+            </div>
+            <div className={`text-xs font-mono ${
+              theme === 'theme-light' ? 'text-green-600' : 'text-green-400'
+            }`}>
+              Slither
+            </div>
+            <div className={`text-xs mt-2 opacity-80 ${
+              theme === 'theme-light' ? 'text-slate-600' : 'text-slate-400'
+            }`}>
+              Auto-detects 90+ vulnerabilities
+            </div>
+
+            {/* Tooltip */}
+            <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-80 p-4 rounded-lg text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 ${
+              theme === 'theme-light'
+                ? 'bg-white text-green-700 border-2 border-green-300 shadow-xl'
+                : 'bg-gray-800 text-green-400 border-2 border-green-400 shadow-xl shadow-green-900/20'
+            }`}>
+              <div className="text-center">
+                <div className="flex justify-center mb-3">
+                  <img 
+                    src="/logos/slither.png" 
+                    alt="Slither" 
+                    className="w-20 h-20"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.nextElementSibling!.style.display = 'block';
+                    }}
+                  />
+                  <div className="text-6xl hidden">🐍</div>
+                </div>
+                <div className="font-bold text-sm mb-3">
+                  Slither
+                </div>
+                <div className="text-xs leading-relaxed opacity-90 text-left">
+                  Static analysis framework for Solidity smart contracts. Detects vulnerabilities, optimization opportunities, and code quality issues. Essential tool for automated security scanning with 90+ built-in detectors.
+                </div>
+              </div>
+              
+              {/* Tooltip arrow */}
+              <div className={`absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent ${
+                theme === 'theme-light' 
+                  ? 'border-t-slate-900' 
+                  : 'border-t-black'
+              }`} />
+            </div>
+          </div>
+
+          {/* Foundry */}
+          <div className={`relative group text-center p-4 rounded-xl border-2 transition-all duration-300 hover:scale-105 ${
+            theme === 'theme-light'
+              ? 'bg-white border-red-200 hover:border-red-400 hover:shadow-lg'
+              : 'bg-slate-800 border-red-700 hover:border-red-500 hover:shadow-xl hover:shadow-red-900/30'
+          }`}>
+            <div className="mb-3">
+              <img 
+                src="/logos/foundry.svg" 
+                alt="Foundry" 
+                className="w-12 h-12 mx-auto"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling!.style.display = 'block';
+                }}
+              />
+              <div className="text-4xl hidden">⚒️</div>
+            </div>
+            <div className={`text-xs font-mono ${
+              theme === 'theme-light' ? 'text-red-600' : 'text-red-400'
+            }`}>
+              Foundry
+            </div>
+            <div className={`text-xs mt-2 opacity-80 ${
+              theme === 'theme-light' ? 'text-slate-600' : 'text-slate-400'
+            }`}>
+              Unlimited fuzz testing power
+            </div>
+
+            {/* Tooltip */}
+            <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-80 p-4 rounded-lg text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 ${
+              theme === 'theme-light'
+                ? 'bg-white text-red-700 border-2 border-red-300 shadow-xl'
+                : 'bg-gray-800 text-red-400 border-2 border-red-400 shadow-xl shadow-red-900/20'
+            }`}>
+              <div className="text-center">
+                <div className="flex justify-center mb-3">
+                  <img 
+                    src="/logos/foundry.svg" 
+                    alt="Foundry" 
+                    className="w-20 h-20"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.nextElementSibling!.style.display = 'block';
+                    }}
+                  />
+                  <div className="text-6xl hidden">⚒️</div>
+                </div>
+                <div className="font-bold text-sm mb-3">
+                  Foundry
+                </div>
+                <div className="text-xs leading-relaxed opacity-90 text-left">
+                  Fast, portable and modular toolkit for Ethereum development. Features advanced testing with fuzzing, gas optimization, and deployment scripting. The gold standard for modern smart contract development and testing.
+                </div>
+              </div>
+              
+              {/* Tooltip arrow */}
+              <div className={`absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent ${
+                theme === 'theme-light' 
+                  ? 'border-t-slate-900' 
+                  : 'border-t-black'
+              }`} />
+            </div>
+          </div>
+
+          {/* Echidna */}
+          <div className={`relative group text-center p-4 rounded-xl border-2 transition-all duration-300 hover:scale-105 ${
+            theme === 'theme-light'
+              ? 'bg-white border-purple-200 hover:border-purple-400 hover:shadow-lg'
+              : 'bg-slate-800 border-purple-700 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-900/30'
+          }`}>
+            <div className="mb-3">
+              <img 
+                src="/logos/echidna.png" 
+                alt="Echidna" 
+                className="w-12 h-12 mx-auto"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling!.style.display = 'block';
+                }}
+              />
+              <div className="text-4xl hidden">🦔</div>
+            </div>
+            <div className={`text-xs font-mono ${
+              theme === 'theme-light' ? 'text-purple-600' : 'text-purple-400'
+            }`}>
+              Echidna
+            </div>
+            <div className={`text-xs mt-2 opacity-80 ${
+              theme === 'theme-light' ? 'text-slate-600' : 'text-slate-400'
+            }`}>
+              Property-based fuzz testing
+            </div>
+
+            {/* Tooltip */}
+            <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-80 p-4 rounded-lg text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 ${
+              theme === 'theme-light'
+                ? 'bg-white text-purple-700 border-2 border-purple-300 shadow-xl'
+                : 'bg-gray-800 text-purple-400 border-2 border-purple-400 shadow-xl shadow-purple-900/20'
+            }`}>
+              <div className="text-center">
+                <div className="flex justify-center mb-3">
+                  <img 
+                    src="/logos/echidna.png" 
+                    alt="Echidna" 
+                    className="w-20 h-20"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.nextElementSibling!.style.display = 'block';
+                    }}
+                  />
+                  <div className="text-6xl hidden">🦔</div>
+                </div>
+                <div className="font-bold text-sm mb-3">
+                  Echidna
+                </div>
+                <div className="text-xs leading-relaxed opacity-90 text-left">
+                  Property-based fuzzer for Ethereum smart contracts by Trail of Bits. Generates random inputs to test invariants and find edge cases. Specialized in discovering subtle bugs through automated property verification.
+                </div>
+              </div>
+              
+              {/* Tooltip arrow */}
+              <div className={`absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent ${
+                theme === 'theme-light' 
+                  ? 'border-t-slate-900' 
+                  : 'border-t-black'
+              }`} />
+            </div>
+          </div>
+        </div>
+
+        {/* Arsenal Stats */}
+        <div className={`mt-6 pt-4 border-t-2 text-center ${
+          theme === 'theme-light' ? 'border-amber-200' : 'border-amber-700'
+        }`}>
+          <div className={`text-sm font-mono font-bold ${
+            theme === 'theme-light' ? 'text-amber-700' : 'text-amber-400'
+          }`}>
+            🏆 MASTER AUDITOR STATUS: UNLOCKED 🏆
+          </div>
+          <div className={`text-xs font-mono mt-1 opacity-80 ${
+            theme === 'theme-light' ? 'text-amber-600' : 'text-amber-500'
+          }`}>
+            All legendary security tools mastered • 100% vulnerability coverage
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
