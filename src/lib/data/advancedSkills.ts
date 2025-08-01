@@ -379,37 +379,37 @@ export const skillCategories: SkillCategory[] = [
         projects: ['Cross-chain protocols', 'Polygon-native dApps', 'Bridge integrations']
       },
       {
-        id: 'zk-rollups',
-        name: 'ZK Rollups',
-        description: 'Zero-knowledge proof based scaling solutions',
-        level: 3,
-        category: 'layer2',
-        subcategory: 'Rollups',
-        icon: '🔏',
-        examples: ['zkSync', 'StarkNet', 'Polygon zkEVM'],
-        projects: ['ZK-compatible contracts', 'Privacy protocols', 'Scalable dApps']
-      },
-      {
-        id: 'cross-chain',
-        name: 'Cross-Chain Bridges',
-        description: 'Interoperability and asset bridging protocols',
+        id: 'gnosis',
+        name: 'Gnosis Chain',
+        description: 'Community-owned EVM chain focused on stability and decentralization',
         level: 4,
         category: 'layer2',
-        subcategory: 'Interoperability',
-        icon: '🌉',
-        examples: ['Token bridges', 'Message passing', 'Liquidity networks'],
-        projects: ['Bridge contracts', 'Cross-chain messaging', 'Multi-chain protocols']
+        subcategory: 'Sidechains',
+        icon: '🦉',
+        examples: ['xDAI payments', 'DAO infrastructure', 'Prediction markets'],
+        projects: ['Payment applications', 'Governance systems', 'Stable-fee transactions']
       },
       {
-        id: 'state-channels',
-        name: 'State Channels',
-        description: 'Off-chain scaling through bilateral channels',
+        id: 'zksync-era',
+        name: 'zkSync Era',
+        description: 'EVM-compatible zkRollup with native account abstraction',
+        level: 4,
+        category: 'layer2',
+        subcategory: 'ZK Rollups',
+        icon: '⚡',
+        examples: ['Account abstraction', 'Paymaster contracts', 'ZK proofs'],
+        projects: ['Gas-efficient dApps', 'Smart wallets', 'Cross-chain protocols']
+      },
+      {
+        id: 'scroll',
+        name: 'Scroll',
+        description: 'Bytecode-level EVM-equivalent zkRollup for seamless migration',
         level: 3,
         category: 'layer2',
-        subcategory: 'Scaling',
-        icon: '📡',
-        examples: ['Payment channels', 'Gaming channels', 'Micropayments'],
-        projects: ['Channel implementations', 'Dispute resolution', 'Channel networks']
+        subcategory: 'ZK Rollups',
+        icon: '📜',
+        examples: ['EVM equivalence', 'zkEVM circuits', 'Developer tooling'],
+        projects: ['Direct ports from Ethereum', 'DeFi protocols', 'NFT marketplaces']
       },
       {
         id: 'base',

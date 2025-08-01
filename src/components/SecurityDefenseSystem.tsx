@@ -768,7 +768,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                           {skill.id === 'formal-verification' && (
                             <>
                               <p className="mb-2">I use mathematical proofs to guarantee contract behavior. By defining invariants and using symbolic execution, I ensure code works correctly in all scenarios.</p>
-                              <p>This catches subtle bugs that testing and auditing miss - critical for high-value protocols where failure isn't an option.</p>
+                              <p>This catches subtle bugs that testing and auditing miss - critical for high-value protocols where failure isn&apos;t an option.</p>
                             </>
                           )}
                           

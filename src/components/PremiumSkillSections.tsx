@@ -1028,6 +1028,9 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
       'polygon': '/logos/polygon.svg',
       'base': '/logos/base.webp',
       'berachain': '/logos/berachain.svg',
+      'gnosis': '/logos/gnosis.svg',
+      'zksync-era': '/logos/zksync.svg',
+      'scroll': '/logos/scroll.webp',
     };
     return logoMap[skillId] || null; // Return null for emoji-based items
   };
