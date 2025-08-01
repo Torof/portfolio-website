@@ -315,35 +315,46 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
                     }}
                   >
                     <div className={`p-4 rounded-xl border-2 backdrop-blur-sm transition-all duration-300 h-full relative overflow-hidden ${
-                      isCenter
+                      isCenter && !isShuffling
                         ? theme === 'theme-light'
                           ? 'bg-gradient-to-br from-slate-200 via-gray-200 to-slate-300 border-cyan-400 shadow-2xl'
                           : 'bg-gradient-to-br from-slate-700 via-gray-600 to-slate-800 border-cyan-400 shadow-2xl'
-                        : theme === 'theme-light'
-                          ? 'bg-gradient-to-br from-gray-100 to-gray-200 border-gray-400'
-                          : 'bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600'
+                        : isCenter && isShuffling
+                          ? theme === 'theme-light'
+                            ? 'bg-gradient-to-br from-gray-100 to-gray-200 border-cyan-400 shadow-2xl'
+                            : 'bg-gradient-to-br from-slate-800 to-slate-700 border-cyan-400 shadow-2xl'
+                          : theme === 'theme-light'
+                            ? 'bg-gradient-to-br from-gray-100 to-gray-200 border-gray-400'
+                            : 'bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600'
                     }`}>
                       {/* Chrome shine effect for center card */}
-                      {isCenter && (
+                      {isCenter && !isShuffling && (
                         <>
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 animate-pulse" />
-                          <div className={`absolute inset-0 border-2 rounded-xl ${
-                            theme === 'theme-light' ? 'border-pink-400/50' : 'border-pink-400/70'
-                          } animate-pulse`} />
                         </>
+                      )}
+                      {/* Border blinking effect - keep this during shuffling */}
+                      {isCenter && (
+                        <div className={`absolute inset-0 border-2 rounded-xl ${
+                          theme === 'theme-light' ? 'border-pink-400/50' : 'border-pink-400/70'
+                        } animate-pulse`} />
                       )}
                       <div className="flex items-center space-x-3" style={{ marginLeft: `${60 - (Math.abs(offset) * 3)}px` }}> {/* Text closer to left edge */}
                         <div className={`text-sm font-bold px-3 py-1.5 rounded-lg relative overflow-hidden border ${
-                          isCenter
+                          isCenter && !isShuffling
                             ? theme === 'theme-light'
                               ? 'bg-gradient-to-r from-slate-400 via-gray-300 to-slate-500 text-white shadow-lg shadow-slate-400/40 border-cyan-400'
                               : 'bg-gradient-to-r from-slate-600 via-gray-500 to-slate-700 text-white shadow-lg shadow-slate-500/50 border-cyan-400'
-                            : theme === 'theme-light' 
-                              ? 'bg-gray-200 text-gray-700 border-gray-300' 
-                              : 'bg-slate-700 text-gray-300 border-slate-600'
+                            : isCenter && isShuffling
+                              ? theme === 'theme-light'
+                                ? 'bg-gray-200 text-gray-700 border-cyan-400'
+                                : 'bg-slate-700 text-gray-300 border-cyan-400'
+                              : theme === 'theme-light' 
+                                ? 'bg-gray-200 text-gray-700 border-gray-300' 
+                                : 'bg-slate-700 text-gray-300 border-slate-600'
                         }`}>
                           {/* Chrome shine for center badge */}
-                          {isCenter && (
+                          {isCenter && !isShuffling && (
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent transform -skew-x-12 animate-pulse" />
                           )}
                           <span className="relative z-10" style={{
