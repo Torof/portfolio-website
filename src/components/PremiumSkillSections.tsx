@@ -1410,13 +1410,9 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
                 </linearGradient>
               </defs>
             </svg>
-            </div>
-            
-          </div>
 
-          {/* Tooltips (HTML overlay for better styling) - moved outside flex container */}
-          <div className="relative h-[600px] w-full max-w-[1200px] mx-auto" style={{ marginTop: '-600px' }}>
-            <AnimatePresence>
+              {/* Tooltips (HTML overlay for better styling) */}
+              <AnimatePresence>
               {category.skills.map((skill, index) => {
                 const pos = nodePositions[index];
                 // Safety check: ensure pos exists and has valid coordinates
@@ -1492,7 +1488,9 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
                 </motion.div>
               ) : null;
             })}
-            </AnimatePresence>
+              </AnimatePresence>
+            </div>
+            
           </div>
         </div>
       </div>
