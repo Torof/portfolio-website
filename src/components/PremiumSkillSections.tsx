@@ -268,7 +268,6 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
                 const z = Math.cos(radians) * radius; // Depth - positive z = closer to viewer
                 
                 // Scale based on position - center is largest
-                const scale = 1 - Math.abs(offset) * 0.15; // Back to original scale difference
                 const opacity = Math.max(0, 1 - Math.abs(offset) * 0.25); // Back to gradual fade
                 const blur = Math.abs(offset) > 2 ? 1 : 0;
                 
@@ -315,14 +314,14 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
                     }}
                   >
                     <div className={`p-4 rounded-xl border-2 backdrop-blur-sm transition-all duration-300 h-full relative overflow-hidden ${
-                      isCenter && !isShuffling
+                      isShuffling
                         ? theme === 'theme-light'
-                          ? 'bg-gradient-to-br from-slate-200 via-gray-200 to-slate-300 border-cyan-400 shadow-2xl'
-                          : 'bg-gradient-to-br from-slate-700 via-gray-600 to-slate-800 border-cyan-400 shadow-2xl'
-                        : isCenter && isShuffling
+                          ? 'bg-gradient-to-br from-gray-100 to-gray-200 border-gray-400'
+                          : 'bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600'
+                        : isCenter
                           ? theme === 'theme-light'
-                            ? 'bg-gradient-to-br from-gray-100 to-gray-200 border-cyan-400 shadow-2xl'
-                            : 'bg-gradient-to-br from-slate-800 to-slate-700 border-cyan-400 shadow-2xl'
+                            ? 'bg-gradient-to-br from-slate-200 via-gray-200 to-slate-300 border-cyan-400 shadow-2xl'
+                            : 'bg-gradient-to-br from-slate-700 via-gray-600 to-slate-800 border-cyan-400 shadow-2xl'
                           : theme === 'theme-light'
                             ? 'bg-gradient-to-br from-gray-100 to-gray-200 border-gray-400'
                             : 'bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600'
@@ -341,14 +340,14 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
                       )}
                       <div className="flex items-center space-x-3" style={{ marginLeft: `${60 - (Math.abs(offset) * 3)}px` }}> {/* Text closer to left edge */}
                         <div className={`text-sm font-bold px-3 py-1.5 rounded-lg relative overflow-hidden border ${
-                          isCenter && !isShuffling
-                            ? theme === 'theme-light'
-                              ? 'bg-gradient-to-r from-slate-400 via-gray-300 to-slate-500 text-white shadow-lg shadow-slate-400/40 border-cyan-400'
-                              : 'bg-gradient-to-r from-slate-600 via-gray-500 to-slate-700 text-white shadow-lg shadow-slate-500/50 border-cyan-400'
-                            : isCenter && isShuffling
+                          isShuffling
+                            ? theme === 'theme-light' 
+                              ? 'bg-gray-200 text-gray-700 border-gray-300' 
+                              : 'bg-slate-700 text-gray-300 border-slate-600'
+                            : isCenter
                               ? theme === 'theme-light'
-                                ? 'bg-gray-200 text-gray-700 border-cyan-400'
-                                : 'bg-slate-700 text-gray-300 border-cyan-400'
+                                ? 'bg-gradient-to-r from-slate-400 via-gray-300 to-slate-500 text-white shadow-lg shadow-slate-400/40 border-cyan-400'
+                                : 'bg-gradient-to-r from-slate-600 via-gray-500 to-slate-700 text-white shadow-lg shadow-slate-500/50 border-cyan-400'
                               : theme === 'theme-light' 
                                 ? 'bg-gray-200 text-gray-700 border-gray-300' 
                                 : 'bg-slate-700 text-gray-300 border-slate-600'
@@ -358,11 +357,13 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent transform -skew-x-12 animate-pulse" />
                           )}
                           <span className="relative z-10" style={{
-                            textShadow: isCenter 
-                              ? theme === 'theme-light' 
-                                ? '0 0 5px rgba(56, 189, 248, 0.5)' 
-                                : '0 0 8px rgba(56, 189, 248, 0.8)'
-                              : 'none'
+                            textShadow: isShuffling 
+                              ? 'none'
+                              : isCenter 
+                                ? theme === 'theme-light' 
+                                  ? '0 0 5px rgba(56, 189, 248, 0.5)' 
+                                  : '0 0 8px rgba(56, 189, 248, 0.8)'
+                                : 'none'
                           }}>
                             ERC-{skill.id.includes('erc') ? skill.id.replace('erc', '').replace('-', '') : 'STD'}
                           </span>

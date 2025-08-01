@@ -346,18 +346,11 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
             // Find turret by defendedBy property
             turret = category.skills.find(skill => skill.id === threatType.defendedBy);
             
-            // Debug logging
-            if (process.env.NODE_ENV === 'development') {
-              console.log(`Threat ${threatType.name} (${threatType.id}) should be defended by ${threatType.defendedBy}, found turret: ${turret?.name || 'none'}`);
-            }
           }
           
           // Fallback - use auditing as default if turret not found
           if (!turret) {
             turret = category.skills.find(skill => skill.id === 'auditing');
-            if (process.env.NODE_ENV === 'development') {
-              console.log(`No turret found for ${threatType?.name}, using auditing fallback`);
-            }
           }
 
           if (turret && threat.health > 0 && threat.y > 20 && threat.y < 70) {
