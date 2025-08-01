@@ -1153,9 +1153,54 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
             </div>
           </div>
 
-          {/* Network Visualization */}
-          <div className="relative h-[600px] w-full max-w-[700px] mx-auto">
-            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+          {/* Content Container - Flex Layout */}
+          <div className="flex gap-8 items-start">
+            {/* Left Side - Text Card */}
+            <div className="flex-1 max-w-md">
+              <div className={`p-6 rounded-xl border ${
+                theme === 'theme-light'
+                  ? 'bg-white/80 border-indigo-200 shadow-lg'
+                  : 'bg-slate-800/80 border-indigo-700 shadow-xl'
+              }`}>
+                <h4 className={`text-xl font-bold mb-4 ${
+                  theme === 'theme-light' ? 'text-indigo-900' : 'text-indigo-300'
+                }`}>
+                  Multi-Chain Architecture
+                </h4>
+                <div className={`space-y-3 text-sm ${
+                  theme === 'theme-light' ? 'text-slate-700' : 'text-slate-300'
+                }`}>
+                  <p>
+                    I specialize in building cross-chain applications that leverage the unique strengths of each Layer 2 network:
+                  </p>
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <span className="text-indigo-500 mr-2">•</span>
+                      <span><strong>Arbitrum & Optimism:</strong> DeFi protocols with complex logic and composability</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-indigo-500 mr-2">•</span>
+                      <span><strong>Polygon & Base:</strong> High-volume consumer applications and gaming</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-indigo-500 mr-2">•</span>
+                      <span><strong>zkSync Era & Scroll:</strong> Privacy-focused and ZK-powered applications</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-indigo-500 mr-2">•</span>
+                      <span><strong>Gnosis & Berachain:</strong> DAOs and innovative consensus mechanisms</span>
+                    </li>
+                  </ul>
+                  <p className="mt-4">
+                    My expertise includes implementing secure cross-chain messaging, unified liquidity management, and seamless user experiences across multiple networks.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Right Side - Network Visualization */}
+            <div className="relative h-[600px] flex-1 max-w-[600px]">
+              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
               {/* Circular Guide (subtle) */}
               <circle
                 cx={centerPos.x}
@@ -1365,8 +1410,12 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
                 </linearGradient>
               </defs>
             </svg>
+            </div>
+            
+          </div>
 
-            {/* Tooltips (HTML overlay for better styling) */}
+          {/* Tooltips (HTML overlay for better styling) - moved outside flex container */}
+          <div className="relative h-[600px] w-full max-w-[1200px] mx-auto" style={{ marginTop: '-600px' }}>
             <AnimatePresence>
               {category.skills.map((skill, index) => {
                 const pos = nodePositions[index];
