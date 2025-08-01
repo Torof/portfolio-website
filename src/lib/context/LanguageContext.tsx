@@ -237,7 +237,7 @@ const translations = {
     'vibe-coding.ai.docs': 'Documentation & Deployment Scripts',
 
     // AI Tools
-    'vibe-coding.tool.claude.name': 'Claude Sonnet',
+    'vibe-coding.tool.claude.name': 'Claude',
     'vibe-coding.tool.claude.desc': 'Advanced reasoning for complex architecture decisions and code reviews',
     'vibe-coding.tool.cursor.name': 'Cursor IDE',
     'vibe-coding.tool.cursor.desc': 'AI-powered code completion and refactoring at lightning speed',
@@ -827,7 +827,7 @@ const translations = {
     'vibe-coding.ai.testing': 'Suites de Tests et Automatisation',
     'vibe-coding.ai.docs': 'Documentation et Scripts de Déploiement',
     // AI Tools
-    'vibe-coding.tool.claude.name': 'Claude Sonnet',
+    'vibe-coding.tool.claude.name': 'Claude',
     'vibe-coding.tool.claude.desc': 'Raisonnement avancé pour les décisions d\'architecture complexes et revues de code',
     'vibe-coding.tool.cursor.name': 'Cursor IDE',
     'vibe-coding.tool.cursor.desc': 'Complétion de code et refactoring alimentés par IA à la vitesse de l\'éclair',

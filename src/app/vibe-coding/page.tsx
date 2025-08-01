@@ -184,12 +184,6 @@ export default function VibeCodingPage() {
                   color: "from-orange-500 to-red-500"
                 },
                 {
-                  nameKey: "vibe-coding.tool.cursor.name",
-                  logo: "/logos/cursor.svg",
-                  descKey: "vibe-coding.tool.cursor.desc",
-                  color: "from-red-500 to-pink-500"
-                },
-                {
                   nameKey: "vibe-coding.tool.copilot.name",
                   logo: "/logos/github-copilot.svg",
                   descKey: "vibe-coding.tool.copilot.desc",
@@ -200,18 +194,6 @@ export default function VibeCodingPage() {
                   logo: "/logos/chatgpt.svg",
                   descKey: "vibe-coding.tool.chatgpt.desc",
                   color: "from-orange-500 to-yellow-500"
-                },
-                {
-                  nameKey: "vibe-coding.tool.perplexity.name",
-                  logo: "/logos/perplexity.svg",
-                  descKey: "vibe-coding.tool.perplexity.desc",
-                  color: "from-red-500 to-orange-500"
-                },
-                {
-                  nameKey: "vibe-coding.tool.v0.name",
-                  logo: "/logos/v0-vercel.svg",
-                  descKey: "vibe-coding.tool.v0.desc",
-                  color: "from-pink-500 to-red-500"
                 }
               ].map((tool, index) => (
                 <div key={index} className="relative p-6 rounded-xl bg-gradient-to-br from-orange-500/10 via-red-500/5 to-yellow-500/10 backdrop-blur-sm border border-orange-400/20 hover:border-orange-400/40 transition-all duration-300 group shadow-lg">
