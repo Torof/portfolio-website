@@ -636,6 +636,29 @@ const translations = {
     'community.question': 'QUESTION:',
     'community.myAnswer': 'MY ANSWER:',
     'community.viewProfile': 'View My Full Stack Exchange Profile',
+
+    // DeFi Protocol Descriptions
+    'defi.amm.description': 'DEX protocols using algorithmic pricing',
+    'defi.lending.description': 'Collateralized lending protocols',
+    'defi.yield-farming.description': 'Liquidity incentive mechanisms and reward distribution',
+    'defi.oracles.description': 'External data integration and price feeds',
+    'defi.flash-loans.description': 'Uncollateralized loans within single transactions',
+    'defi.vaults.description': 'Automated yield generation and vault management',
+    'defi.derivatives.description': 'Options, futures, and synthetic assets',
+    'defi.liquidations.description': 'Collateral liquidation and auction systems',
+    'defi.tokenomics.description': 'Token economics and incentive mechanisms',
+
+    // DeFi Usage Descriptions
+    'defi.usage.dex': 'I architect and optimize automated market maker (AMM) systems, implementing custom trading strategies and liquidity pool integrations. My expertise includes MEV protection, arbitrage mechanisms, and cross-chain bridge development for seamless asset transfers.',
+    'defi.usage.lending': 'I design sophisticated lending and borrowing protocols with dynamic interest rate models and advanced collateral management systems. My work focuses on risk assessment algorithms, liquidation mechanisms, and yield optimization strategies.',
+    'defi.usage.yieldFarming': 'I create auto-compounding yield farming strategies and implement complex reward distribution mechanisms. My expertise covers liquidity mining protocols, governance token economics, and sustainable yield generation models.',
+    'defi.usage.derivatives': 'I build advanced derivatives platforms with options, futures, and perpetual contracts. My implementations include synthetic asset protocols, prediction markets, and automated settlement systems.',
+    'defi.usage.default': 'I integrate this protocol into comprehensive DeFi ecosystems, focusing on interoperability, gas optimization, and security best practices. My implementations emphasize user experience and robust smart contract architecture.',
+
+    // DeFi Section Headers
+    'defi.section.protocolOverview': 'PROTOCOL_OVERVIEW',
+    'defi.section.howIUseIt': 'HOW_I_USE_IT',
+    'defi.section.keyFeatures': 'KEY_FEATURES',
   },
   fr: {
     // Navigation
@@ -1203,5 +1226,28 @@ const translations = {
     'community.question': 'QUESTION :',
     'community.myAnswer': 'MA RÉPONSE :',
     'community.viewProfile': 'Voir Mon Profil Stack Exchange Complet',
+
+    // DeFi Protocol Descriptions
+    'defi.amm.description': 'Protocoles DEX utilisant la tarification algorithmique',
+    'defi.lending.description': 'Protocoles de prêt collatéralisé',
+    'defi.yield-farming.description': 'Mécanismes d\'incitation à la liquidité et distribution de récompenses',
+    'defi.oracles.description': 'Intégration de données externes et flux de prix',
+    'defi.flash-loans.description': 'Prêts non collatéralisés au sein de transactions uniques',
+    'defi.vaults.description': 'Génération automatisée de rendement et gestion de coffres',
+    'defi.derivatives.description': 'Options, futures et actifs synthétiques',
+    'defi.liquidations.description': 'Systèmes de liquidation de collatéral et d\'enchères',
+    'defi.tokenomics.description': 'Économie des tokens et mécanismes d\'incitation',
+
+    // DeFi Usage Descriptions
+    'defi.usage.dex': 'J\'architecte et optimise des systèmes de market maker automatisés (AMM), en implémentant des stratégies de trading personnalisées et des intégrations de pools de liquidité. Mon expertise inclut la protection MEV, les mécanismes d\'arbitrage et le développement de bridges cross-chain pour des transferts d\'actifs fluides.',
+    'defi.usage.lending': 'Je conçois des protocoles de prêt et d\'emprunt sophistiqués avec des modèles de taux d\'intérêt dynamiques et des systèmes avancés de gestion de collatéral. Mon travail se concentre sur les algorithmes d\'évaluation des risques, les mécanismes de liquidation et les stratégies d\'optimisation de rendement.',
+    'defi.usage.yieldFarming': 'Je crée des stratégies de yield farming auto-composées et implémente des mécanismes complexes de distribution de récompenses. Mon expertise couvre les protocoles de liquidity mining, l\'économie des tokens de gouvernance et les modèles de génération de rendement durable.',
+    'defi.usage.derivatives': 'Je construis des plateformes de dérivés avancées avec options, futures et contrats perpétuels. Mes implémentations incluent des protocoles d\'actifs synthétiques, des marchés de prédiction et des systèmes de règlement automatisés.',
+    'defi.usage.default': 'J\'intègre ce protocole dans des écosystèmes DeFi complets, en me concentrant sur l\'interopérabilité, l\'optimisation du gas et les meilleures pratiques de sécurité. Mes implémentations mettent l\'accent sur l\'expérience utilisateur et une architecture de smart contracts robuste.',
+
+    // DeFi Section Headers
+    'defi.section.protocolOverview': 'APERÇU_PROTOCOLE',
+    'defi.section.howIUseIt': 'COMMENT_JE_L\'UTILISE',
+    'defi.section.keyFeatures': 'FONCTIONNALITÉS_CLÉS',
   }
 };

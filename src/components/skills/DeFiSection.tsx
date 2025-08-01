@@ -41,15 +41,26 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
   // Get detailed protocol information
   const getProtocolDetails = (skill: AdvancedSkill) => {
     const usageDescriptions: { [key: string]: string } = {
-      'DEX': `I architect and optimize automated market maker (AMM) systems, implementing custom trading strategies and liquidity pool integrations. My expertise includes MEV protection, arbitrage mechanisms, and cross-chain bridge development for seamless asset transfers.`,
-      'Lending': `I design sophisticated lending and borrowing protocols with dynamic interest rate models and advanced collateral management systems. My work focuses on risk assessment algorithms, liquidation mechanisms, and yield optimization strategies.`,
-      'Yield Farming': `I create auto-compounding yield farming strategies and implement complex reward distribution mechanisms. My expertise covers liquidity mining protocols, governance token economics, and sustainable yield generation models.`,
-      'Derivatives': `I build advanced derivatives platforms with options, futures, and perpetual contracts. My implementations include synthetic asset protocols, prediction markets, and automated settlement systems.`,
-      'default': `I integrate this protocol into comprehensive DeFi ecosystems, focusing on interoperability, gas optimization, and security best practices. My implementations emphasize user experience and robust smart contract architecture.`
+      'Trading': t('defi.usage.dex'),
+      'Credit': t('defi.usage.lending'),
+      'Incentives': t('defi.usage.yieldFarming'),
+      'Yield Generation': t('defi.usage.yieldFarming'),
+      'Advanced DeFi': t('defi.usage.derivatives'),
+      'Risk Management': t('defi.usage.lending'),
+      'Protocol Design': t('defi.usage.default'),
+      'Infrastructure': t('defi.usage.default'),
+      'default': t('defi.usage.default')
+    };
+
+    // Get translated skill description
+    const getTranslatedDescription = (skillId: string): string => {
+      const key = `defi.${skillId}.description`;
+      const translated = t(key);
+      return translated !== key ? translated : skill.description;
     };
 
     return {
-      description: skill.description,
+      description: getTranslatedDescription(skill.id),
       usage: usageDescriptions[skill.subcategory] || usageDescriptions['default'],
       features: skill.examples || []
     };
@@ -298,7 +309,7 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
                               <div className={`font-mono text-sm font-bold mb-2 ${
                                 theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
                               }`}>
-                                {'>>>'} PROTOCOL_OVERVIEW:
+                                {'>>>'} {t('defi.section.protocolOverview')}:
                               </div>
                               <div className={`font-mono text-xs leading-relaxed ${
                                 theme === 'theme-light' ? 'text-amber-800' : 'text-green-300'
@@ -312,7 +323,7 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
                               <div className={`font-mono text-sm font-bold mb-2 ${
                                 theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
                               }`}>
-                                {'>>>'} HOW_I_USE_IT:
+                                {'>>>'} {t('defi.section.howIUseIt')}:
                               </div>
                               <div className={`font-mono text-xs leading-relaxed ${
                                 theme === 'theme-light' ? 'text-amber-800' : 'text-green-300'
@@ -327,7 +338,7 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
                                 <div className={`font-mono text-sm font-bold mb-2 ${
                                   theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
                                 }`}>
-                                  {'>>>'} KEY_FEATURES:
+                                  {'>>>'} {t('defi.section.keyFeatures')}:
                                 </div>
                                 <div className="grid grid-cols-2 gap-2">
                                   {getProtocolDetails(skill).features.slice(0, 6).map((feature: string, idx: number) => (
