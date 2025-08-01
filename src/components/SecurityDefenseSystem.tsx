@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
+import { useLanguage } from '@/lib/context/LanguageContext';
 import { SkillCategory } from '@/lib/types';
 
 interface SecurityDefenseSystemProps {
@@ -251,6 +252,31 @@ interface Explosion {
 
 export default function SecurityDefenseSystem({ category }: SecurityDefenseSystemProps) {
   const { theme } = useTheme();
+  const { t } = useLanguage();
+
+  // Helper function to get threat name (always in English)
+  const getThreatName = (threatId: string): string => {
+    return threatTypes.find(t => t.id === threatId)?.name || threatId;
+  };
+
+  // Helper function to get translated threat description
+  const getThreatDescription = (threatId: string): string => {
+    const key = `threat.${threatId}.description`;
+    const translated = t(key);
+    return translated !== key ? translated : threatTypes.find(t => t.id === threatId)?.description || '';
+  };
+
+  // Helper function to get translated threat process steps
+  const getThreatProcess = (threatId: string) => {
+    const threatType = threatTypes.find(t => t.id === threatId);
+    if (!threatType?.process) return null;
+    
+    return {
+      detect: t(`threat.${threatId}.detect`) !== `threat.${threatId}.detect` ? t(`threat.${threatId}.detect`) : threatType.process.detect,
+      prevent: t(`threat.${threatId}.prevent`) !== `threat.${threatId}.prevent` ? t(`threat.${threatId}.prevent`) : threatType.process.prevent,
+      fix: t(`threat.${threatId}.fix`) !== `threat.${threatId}.fix` ? t(`threat.${threatId}.fix`) : threatType.process.fix,
+    };
+  };
   const [threats, setThreats] = useState<Threat[]>([]);
   const [lasers, setLasers] = useState<LaserBeam[]>([]);
   const [explosions, setExplosions] = useState<Explosion[]>([]);
@@ -434,11 +460,11 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
           <div className={`text-xs font-mono font-bold text-center ${
             theme === 'theme-light' ? 'text-red-600' : 'text-red-400'
           }`}>
-            <div className="animate-pulse">⚡ SYSTEMS ONLINE</div>
+            <div className="animate-pulse">⚡ {t('security.status.online')}</div>
             <div className={`flex justify-center space-x-1 mt-1 ${
               theme === 'theme-light' ? 'text-green-600' : 'text-green-400'
             }`}>
-              <span>SCAN</span>
+              <span>{t('security.status.scan')}</span>
               <span className="animate-bounce" style={{ animationDelay: '0.1s' }}>•</span>
               <span className="animate-bounce" style={{ animationDelay: '0.2s' }}>•</span>
               <span className="animate-bounce" style={{ animationDelay: '0.3s' }}>•</span>
@@ -449,10 +475,10 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
           theme === 'theme-light' ? 'text-slate-800' : 'text-slate-200'
         }`}>
           <h3 className="text-xl font-bold font-mono mb-2">
-            🛡️ SMART CONTRACT SECURITY & AUDITING 🛡️
+            🛡️ {t('security.title')} 🛡️
           </h3>
           <p className="text-sm font-mono opacity-80">
-            Protecting decentralized applications from vulnerabilities and exploits
+            {t('security.subtitle')}
           </p>
         </div>
 
@@ -460,13 +486,12 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
           theme === 'theme-light' ? 'text-slate-700' : 'text-slate-300'
         }`}>
           <p className="mb-3">
-            <strong>Security is paramount in DeFi.</strong> Smart contracts handle billions in value and are immutable once deployed. 
-            A single vulnerability can lead to catastrophic losses, making thorough security analysis essential for any serious protocol.
+            <strong>{t('security.description.intro')}</strong> 
+            {t('security.description.vulnerability')}
           </p>
           <p className="mb-3">
-            My approach combines <strong>automated tools</strong> (Slither, Foundry fuzzing), <strong>manual code review</strong>, 
-            and <strong>formal verification</strong> techniques to identify vulnerabilities before they can be exploited. 
-            I focus on common attack vectors like reentrancy, flash loan exploits, and access control flaws.
+            {t('security.approach')} 
+            {t('security.description.focus')}
           </p>
         </div>
 
@@ -476,8 +501,8 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
             : 'bg-blue-950 text-blue-300 border border-blue-500'
         }`}>
           <div>
-            Watch real-time threat detection in action below • <strong>Hover on elements</strong> for detailed information • 
-            Turrets represent security skills defending against common vulnerabilities
+            {t('security.description.watch')} <strong>{t('security.status.hoverElements')}</strong> {t('security.status.detailedInfo')} • 
+            {t('security.description.turrets')}
           </div>
         </div>
       </div>
@@ -521,24 +546,24 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
               <h3 className={`text-2xl font-bold font-mono ${
                 theme === 'theme-light' ? 'text-slate-800' : 'text-green-400'
               }`}>
-                SECURITY DEFENSE SYSTEM
+                {t('security.system.title')}
               </h3>
               <p className={`text-sm font-mono ${
                 theme === 'theme-light' ? 'text-slate-600' : 'text-green-500'
               }`}>
-                AUTO-TARGETING: ENABLED | THREAT LEVEL: ACTIVE
+                {t('security.system.status')}
               </p>
             </div>
             <div className="text-right">
               <div className={`text-3xl font-bold font-mono ${
                 theme === 'theme-light' ? 'text-blue-600' : 'text-green-400'
               }`}>
-                SCORE: {String(score).padStart(6, '0')}
+                {t('security.status.score')} {String(score).padStart(6, '0')}
               </div>
               <div className={`text-sm font-mono ${
                 theme === 'theme-light' ? 'text-slate-600' : 'text-green-500'
               }`}>
-                THREATS NEUTRALIZED
+                {t('security.system.neutralized')}
               </div>
             </div>
           </div>
@@ -590,7 +615,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                       ? 'bg-red-100 text-red-800 border border-red-300' 
                       : 'bg-red-900/50 text-red-300 border border-red-500'
                   }`}>
-                    {threat.type.name}
+                    {getThreatName(threat.type.id)}
                   </div>
                   
                   {/* Health bar */}
@@ -746,29 +771,29 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                         <div className="text-xs leading-relaxed opacity-90">
                           {skill.id === 'auditing' && (
                             <>
-                              <p className="mb-2">I perform line-by-line code reviews to identify vulnerabilities before deployment. My audits combine manual analysis with automated tools.</p>
-                              <p>Focus areas: access control flaws, reentrancy risks, fund management issues, and business logic errors that could lead to exploits.</p>
+                              <p className="mb-2">{t('security.skill.auditing')}</p>
+                              <p>{t('security.skill.auditing.focus')}</p>
                             </>
                           )}
                           
                           {skill.id === 'common-vulnerabilities' && (
                             <>
-                              <p className="mb-2">I recognize and prevent well-known attack patterns like reentrancy, integer overflows, and unchecked returns that have caused millions in losses.</p>
-                              <p>My approach: implement checks-effects-interactions, use SafeMath, validate all external calls, and apply defensive programming patterns.</p>
+                              <p className="mb-2">{t('security.skill.invariant-testing')}</p>
+                              <p>{t('security.skill.invariant-testing.approach')}</p>
                             </>
                           )}
                           
                           {skill.id === 'formal-verification' && (
                             <>
-                              <p className="mb-2">I use mathematical proofs to guarantee contract behavior. By defining invariants and using symbolic execution, I ensure code works correctly in all scenarios.</p>
-                              <p>This catches subtle bugs that testing and auditing miss - critical for high-value protocols where failure isn&apos;t an option.</p>
+                              <p className="mb-2">{t('security.skill.formal-verification.math')}</p>
+                              <p>{t('security.skill.formal-verification')}</p>
                             </>
                           )}
                           
                           {skill.id === 'mev-protection' && (
                             <>
-                              <p className="mb-2">I protect users from sandwich attacks and front-running by implementing commit-reveal schemes, TWAP oracles, and private mempool strategies.</p>
-                              <p>My MEV-resistant designs ensure fair trading and prevent value extraction that hurts user experience in DeFi protocols.</p>
+                              <p className="mb-2">{t('security.skill.mev-protection')}</p>
+                              <p>{t('security.skill.mev-protection.design')}</p>
                             </>
                           )}
                           
@@ -781,8 +806,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                           
                           {skill.id === 'attack-vectors' && (
                             <>
-                              <p className="mb-2">I analyze how vulnerabilities chain together in real exploits - flash loans combined with oracle manipulation, governance attacks, and cross-protocol interactions.</p>
-                              <p>By thinking like an attacker and studying past hacks, I identify non-obvious attack paths before malicious actors find them.</p>
+                              <p>{t('security.skill.attack-vectors')}</p>
                             </>
                           )}
                         </div>
@@ -822,12 +846,12 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
               <h4 className={`text-lg font-bold font-mono ${
                 theme === 'theme-light' ? 'text-red-800' : 'text-red-400'
               }`}>
-                THREAT MONITOR
+                {t('security.threat.monitor')}
               </h4>
               <p className={`text-xs font-mono ${
                 theme === 'theme-light' ? 'text-red-600' : 'text-red-500'
               }`}>
-                ACTIVE INCOMING THREATS
+                {t('security.threat.active')}
               </p>
             </div>
             
@@ -838,12 +862,12 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                 }`}>
                   <div className="text-4xl mb-2">🛡️</div>
                   <div className="text-sm font-mono">
-                    All Clear
+                    {t('security.status.allClear')}
                   </div>
                   <div className={`text-xs font-mono opacity-60 ${
                     theme === 'theme-light' ? 'text-red-500' : 'text-red-500'
                   }`}>
-                    No threats detected
+                    {t('security.threat.none')}
                   </div>
                 </div>
               ) : (
@@ -872,37 +896,40 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                             <div className={`text-sm font-mono font-bold mb-2 ${
                               theme === 'theme-light' ? 'text-red-700' : 'text-red-300'
                             }`}>
-                              {threat.type.name}
+                              {getThreatName(threat.type.id)}
                             </div>
                             {/* Security Process Steps */}
-                            {threat.type.process ? (
-                              <div className="space-y-2 mb-3">
-                                <div className={`text-xs ${
-                                  theme === 'theme-light' ? 'text-blue-600' : 'text-blue-400'
-                                }`}>
-                                  <span className="font-mono font-bold">🔍 DETECT:</span>
-                                  <div className="ml-4 mt-1">{threat.type.process.detect}</div>
+                            {(() => {
+                              const process = getThreatProcess(threat.type.id);
+                              return process ? (
+                                <div className="space-y-2 mb-3">
+                                  <div className={`text-xs ${
+                                    theme === 'theme-light' ? 'text-blue-600' : 'text-blue-400'
+                                  }`}>
+                                    <span className="font-mono font-bold">🔍 {t('security.threat.detect')}</span>
+                                    <div className="ml-4 mt-1">{process.detect}</div>
+                                  </div>
+                                  <div className={`text-xs ${
+                                    theme === 'theme-light' ? 'text-yellow-600' : 'text-yellow-400'
+                                  }`}>
+                                    <span className="font-mono font-bold">🛡️ {t('security.threat.prevent')}</span>
+                                    <div className="ml-4 mt-1">{process.prevent}</div>
+                                  </div>
+                                  <div className={`text-xs ${
+                                    theme === 'theme-light' ? 'text-green-600' : 'text-green-400'
+                                  }`}>
+                                    <span className="font-mono font-bold">🔧 {t('security.threat.fix')}</span>
+                                    <div className="ml-4 mt-1">{process.fix}</div>
+                                  </div>
                                 </div>
-                                <div className={`text-xs ${
-                                  theme === 'theme-light' ? 'text-yellow-600' : 'text-yellow-400'
+                              ) : (
+                                <div className={`text-xs leading-relaxed mb-3 ${
+                                  theme === 'theme-light' ? 'text-red-600' : 'text-red-400'
                                 }`}>
-                                  <span className="font-mono font-bold">🛡️ PREVENT:</span>
-                                  <div className="ml-4 mt-1">{threat.type.process.prevent}</div>
+                                  {getThreatDescription(threat.type.id)}
                                 </div>
-                                <div className={`text-xs ${
-                                  theme === 'theme-light' ? 'text-green-600' : 'text-green-400'
-                                }`}>
-                                  <span className="font-mono font-bold">🔧 FIX:</span>
-                                  <div className="ml-4 mt-1">{threat.type.process.fix}</div>
-                                </div>
-                              </div>
-                            ) : (
-                              <div className={`text-xs leading-relaxed mb-3 ${
-                                theme === 'theme-light' ? 'text-red-600' : 'text-red-400'
-                              }`}>
-                                {threat.type.description}
-                              </div>
-                            )}
+                              );
+                            })()}
 
                           </div>
                         </div>
@@ -926,10 +953,10 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
           theme === 'theme-light' ? 'text-amber-800' : 'text-amber-300'
         }`}>
           <h4 className="text-xl font-bold font-mono mb-2">
-            🛡️ SECURITY ARSENAL 🛡️
+            🛡️ {t('security.arsenal.title')} 🛡️
           </h4>
           <p className="text-sm font-mono opacity-80">
-            LEGENDARY WEAPONS & POWER-UPS FOR THE ULTIMATE SECURITY AUDIT
+            {t('security.arsenal.subtitle')}
           </p>
         </div>
 
@@ -960,7 +987,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
             <div className={`text-xs mt-2 opacity-80 ${
               theme === 'theme-light' ? 'text-slate-600' : 'text-slate-400'
             }`}>
-              +50% Defense vs Access Control
+              {t('security.arsenal.openzeppelin.short')}
             </div>
 
             {/* Tooltip */}
@@ -986,7 +1013,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                   OpenZeppelin
                 </div>
                 <div className="text-xs leading-relaxed opacity-90 text-left">
-                  Industry-standard library of secure, reusable smart contract components. Provides battle-tested implementations of ERC standards, access control, and security patterns used by thousands of projects.
+                  {t('security.arsenal.openzeppelin')}
                 </div>
               </div>
               
@@ -1025,7 +1052,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
             <div className={`text-xs mt-2 opacity-80 ${
               theme === 'theme-light' ? 'text-slate-600' : 'text-slate-400'
             }`}>
-              Auto-detects 90+ vulnerabilities
+              {t('security.arsenal.slither.short')}
             </div>
 
             {/* Tooltip */}
@@ -1051,7 +1078,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                   Slither
                 </div>
                 <div className="text-xs leading-relaxed opacity-90 text-left">
-                  Static analysis framework for Solidity smart contracts. Detects vulnerabilities, optimization opportunities, and code quality issues. Essential tool for automated security scanning with 90+ built-in detectors.
+                  {t('security.arsenal.slither')}
                 </div>
               </div>
               
@@ -1090,7 +1117,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
             <div className={`text-xs mt-2 opacity-80 ${
               theme === 'theme-light' ? 'text-slate-600' : 'text-slate-400'
             }`}>
-              Unlimited fuzz testing power
+              {t('security.arsenal.foundry.short')}
             </div>
 
             {/* Tooltip */}
@@ -1116,7 +1143,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                   Foundry
                 </div>
                 <div className="text-xs leading-relaxed opacity-90 text-left">
-                  Fast, portable and modular toolkit for Ethereum development. Features advanced testing with fuzzing, gas optimization, and deployment scripting. The gold standard for modern smart contract development and testing.
+                  {t('security.arsenal.foundry')}
                 </div>
               </div>
               
@@ -1155,7 +1182,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
             <div className={`text-xs mt-2 opacity-80 ${
               theme === 'theme-light' ? 'text-slate-600' : 'text-slate-400'
             }`}>
-              Property-based fuzz testing
+              {t('security.arsenal.echidna.short')}
             </div>
 
             {/* Tooltip */}
@@ -1181,7 +1208,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                   Echidna
                 </div>
                 <div className="text-xs leading-relaxed opacity-90 text-left">
-                  Property-based fuzzer for Ethereum smart contracts by Trail of Bits. Generates random inputs to test invariants and find edge cases. Specialized in discovering subtle bugs through automated property verification.
+                  {t('security.arsenal.echidna')}
                 </div>
               </div>
               
@@ -1202,12 +1229,12 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
           <div className={`text-sm font-mono font-bold ${
             theme === 'theme-light' ? 'text-amber-700' : 'text-amber-400'
           }`}>
-            🏆 MASTER AUDITOR STATUS: UNLOCKED 🏆
+            🏆 {t('security.master.title')} 🏆
           </div>
           <div className={`text-xs font-mono mt-1 opacity-80 ${
             theme === 'theme-light' ? 'text-amber-600' : 'text-amber-500'
           }`}>
-            All legendary security tools mastered • 100% vulnerability coverage
+            {t('security.master.description')}
           </div>
         </div>
       </div>
