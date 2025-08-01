@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence, useMotionValue, useTransform, PanInfo } from 'framer-motion';
+import { useState, useRef } from 'react';
+import { motion, useMotionValue, PanInfo } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
 import { SkillCategory, AdvancedSkill } from '@/lib/types';
 

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
-import { SkillCategory, AdvancedSkill } from '@/lib/types';
+import { SkillCategory } from '@/lib/types';
 
 interface ThemedSkillSectionsProps {
   categories: SkillCategory[];
@@ -12,7 +12,7 @@ interface ThemedSkillSectionsProps {
 // Smart Contracts - Blockchain/Document Theme
 const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
   const { theme } = useTheme();
-  const [selectedSkill, setSelectedSkill] = useState<AdvancedSkill | null>(null);
+  // const [selectedSkill, setSelectedSkill] = useState<AdvancedSkill | null>(null);
 
   return (
     <section className="mb-20">
@@ -53,7 +53,6 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                onClick={() => setSelectedSkill(selectedSkill?.id === skill.id ? null : skill)}
               >
                 {/* Contract-style header */}
                 <div className="flex items-center justify-between mb-4">
@@ -96,7 +95,7 @@ const SmartContractsSection = ({ category }: { category: SkillCategory }) => {
 // DeFi - Financial/Trading Theme
 const DeFiSection = ({ category }: { category: SkillCategory }) => {
   const { theme } = useTheme();
-  const [selectedSkill, setSelectedSkill] = useState<AdvancedSkill | null>(null);
+  // const [selectedSkill, setSelectedSkill] = useState<AdvancedSkill | null>(null);
 
   return (
     <section className="mb-20">

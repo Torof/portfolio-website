@@ -25,7 +25,7 @@ function buildApiUrl(endpoint: string, params: Record<string, string> = {}): str
 }
 
 // Helper function to handle API responses with rate limit awareness
-async function handleApiResponse(response: Response, context: string): Promise<any> {
+async function handleApiResponse(response: Response, context: string): Promise<unknown> {
   if (!response.ok) {
     if (response.status === 400) {
       console.error(`Stack Exchange API Bad Request (${context}):`, response.status);
@@ -106,12 +106,12 @@ export async function fetchStackExchangeProfile(userId: string): Promise<StackOv
     });
 
     const data = await handleApiResponse(response, 'profile');
-    if (!data || !data.items || data.items.length === 0) {
+    if (!data || !(data as { items?: unknown[] }).items || (data as { items: unknown[] }).items.length === 0) {
       console.error('No user data found');
       return null;
     }
 
-    const user: StackExchangeUser = data.items[0];
+    const user: StackExchangeUser = (data as { items: StackExchangeUser[] }).items[0];
 
     // Fetch top tags for the user
     const tagsApiUrl = buildApiUrl(`/users/${userId}/top-tags`, {
@@ -127,8 +127,8 @@ export async function fetchStackExchangeProfile(userId: string): Promise<StackOv
 
     let topTags: string[] = ['solidity', 'evm', 'nft', 'ethereum', 'smart-contracts']; // fallback
     const tagsData = await handleApiResponse(tagsResponse, 'tags');
-    if (tagsData && tagsData.items && tagsData.items.length > 0) {
-      topTags = tagsData.items.map((tag: any) => tag.tag_name);
+    if (tagsData && (tagsData as { items?: { tag_name: string }[] }).items && (tagsData as { items: { tag_name: string }[] }).items.length > 0) {
+      topTags = (tagsData as { items: { tag_name: string }[] }).items.map((tag: { tag_name: string }) => tag.tag_name);
     }
 
     const profile: StackOverflowProfile = {
@@ -173,13 +173,13 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
     });
 
     const answersData = await handleApiResponse(answersResponse, 'answers');
-    if (!answersData || !answersData.items || answersData.items.length === 0) {
+    if (!answersData || !(answersData as { items?: unknown[] }).items || (answersData as { items: unknown[] }).items.length === 0) {
       return [];
     }
     
 
     // Get question IDs to fetch question details
-    const questionIds = answersData.items.map((answer: any) => answer.question_id);
+    const questionIds = (answersData as { items: { question_id: number }[] }).items.map((answer: { question_id: number }) => answer.question_id);
     
     // Fetch question details
     const questionsApiUrl = buildApiUrl(`/questions/${questionIds.join(';')}`, {
@@ -195,8 +195,8 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
 
     let questionsMap: { [key: number]: StackExchangeQuestion } = {};
     const questionsData = await handleApiResponse(questionsResponse, 'questions');
-    if (questionsData && questionsData.items) {
-      questionsMap = questionsData.items.reduce((map: any, question: any) => {
+    if (questionsData && (questionsData as { items?: unknown[] }).items) {
+      questionsMap = (questionsData as { items: { question_id: number; title: string; link: string; tags: string[] }[] }).items.reduce((map: { [key: number]: StackExchangeQuestion }, question: { question_id: number; title: string; link: string; tags: string[] }) => {
         map[question.question_id] = {
           question_id: question.question_id,
           title: question.title,
@@ -208,7 +208,7 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
     }
 
     // Combine answers with question data
-    const featuredAnswers: StackOverflowAnswer[] = answersData.items.map((answer: any, index: number) => {
+    const featuredAnswers: StackOverflowAnswer[] = (answersData as { items: { question_id: number; answer_id: number; score: number; is_accepted: boolean; body: string }[] }).items.map((answer: { question_id: number; answer_id: number; score: number; is_accepted: boolean; body: string }) => {
       const question = questionsMap[answer.question_id] || {
         title: 'Question not found',
         link: '',

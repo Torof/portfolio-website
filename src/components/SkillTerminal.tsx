@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
-import { SkillCategory, AdvancedSkill } from '@/lib/types';
+import { SkillCategory } from '@/lib/types';
 
 interface TerminalLine {
   id: string;

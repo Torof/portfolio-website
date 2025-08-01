@@ -325,7 +325,7 @@ export default function SecurityArsenal({ category }: SecurityArsenalProps) {
                         <div className="mb-4">
                           <h5 className="font-semibold light-text mb-2">Combat Techniques:</h5>
                           <div className="flex flex-wrap gap-2">
-                            {skill.examples.map((example, i) => (
+                            {skill.examples?.map((example, i) => (
                               <span
                                 key={i}
                                 className={`px-3 py-1 text-sm rounded-full ${
@@ -344,7 +344,7 @@ export default function SecurityArsenal({ category }: SecurityArsenalProps) {
                         <div>
                           <h5 className="font-semibold light-text mb-2">Battle History:</h5>
                           <ul className="space-y-1">
-                            {skill.projects.map((project, i) => (
+                            {skill.projects?.map((project, i) => (
                               <li key={i} className="flex items-start">
                                 <span className="text-orange-500 mr-2 mt-1">⚔️</span>
                                 <span className="light-text opacity-80 text-sm">{project}</span>

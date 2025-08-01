@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo, memo } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
 import { useLanguage } from '@/lib/context/LanguageContext';
@@ -16,15 +16,6 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
   const [mounted, setMounted] = useState(false);
   const [showList, setShowList] = useState(false);
   
-  // Memoize theme-dependent values to prevent unnecessary re-renders
-  const themeClasses = useMemo(() => ({
-    container: theme === 'theme-light'
-      ? 'bg-gradient-to-br from-gray-50 to-blue-50'
-      : 'bg-gradient-to-br from-slate-900 to-slate-800',
-    button: theme === 'theme-light'
-      ? 'bg-white/80 border-gray-200 text-gray-800 hover:bg-white hover:border-gray-300'
-      : 'bg-slate-800/80 border-slate-700 text-slate-300 hover:bg-slate-800 hover:border-slate-600'
-  }), [theme]);
 
   useEffect(() => {
     setMounted(true);

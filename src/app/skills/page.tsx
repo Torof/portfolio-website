@@ -1,12 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
 import { useScrollAnimation, getAnimationClass } from '@/lib/hooks/useScrollAnimation';
 import { useTheme } from '@/lib/context/ThemeContext';
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { skillCategories } from '@/lib/data/advancedSkills';
-import { AdvancedSkill } from '@/lib/types';
 import AnimatedTitle from '@/components/AnimatedTitle';
 import BlockchainNetwork from '@/components/BlockchainNetwork';
 import PremiumSkillSections from '@/components/PremiumSkillSections';

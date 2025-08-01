@@ -59,7 +59,7 @@ const LiveStackExchangeCard = () => {
           
           if (data.answers && data.answers.length > 0) {
             // Check if live answers have excerpts, otherwise use static data
-            const validAnswers = data.answers.filter(answer => answer.excerpt && answer.excerpt.trim().length > 0);
+            const validAnswers = data.answers.filter((answer: { excerpt?: string }) => answer.excerpt && answer.excerpt.trim().length > 0);
             if (validAnswers.length > 0) {
               setAnswers(validAnswers.slice(0, 4));
               console.log(`✅ Successfully fetched ${validAnswers.length} live Stack Exchange answers via API route`);

@@ -28,7 +28,7 @@ export default function BlockchainNetwork() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number>(0);
   const nodesRef = useRef<Node[]>([]);
   const connectionsRef = useRef<Connection[]>([]);
   

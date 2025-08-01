@@ -61,7 +61,7 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
 
     return {
       description: getTranslatedDescription(skill.id),
-      usage: usageDescriptions[skill.subcategory] || usageDescriptions['default'],
+      usage: usageDescriptions[skill.subcategory || 'default'] || usageDescriptions['default'],
       features: skill.examples || []
     };
   };

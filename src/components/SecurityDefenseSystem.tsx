@@ -974,7 +974,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                 className="w-12 h-12 mx-auto"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
-                  e.currentTarget.nextElementSibling!.style.display = 'block';
+                  (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
                 }}
               />
               <div className="text-4xl hidden">🏰</div>
@@ -1004,7 +1004,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                     className="w-20 h-20"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
-                      e.currentTarget.nextElementSibling!.style.display = 'block';
+                      (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
                     }}
                   />
                   <div className="text-6xl hidden">🏰</div>
@@ -1039,7 +1039,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                 className="w-12 h-12 mx-auto"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
-                  e.currentTarget.nextElementSibling!.style.display = 'block';
+                  (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
                 }}
               />
               <div className="text-4xl hidden">🐍</div>
@@ -1069,7 +1069,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                     className="w-20 h-20"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
-                      e.currentTarget.nextElementSibling!.style.display = 'block';
+                      (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
                     }}
                   />
                   <div className="text-6xl hidden">🐍</div>
@@ -1104,7 +1104,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                 className="w-12 h-12 mx-auto"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
-                  e.currentTarget.nextElementSibling!.style.display = 'block';
+                  (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
                 }}
               />
               <div className="text-4xl hidden">⚒️</div>
@@ -1134,7 +1134,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                     className="w-20 h-20"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
-                      e.currentTarget.nextElementSibling!.style.display = 'block';
+                      (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
                     }}
                   />
                   <div className="text-6xl hidden">⚒️</div>
@@ -1169,7 +1169,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                 className="w-12 h-12 mx-auto"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
-                  e.currentTarget.nextElementSibling!.style.display = 'block';
+                  (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
                 }}
               />
               <div className="text-4xl hidden">🦔</div>
@@ -1199,7 +1199,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                     className="w-20 h-20"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
-                      e.currentTarget.nextElementSibling!.style.display = 'block';
+                      (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
                     }}
                   />
                   <div className="text-6xl hidden">🦔</div>

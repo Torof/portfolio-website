@@ -395,7 +395,7 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
                       >
                         <div className="w-full h-full flex items-center justify-center">
                           <img 
-                            src={getNetworkLogo(skill.id)}
+                            src={getNetworkLogo(skill.id) || ''}
                             alt={`${skill.name} logo`}
                             className="w-full h-full object-contain rounded-full"
                           />
@@ -482,7 +482,7 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
                     <div className="text-lg">
                       {getNetworkLogo(skill.id) ? (
                         <img 
-                          src={getNetworkLogo(skill.id)} 
+                          src={getNetworkLogo(skill.id) || ''} 
                           alt={`${skill.name} logo`} 
                           className="w-6 h-6 object-contain rounded-full"
                         />
