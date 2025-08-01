@@ -17,7 +17,12 @@ const threatTypes = [
     icon: '🔄', 
     color: '#ef4444', 
     defendedBy: 'auditing',
-    description: 'Malicious contract calls back into vulnerable function before state updates complete'
+    description: 'Malicious contract calls back into vulnerable function before state updates complete',
+    process: {
+      detect: 'Use static analysis tools (Slither) to identify external calls before state changes',
+      prevent: 'Apply checks-effects-interactions pattern and use ReentrancyGuard modifier',
+      fix: 'Move state updates before external calls, add mutex locks'
+    }
   },
   { 
     id: 'overflow', 
@@ -25,7 +30,12 @@ const threatTypes = [
     icon: '💯', 
     color: '#f59e0b', 
     defendedBy: 'invariant-testing',
-    description: 'Arithmetic operations exceed maximum values causing unexpected behavior'
+    description: 'Arithmetic operations exceed maximum values causing unexpected behavior',
+    process: {
+      detect: 'Implement invariant testing with Foundry to catch arithmetic edge cases',
+      prevent: 'Use SafeMath library or Solidity 0.8+ built-in overflow checks',
+      fix: 'Replace unchecked arithmetic with safe operations and add bounds checking'
+    }
   },
   { 
     id: 'flash-loan', 
@@ -33,7 +43,12 @@ const threatTypes = [
     icon: '⚡', 
     color: '#8b5cf6', 
     defendedBy: 'mev-protection',
-    description: 'Exploits using large uncollateralized loans to manipulate DeFi protocols'
+    description: 'Exploits using large uncollateralized loans to manipulate DeFi protocols',
+    process: {
+      detect: 'Monitor for unusual transaction patterns and price oracle manipulations',
+      prevent: 'Use time-weighted average prices (TWAP) and transaction delays',
+      fix: 'Implement oracle validation, add slippage protection and pause mechanisms'
+    }
   },
   { 
     id: 'access-control', 
@@ -41,7 +56,12 @@ const threatTypes = [
     icon: '🔓', 
     color: '#3b82f6', 
     defendedBy: 'attack-vectors',
-    description: 'Unauthorized users gain access to restricted functions or data'
+    description: 'Unauthorized users gain access to restricted functions or data',
+    process: {
+      detect: 'Audit role assignments and use access control testing frameworks',
+      prevent: 'Implement OpenZeppelin AccessControl with proper role hierarchies',
+      fix: 'Add onlyRole modifiers and remove unused privileged functions'
+    }
   },
   { 
     id: 'price-manip', 
@@ -49,15 +69,24 @@ const threatTypes = [
     icon: '📈', 
     color: '#10b981', 
     defendedBy: 'formal-verification',
-    description: 'Manipulation of price feeds to exploit DeFi lending and trading protocols'
+    description: 'Manipulation of price feeds to exploit DeFi lending and trading protocols',
+    process: {
+      detect: 'Monitor price deviations and use multiple oracle sources for validation',
+      prevent: 'Implement Chainlink oracles with heartbeat and deviation thresholds',
+      fix: 'Add circuit breakers, price sanity checks, and oracle aggregation'
+    }
   },
   { 
     id: 'front-run', 
     name: 'Front-running', 
     icon: '🏃', 
     color: '#ec4899', 
-    defendedBy: 'mev-protection',
-    description: 'Malicious actors front-run transactions for profit extraction'
+    description: 'Malicious actors front-run transactions for profit extraction',
+    process: {
+      detect: 'Analyze mempool for transaction ordering attacks and MEV patterns',
+      prevent: 'Use commit-reveal schemes and private mempools (Flashbots)',
+      fix: 'Implement batch auctions, time delays, and randomized execution'
+    }
   },
   { 
     id: 'dos', 
@@ -65,15 +94,24 @@ const threatTypes = [
     icon: '🚫', 
     color: '#6366f1', 
     defendedBy: 'common-vulnerabilities',
-    description: 'Denial of service attacks that prevent normal contract operations'
+    description: 'Denial of service attacks that prevent normal contract operations',
+    process: {
+      detect: 'Monitor gas usage patterns and failed transaction spikes',
+      prevent: 'Implement rate limiting, gas limits, and withdrawal patterns',
+      fix: 'Add circuit breakers, emergency pauses, and external call limits'
+    }
   },
   { 
     id: 'logic-bug', 
     name: 'Logic Vulnerability', 
     icon: '🐛', 
     color: '#14b8a6', 
-    defendedBy: 'formal-verification',
-    description: 'Flawed business logic that leads to unintended contract behavior'
+    description: 'Flawed business logic that leads to unintended contract behavior',
+    process: {
+      detect: 'Use formal verification tools and comprehensive property testing',
+      prevent: 'Write detailed specifications and use property-based testing',
+      fix: 'Refactor business logic, add invariant checks, and emergency controls'
+    }
   },
   {
     id: 'timestamp-manip',
@@ -81,23 +119,36 @@ const threatTypes = [
     icon: '⏰',
     color: '#f97316',
     defendedBy: 'common-vulnerabilities',
-    description: 'Miners can manipulate block.timestamp within ~15 seconds for profit'
+    description: 'Miners can manipulate block.timestamp within ~15 seconds for profit',
+    process: {
+      detect: 'Review timestamp dependencies and time-sensitive logic in contracts',
+      prevent: 'Avoid block.timestamp for critical logic, use block numbers instead',
+      fix: 'Replace timestamp checks with block-based delays and tolerances'
+    }
   },
   {
     id: 'signature-replay',
     name: 'Signature Replay Attack',
     icon: '🔁',
     color: '#0891b2',
-    defendedBy: 'attack-vectors',
-    description: 'Reusing valid signatures across different contexts or chains'
+    description: 'Reusing valid signatures across different contexts or chains',
+    process: {
+      detect: 'Check for nonce usage and domain separation in signature schemes',
+      prevent: 'Use EIP-712 with proper domain separators and nonces',
+      fix: 'Add replay protection with incremental nonces and chain IDs'
+    }
   },
   {
     id: 'sandwich-attack',
     name: 'Sandwich Attack',
     icon: '🥪',
     color: '#dc2626',
-    defendedBy: 'mev-protection',
-    description: 'MEV bots front-run and back-run user transactions for profit'
+    description: 'MEV bots front-run and back-run user transactions for profit',
+    process: {
+      detect: 'Monitor for transaction ordering patterns and slippage exploitation',
+      prevent: 'Implement dynamic slippage protection and private mempools',
+      fix: 'Add MEV protection mechanisms and fair ordering systems'
+    }
   },
   {
     id: 'governance-attack',
@@ -105,39 +156,60 @@ const threatTypes = [
     icon: '🗳️',
     color: '#7c3aed',
     defendedBy: 'auditing',
-    description: 'Malicious proposals or flash loan voting to hijack protocol control'
+    description: 'Malicious proposals or flash loan voting to hijack protocol control',
+    process: {
+      detect: 'Monitor voting patterns and token concentration for unusual activity',
+      prevent: 'Implement timelock delays and voting power caps',
+      fix: 'Add emergency vetoes, snapshot voting, and delegation limits'
+    }
   },
   {
     id: 'storage-collision',
     name: 'Storage Collision',
     icon: '💥',
     color: '#e11d48',
-    defendedBy: 'formal-verification',
-    description: 'Proxy storage slots overwriting implementation storage'
+    description: 'Proxy storage slots overwriting implementation storage',
+    process: {
+      detect: 'Use storage layout analysis tools and automated slot collision detection',
+      prevent: 'Follow OpenZeppelin proxy patterns with unstructured storage',
+      fix: 'Reorganize storage slots using ERC-1967 standard locations'
+    }
   },
   {
     id: 'unchecked-return',
     name: 'Unchecked Return Values',
     icon: '❌',
     color: '#64748b',
-    defendedBy: 'common-vulnerabilities',
-    description: 'Failed external calls going unnoticed leading to state corruption'
+    description: 'Failed external calls going unnoticed leading to state corruption',
+    process: {
+      detect: 'Use static analysis to find unchecked low-level calls',
+      prevent: 'Always check return values and use SafeERC20 for token calls',
+      fix: 'Add explicit success checks and revert on failed external calls'
+    }
   },
   {
     id: 'randomness-manip',
     name: 'Randomness Manipulation',
     icon: '🎲',
     color: '#06b6d4',
-    defendedBy: 'attack-vectors',
-    description: 'Predictable on-chain randomness exploited for unfair advantage'
+    description: 'Predictable on-chain randomness exploited for unfair advantage',
+    process: {
+      detect: 'Audit randomness sources for predictability and miner influence',
+      prevent: 'Use Chainlink VRF or commit-reveal schemes for true randomness',
+      fix: 'Replace blockhash/timestamp with verifiable random functions (VRF)'
+    }
   },
   {
     id: 'centralization-risk',
     name: 'Centralization Risk',
     icon: '👑',
     color: '#eab308',
-    defendedBy: 'auditing',
-    description: 'Single points of failure through admin keys or privileged roles'
+    description: 'Single points of failure through admin keys or privileged roles',
+    process: {
+      detect: 'Audit admin functions and single points of control in governance',
+      prevent: 'Use multi-sig wallets, timelock controllers, and decentralized governance',
+      fix: 'Implement progressive decentralization and remove unnecessary admin powers'
+    }
   },
 ];
 
@@ -258,16 +330,8 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
 
         // Auto-targeting system
         updatedThreats.forEach(threat => {
-          // Find the appropriate turret for this threat
-          const turret = category.skills.find(skill => 
-            skill.id === threat.type.defendedBy || 
-            (threat.type.defendedBy === 'auditing' && skill.id === 'auditing') ||
-            (threat.type.defendedBy === 'invariant-testing' && skill.id === 'invariant-testing') ||
-            (threat.type.defendedBy === 'mev-protection' && skill.id === 'mev-protection') ||
-            (threat.type.defendedBy === 'attack-vectors' && skill.id === 'attack-vectors') ||
-            (threat.type.defendedBy === 'formal-verification' && skill.id === 'formal-verification') ||
-            (threat.type.defendedBy === 'common-vulnerabilities' && skill.id === 'common-vulnerabilities')
-          );
+          // Any turret can target any threat (simplified for debugging)
+          const turret = category.skills[Math.floor(Math.random() * category.skills.length)];
 
           if (turret && threat.health > 0 && threat.y > 20 && threat.y < 70) {
             // Calculate turret position
@@ -731,12 +795,12 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
 
         {/* Threat Display Card - Outside the main game area */}
         <div className="w-80">
-          <div className={`rounded-2xl border-2 h-full ${
+          <div className={`rounded-2xl border-2 h-[620px] ${
             theme === 'theme-light'
               ? 'bg-gradient-to-b from-red-50 to-red-100 border-slate-300'
               : 'bg-gradient-to-b from-red-950 via-red-900 to-black border-slate-600'
           }`}>
-            <div className={`p-4 border-b-2 rounded-t-2xl ${
+            <div className={`p-6 border-b-2 rounded-t-2xl ${
               theme === 'theme-light' 
                 ? 'bg-red-100 border-red-300' 
                 : 'bg-black border-red-500'
@@ -753,7 +817,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
               </p>
             </div>
             
-            <div className="p-4 h-[calc(100%-80px)] overflow-y-auto">
+            <div className="p-4 h-[calc(100%-96px)] overflow-y-auto">
               {threats.length === 0 ? (
                 <div className={`text-center py-8 ${
                   theme === 'theme-light' ? 'text-red-600' : 'text-red-400'
@@ -796,34 +860,36 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                             }`}>
                               {threat.type.name}
                             </div>
-                            <div className={`text-xs leading-relaxed mb-3 ${
-                              theme === 'theme-light' ? 'text-red-600' : 'text-red-400'
-                            }`}>
-                              {threat.type.description}
-                            </div>
-                            
-                            {/* Health bar */}
-                            <div className="mb-2">
-                              <div className={`text-xs font-mono mb-1 ${
-                                theme === 'theme-light' ? 'text-red-500' : 'text-red-400'
+                            {/* Security Process Steps */}
+                            {threat.type.process ? (
+                              <div className="space-y-2 mb-3">
+                                <div className={`text-xs ${
+                                  theme === 'theme-light' ? 'text-blue-600' : 'text-blue-400'
+                                }`}>
+                                  <span className="font-mono font-bold">🔍 DETECT:</span>
+                                  <div className="ml-4 mt-1">{threat.type.process.detect}</div>
+                                </div>
+                                <div className={`text-xs ${
+                                  theme === 'theme-light' ? 'text-yellow-600' : 'text-yellow-400'
+                                }`}>
+                                  <span className="font-mono font-bold">🛡️ PREVENT:</span>
+                                  <div className="ml-4 mt-1">{threat.type.process.prevent}</div>
+                                </div>
+                                <div className={`text-xs ${
+                                  theme === 'theme-light' ? 'text-green-600' : 'text-green-400'
+                                }`}>
+                                  <span className="font-mono font-bold">🔧 FIX:</span>
+                                  <div className="ml-4 mt-1">{threat.type.process.fix}</div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className={`text-xs leading-relaxed mb-3 ${
+                                theme === 'theme-light' ? 'text-red-600' : 'text-red-400'
                               }`}>
-                                Integrity: {threat.health}%
+                                {threat.type.description}
                               </div>
-                              <div className="w-full h-2 bg-gray-600 rounded-full overflow-hidden">
-                                <motion.div
-                                  className="h-full bg-gradient-to-r from-red-500 to-red-600"
-                                  animate={{ width: `${threat.health}%` }}
-                                  transition={{ duration: 0.2 }}
-                                />
-                              </div>
-                            </div>
+                            )}
 
-                            {/* Defended by */}
-                            <div className={`text-xs font-mono ${
-                              theme === 'theme-light' ? 'text-blue-600' : 'text-green-400'
-                            }`}>
-                              🎯 Defended by: {threat.type.defendedBy}
-                            </div>
                           </div>
                         </div>
                       </motion.div>
