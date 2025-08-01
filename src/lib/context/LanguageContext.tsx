@@ -498,6 +498,39 @@ const translations = {
     'security.status.score': 'SCORE:',
     'security.status.detailedInfo': 'for detailed information',
 
+    // ERC Standard Descriptions
+    'erc.erc20.description': 'Standard for fungible tokens on Ethereum',
+    'erc.erc721.description': 'Non-fungible token standard for unique digital assets',
+    'erc.erc4626.description': 'Standard for yield-bearing vaults and asset management',
+    'erc.erc2535.description': 'Modular smart contract system for upgradeable contracts',
+    'erc.erc4337.description': 'Smart contract wallets without protocol changes',
+    'erc.erc1155.description': 'Standard for contracts managing multiple token types',
+    'erc.erc2981.description': 'Standardized royalty information for NFT marketplaces',
+    'erc.erc6551.description': 'NFTs that can own assets and interact with applications',
+    'erc.erc2612.description': 'Gasless token approvals using signatures',
+    'erc.erc3156.description': 'Standardized interface for flash loan providers and receivers',
+    'erc.erc4907.description': 'NFT rental standard for time-limited usage rights',
+    'erc.erc5192.description': 'Non-transferable tokens for identity and credentials',
+    'erc.erc165.description': 'Standard method to detect contract interfaces',
+    'erc.erc1271.description': 'Standard for contract-based signature validation',
+    'erc.erc1967.description': 'Standard proxy storage slots to avoid clashes',
+    'erc.erc2767.description': 'Standard for on-chain governance and voting',
+    'erc.erc5805.description': 'Standardized voting with delegation capabilities',
+    'erc.proxy-patterns.description': 'Proxy patterns and upgrade mechanisms for smart contracts',
+    'erc.access-control.description': 'Role-based access control and permission management',
+    'erc.merkle-trees.description': 'Efficient data verification and whitelist mechanisms',
+
+    // ERC Detail Cards UI
+    'erc.detail.viewEIP': 'View EIP',
+    'erc.detail.myExperience': 'My Experience',
+    'erc.detail.useCases': 'Use Cases',
+    
+    // ERC Wheel Controls
+    'erc.wheel.tryLuck': 'Try your luck! ↓',
+    'erc.wheel.random': '🎲 RANDOM',
+    'erc.wheel.spinning': '⚡ SPINNING...',
+    'erc.wheel.spinTooltip': 'Spin the retro wheel to randomly select a standard',
+
     // Threat Types Process Descriptions (Names stay in English)
     'threat.reentrancy.description': 'Malicious contract calls back into vulnerable function before state updates complete',
     'threat.reentrancy.detect': 'Use static analysis tools (Slither) to identify external calls before state changes',
@@ -1016,6 +1049,39 @@ const translations = {
     'security.status.allClear': 'Tout va bien',
     'security.status.score': 'SCORE:',
     'security.status.detailedInfo': 'pour des informations détaillées',
+
+    // ERC Standard Descriptions
+    'erc.erc20.description': 'Standard pour les tokens fongibles sur Ethereum',
+    'erc.erc721.description': 'Standard de token non-fongible pour actifs numériques uniques',
+    'erc.erc4626.description': 'Standard pour les coffres générateurs de rendement et gestion d\'actifs',
+    'erc.erc2535.description': 'Système de contrat intelligent modulaire pour contrats évolutifs',
+    'erc.erc4337.description': 'Portefeuilles de contrats intelligents sans changements de protocole',
+    'erc.erc1155.description': 'Standard pour contrats gérant plusieurs types de tokens',
+    'erc.erc2981.description': 'Informations de royalties standardisées pour marchés NFT',
+    'erc.erc6551.description': 'NFTs pouvant posséder des actifs et interagir avec applications',
+    'erc.erc2612.description': 'Approbations de tokens sans gas utilisant des signatures',
+    'erc.erc3156.description': 'Interface standardisée pour fournisseurs et receveurs de flash loans',
+    'erc.erc4907.description': 'Standard de location NFT pour droits d\'usage à durée limitée',
+    'erc.erc5192.description': 'Tokens non-transférables pour identité et identifiants',
+    'erc.erc165.description': 'Méthode standard pour détecter les interfaces de contrat',
+    'erc.erc1271.description': 'Standard pour validation de signatures basée sur contrat',
+    'erc.erc1967.description': 'Slots de stockage proxy standardisés pour éviter les conflits',
+    'erc.erc2767.description': 'Standard pour gouvernance et vote on-chain',
+    'erc.erc5805.description': 'Vote standardisé avec capacités de délégation',
+    'erc.proxy-patterns.description': 'Patterns de proxy et mécanismes de mise à niveau pour contrats intelligents',
+    'erc.access-control.description': 'Contrôle d\'accès basé sur rôles et gestion des permissions',
+    'erc.merkle-trees.description': 'Mécanismes de vérification de données efficaces et listes blanches',
+
+    // ERC Detail Cards UI
+    'erc.detail.viewEIP': 'Voir EIP',
+    'erc.detail.myExperience': 'Mon Expérience',
+    'erc.detail.useCases': 'Cas d\'Usage',
+    
+    // ERC Wheel Controls
+    'erc.wheel.tryLuck': 'Tentez votre chance ! ↓',
+    'erc.wheel.random': '🎲 ALÉATOIRE',
+    'erc.wheel.spinning': '⚡ ROTATION...',
+    'erc.wheel.spinTooltip': 'Faites tourner la roue rétro pour sélectionner un standard au hasard',
 
     // Threat Types Process Descriptions (Names stay in English)
     'threat.reentrancy.description': 'Un contrat malveillant rappelle une fonction vulnérable avant que les mises à jour d\'état ne soient terminées',

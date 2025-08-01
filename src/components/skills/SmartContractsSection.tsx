@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
+import { useLanguage } from '@/lib/context/LanguageContext';
 import { SkillCategory } from '@/lib/types';
 
 interface SmartContractsSectionProps {
@@ -12,7 +13,15 @@ interface SmartContractsSectionProps {
 // Smart Contracts - Single-Side Gear Wheel
 const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Helper function to get translated ERC description
+  const getERCDescription = (skillId: string): string => {
+    const key = `erc.${skillId}.description`;
+    const translated = t(key);
+    return translated !== key ? translated : category.skills.find(s => s.id === skillId)?.description || '';
+  };
   const [mounted, setMounted] = useState(false);
   const [isShuffling, setIsShuffling] = useState(false);
 
@@ -182,7 +191,7 @@ const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
                   ? '0 0 5px rgba(56, 189, 248, 0.5)' 
                   : '0 0 5px rgba(56, 189, 248, 0.8)' 
               }}>
-                Try your luck! ↓
+                {t('erc.wheel.tryLuck')}
               </div>
               <motion.button
                 onClick={handleShuffle}
@@ -194,7 +203,7 @@ const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
                 } ${isShuffling ? 'opacity-75 cursor-not-allowed' : 'hover:shadow-2xl hover:shadow-cyan-500/60'}`}
                 whileHover={!isShuffling ? { scale: 1.08 } : {}}
                 whileTap={!isShuffling ? { scale: 0.92 } : {}}
-                title="Spin the retro wheel to randomly select a standard"
+                title={t('erc.wheel.spinTooltip')}
               >
                 {/* Chrome shine overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent transform -skew-x-12 -translate-x-full animate-pulse" />
@@ -207,7 +216,7 @@ const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
                 )}
                 
                 <span className="relative z-10 flex items-center space-x-2">
-                  <span>{isShuffling ? '⚡ SPINNING...' : '🎲 RANDOM'}</span>
+                  <span>{isShuffling ? t('erc.wheel.spinning') : t('erc.wheel.random')}</span>
                 </span>
               </motion.button>
             </div>
@@ -380,7 +389,7 @@ const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
                             <p className={`text-xs mt-1 ${
                               theme === 'theme-light' ? 'text-slate-600' : 'text-slate-300'
                             }`}>
-                              {skill.description}
+                              {getERCDescription(skill.id)}
                             </p>
                           )}
                         </div>
@@ -528,7 +537,7 @@ const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
                             : 'text-blue-400 hover:bg-blue-900/30 border border-blue-800'
                         }`}
                       >
-                        <span className="mr-2">View EIP</span>
+                        <span className="mr-2">{t('erc.detail.viewEIP')}</span>
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
@@ -545,7 +554,7 @@ const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
                         <h4 className={`font-semibold mb-2 ${
                           theme === 'theme-light' ? 'text-slate-800' : 'text-white'
                         }`}>
-                          My Experience
+                          {t('erc.detail.myExperience')}
                         </h4>
                         <ul className={`text-sm space-y-1 ${
                           theme === 'theme-light' ? 'text-slate-600' : 'text-slate-300'
@@ -566,7 +575,7 @@ const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
                         <h4 className={`font-semibold mb-2 ${
                           theme === 'theme-light' ? 'text-slate-800' : 'text-white'
                         }`}>
-                          Use Cases
+                          {t('erc.detail.useCases')}
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {selectedSkill.examples.map((example, index) => (
