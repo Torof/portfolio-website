@@ -301,7 +301,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
         const newThreat: Threat = {
           id: `threat-${threatIdCounter.current++}`,
           type: threatType,
-          x: 10 + Math.random() * 80, // 10-90% of width
+          x: 15 + Math.random() * 70, // 15-85% of width to prevent overflow
           y: 0,
           health: 100,
           speed: 0.2 + Math.random() * 0.3, // Variable speed
@@ -592,7 +592,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                   </motion.div>
                   
                   {/* Threat name */}
-                  <div className={`text-xs font-mono text-center px-2 py-1 rounded whitespace-nowrap ${
+                  <div className={`text-xs font-mono text-center px-2 py-1 rounded max-w-32 truncate ${
                     theme === 'theme-light' 
                       ? 'bg-red-100 text-red-800 border border-red-300' 
                       : 'bg-red-900/50 text-red-300 border border-red-500'
