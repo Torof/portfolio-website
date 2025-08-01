@@ -330,12 +330,37 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
 
   return (
     <section className="mb-24">
-      {/* Security Overview Card */}
-      <div className={`mb-6 rounded-2xl border-4 p-6 ${
+      {/* Unified Security Section Container */}
+      <div className={`rounded-3xl border-4 p-6 ${
         theme === 'theme-light'
-          ? 'bg-gradient-to-r from-slate-50 via-blue-50 to-slate-50 border-slate-300'
-          : 'bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 border-slate-500'
+          ? 'bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 border-slate-400 shadow-2xl'
+          : 'bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 border-slate-500 shadow-2xl shadow-blue-900/20'
       }`}>
+        
+        {/* Security Overview Card */}
+        <div className={`mb-6 rounded-2xl border-2 p-6 transition-all duration-300 hover:scale-[1.02] cursor-pointer relative group ${
+          theme === 'theme-light'
+            ? 'bg-white/80 border-slate-200 hover:bg-white hover:border-slate-300 hover:shadow-lg'
+            : 'bg-slate-800/60 border-slate-600 hover:bg-slate-800/80 hover:border-slate-500 hover:shadow-xl hover:shadow-blue-900/20'
+        }`}>
+        
+        {/* Security System Status Animation */}
+        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500">
+          {/* Status Display */}
+          <div className={`text-xs font-mono font-bold text-center ${
+            theme === 'theme-light' ? 'text-red-600' : 'text-red-400'
+          }`}>
+            <div className="animate-pulse">⚡ SYSTEMS ONLINE</div>
+            <div className={`flex justify-center space-x-1 mt-1 ${
+              theme === 'theme-light' ? 'text-green-600' : 'text-green-400'
+            }`}>
+              <span>SCAN</span>
+              <span className="animate-bounce" style={{ animationDelay: '0.1s' }}>•</span>
+              <span className="animate-bounce" style={{ animationDelay: '0.2s' }}>•</span>
+              <span className="animate-bounce" style={{ animationDelay: '0.3s' }}>•</span>
+            </div>
+          </div>
+        </div>
         <div className={`text-center mb-4 ${
           theme === 'theme-light' ? 'text-slate-800' : 'text-slate-200'
         }`}>
@@ -375,10 +400,10 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
 
       <div className="flex gap-6">
         {/* Main Game Area */}
-        <div className={`flex-1 relative overflow-hidden rounded-2xl border-4 ${
+        <div className={`flex-1 relative overflow-hidden rounded-2xl border-2 ${
           theme === 'theme-light'
-            ? 'bg-gradient-to-b from-blue-100 to-slate-200 border-slate-400'
-            : 'bg-gradient-to-b from-slate-900 via-slate-800 to-black border-green-500'
+            ? 'bg-gradient-to-b from-blue-100 to-slate-200 border-slate-300'
+            : 'bg-gradient-to-b from-slate-900 via-slate-800 to-black border-slate-600'
         }`}>
         
         {/* Retro CRT effect */}
@@ -706,12 +731,12 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
 
         {/* Threat Display Card - Outside the main game area */}
         <div className="w-80">
-          <div className={`rounded-2xl border-4 h-full ${
+          <div className={`rounded-2xl border-2 h-full ${
             theme === 'theme-light'
-              ? 'bg-gradient-to-b from-red-50 to-red-100 border-red-300'
-              : 'bg-gradient-to-b from-red-950 via-red-900 to-black border-red-500'
+              ? 'bg-gradient-to-b from-red-50 to-red-100 border-slate-300'
+              : 'bg-gradient-to-b from-red-950 via-red-900 to-black border-slate-600'
           }`}>
-            <div className={`p-4 border-b-2 ${
+            <div className={`p-4 border-b-2 rounded-t-2xl ${
               theme === 'theme-light' 
                 ? 'bg-red-100 border-red-300' 
                 : 'bg-black border-red-500'
@@ -812,10 +837,10 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
       </div>
 
       {/* Security Arsenal - Tools & Frameworks */}
-      <div className={`mt-6 rounded-2xl border-4 p-6 ${
+      <div className={`mt-6 rounded-2xl border-2 p-6 ${
         theme === 'theme-light'
-          ? 'bg-gradient-to-r from-amber-50 via-yellow-50 to-orange-50 border-amber-300'
-          : 'bg-gradient-to-r from-amber-950 via-yellow-950 to-orange-950 border-amber-500'
+          ? 'bg-gradient-to-r from-amber-50 via-yellow-50 to-orange-50 border-slate-300'
+          : 'bg-gradient-to-r from-amber-950 via-yellow-950 to-orange-950 border-slate-600'
       }`}>
         <div className={`text-center mb-6 ${
           theme === 'theme-light' ? 'text-amber-800' : 'text-amber-300'
@@ -1106,6 +1131,8 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
           </div>
         </div>
       </div>
+      
+      </div> {/* End Unified Security Section Container */}
     </section>
   );
 }
