@@ -317,6 +317,49 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
 
   return (
     <section className="mb-24">
+      {/* Security Overview Card */}
+      <div className={`mb-6 rounded-2xl border-4 p-6 ${
+        theme === 'theme-light'
+          ? 'bg-gradient-to-r from-slate-50 via-blue-50 to-slate-50 border-slate-300'
+          : 'bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 border-slate-500'
+      }`}>
+        <div className={`text-center mb-4 ${
+          theme === 'theme-light' ? 'text-slate-800' : 'text-slate-200'
+        }`}>
+          <h3 className="text-xl font-bold font-mono mb-2">
+            🛡️ SMART CONTRACT SECURITY & AUDITING 🛡️
+          </h3>
+          <p className="text-sm font-mono opacity-80">
+            Protecting decentralized applications from vulnerabilities and exploits
+          </p>
+        </div>
+
+        <div className={`text-sm leading-relaxed mb-4 ${
+          theme === 'theme-light' ? 'text-slate-700' : 'text-slate-300'
+        }`}>
+          <p className="mb-3">
+            <strong>Security is paramount in DeFi.</strong> Smart contracts handle billions in value and are immutable once deployed. 
+            A single vulnerability can lead to catastrophic losses, making thorough security analysis essential for any serious protocol.
+          </p>
+          <p className="mb-3">
+            My approach combines <strong>automated tools</strong> (Slither, Foundry fuzzing), <strong>manual code review</strong>, 
+            and <strong>formal verification</strong> techniques to identify vulnerabilities before they can be exploited. 
+            I focus on common attack vectors like reentrancy, flash loan exploits, and access control flaws.
+          </p>
+        </div>
+
+        <div className={`text-center text-xs font-mono p-3 rounded-lg ${
+          theme === 'theme-light' 
+            ? 'bg-blue-100 text-blue-700 border border-blue-200' 
+            : 'bg-blue-950 text-blue-300 border border-blue-500'
+        }`}>
+          <div>
+            Watch real-time threat detection in action below • <strong>Hover on elements</strong> for detailed information • 
+            Turrets represent security skills defending against common vulnerabilities
+          </div>
+        </div>
+      </div>
+
       <div className="flex gap-6">
         {/* Main Game Area */}
         <div className={`flex-1 relative overflow-hidden rounded-2xl border-4 ${
@@ -643,23 +686,6 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
             </div>
           </div>
 
-          {/* Threat Legend */}
-          <div className={`absolute top-4 left-4 p-3 rounded-lg text-xs font-mono ${
-            theme === 'theme-light' 
-              ? 'bg-white/80 text-slate-700 border border-slate-300' 
-              : 'bg-black/80 text-green-400 border border-green-500'
-          }`}>
-            <div className="font-bold mb-2">THREAT TYPES:</div>
-            <div className="space-y-1">
-              {threatTypes.slice(0, 4).map(threat => (
-                <div key={threat.id} className="flex items-center space-x-2">
-                  <span>{threat.icon}</span>
-                  <span>{threat.name}</span>
-                </div>
-              ))}
-              <div className="opacity-60">...and more</div>
-            </div>
-          </div>
 
           </div>
         </div>
