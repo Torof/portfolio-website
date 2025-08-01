@@ -177,6 +177,12 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
   const [score, setScore] = useState(0);
   const [mounted, setMounted] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const isPausedRef = useRef(false);
+
+  // Sync isPaused state with ref
+  useEffect(() => {
+    isPausedRef.current = isPaused;
+  }, [isPaused]);
   const gameAreaRef = useRef<HTMLDivElement>(null);
   const threatIdCounter = useRef(0);
   const laserIdCounter = useRef(0);
@@ -226,23 +232,23 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
 
     // Initial spawn
     setTimeout(() => {
-      if (!isPaused) spawnThreat();
+      if (!isPausedRef.current) spawnThreat();
     }, 1000);
     
     // Regular spawning
     const spawnInterval = setInterval(() => {
-      if (!isPaused) spawnThreat();
+      if (!isPausedRef.current) spawnThreat();
     }, 3000 + Math.random() * 2000);
     
     return () => clearInterval(spawnInterval);
-  }, [mounted, isPaused]);
+  }, [mounted]);
 
   // Game loop - move threats and check for targeting
   useEffect(() => {
     if (!mounted) return;
 
     const gameLoop = setInterval(() => {
-      if (isPaused) return; // Skip game loop when paused
+      if (isPausedRef.current) return; // Skip game loop when paused
       
       setThreats(prev => {
         const updatedThreats = prev.map(threat => ({
@@ -316,7 +322,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
     }, 80); // ~12 FPS
 
     return () => clearInterval(gameLoop);
-  }, [mounted, category.skills, isPaused]);
+  }, [mounted, category.skills]);
 
   if (!mounted) {
     return <div className="h-[800px]" />;
