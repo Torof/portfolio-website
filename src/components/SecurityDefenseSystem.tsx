@@ -75,6 +75,70 @@ const threatTypes = [
     defendedBy: 'formal-verification',
     description: 'Flawed business logic that leads to unintended contract behavior'
   },
+  {
+    id: 'timestamp-manip',
+    name: 'Timestamp Manipulation',
+    icon: '⏰',
+    color: '#f97316',
+    defendedBy: 'common-vulnerabilities',
+    description: 'Miners can manipulate block.timestamp within ~15 seconds for profit'
+  },
+  {
+    id: 'signature-replay',
+    name: 'Signature Replay Attack',
+    icon: '🔁',
+    color: '#0891b2',
+    defendedBy: 'attack-vectors',
+    description: 'Reusing valid signatures across different contexts or chains'
+  },
+  {
+    id: 'sandwich-attack',
+    name: 'Sandwich Attack',
+    icon: '🥪',
+    color: '#dc2626',
+    defendedBy: 'mev-protection',
+    description: 'MEV bots front-run and back-run user transactions for profit'
+  },
+  {
+    id: 'governance-attack',
+    name: 'Governance Attack',
+    icon: '🗳️',
+    color: '#7c3aed',
+    defendedBy: 'auditing',
+    description: 'Malicious proposals or flash loan voting to hijack protocol control'
+  },
+  {
+    id: 'storage-collision',
+    name: 'Storage Collision',
+    icon: '💥',
+    color: '#e11d48',
+    defendedBy: 'formal-verification',
+    description: 'Proxy storage slots overwriting implementation storage'
+  },
+  {
+    id: 'unchecked-return',
+    name: 'Unchecked Return Values',
+    icon: '❌',
+    color: '#64748b',
+    defendedBy: 'common-vulnerabilities',
+    description: 'Failed external calls going unnoticed leading to state corruption'
+  },
+  {
+    id: 'randomness-manip',
+    name: 'Randomness Manipulation',
+    icon: '🎲',
+    color: '#06b6d4',
+    defendedBy: 'attack-vectors',
+    description: 'Predictable on-chain randomness exploited for unfair advantage'
+  },
+  {
+    id: 'centralization-risk',
+    name: 'Centralization Risk',
+    icon: '👑',
+    color: '#eab308',
+    defendedBy: 'auditing',
+    description: 'Single points of failure through admin keys or privileged roles'
+  },
 ];
 
 // Active threat instance
@@ -126,16 +190,37 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
     if (!mounted) return;
 
     const spawnThreat = () => {
-      const threatType = threatTypes[Math.floor(Math.random() * threatTypes.length)];
-      const newThreat: Threat = {
-        id: `threat-${threatIdCounter.current++}`,
-        type: threatType,
-        x: 10 + Math.random() * 80, // 10-90% of width
-        y: 0,
-        health: 100,
-        speed: 0.2 + Math.random() * 0.3, // Variable speed
-      };
-      setThreats(prev => [...prev, newThreat]);
+      setThreats(prev => {
+        // Don't spawn if we already have 3 or more threats
+        if (prev.length >= 3) {
+          return prev;
+        }
+        
+        // Get list of currently active threat types
+        const activeThreatsTypes = prev.map(threat => threat.type.id);
+        
+        // Filter out threat types that are already on screen
+        const availableThreats = threatTypes.filter(
+          threat => !activeThreatsTypes.includes(threat.id)
+        );
+        
+        // If all threat types are already on screen, don't spawn
+        if (availableThreats.length === 0) {
+          return prev;
+        }
+        
+        // Pick a random threat from available ones
+        const threatType = availableThreats[Math.floor(Math.random() * availableThreats.length)];
+        const newThreat: Threat = {
+          id: `threat-${threatIdCounter.current++}`,
+          type: threatType,
+          x: 10 + Math.random() * 80, // 10-90% of width
+          y: 0,
+          health: 100,
+          speed: 0.2 + Math.random() * 0.3, // Variable speed
+        };
+        return [...prev, newThreat];
+      });
     };
 
     // Initial spawn
@@ -213,7 +298,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                 // Remove explosion after animation
                 setTimeout(() => {
                   setExplosions(prev => prev.filter(e => e.id !== explosion.id));
-                }, 800);
+                }, 500);
               }
             }
           }
@@ -394,7 +479,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                 initial={{ scale: 0, opacity: 1 }}
                 animate={{ scale: 3, opacity: 0 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 0.5 }}
               >
                 <div className={`text-4xl ${
                   theme === 'theme-light' ? 'text-orange-500' : 'text-yellow-400'
@@ -475,35 +560,20 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                     </div>
 
                     {/* Comprehensive Tooltip */}
-                    <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-96 p-4 rounded-lg text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 ${
-                      theme === 'theme-light'
-                        ? 'bg-slate-900 text-white border-2 border-slate-600 shadow-xl'
-                        : 'bg-black text-green-400 border-2 border-green-500 shadow-xl shadow-green-900/30'
-                    }`}>
+                    <div 
+                      className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-64 max-h-[32rem] p-4 rounded-lg text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] ${
+                        theme === 'theme-light'
+                          ? 'bg-slate-900 text-white border-2 border-slate-600 shadow-xl'
+                          : 'bg-black text-green-400 border-2 border-green-500 shadow-xl shadow-green-900/30'
+                      }`}
+                    >
                       {/* Header */}
-                      <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-600">
-                        <div className="flex items-center space-x-2">
-                          <span className="text-lg">{skill.icon}</span>
-                          <div className={`font-bold text-sm ${
-                            theme === 'theme-light' ? 'text-blue-300' : 'text-green-300'
-                          }`}>
-                            {skill.name}
-                          </div>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <span className="text-xs opacity-60">LEVEL</span>
-                          <div className="flex space-x-0.5">
-                            {Array.from({ length: 5 }).map((_, i) => (
-                              <div
-                                key={i}
-                                className={`w-2 h-2 rounded-full ${
-                                  i < skill.level 
-                                    ? theme === 'theme-light' ? 'bg-blue-400' : 'bg-green-400'
-                                    : 'bg-gray-600'
-                                }`}
-                              />
-                            ))}
-                          </div>
+                      <div className="flex items-center space-x-2 mb-3 pb-2 border-b border-slate-600">
+                        <span className="text-lg">{skill.icon}</span>
+                        <div className={`font-bold text-sm ${
+                          theme === 'theme-light' ? 'text-blue-300' : 'text-green-300'
+                        }`}>
+                          {skill.name}
                         </div>
                       </div>
 
@@ -559,35 +629,6 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                         </div>
                       </div>
 
-                      {/* Combat Stats */}
-                      <div className={`text-xs opacity-70 pt-2 border-t ${
-                        theme === 'theme-light' ? 'border-slate-600' : 'border-slate-700'
-                      }`}>
-                        <div className="flex justify-between items-center">
-                          <span>DAMAGE OUTPUT:</span>
-                          <span className={`font-mono ${
-                            theme === 'theme-light' ? 'text-blue-300' : 'text-green-300'
-                          }`}>
-                            {25 * skill.level} DMG/hit
-                          </span>
-                        </div>
-                        <div className="flex justify-between items-center mt-1">
-                          <span>TARGETING RANGE:</span>
-                          <span className={`font-mono ${
-                            theme === 'theme-light' ? 'text-blue-300' : 'text-green-300'
-                          }`}>
-                            20-70% altitude
-                          </span>
-                        </div>
-                        <div className="flex justify-between items-center mt-1">
-                          <span>FIRE RATE:</span>
-                          <span className={`font-mono ${
-                            theme === 'theme-light' ? 'text-blue-300' : 'text-green-300'
-                          }`}>
-                            ~10% chance/frame
-                          </span>
-                        </div>
-                      </div>
                       
                       {/* Tooltip arrow */}
                       <div className={`absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-6 border-transparent ${

@@ -444,7 +444,7 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       {
         id: 'auditing',
-        name: 'Smart Contract Auditing',
+        name: 'Audit & Security Analysis',
         description: 'Security analysis and vulnerability assessment',
         level: 4,
         category: 'security',
