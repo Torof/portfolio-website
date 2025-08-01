@@ -621,6 +621,21 @@ const translations = {
     'common.viewAllProjects': 'View All Projects',
     'common.active': 'Active',
     'common.clickToView': 'Click to view',
+
+    // Community Contributions section
+    'community.title': 'Community Contributions',
+    'community.subtitle': 'Sharing knowledge and helping developers solve complex blockchain challenges on Stack Exchange',
+    'community.liveData': 'LIVE DATA',
+    'community.loadingData': 'Loading live data...',
+    'community.stackExchangeContributor': 'Ethereum Stack Exchange Contributor',
+    'community.reputation': 'Reputation',
+    'community.gold': 'Gold',
+    'community.silver': 'Silver',
+    'community.bronze': 'Bronze',
+    'community.featuredContributions': 'Featured Contributions',
+    'community.question': 'QUESTION:',
+    'community.myAnswer': 'MY ANSWER:',
+    'community.viewProfile': 'View My Full Stack Exchange Profile',
   },
   fr: {
     // Navigation
@@ -1173,5 +1188,20 @@ const translations = {
     'common.viewAllProjects': 'Voir Tous les Projets',
     'common.active': 'Actif',
     'common.clickToView': 'Cliquer pour voir',
+
+    // Community Contributions section
+    'community.title': 'Contributions Communautaires',
+    'community.subtitle': 'Partager des connaissances et aider les développeurs à résoudre des défis blockchain complexes sur Stack Exchange',
+    'community.liveData': 'DONNÉES LIVE',
+    'community.loadingData': 'Chargement des données live...',
+    'community.stackExchangeContributor': 'Contributeur Ethereum Stack Exchange',
+    'community.reputation': 'Réputation',
+    'community.gold': 'Or',
+    'community.silver': 'Argent',
+    'community.bronze': 'Bronze',
+    'community.featuredContributions': 'Contributions Sélectionnées',
+    'community.question': 'QUESTION :',
+    'community.myAnswer': 'MA RÉPONSE :',
+    'community.viewProfile': 'Voir Mon Profil Stack Exchange Complet',
   }
 };

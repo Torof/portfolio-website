@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
+import { useLanguage } from '@/lib/context/LanguageContext';
 import { fetchCompleteStackExchangeData } from '@/lib/services/stackexchange'; // Fallback for static builds
 import { stackOverflowProfile, featuredAnswers } from '@/lib/data/advancedSkills';
 import { StackOverflowProfile, StackOverflowAnswer } from '@/lib/types';
@@ -11,6 +12,7 @@ import Image from 'next/image';
 
 const LiveStackExchangeCard = () => {
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const [profile, setProfile] = useState<StackOverflowProfile>(stackOverflowProfile);
   const [answers, setAnswers] = useState<StackOverflowAnswer[]>(featuredAnswers);
   const [isLoading, setIsLoading] = useState(true);
@@ -72,7 +74,7 @@ const LiveStackExchangeCard = () => {
           throw new Error(`API route not available (status: ${response.status})`);
         }
         
-      } catch (error) {
+      } catch {
         console.log('⚠️ API route unavailable, trying direct Stack Exchange API...');
         
         try {
@@ -113,10 +115,10 @@ const LiveStackExchangeCard = () => {
       {/* Section Header */}
       <div className="text-center mb-12">
         <h2 className="text-4xl md:text-5xl font-bold light-text mb-6">
-          Community Contributions
+          {t('community.title')}
         </h2>
         <p className="text-xl light-text opacity-80 max-w-3xl mx-auto">
-          Sharing knowledge and helping developers solve complex blockchain challenges on Stack Exchange
+          {t('community.subtitle')}
         </p>
       </div>
 
@@ -132,7 +134,7 @@ const LiveStackExchangeCard = () => {
         {isLiveData && (
           <div className="absolute top-4 right-4 flex items-center space-x-2">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-xs light-text opacity-70 font-medium">LIVE DATA</span>
+            <span className="text-xs light-text opacity-70 font-medium">{t('community.liveData')}</span>
           </div>
         )}
 
@@ -141,7 +143,7 @@ const LiveStackExchangeCard = () => {
           <div className="absolute inset-0 bg-black/20 backdrop-blur-sm rounded-3xl flex items-center justify-center z-20">
             <div className="flex items-center space-x-3">
               <div className="w-5 h-5 border-2 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
-              <span className="text-white font-medium">Loading live data...</span>
+              <span className="text-white font-medium">{t('community.loadingData')}</span>
             </div>
           </div>
         )}
@@ -182,7 +184,7 @@ const LiveStackExchangeCard = () => {
                 {profile.displayName}
               </h3>
               <p className="text-lg light-text opacity-70 mb-4">
-                Ethereum Stack Exchange Contributor
+                {t('community.stackExchangeContributor')}
               </p>
               
               {/* Stats Grid */}
@@ -197,7 +199,7 @@ const LiveStackExchangeCard = () => {
                   <div className="text-2xl font-bold text-orange-600">
                     {profile.reputation.toLocaleString()}
                   </div>
-                  <div className="text-xs light-text opacity-70 uppercase tracking-wider">Reputation</div>
+                  <div className="text-xs light-text opacity-70 uppercase tracking-wider">{t('community.reputation')}</div>
                 </div>
                 
                 {profile.badges.gold > 0 && (
@@ -217,7 +219,7 @@ const LiveStackExchangeCard = () => {
                       </svg>
                       <span className="text-2xl font-bold light-text">{profile.badges.gold}</span>
                     </div>
-                    <div className="text-xs light-text opacity-70 uppercase tracking-wider">Gold</div>
+                    <div className="text-xs light-text opacity-70 uppercase tracking-wider">{t('community.gold')}</div>
                   </div>
                 )}
                 
@@ -237,7 +239,7 @@ const LiveStackExchangeCard = () => {
                     </svg>
                     <span className="text-2xl font-bold light-text">{profile.badges.silver}</span>
                   </div>
-                  <div className="text-xs light-text opacity-70 uppercase tracking-wider">Silver</div>
+                  <div className="text-xs light-text opacity-70 uppercase tracking-wider">{t('community.silver')}</div>
                 </div>
                 
                 <div className={`p-4 rounded-xl text-center ${
@@ -256,7 +258,7 @@ const LiveStackExchangeCard = () => {
                     </svg>
                     <span className="text-2xl font-bold light-text">{profile.badges.bronze}</span>
                   </div>
-                  <div className="text-xs light-text opacity-70 uppercase tracking-wider">Bronze</div>
+                  <div className="text-xs light-text opacity-70 uppercase tracking-wider">{t('community.bronze')}</div>
                 </div>
               </div>
 
@@ -280,7 +282,7 @@ const LiveStackExchangeCard = () => {
 
           {/* Featured Answers */}
           <div className="mt-8">
-            <h4 className="text-2xl font-bold light-text mb-6 text-center">Featured Contributions</h4>
+            <h4 className="text-2xl font-bold light-text mb-6 text-center">{t('community.featuredContributions')}</h4>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {answers.map((answer) => (
                 <Link
@@ -327,7 +329,7 @@ const LiveStackExchangeCard = () => {
                     <div className={`text-xs font-semibold mb-1 ${
                       theme === 'theme-light' ? 'text-blue-600' : 'text-blue-400'
                     }`}>
-                      QUESTION:
+                      {t('community.question')}
                     </div>
                     <h5 className="font-bold light-text text-lg pr-24 leading-tight group-hover/answer:text-orange-500 transition-colors">
                       {truncateText(answer.questionTitle, 65)}
@@ -339,7 +341,7 @@ const LiveStackExchangeCard = () => {
                     <div className={`text-xs font-semibold mb-2 ${
                       theme === 'theme-light' ? 'text-orange-600' : 'text-orange-400'
                     }`}>
-                      MY ANSWER:
+                      {t('community.myAnswer')}
                     </div>
                     <p className={`text-sm leading-relaxed italic transition-colors ${
                       theme === 'theme-light' 
@@ -383,7 +385,7 @@ const LiveStackExchangeCard = () => {
                   : 'bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white'
               }`}
             >
-              View My Full Stack Exchange Profile
+              {t('community.viewProfile')}
               <svg 
                 className="ml-3 w-5 h-5 transition-transform group-hover:translate-x-1" 
                 fill="none" 
