@@ -739,64 +739,58 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                           : 'bg-black text-green-400 border-2 border-green-500 shadow-xl shadow-green-900/30'
                       }`}
                     >
-                      {/* Header */}
-                      <div className="flex items-center space-x-2 mb-3 pb-2 border-b border-slate-600">
-                        <span className="text-lg">{skill.icon}</span>
-                        <div className={`font-bold text-sm ${
-                          theme === 'theme-light' ? 'text-blue-300' : 'text-green-300'
-                        }`}>
-                          {skill.name}
+                      {/* Turret Skill Explanation */}
+                      <div className="text-left">
+                        <div className="flex items-center space-x-2 mb-3 pb-2 border-b border-slate-600">
+                          <span className="text-2xl">{skill.icon}</span>
+                          <div className={`font-bold text-sm ${
+                            theme === 'theme-light' ? 'text-blue-300' : 'text-green-300'
+                          }`}>
+                            {skill.name}
+                          </div>
                         </div>
-                      </div>
-
-                      {/* Description */}
-                      <div className="mb-3">
-                        <div className={`font-semibold mb-1 ${
-                          theme === 'theme-light' ? 'text-slate-200' : 'text-green-200'
-                        }`}>
-                          DEFENSE CAPABILITY:
-                        </div>
+                        
                         <div className="text-xs leading-relaxed opacity-90">
-                          {skill.description}
-                        </div>
-                      </div>
-
-                      {/* Threat Defense Matrix */}
-                      <div className="mb-3">
-                        <div className={`font-semibold mb-2 ${
-                          theme === 'theme-light' ? 'text-slate-200' : 'text-green-200'
-                        }`}>
-                          THREAT DEFENSE MATRIX:
-                        </div>
-                        <div className="grid grid-cols-1 gap-1">
-                          {threatTypes
-                            .filter(threat => threat.defendedBy === skill.id)
-                            .map(threat => (
-                              <div 
-                                key={threat.id}
-                                className={`flex items-center space-x-2 p-2 rounded border ${
-                                  theme === 'theme-light' 
-                                    ? 'bg-slate-800 border-slate-600' 
-                                    : 'bg-slate-900 border-slate-700'
-                                }`}
-                              >
-                                <span className="text-sm">{threat.icon}</span>
-                                <div className="flex-1">
-                                  <div className={`font-medium text-xs ${
-                                    theme === 'theme-light' ? 'text-red-300' : 'text-red-400'
-                                  }`}>
-                                    {threat.name}
-                                  </div>
-                                  <div className="text-xs opacity-70 leading-tight">
-                                    {threat.description}
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          {threatTypes.filter(threat => threat.defendedBy === skill.id).length === 0 && (
-                            <div className="text-xs opacity-60 italic">
-                              General purpose security skill - defends against various threats
-                            </div>
+                          {skill.id === 'auditing' && (
+                            <>
+                              <p className="mb-2">I perform line-by-line code reviews to identify vulnerabilities before deployment. My audits combine manual analysis with automated tools.</p>
+                              <p>Focus areas: access control flaws, reentrancy risks, fund management issues, and business logic errors that could lead to exploits.</p>
+                            </>
+                          )}
+                          
+                          {skill.id === 'common-vulnerabilities' && (
+                            <>
+                              <p className="mb-2">I recognize and prevent well-known attack patterns like reentrancy, integer overflows, and unchecked returns that have caused millions in losses.</p>
+                              <p>My approach: implement checks-effects-interactions, use SafeMath, validate all external calls, and apply defensive programming patterns.</p>
+                            </>
+                          )}
+                          
+                          {skill.id === 'formal-verification' && (
+                            <>
+                              <p className="mb-2">I use mathematical proofs to guarantee contract behavior. By defining invariants and using symbolic execution, I ensure code works correctly in all scenarios.</p>
+                              <p>This catches subtle bugs that testing and auditing miss - critical for high-value protocols where failure isn't an option.</p>
+                            </>
+                          )}
+                          
+                          {skill.id === 'mev-protection' && (
+                            <>
+                              <p className="mb-2">I protect users from sandwich attacks and front-running by implementing commit-reveal schemes, TWAP oracles, and private mempool strategies.</p>
+                              <p>My MEV-resistant designs ensure fair trading and prevent value extraction that hurts user experience in DeFi protocols.</p>
+                            </>
+                          )}
+                          
+                          {skill.id === 'invariant-testing' && (
+                            <>
+                              <p className="mb-2">I define unbreakable rules and use fuzz testing to throw thousands of random inputs at contracts, finding edge cases humans miss.</p>
+                              <p>Using Foundry and Echidna, I discover arithmetic errors, unexpected state transitions, and complex multi-step exploits automatically.</p>
+                            </>
+                          )}
+                          
+                          {skill.id === 'attack-vectors' && (
+                            <>
+                              <p className="mb-2">I analyze how vulnerabilities chain together in real exploits - flash loans combined with oracle manipulation, governance attacks, and cross-protocol interactions.</p>
+                              <p>By thinking like an attacker and studying past hacks, I identify non-obvious attack paths before malicious actors find them.</p>
+                            </>
                           )}
                         </div>
                       </div>
