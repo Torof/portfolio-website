@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo, memo } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
+import { useLanguage } from '@/lib/context/LanguageContext';
 import { techStack, TechItem } from '@/lib/data/techStack';
 
 interface TechRiverProps {
@@ -11,6 +12,7 @@ interface TechRiverProps {
 
 const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const [mounted, setMounted] = useState(false);
   const [showList, setShowList] = useState(false);
   
@@ -188,7 +190,7 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
           transition={{ duration: 0.6, delay: 0.8 }}
         >
           <div className="flex items-center space-x-2 text-sm font-medium">
-            <span>{showList ? '🌊 Click to see River View' : '📋 Click to see List View'}</span>
+            <span>{showList ? t('skills.techStack.riverView') : t('skills.techStack.listView')}</span>
           </div>
         </motion.button>
 
@@ -202,7 +204,7 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            My <span className="font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Tech Stack</span>
+            {t('skills.techStack.title')}
           </motion.h2>
           
           <motion.p 
@@ -211,7 +213,7 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            A flowing showcase of all the technologies I use to build amazing digital experiences
+            {t('skills.techStack.description')}
           </motion.p>
         </div>
 
@@ -360,7 +362,7 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
                 <h3 className={`text-2xl font-bold ${
                   theme === 'theme-light' ? 'text-slate-800' : 'text-white'
                 }`}>
-                  Technology Stack ({techItems.length} Technologies)
+                  {t('skills.techStack.count', { count: techItems.length })}
                 </h3>
               </div>
 

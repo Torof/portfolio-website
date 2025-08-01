@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useScrollAnimation, getAnimationClass } from '@/lib/hooks/useScrollAnimation';
 import { useTheme } from '@/lib/context/ThemeContext';
+import { useLanguage } from '@/lib/context/LanguageContext';
 import { skillCategories } from '@/lib/data/advancedSkills';
 import { AdvancedSkill } from '@/lib/types';
 import AnimatedTitle from '@/components/AnimatedTitle';
@@ -16,6 +17,7 @@ import LiveStackExchangeCard from '@/components/LiveStackExchangeCard';
 
 export default function SkillsPage() {
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
 
   return (
@@ -36,10 +38,10 @@ export default function SkillsPage() {
           className={`text-center mb-16 ${getAnimationClass(titleAnimation.isVisible, 'fadeInUp')}`}
         >
           <AnimatedTitle variant="glitch" className="text-5xl md:text-6xl mb-6">
-            Advanced Skills
+            {t('skills.advanced.title')}
           </AnimatedTitle>
           <p className="text-xl light-text opacity-80 max-w-3xl mx-auto">
-            Deep technical expertise in blockchain development, smart contracts, and decentralized finance
+            {t('skills.advanced.subtitle')}
           </p>
         </div>
 
@@ -52,10 +54,10 @@ export default function SkillsPage() {
         >
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold light-text mb-6">
-              What I Can Do For You
+              {t('skills.whatCanDo.title')}
             </h2>
             <p className="text-xl light-text opacity-80 max-w-3xl mx-auto">
-              From concept to production, I deliver complete blockchain solutions that drive real business value
+              {t('skills.whatCanDo.subtitle')}
             </p>
           </div>
 
@@ -75,27 +77,27 @@ export default function SkillsPage() {
               <div className="relative z-10">
                 <div className="text-5xl mb-6">🏗️</div>
                 <h3 className="text-2xl font-bold light-text mb-4">
-                  Complete Smart Contract Systems
+                  {t('skills.service1.title')}
                 </h3>
                 <p className="light-text opacity-80 mb-6">
-                  I architect and build entire smart contract ecosystems from scratch, handling everything from tokenomics design to complex DeFi mechanics.
+                  {t('skills.service1.description')}
                 </p>
                 <ul className="space-y-3 light-text">
                   <li className="flex items-start">
                     <span className="text-green-400 mr-2 mt-1">✓</span>
-                    <span>Custom token standards (ERC-20, ERC-721, ERC-1155)</span>
+                    <span>{t('skills.service1.feature1')}</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-green-400 mr-2 mt-1">✓</span>
-                    <span>DeFi protocols (AMMs, lending, staking, yield farming)</span>
+                    <span>{t('skills.service1.feature2')}</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-green-400 mr-2 mt-1">✓</span>
-                    <span>Governance systems and DAOs</span>
+                    <span>{t('skills.service1.feature3')}</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-green-400 mr-2 mt-1">✓</span>
-                    <span>Multi-chain deployment strategies</span>
+                    <span>{t('skills.service1.feature4')}</span>
                   </li>
                 </ul>
               </div>
@@ -115,27 +117,27 @@ export default function SkillsPage() {
               <div className="relative z-10">
                 <div className="text-5xl mb-6">⚡</div>
                 <h3 className="text-2xl font-bold light-text mb-4">
-                  Optimization & Security Auditing
+                  {t('skills.service2.title')}
                 </h3>
                 <p className="light-text opacity-80 mb-6">
-                  I optimize existing contracts for gas efficiency and conduct thorough security reviews to ensure your protocols are bulletproof.
+                  {t('skills.service2.description')}
                 </p>
                 <ul className="space-y-3 light-text">
                   <li className="flex items-start">
                     <span className="text-green-400 mr-2 mt-1">✓</span>
-                    <span>Gas optimization using Yul and assembly</span>
+                    <span>{t('skills.service2.feature1')}</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-green-400 mr-2 mt-1">✓</span>
-                    <span>Security vulnerability assessments</span>
+                    <span>{t('skills.service2.feature2')}</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-green-400 mr-2 mt-1">✓</span>
-                    <span>Code refactoring for efficiency</span>
+                    <span>{t('skills.service2.feature3')}</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-green-400 mr-2 mt-1">✓</span>
-                    <span>Best practices implementation</span>
+                    <span>{t('skills.service2.feature4')}</span>
                   </li>
                 </ul>
               </div>
@@ -155,27 +157,27 @@ export default function SkillsPage() {
               <div className="relative z-10">
                 <div className="text-5xl mb-6">🚀</div>
                 <h3 className="text-2xl font-bold light-text mb-4">
-                  End-to-End DApp Development
+                  {t('skills.service3.title')}
                 </h3>
                 <p className="light-text opacity-80 mb-6">
-                  I build complete decentralized applications with modern frontends, robust backends, and seamless blockchain integration.
+                  {t('skills.service3.description')}
                 </p>
                 <ul className="space-y-3 light-text">
                   <li className="flex items-start">
                     <span className="text-green-400 mr-2 mt-1">✓</span>
-                    <span>React/Next.js frontend development</span>
+                    <span>{t('skills.service3.feature1')}</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-green-400 mr-2 mt-1">✓</span>
-                    <span>Web3 integration (ethers.js, wagmi)</span>
+                    <span>{t('skills.service3.feature2')}</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-green-400 mr-2 mt-1">✓</span>
-                    <span>Backend APIs and indexing services</span>
+                    <span>{t('skills.service3.feature3')}</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-green-400 mr-2 mt-1">✓</span>
-                    <span>IPFS integration and decentralized storage</span>
+                    <span>{t('skills.service3.feature4')}</span>
                   </li>
                 </ul>
               </div>
@@ -194,28 +196,28 @@ export default function SkillsPage() {
             transition={{ delay: 0.4, duration: 0.6 }}
           >
             <h3 className="text-3xl font-bold light-text mb-6">
-              Why I&apos;m the Right Choice
+              {t('skills.whyChoose.title')}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
               <div>
                 <div className="text-4xl mb-3">🏆</div>
-                <h4 className="text-lg font-semibold light-text mb-2">6+ Years Experience</h4>
-                <p className="text-sm light-text opacity-80">Battle-tested in production environments</p>
+                <h4 className="text-lg font-semibold light-text mb-2">{t('skills.whyChoose.experience')}</h4>
+                <p className="text-sm light-text opacity-80">{t('skills.whyChoose.experienceDesc')}</p>
               </div>
               <div>
                 <div className="text-4xl mb-3">🔒</div>
-                <h4 className="text-lg font-semibold light-text mb-2">Security First</h4>
-                <p className="text-sm light-text opacity-80">Auditing mindset in every line of code</p>
+                <h4 className="text-lg font-semibold light-text mb-2">{t('skills.whyChoose.security')}</h4>
+                <p className="text-sm light-text opacity-80">{t('skills.whyChoose.securityDesc')}</p>
               </div>
               <div>
                 <div className="text-4xl mb-3">💡</div>
-                <h4 className="text-lg font-semibold light-text mb-2">Innovation Driven</h4>
-                <p className="text-sm light-text opacity-80">Always exploring cutting-edge solutions</p>
+                <h4 className="text-lg font-semibold light-text mb-2">{t('skills.whyChoose.innovation')}</h4>
+                <p className="text-sm light-text opacity-80">{t('skills.whyChoose.innovationDesc')}</p>
               </div>
               <div>
                 <div className="text-4xl mb-3">🤝</div>
-                <h4 className="text-lg font-semibold light-text mb-2">Client Focused</h4>
-                <p className="text-sm light-text opacity-80">Your success is my priority</p>
+                <h4 className="text-lg font-semibold light-text mb-2">{t('skills.whyChoose.client')}</h4>
+                <p className="text-sm light-text opacity-80">{t('skills.whyChoose.clientDesc')}</p>
               </div>
             </div>
           </motion.div>
@@ -239,10 +241,10 @@ export default function SkillsPage() {
         <div className="mb-20">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold light-text mb-6">
-              Technical Expertise
+              {t('skills.expertise.title')}
             </h2>
             <p className="text-xl light-text opacity-80 max-w-3xl mx-auto">
-              Explore my specialized blockchain development skills through uniquely themed sections, each showcasing different aspects of my expertise.
+              {t('skills.expertise.subtitle')}
             </p>
           </div>
 

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
+import { useLanguage } from '@/lib/context/LanguageContext';
 import { SkillCategory } from '@/lib/types';
 
 interface Layer2SectionProps {
@@ -12,6 +13,7 @@ interface Layer2SectionProps {
 // Layer 2 - Network Topology with Official Logos
 const Layer2Section = ({ category }: Layer2SectionProps) => {
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
   
@@ -50,6 +52,12 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
     };
   }, [hoverTimeout]);
   
+  // Get translated tooltip description
+  const getTooltipDescription = (skillId: string): string => {
+    const tooltipKey = `layer2.tooltip.${skillId.toLowerCase()}`;
+    return t(tooltipKey);
+  };
+
   // Logo mapping for Layer 2 networks
   const getNetworkLogo = (skillId: string): string | null => {
     const logoMap: { [key: string]: string } = {
@@ -159,12 +167,12 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
                 <h3 className={`text-3xl font-bold ${
                   theme === 'theme-light' ? 'text-slate-800' : 'text-white'
                 }`}>
-                  Layer 2 Network
+                  {t('layer2.title')}
                 </h3>
                 <p className={`text-lg ${
                   theme === 'theme-light' ? 'text-slate-600' : 'text-slate-300'
                 }`}>
-                  Interconnected scaling ecosystem
+                  {t('layer2.subtitle')}
                 </p>
               </div>
             </div>
@@ -178,7 +186,7 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
               <p className={`text-sm leading-relaxed ${
                 theme === 'theme-light' ? 'text-indigo-900' : 'text-indigo-200'
               }`}>
-                I architect multi-chain ecosystems where each Layer 2 serves specific purposes - from high-throughput gaming on Polygon to innovative DeFi on Arbitrum, all connected through secure bridge infrastructure.
+                {t('layer2.description')}
               </p>
             </div>
           </div>
@@ -195,34 +203,34 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
                 <h4 className={`text-xl font-bold mb-4 ${
                   theme === 'theme-light' ? 'text-indigo-900' : 'text-indigo-300'
                 }`}>
-                  Multi-Chain Architecture
+                  {t('layer2.architecture.title')}
                 </h4>
                 <div className={`space-y-3 text-sm ${
                   theme === 'theme-light' ? 'text-slate-700' : 'text-slate-300'
                 }`}>
                   <p>
-                    I specialize in building cross-chain applications that leverage the unique strengths of each Layer 2 network:
+                    {t('layer2.architecture.intro')}
                   </p>
                   <ul className="space-y-2">
                     <li className="flex items-start">
                       <span className="text-indigo-500 mr-2">•</span>
-                      <span><strong>Arbitrum & Optimism:</strong> DeFi protocols with complex logic and composability</span>
+                      <span><strong>Arbitrum & Optimism:</strong> {t('layer2.architecture.arbitrum')}</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-indigo-500 mr-2">•</span>
-                      <span><strong>Polygon & Base:</strong> High-volume consumer applications and gaming</span>
+                      <span><strong>Polygon & Base:</strong> {t('layer2.architecture.polygon')}</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-indigo-500 mr-2">•</span>
-                      <span><strong>zkSync Era & Scroll:</strong> Privacy-focused and ZK-powered applications</span>
+                      <span><strong>zkSync Era & Scroll:</strong> {t('layer2.architecture.zksync')}</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-indigo-500 mr-2">•</span>
-                      <span><strong>Gnosis & Berachain:</strong> DAOs and innovative consensus mechanisms</span>
+                      <span><strong>Gnosis & Berachain:</strong> {t('layer2.architecture.gnosis')}</span>
                     </li>
                   </ul>
                   <p className="mt-4">
-                    My expertise includes implementing secure cross-chain messaging, unified liquidity management, and seamless user experiences across multiple networks.
+                    {t('layer2.architecture.conclusion')}
                   </p>
                 </div>
               </div>
@@ -492,7 +500,7 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
                   <p className={`text-sm leading-relaxed mb-3 ${
                     theme === 'theme-light' ? 'text-slate-600' : 'text-slate-300'
                   }`}>
-                    {skill.description}
+                    {getTooltipDescription(skill.id)}
                   </p>
 
                   <div className="mb-3 text-xs">

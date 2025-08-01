@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
+import { useLanguage } from '@/lib/context/LanguageContext';
 import { SkillCategory, AdvancedSkill } from '@/lib/types';
 
 interface DeFiSectionProps {
@@ -12,6 +13,7 @@ interface DeFiSectionProps {
 // DeFi - Retro Trading Terminal Theme
 const DeFiSection = ({ category }: DeFiSectionProps) => {
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const [isExpanded, setIsExpanded] = useState(false);
   const [currentTime, setCurrentTime] = useState<Date | null>(null);
   const [expandedProtocol, setExpandedProtocol] = useState<string | null>(null);
@@ -190,11 +192,11 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
                   : 'bg-green-950/50 border-green-600 text-green-500'
               }`}>
                 <div className="col-span-1">ID</div>
-                <div className="col-span-3">PROTOCOL</div>
-                <div className="col-span-2">TYPE</div>
-                <div className="col-span-2">TVL</div>
-                <div className="col-span-2">24H</div>
-                <div className="col-span-2">STATUS</div>
+                <div className="col-span-3">{t('defi.dropdown.protocols')}</div>
+                <div className="col-span-2">{t('defi.dropdown.type')}</div>
+                <div className="col-span-2">{t('defi.dropdown.tvl')}</div>
+                <div className="col-span-2">{t('defi.dropdown.24h')}</div>
+                <div className="col-span-2">{t('defi.dropdown.status')}</div>
               </div>
 
               {/* Protocol Rows */}
@@ -270,7 +272,7 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
                             skill.level >= 4 ? 'bg-green-600' : 'bg-yellow-500'
                           } animate-pulse`} />
                           <span className="text-xs">
-                            {skill.level >= 4 ? 'EXPERT' : 'ACTIVE'}
+                            {skill.level >= 4 ? t('defi.dropdown.expert') : t('defi.dropdown.active')}
                           </span>
                         </div>
                       </div>
@@ -379,7 +381,7 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                [{isExpanded ? 'COLLAPSE' : 'EXPAND'}]
+                [{isExpanded ? t('defi.dropdown.collapse') : t('defi.dropdown.expand')}]
               </motion.button>
             </div>
 
