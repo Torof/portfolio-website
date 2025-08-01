@@ -176,6 +176,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
   const [explosions, setExplosions] = useState<Explosion[]>([]);
   const [score, setScore] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const gameAreaRef = useRef<HTMLDivElement>(null);
   const threatIdCounter = useRef(0);
   const laserIdCounter = useRef(0);
@@ -224,19 +225,25 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
     };
 
     // Initial spawn
-    setTimeout(spawnThreat, 1000);
+    setTimeout(() => {
+      if (!isPaused) spawnThreat();
+    }, 1000);
     
     // Regular spawning
-    const spawnInterval = setInterval(spawnThreat, 3000 + Math.random() * 2000);
+    const spawnInterval = setInterval(() => {
+      if (!isPaused) spawnThreat();
+    }, 3000 + Math.random() * 2000);
     
     return () => clearInterval(spawnInterval);
-  }, [mounted]);
+  }, [mounted, isPaused]);
 
   // Game loop - move threats and check for targeting
   useEffect(() => {
     if (!mounted) return;
 
     const gameLoop = setInterval(() => {
+      if (isPaused) return; // Skip game loop when paused
+      
       setThreats(prev => {
         const updatedThreats = prev.map(threat => ({
           ...threat,
@@ -309,7 +316,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
     }, 80); // ~12 FPS
 
     return () => clearInterval(gameLoop);
-  }, [mounted, category.skills]);
+  }, [mounted, category.skills, isPaused]);
 
   if (!mounted) {
     return <div className="h-[800px]" />;
@@ -736,15 +743,17 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                     {threats.map(threat => (
                       <motion.div
                         key={threat.id}
-                        className={`p-4 rounded-lg border-2 ${
+                        className={`p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
                           theme === 'theme-light'
-                            ? 'bg-white border-red-200'
-                            : 'bg-red-950/50 border-red-800'
+                            ? 'bg-white border-red-200 hover:border-red-400 hover:shadow-lg'
+                            : 'bg-red-950/50 border-red-800 hover:border-red-600 hover:bg-red-950/70'
                         }`}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.3 }}
+                        onMouseEnter={() => setIsPaused(true)}
+                        onMouseLeave={() => setIsPaused(false)}
                       >
                         <div className="flex items-start space-x-3">
                           <div className="text-2xl flex-shrink-0">
