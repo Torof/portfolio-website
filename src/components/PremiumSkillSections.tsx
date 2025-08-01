@@ -1465,16 +1465,11 @@ const Layer2Section = ({ category }: { category: SkillCategory }) => {
                     {skill.description}
                   </p>
 
-                  <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
+                  <div className="mb-3 text-xs">
                     <div className={`${
                       theme === 'theme-light' ? 'text-slate-500' : 'text-slate-400'
                     }`}>
                       <span className="font-medium">Type:</span> {skill.subcategory}
-                    </div>
-                    <div className={`${
-                      theme === 'theme-light' ? 'text-slate-500' : 'text-slate-400'
-                    }`}>
-                      <span className="font-medium">Experience:</span> {skill.level * 2}+ years
                     </div>
                   </div>
 
