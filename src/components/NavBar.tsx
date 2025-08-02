@@ -70,21 +70,19 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center space-x-8">
           <div className="flex space-x-1">
-            {navLinks.map((link) => {
-              return (
-                <Link
-                  key={link.path}
-                  href={link.path}
-                  className={`nav-link ${
-                    pathname === link.path
-                      ? "active"
-                      : ""
-                  }`}
-                >
-                  {t(`nav.${link.name.toLowerCase().replace(/ /g, '-')}`)}
-                </Link>
-              );
-            })}
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                href={link.path}
+                className={`nav-link ${
+                  pathname === link.path
+                    ? "active"
+                    : ""
+                }`}
+              >
+                {t(`nav.${link.name.toLowerCase().replace(/ /g, '-')}`)}
+              </Link>
+            ))}
           </div>
           
           <div className={`h-6 w-px ${
@@ -180,18 +178,16 @@ export default function Navbar() {
             : 'bg-[rgba(5,5,5,0.95)] border-[rgba(255,255,255,0.1)]'
         }`}>
           <div className="container-custom py-4">
-            {navLinks.map((link) => {
-              return (
-                <Link
-                  key={link.path}
-                  href={link.path}
-                  className="py-3 px-4 rounded-lg transition-all block"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {t(`nav.${link.name.toLowerCase().replace(/ /g, '-')}`)}
-                </Link>
-              );
-            })}
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                href={link.path}
+                className="py-3 px-4 rounded-lg transition-all block"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {t(`nav.${link.name.toLowerCase().replace(/ /g, '-')}`)}
+              </Link>
+            ))}
             
             <div className={`pt-2 flex flex-col space-y-2 border-t mt-2 ${
               theme === 'theme-light' 

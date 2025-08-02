@@ -1,19 +1,16 @@
 import type { NextConfig } from "next";
 
-const isDevelopment = process.env.NODE_ENV === 'development';
-
 const nextConfig: NextConfig = {
-  // Use static export for production, standard mode for development (to support API routes)
-  output: isDevelopment ? undefined : 'export',
+  // Standard Next.js configuration for Vercel deployment
+  // No static export needed - Vercel supports full Next.js features including API routes
   
-  // Enable trailing slash for proper static hosting routing
-  trailingSlash: true,
-  
-  // Configure images for static export
+  // Configure images
   images: {
-    unoptimized: true, // Required for static export
     domains: ['avatars.githubusercontent.com'],
   },
+  
+  // Standard trailing slash behavior
+  trailingSlash: false,
 };
 
 export default nextConfig;
