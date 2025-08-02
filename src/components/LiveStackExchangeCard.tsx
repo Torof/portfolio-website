@@ -38,26 +38,59 @@ const LiveStackExchangeCard = () => {
   useEffect(() => {
     const fetchLiveData = async () => {
       try {
-        // Direct Stack Exchange API call from browser
-        console.log('🔄 Fetching live Stack Exchange data directly from API...');
+        // Try API route first (server-side, better rate limiting)
+        console.log('🔄 Attempting to fetch live Stack Exchange data via API route...');
         
-        const { profile: liveProfile, answers: liveAnswers } = await fetchCompleteStackExchangeData('52251');
-        
-        if (liveProfile) {
-          setProfile(liveProfile);
-          setIsLiveData(true);
-          console.log('✅ Successfully fetched live Stack Exchange profile');
+        const response = await fetch('/api/stackexchange?userId=52251', {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          
+          if (data.profile) {
+            setProfile(data.profile);
+            setIsLiveData(true);
+            console.log('✅ Successfully fetched live Stack Exchange profile via API route');
+          }
+          
+          if (data.answers && data.answers.length > 0) {
+            setAnswers(data.answers.slice(0, 4));
+            console.log(`✅ Successfully fetched ${data.answers.length} live Stack Exchange answers via API route`);
+          }
+
+          console.log(`📊 Data source: ${data.source}, fetched at: ${data.fetchedAt}`);
+          return; // Success, exit early
+        } else {
+          throw new Error(`API route returned ${response.status}`);
         }
         
-        if (liveAnswers && liveAnswers.length > 0) {
-          setAnswers(liveAnswers.slice(0, 4));
-          console.log(`✅ Successfully fetched ${liveAnswers.length} live Stack Exchange answers`);
-        }
+      } catch (apiError) {
+        console.log('⚠️ API route failed, trying direct Stack Exchange API...', apiError);
         
-      } catch {
-        console.log('⚠️ Could not fetch live data (CORS or API limit), using static data');
-        console.log('📊 Displaying static Stack Exchange data');
-        // Keep using fallback data - component will show static data
+        try {
+          // Fallback: Direct Stack Exchange API call (may be rate limited)
+          const { profile: liveProfile, answers: liveAnswers } = await fetchCompleteStackExchangeData('52251');
+          
+          if (liveProfile) {
+            setProfile(liveProfile);
+            setIsLiveData(true);
+            console.log('✅ Successfully fetched live Stack Exchange profile via direct API');
+          }
+          
+          if (liveAnswers && liveAnswers.length > 0) {
+            setAnswers(liveAnswers.slice(0, 4));
+            console.log(`✅ Successfully fetched ${liveAnswers.length} live Stack Exchange answers via direct API`);
+          }
+          
+        } catch (directError) {
+          console.log('⚠️ Both API route and direct Stack Exchange API failed, using static data');
+          console.log('📋 Displaying static Stack Exchange data');
+          // Keep using fallback data - component will show static data
+        }
       } finally {
         setIsLoading(false);
       }
