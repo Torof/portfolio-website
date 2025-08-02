@@ -139,11 +139,28 @@ export async function fetchStackExchangeProfile(userId: string): Promise<StackOv
       filter: 'default'
     });
     
+    console.log('API URL:', apiUrl);
+    
     let data: unknown;
     
     if (isBrowser) {
-      // Use JSONP for browser requests
-      data = await fetchJsonp(apiUrl);
+      // Try direct fetch first (Stack Exchange API supports CORS)
+      console.log('Making direct fetch request to:', apiUrl);
+      try {
+        const response = await fetch(apiUrl);
+        if (response.ok) {
+          data = await response.json();
+          console.log('Direct fetch response received:', data);
+        } else {
+          console.log('Direct fetch failed, trying JSONP...');
+          data = await fetchJsonp(apiUrl);
+          console.log('JSONP response received:', data);
+        }
+      } catch (fetchError) {
+        console.log('Direct fetch failed with error, trying JSONP:', fetchError);
+        data = await fetchJsonp(apiUrl);
+        console.log('JSONP response received:', data);
+      }
     } else {
       // Use regular fetch for server-side requests
       const response = await fetch(apiUrl, {
@@ -155,8 +172,11 @@ export async function fetchStackExchangeProfile(userId: string): Promise<StackOv
       data = await handleApiResponse(response, 'profile');
     }
     
+    console.log('Stack Exchange API response:', data);
+    
     if (!data || !(data as { items?: unknown[] }).items || (data as { items: unknown[] }).items.length === 0) {
       console.error('No user data found');
+      console.error('Data structure:', data);
       return null;
     }
 
@@ -171,8 +191,17 @@ export async function fetchStackExchangeProfile(userId: string): Promise<StackOv
     let tagsData: unknown;
     
     if (isBrowser) {
-      // Use JSONP for browser requests
-      tagsData = await fetchJsonp(tagsApiUrl);
+      // Try direct fetch first (Stack Exchange API supports CORS)
+      try {
+        const response = await fetch(tagsApiUrl);
+        if (response.ok) {
+          tagsData = await response.json();
+        } else {
+          tagsData = await fetchJsonp(tagsApiUrl);
+        }
+      } catch {
+        tagsData = await fetchJsonp(tagsApiUrl);
+      }
     } else {
       // Use regular fetch for server-side requests
       const tagsResponse = await fetch(tagsApiUrl, {
@@ -224,8 +253,17 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
     let answersData: unknown;
     
     if (isBrowser) {
-      // Use JSONP for browser requests
-      answersData = await fetchJsonp(answersApiUrl);
+      // Try direct fetch first (Stack Exchange API supports CORS)
+      try {
+        const response = await fetch(answersApiUrl);
+        if (response.ok) {
+          answersData = await response.json();
+        } else {
+          answersData = await fetchJsonp(answersApiUrl);
+        }
+      } catch {
+        answersData = await fetchJsonp(answersApiUrl);
+      }
     } else {
       // Use regular fetch for server-side requests
       const answersResponse = await fetch(answersApiUrl, {
@@ -254,8 +292,17 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
     let questionsData: unknown;
     
     if (isBrowser) {
-      // Use JSONP for browser requests
-      questionsData = await fetchJsonp(questionsApiUrl);
+      // Try direct fetch first (Stack Exchange API supports CORS)
+      try {
+        const response = await fetch(questionsApiUrl);
+        if (response.ok) {
+          questionsData = await response.json();
+        } else {
+          questionsData = await fetchJsonp(questionsApiUrl);
+        }
+      } catch {
+        questionsData = await fetchJsonp(questionsApiUrl);
+      }
     } else {
       // Use regular fetch for server-side requests
       const questionsResponse = await fetch(questionsApiUrl, {
