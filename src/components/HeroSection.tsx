@@ -3,7 +3,6 @@
 // import Link from "next/link"; // Removed for IPFS compatibility
 import Image from "next/image";
 import { personalInfo } from "@/lib/data";
-import ScrollIndicator from "@/components/ScrollIndicator";
 import { useScrollAnimation, getAnimationClass } from "@/lib/hooks/useScrollAnimation";
 import BlockchainRain from "@/components/BlockchainRain";
 import { useLanguage } from "@/lib/context/LanguageContext";
@@ -120,8 +119,6 @@ export default function HeroSection() {
         </div>
       </div>
       
-      {/* Add ScrollIndicator component */}
-      <ScrollIndicator />
     </section>
   );
 }
