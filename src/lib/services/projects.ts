@@ -1,5 +1,5 @@
 import { Project } from '../types';
-import { GitHubRepository, fetchGitHubRepositories, fetchRepositoryLanguages } from './github';
+import { GitHubRepository, fetchGitHubRepositories } from './github';
 import { fallbackProjects } from '../data/fallbackProjects';
 
 /**
@@ -178,17 +178,9 @@ async function extractTechnologies(repo: GitHubRepository): Promise<string[]> {
     if (normalizedTopic.includes('ethers')) technologies.add('ethers.js');
   });
   
-  // Try to fetch additional languages
-  try {
-    const languages = await fetchRepositoryLanguages(repo.name);
-    Object.keys(languages).forEach(lang => {
-      if (TECH_MAPPING[lang]) {
-        technologies.add(TECH_MAPPING[lang]);
-      }
-    });
-  } catch (error) {
-    console.warn(`Could not fetch languages for ${repo.name}:`, error);
-  }
+  // Skip fetching additional languages to avoid rate limiting
+  // The primary language and topics provide sufficient technology information
+  // This prevents 403 errors when making too many API requests
   
   return Array.from(technologies).slice(0, 8); // Limit to 8 technologies
 }
