@@ -1,5 +1,4 @@
 import { SocialLink } from '../types';
-import { getAssetUrl } from '../utils/assetLoader';
 
 export const personalInfo = {
   name: "Scott Devines",
@@ -7,7 +6,7 @@ export const personalInfo = {
   email: "dev.solidity@proton.me",
   location: "Remote",
   bio: "Experienced Full Stack Web3 Developer with 6+ years in blockchain, specializing in designing, writing, and auditing smart contract projects. Adept in Solidity and skilled in EVM, DeFi, and NFT. Passionate about building fullstack Decentralized Applications (dApps) from conception to production.",
-  profileImage: getAssetUrl('/profile.jpg'),
+  profileImage: '/profile.jpg',
   startedBlockchain: "2017"
 };
 

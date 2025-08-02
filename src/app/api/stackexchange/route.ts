@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
 }
 
 // Optional: Add caching headers to reduce API calls
-export async function HEAD(request: NextRequest) {
+export async function HEAD() {
   return new NextResponse(null, {
     status: 200,
     headers: {

@@ -1,5 +1,4 @@
 import { Experience } from '../types';
-import { getAssetUrl } from '../utils/assetLoader';
 
 export const experiences: Experience[] = [
   // Work Experiences
@@ -18,7 +17,7 @@ export const experiences: Experience[] = [
       "Developed user-friendly interfaces for complex blockchain functions to improve accessibility."
     ],
     skills: ["Solidity", "Smart Contracts", "Ethereum", "L2", "Code Auditing", "dApps"],
-    logo: getAssetUrl('/logos/ledgity-logo.svg'),
+    logo: '/logos/ledgity-logo.svg',
     type: "work",
     website: "https://ledgity.finance/"
   },
@@ -37,7 +36,7 @@ export const experiences: Experience[] = [
       "January 2025 - Hamilton Jury - POAP: https://collectors.poap.xyz/token/7390139"
     ],
     skills: ["Technical Assessment", "Blockchain Education", "Smart Contract Review", "Mentoring", "Ethereum"],
-    logo: getAssetUrl('/logos/alyra.png'),
+    logo: '/logos/alyra.png',
     type: "work",
     website: "https://www.alyra.fr/"
   },
@@ -57,7 +56,7 @@ export const experiences: Experience[] = [
       "Conducted thorough testing using frameworks like Foundry and Hardhat."
     ],
     skills: ["Solidity", "Smart Contracts", "NFT", "ERC20", "ERC721", "React.js", "Next.js", "Foundry", "Hardhat"],
-    logo: getAssetUrl('/logos/freelance.svg'),
+    logo: '/logos/freelance.svg',
     type: "work"
   },
   {
@@ -75,7 +74,7 @@ export const experiences: Experience[] = [
       "Implemented an Ethereum-based token economy to enhance player engagement."
     ],
     skills: ["Leadership", "Solidity", "Smart Contracts", "P2E", "Game Development", "Ethereum", "Agile"],
-    logo: getAssetUrl('/logos/tasc.svg'),
+    logo: '/logos/tasc.svg',
     type: "work"
   },
   {
@@ -91,7 +90,7 @@ export const experiences: Experience[] = [
       "Implemented token standards, including ERC20 and ERC721, to facilitate token creation and management."
     ],
     skills: ["Solidity", "Smart Contracts", "Ethereum", "ERC20", "ERC721", "Game Development"],
-    logo: getAssetUrl('/logos/future-institution.jpeg'),
+    logo: '/logos/future-institution.jpeg',
     type: "work",
     website: "https://www.linkedin.com/company/future-institution/"
   },
@@ -109,7 +108,7 @@ export const experiences: Experience[] = [
       "Maintained the front-end of the website"
     ],
     skills: ["Solidity", "Web3", "ERC20", "dApps", "Ethereum", "Frontend Development"],
-    logo: getAssetUrl('/logos/bitcoin-vietnam-logo.png'),
+    logo: '/logos/bitcoin-vietnam-logo.png',
     type: "work",
     website: "https://bitcoinvn.io/"
   },
@@ -130,7 +129,7 @@ export const experiences: Experience[] = [
       "Team name: RedCodeChilizPeppers"
     ],
     skills: ["Solidity", "Smart Contracts", "Chiliz Blockchain", "Full-Stack Development"],
-    logo: getAssetUrl('/logos/chiliz.png'),
+    logo: '/logos/chiliz.png',
     type: "hackathon",
     website: "https://www.chiliz.com/hacking-paris/"
   },
@@ -150,7 +149,7 @@ export const experiences: Experience[] = [
       "Collaborated with international team of 5 developers"
     ],
     skills: ["Solidity", "Next.js", "React", "Thirdweb", "Hardhat", "ERC6551", "ERC4337", "Soul Bound Tokens"],
-    logo: getAssetUrl('/logos/eth-global.ico'),
+    logo: '/logos/eth-global.ico',
     type: "hackathon",
     website: "https://ethglobal.com/events/ethonline2023"
   },
@@ -169,7 +168,7 @@ export const experiences: Experience[] = [
       "Enabled third-party career validation from mentors, hackathons, and instructors"
     ],
     skills: ["Solidity", "NFT", "Smart Contracts", "Privacy Solutions"],
-    logo: getAssetUrl('/logos/ethcon-korea.png'),
+    logo: '/logos/ethcon-korea.png',
     type: "hackathon",
     website: "https://devfolio.co/projects/careerzen-c34f"
   }
