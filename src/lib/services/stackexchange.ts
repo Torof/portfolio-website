@@ -240,11 +240,12 @@ export async function fetchStackExchangeProfile(userId: string): Promise<StackOv
  */
 export async function fetchStackExchangeAnswers(userId: string, limit: number = 10): Promise<StackOverflowAnswer[]> {
   try {
-    // First, get the user's answers
+    // First, get the user's answers with body content included
     const answersApiUrl = buildApiUrl(`/users/${userId}/answers`, {
       order: 'desc',
       sort: 'votes',
-      pagesize: limit.toString()
+      pagesize: limit.toString(),
+      filter: 'withbody' // Include body in the response
     });
     
     let answersData: unknown;
@@ -273,8 +274,11 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
     }
     
     if (!answersData || !(answersData as { items?: unknown[] }).items || (answersData as { items: unknown[] }).items.length === 0) {
+      console.log('No answers data found or empty items array');
       return [];
     }
+    
+    console.log(`Found ${(answersData as { items: unknown[] }).items.length} answers from Stack Exchange API`);
     
 
     // Get question IDs to fetch question details
@@ -331,9 +335,18 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
       // Create excerpt from body field (HTML format, needs cleaning) or use fallback
       let excerpt = '';
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if ((answer as any).body) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        excerpt = (answer as any).body
+      const answerBody = (answer as any).body;
+      
+      console.log(`Processing answer ${answer.answer_id}:`, {
+        hasBody: !!answerBody,
+        bodyType: typeof answerBody,
+        bodyLength: answerBody ? answerBody.length : 0,
+        bodyPreview: answerBody ? answerBody.slice(0, 100) + '...' : 'No body'
+      });
+      
+      if (answerBody && typeof answerBody === 'string' && answerBody.trim().length > 0) {
+        // Clean HTML from the answer body to create a readable excerpt
+        excerpt = answerBody
           // Remove HTML tags
           .replace(/<[^>]*>/g, '')
           // Replace HTML entities
@@ -343,14 +356,26 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
           .replace(/&quot;/g, '"')
           .replace(/&#39;/g, "'")
           .replace(/&nbsp;/g, ' ')
-          // Clean up whitespace
+          .replace(/&hellip;/g, '...')
+          // Clean up whitespace and line breaks
           .replace(/\s+/g, ' ')
-          .trim()
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          .slice(0, 180) + ((answer as any).body.length > 180 ? '...' : '');
+          .replace(/\n+/g, ' ')
+          .trim();
+          
+        // Truncate if too long
+        if (excerpt.length > 180) {
+          excerpt = excerpt.slice(0, 180).trim() + '...';
+        }
+        
+        console.log(`Created excerpt from body: "${excerpt}"`);
       } else {
-        // Fallback excerpt when body is not available
-        excerpt = `Answer with ${answer.score} upvotes on ${question.title.slice(0, 60)}...`;
+        // Enhanced fallback with more context when body is not available
+        const shortTitle = question.title.length > 50 ? question.title.slice(0, 50) + '...' : question.title;
+        const scoreText = answer.score === 1 ? '1 upvote' : `${answer.score} upvotes`;
+        const acceptedText = answer.is_accepted ? ' (accepted)' : '';
+        excerpt = `Solution with ${scoreText}${acceptedText} for: "${shortTitle}"`;
+        
+        console.log(`Using fallback excerpt: "${excerpt}"`);
       }
 
       return {
