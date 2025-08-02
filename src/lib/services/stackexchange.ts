@@ -24,6 +24,47 @@ function buildApiUrl(endpoint: string, params: Record<string, string> = {}): str
   return url.toString();
 }
 
+// Helper function to make JSONP requests for browser compatibility
+function fetchJsonp(url: string): Promise<unknown> {
+  return new Promise((resolve, reject) => {
+    const callbackName = `jsonp_callback_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const timeoutId = setTimeout(() => {
+      cleanup();
+      reject(new Error('JSONP request timeout'));
+    }, 10000);
+
+    function cleanup() {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if ((window as any)[callbackName]) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        delete (window as any)[callbackName];
+      }
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+      clearTimeout(timeoutId);
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any)[callbackName] = (data: unknown) => {
+      cleanup();
+      resolve(data);
+    };
+
+    const script = document.createElement('script');
+    script.src = `${url}&callback=${callbackName}`;
+    script.onerror = () => {
+      cleanup();
+      reject(new Error('JSONP script error'));
+    };
+
+    document.head.appendChild(script);
+  });
+}
+
+// Check if we're in a browser environment
+const isBrowser = typeof window !== 'undefined';
+
 // Helper function to handle API responses with rate limit awareness
 async function handleApiResponse(response: Response, context: string): Promise<unknown> {
   if (!response.ok) {
@@ -98,14 +139,22 @@ export async function fetchStackExchangeProfile(userId: string): Promise<StackOv
       filter: 'default'
     });
     
-    const response = await fetch(apiUrl, {
-      headers: {
-        'Accept': 'application/json',
-        'User-Agent': 'Portfolio-Website/1.0 (torof-portfolio)',
-      },
-    });
-
-    const data = await handleApiResponse(response, 'profile');
+    let data: unknown;
+    
+    if (isBrowser) {
+      // Use JSONP for browser requests
+      data = await fetchJsonp(apiUrl);
+    } else {
+      // Use regular fetch for server-side requests
+      const response = await fetch(apiUrl, {
+        headers: {
+          'Accept': 'application/json',
+          'User-Agent': 'Portfolio-Website/1.0 (torof-portfolio)',
+        },
+      });
+      data = await handleApiResponse(response, 'profile');
+    }
+    
     if (!data || !(data as { items?: unknown[] }).items || (data as { items: unknown[] }).items.length === 0) {
       console.error('No user data found');
       return null;
@@ -118,15 +167,22 @@ export async function fetchStackExchangeProfile(userId: string): Promise<StackOv
       pagesize: '5'
     });
     
-    const tagsResponse = await fetch(tagsApiUrl, {
-      headers: {
-        'Accept': 'application/json',
-        'User-Agent': 'Portfolio-Website/1.0 (torof-portfolio)',
-      },
-    });
-
     let topTags: string[] = ['solidity', 'evm', 'nft', 'ethereum', 'smart-contracts']; // fallback
-    const tagsData = await handleApiResponse(tagsResponse, 'tags');
+    let tagsData: unknown;
+    
+    if (isBrowser) {
+      // Use JSONP for browser requests
+      tagsData = await fetchJsonp(tagsApiUrl);
+    } else {
+      // Use regular fetch for server-side requests
+      const tagsResponse = await fetch(tagsApiUrl, {
+        headers: {
+          'Accept': 'application/json',
+          'User-Agent': 'Portfolio-Website/1.0 (torof-portfolio)',
+        },
+      });
+      tagsData = await handleApiResponse(tagsResponse, 'tags');
+    }
     if (tagsData && (tagsData as { items?: { tag_name: string }[] }).items && (tagsData as { items: { tag_name: string }[] }).items.length > 0) {
       topTags = (tagsData as { items: { tag_name: string }[] }).items.map((tag: { tag_name: string }) => tag.tag_name);
     }
@@ -165,14 +221,22 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
       filter: 'withbody'
     });
     
-    const answersResponse = await fetch(answersApiUrl, {
-      headers: {
-        'Accept': 'application/json',
-        'User-Agent': 'Portfolio-Website/1.0 (torof-portfolio)',
-      },
-    });
-
-    const answersData = await handleApiResponse(answersResponse, 'answers');
+    let answersData: unknown;
+    
+    if (isBrowser) {
+      // Use JSONP for browser requests
+      answersData = await fetchJsonp(answersApiUrl);
+    } else {
+      // Use regular fetch for server-side requests
+      const answersResponse = await fetch(answersApiUrl, {
+        headers: {
+          'Accept': 'application/json',
+          'User-Agent': 'Portfolio-Website/1.0 (torof-portfolio)',
+        },
+      });
+      answersData = await handleApiResponse(answersResponse, 'answers');
+    }
+    
     if (!answersData || !(answersData as { items?: unknown[] }).items || (answersData as { items: unknown[] }).items.length === 0) {
       return [];
     }
@@ -186,15 +250,22 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
       filter: 'default'
     });
     
-    const questionsResponse = await fetch(questionsApiUrl, {
-      headers: {
-        'Accept': 'application/json',
-        'User-Agent': 'Portfolio-Website/1.0 (torof-portfolio)',
-      },
-    });
-
     let questionsMap: { [key: number]: StackExchangeQuestion } = {};
-    const questionsData = await handleApiResponse(questionsResponse, 'questions');
+    let questionsData: unknown;
+    
+    if (isBrowser) {
+      // Use JSONP for browser requests
+      questionsData = await fetchJsonp(questionsApiUrl);
+    } else {
+      // Use regular fetch for server-side requests
+      const questionsResponse = await fetch(questionsApiUrl, {
+        headers: {
+          'Accept': 'application/json',
+          'User-Agent': 'Portfolio-Website/1.0 (torof-portfolio)',
+        },
+      });
+      questionsData = await handleApiResponse(questionsResponse, 'questions');
+    }
     if (questionsData && (questionsData as { items?: unknown[] }).items) {
       questionsMap = (questionsData as { items: { question_id: number; title: string; link: string; tags: string[] }[] }).items.reduce((map: { [key: number]: StackExchangeQuestion }, question: { question_id: number; title: string; link: string; tags: string[] }) => {
         map[question.question_id] = {

@@ -184,7 +184,7 @@ export default function SkillsPage() {
 
           {/* Why Choose Me */}
           <motion.div
-            className={`relative p-10 rounded-2xl border backdrop-blur-md text-center ${
+            className={`relative p-10 rounded-2xl border backdrop-blur-md text-center mt-16 ${
               theme === 'theme-light'
                 ? 'bg-gradient-to-r from-purple-50/90 via-pink-50/90 to-blue-50/90 border-purple-200'
                 : 'bg-gradient-to-r from-purple-900/20 via-pink-900/20 to-blue-900/20 border-purple-700/50'

@@ -1,11 +1,13 @@
 import type { NextConfig } from "next";
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 const nextConfig: NextConfig = {
-  // Standard static export for web hosting
-  output: 'export',
+  // Use static export for production, standard mode for development (to support API routes)
+  output: isDevelopment ? undefined : 'export',
   
-  // Standard configuration for web hosting
-  trailingSlash: false,
+  // Enable trailing slash for proper static hosting routing
+  trailingSlash: true,
   
   // Configure images for static export
   images: {
