@@ -149,7 +149,7 @@ const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryC
           exit={{ opacity: 0, y: -20 }}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"
         >
-          {techStack[activeCategory].map((tech, index) => (
+          {techStack[activeCategory].map((tech) => (
             <motion.div
               key={tech.name}
               variants={itemVariants}
