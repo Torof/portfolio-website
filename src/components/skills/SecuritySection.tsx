@@ -137,75 +137,15 @@ const SecuritySection = ({ category }: SecuritySectionProps) => {
                       <h4 className="text-xl font-semibold light-text mb-2 group-hover:text-blue-600 transition-colors">
                         {skill.name}
                       </h4>
-                      <div className="flex items-center space-x-3">
-                        <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          skill.level >= 4 ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-white'
-                        } shadow-sm`}>
-                          {skill.level >= 4 ? 'SECURE' : 'MONITORING'}
-                        </div>
-                        <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          theme === 'theme-light' 
-                            ? 'bg-slate-100 text-slate-800' 
-                            : 'bg-slate-800 text-slate-300'
-                        }`}>
-                          Level {skill.level}
-                        </div>
-                      </div>
                     </div>
                   </div>
                   
-                  {/* Threat assessment display */}
-                  <div className="text-right">
-                    <motion.div 
-                      className="text-xs font-medium text-emerald-500 mb-2"
-                      animate={{ opacity: [0.7, 1, 0.7] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      THREAT LEVEL: LOW
-                    </motion.div>
-                    <div className="flex justify-end space-x-1">
-                      {[...Array(5)].map((_, i) => (
-                        <motion.div 
-                          key={i}
-                          className={`w-2 h-2 rounded-full ${
-                            i < skill.level ? 'bg-emerald-500' : 'bg-gray-300'
-                          }`}
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: index * 0.1 + i * 0.1 }}
-                        />
-                      ))}
-                    </div>
-                  </div>
                 </div>
 
                 <p className="text-sm light-text opacity-70 leading-relaxed mb-6">
                   {skill.description}
                 </p>
 
-                {/* Security metrics dashboard */}
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="text-center">
-                    <motion.div 
-                      className="text-2xl font-bold text-emerald-500 mb-1"
-                      animate={{ scale: [1, 1.05, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      {skill.level * 50}+
-                    </motion.div>
-                    <div className="text-xs light-text opacity-50 uppercase tracking-wider">Audits Complete</div>
-                  </div>
-                  <div className="text-center">
-                    <motion.div 
-                      className="text-2xl font-bold text-red-500 mb-1"
-                      animate={{ scale: [1, 1.05, 1] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                    >
-                      {Math.max(0, 5 - skill.level)}
-                    </motion.div>
-                    <div className="text-xs light-text opacity-50 uppercase tracking-wider">Critical Issues</div>
-                  </div>
-                </div>
               </motion.div>
             ))}
           </div>

@@ -400,7 +400,7 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
               setLasers(prev => [...prev, laser]);
 
               // Damage the threat
-              threat.health -= 25 * turret.level; // Higher level = more damage
+              threat.health -= 50; // Standard damage
 
               // Remove laser after animation
               setTimeout(() => {
@@ -734,19 +734,6 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
                         {skill.name.split(' ')[0]}
                       </div>
                       
-                      {/* Power level */}
-                      <div className="flex justify-center mt-1 space-x-0.5">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <div
-                            key={i}
-                            className={`w-1.5 h-1.5 rounded-full ${
-                              i < skill.level 
-                                ? theme === 'theme-light' ? 'bg-blue-500' : 'bg-green-400'
-                                : theme === 'theme-light' ? 'bg-gray-300' : 'bg-gray-600'
-                            }`}
-                          />
-                        ))}
-                      </div>
                     </div>
 
                     {/* Comprehensive Tooltip */}

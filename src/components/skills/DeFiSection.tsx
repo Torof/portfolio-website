@@ -33,10 +33,6 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
     return changes[index % changes.length];
   };
 
-  const getTVL = (level: number) => {
-    const base = level * 250;
-    return `$${base}M`;
-  };
 
   // Get detailed protocol information
   const getProtocolDetails = (skill: AdvancedSkill) => {
@@ -203,9 +199,8 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
                   : 'bg-green-950/50 border-green-600 text-green-500'
               }`}>
                 <div className="col-span-1">ID</div>
-                <div className="col-span-3">{t('defi.dropdown.protocols')}</div>
-                <div className="col-span-2">{t('defi.dropdown.type')}</div>
-                <div className="col-span-2">{t('defi.dropdown.tvl')}</div>
+                <div className="col-span-4">{t('defi.dropdown.protocols')}</div>
+                <div className="col-span-3">{t('defi.dropdown.type')}</div>
                 <div className="col-span-2">{t('defi.dropdown.24h')}</div>
                 <div className="col-span-2">{t('defi.dropdown.status')}</div>
               </div>
@@ -244,7 +239,7 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
                       }`}>
                         {String(index + 1).padStart(2, '0')}
                       </div>
-                      <div className={`col-span-3 font-bold flex items-center ${
+                      <div className={`col-span-4 font-bold flex items-center ${
                         theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
                       }`}>
                         <span>{skill.name}</span>
@@ -256,15 +251,10 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
                           <span className="text-xs">▶</span>
                         </motion.div>
                       </div>
-                      <div className={`col-span-2 text-xs ${
+                      <div className={`col-span-3 text-xs ${
                         theme === 'theme-light' ? 'text-amber-700' : 'text-green-500'
                       }`}>
                         {skill.subcategory}
-                      </div>
-                      <div className={`col-span-2 ${
-                        theme === 'theme-light' ? 'text-amber-800' : 'text-green-400'
-                      }`}>
-                        {getTVL(skill.level)}
                       </div>
                       <div className={`col-span-2 font-bold ${
                         getPriceChange(index).startsWith('+') 
@@ -275,16 +265,10 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
                       </div>
                       <div className="col-span-2">
                         <div className={`inline-flex items-center space-x-1 ${
-                          skill.level >= 4 
-                            ? 'text-green-600' 
-                            : theme === 'theme-light' ? 'text-amber-600' : 'text-yellow-500'
+                          theme === 'theme-light' ? 'text-amber-600' : 'text-green-500'
                         }`}>
-                          <div className={`w-2 h-2 rounded-full ${
-                            skill.level >= 4 ? 'bg-green-600' : 'bg-yellow-500'
-                          } animate-pulse`} />
-                          <span className="text-xs">
-                            {skill.level >= 4 ? t('defi.dropdown.expert') : t('defi.dropdown.active')}
-                          </span>
+                          <div className="w-2 h-2 rounded-full bg-green-600 animate-pulse" />
+                          <span className="text-xs">Active</span>
                         </div>
                       </div>
                     </motion.div>

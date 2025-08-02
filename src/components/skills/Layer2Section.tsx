@@ -503,20 +503,12 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
                     {getTooltipDescription(skill.id)}
                   </p>
 
-                  <div className="mb-3 text-xs">
+                  <div className="text-xs">
                     <div className={`${
                       theme === 'theme-light' ? 'text-slate-500' : 'text-slate-400'
                     }`}>
                       <span className="font-medium">Type:</span> {skill.subcategory}
                     </div>
-                  </div>
-
-                  <div className={`text-xs px-3 py-1.5 rounded-full text-center font-medium ${
-                    skill.level >= 4 
-                      ? (theme === 'theme-light' ? 'bg-emerald-100 text-emerald-800' : 'bg-emerald-900/50 text-emerald-300')
-                      : (theme === 'theme-light' ? 'bg-blue-100 text-blue-800' : 'bg-blue-900/50 text-blue-300')
-                  }`}>
-                    {skill.level >= 4 ? 'Expert Level' : 'Proficient Level'}
                   </div>
                 </motion.div>
               ) : null;
