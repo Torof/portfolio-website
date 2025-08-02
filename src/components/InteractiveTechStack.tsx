@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { techStack } from '../lib/data/techStack';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useLanguage } from '../lib/context/LanguageContext';
 
 interface InteractiveTechStackProps {
@@ -86,30 +86,6 @@ const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryC
     }
   ];
 
-  const getExpertiseLevel = (techName: string): number => {
-    // This would ideally come from your data, but I'm mocking it for demonstration
-    // Returns a rating from 1-5 stars
-    const expertiseLevels: {[key: string]: number} = {
-      'Solidity': 5,
-      'Hardhat': 5,
-      'Foundry': 4,
-      'Ethereum': 5,
-      'Solana': 4,
-      'Polkadot': 3,
-      'Rust': 4,
-      'React': 5,
-      'Next.js': 5,
-      'Typescript': 5,
-      'HTML': 5,
-      'CSS': 4,
-      'TailwindCSS': 5,
-      'Node.js': 4,
-      'Bash': 4,
-      'theGraph': 4
-    };
-    
-    return expertiseLevels[techName] || 3; // Default to 3 stars if not defined
-  };
 
   return (
     <div className="w-full max-w-5xl mx-auto">
@@ -165,7 +141,6 @@ const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryC
       </div>
 
       {/* Tech Grid */}
-      <AnimatePresence mode="wait">
         <motion.div 
           key={activeCategory}
           variants={containerVariants}
@@ -200,45 +175,6 @@ const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryC
                 {tech.name}
               </h3>
 
-              {/* Star Rating */}
-              <div className="flex items-center justify-center space-x-1 mt-auto">
-                {[...Array(5)].map((_, i) => {
-                  const starFill = i < getExpertiseLevel(tech.name) ? 
-                    'text-[#FFC107]' : 
-                    'text-[rgba(255,255,255,0.2)]';
-                  
-                  return (
-                    <motion.svg 
-                      key={i}
-                      xmlns="http://www.w3.org/2000/svg" 
-                      width="14" 
-                      height="14" 
-                      viewBox="0 0 24 24" 
-                      fill="currentColor"
-                      className={`${starFill}`}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.5 + (index * 0.05) + (i * 0.05) }}
-                    >
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                    </motion.svg>
-                  );
-                })}
-              </div>
-              
-              {/* Expertise Label - only visible on hover */}
-              <AnimatePresence>
-                {hoveredTech === tech.name && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-[rgba(0,0,0,0.8)] text-white text-xs py-1 px-2 rounded shadow-lg whitespace-nowrap z-10"
-                  >
-                    Proficiency: {getExpertiseLevel(tech.name)}/5
-                  </motion.div>
-                )}
-              </AnimatePresence>
 
               {/* Glow effect on hover */}
               {hoveredTech === tech.name && (
@@ -262,7 +198,6 @@ const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryC
             </motion.div>
           ))}
         </motion.div>
-      </AnimatePresence>
     </div>
   );
 };

@@ -270,8 +270,8 @@ const translations = {
     'github.thisYear': 'This Year',
 
     // Experience Data Translations
-    'exp.ledgity.position': 'Lead Blockchain Developer',
-    'exp.ledgity.description': 'Led the blockchain development team in creating secure, efficient smart contracts and dApps.',
+    'exp.ledgity.position': 'Blockchain Developer',
+    'exp.ledgity.description': 'Solo blockchain developer responsible for smart contract development, integration, maintenance, and frontend modifications.',
     'exp.ledgity.achievement.1': 'Developed robust, secure smart contracts using Solidity on Ethereum L1 and L2.',
     'exp.ledgity.achievement.2': 'Conducted code reviews and audits to ensure high-quality, bug-free code before deployment.',
     'exp.ledgity.achievement.3': 'Integrated decentralized applications (dApps) with smart contracts to enhance user experience.',
@@ -295,7 +295,7 @@ const translations = {
     'exp.tasc.achievement.4': 'Developed smart contracts for in-game assets using Solidity.',
     'exp.tasc.achievement.5': 'Implemented an Ethereum-based token economy to enhance player engagement.',
 
-    'exp.future-institution.position': 'Lead Smart Contract Developer',
+    'exp.future-institution.position': 'Smart Contract Developer',
     'exp.future-institution.description': 'Led the development of smart contracts for a blockchain game.',
     'exp.future-institution.achievement.1': 'Led the development of smart contracts for a Blockchain game.',
     'exp.future-institution.achievement.2': 'Led the design and implementation of robust smart contracts on Ethereum.',
@@ -860,8 +860,8 @@ const translations = {
     'github.thisYear': 'Cette Année',
 
     // Experience Data Translations
-    'exp.ledgity.position': 'Développeur Blockchain Principal',
-    'exp.ledgity.description': 'Dirigé l\'équipe de développement blockchain pour créer des contrats intelligents sécurisés et efficaces et des dApps.',
+    'exp.ledgity.position': 'Développeur Blockchain',
+    'exp.ledgity.description': 'Développeur blockchain solo responsable du développement de contrats intelligents, de l\'intégration, de la maintenance et des modifications frontend.',
     'exp.ledgity.achievement.1': 'Développé des contrats intelligents robustes et sécurisés utilisant Solidity sur Ethereum L1 et L2.',
     'exp.ledgity.achievement.2': 'Effectué des révisions de code et audits pour garantir un code de haute qualité, sans bugs avant le déploiement.',
     'exp.ledgity.achievement.3': 'Intégré des applications décentralisées (dApps) avec des contrats intelligents pour améliorer l\'expérience utilisateur.',
@@ -885,7 +885,7 @@ const translations = {
     'exp.tasc.achievement.4': 'Développé des contrats intelligents pour les actifs du jeu utilisant Solidity.',
     'exp.tasc.achievement.5': 'Implémenté une économie de tokens basée sur Ethereum pour améliorer l\'engagement des joueurs.',
 
-    'exp.future-institution.position': 'Développeur Smart Contract Principal',
+    'exp.future-institution.position': 'Développeur Smart Contract',
     'exp.future-institution.description': 'Dirigé le développement de contrats intelligents pour un jeu blockchain.',
     'exp.future-institution.achievement.1': 'Dirigé le développement de contrats intelligents pour un jeu Blockchain.',
     'exp.future-institution.achievement.2': 'Dirigé la conception et l\'implémentation de contrats intelligents robustes sur Ethereum.',

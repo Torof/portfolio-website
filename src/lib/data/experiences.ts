@@ -5,10 +5,10 @@ export const experiences: Experience[] = [
   {
     id: "ledgity",
     company: "Ledgity",
-    position: "Lead Blockchain Developer",
+    position: "Blockchain Developer",
     startDate: "Jun 2024",
     endDate: "Dec 2024",
-    description: "Led the blockchain development team in creating secure, efficient smart contracts and dApps.",
+    description: "Solo blockchain developer responsible for smart contract development, integration, maintenance, and frontend modifications.",
     achievements: [
       "Developed robust, secure smart contracts using Solidity on Ethereum L1 and L2.",
       "Conducted code reviews and audits to ensure high-quality, bug-free code before deployment.",
@@ -80,7 +80,7 @@ export const experiences: Experience[] = [
   {
     id: "future-institution",
     company: "Future Institution",
-    position: "Lead Smart Contract Developer",
+    position: "Smart Contract Developer",
     startDate: "Feb 2019",
     endDate: "May 2019",
     description: "Led the development of smart contracts for a blockchain game.",
