@@ -86,7 +86,7 @@ const LiveStackExchangeCard = () => {
             console.log(`✅ Successfully fetched ${liveAnswers.length} live Stack Exchange answers via direct API`);
           }
           
-        } catch (directError) {
+        } catch {
           console.log('⚠️ Both API route and direct Stack Exchange API failed, using static data');
           console.log('📋 Displaying static Stack Exchange data');
           // Keep using fallback data - component will show static data
