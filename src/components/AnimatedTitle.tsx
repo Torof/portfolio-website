@@ -84,6 +84,7 @@ export default function AnimatedTitle({
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: delay + 0.2, duration: 0.5, type: "spring" }}
           className="bg-clip-text text-transparent bg-gradient-to-r from-[#4f46e5] to-[#8b5cf6]"
+          style={{ backgroundSize: "100% 100%" }}
         >
           {firstHalf}
         </motion.span>
@@ -92,6 +93,7 @@ export default function AnimatedTitle({
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: delay + 0.3, duration: 0.5, type: "spring" }}
           className="bg-clip-text text-transparent bg-gradient-to-r from-[#8b5cf6] to-[#06b6d4]"
+          style={{ backgroundSize: "100% 100%" }}
         >
           {secondHalf}
         </motion.span>
@@ -177,7 +179,10 @@ export default function AnimatedTitle({
       animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
       transition={{ delay, duration: 0.6 }}
     >
-      <span className={`bg-clip-text text-transparent bg-gradient-to-r ${gradient}`}>
+      <span 
+        className={`bg-clip-text text-transparent bg-gradient-to-r ${gradient}`}
+        style={{ backgroundSize: "100% 100%" }}
+      >
         {children}
       </span>
     </motion.h2>
