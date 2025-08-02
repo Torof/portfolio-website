@@ -135,9 +135,7 @@ export interface StackExchangeQuestion {
  */
 export async function fetchStackExchangeProfile(userId: string): Promise<StackOverflowProfile | null> {
   try {
-    const apiUrl = buildApiUrl(`/users/${userId}`, {
-      filter: 'default'
-    });
+    const apiUrl = buildApiUrl(`/users/${userId}`, {});
     
     console.log('API URL:', apiUrl);
     
@@ -246,8 +244,7 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
     const answersApiUrl = buildApiUrl(`/users/${userId}/answers`, {
       order: 'desc',
       sort: 'votes',
-      pagesize: limit.toString(),
-      filter: 'withbody'
+      pagesize: limit.toString()
     });
     
     let answersData: unknown;
@@ -284,9 +281,7 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
     const questionIds = (answersData as { items: { question_id: number }[] }).items.map((answer: { question_id: number }) => answer.question_id);
     
     // Fetch question details
-    const questionsApiUrl = buildApiUrl(`/questions/${questionIds.join(';')}`, {
-      filter: 'default'
-    });
+    const questionsApiUrl = buildApiUrl(`/questions/${questionIds.join(';')}`, {});
     
     let questionsMap: { [key: number]: StackExchangeQuestion } = {};
     let questionsData: unknown;
@@ -333,10 +328,12 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
         tags: []
       };
 
-      // Create excerpt from body field (HTML format, needs cleaning)
+      // Create excerpt from body field (HTML format, needs cleaning) or use fallback
       let excerpt = '';
-      if (answer.body) {
-        excerpt = answer.body
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if ((answer as any).body) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        excerpt = (answer as any).body
           // Remove HTML tags
           .replace(/<[^>]*>/g, '')
           // Replace HTML entities
@@ -349,7 +346,11 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
           // Clean up whitespace
           .replace(/\s+/g, ' ')
           .trim()
-          .slice(0, 180) + (answer.body.length > 180 ? '...' : '');
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .slice(0, 180) + ((answer as any).body.length > 180 ? '...' : '');
+      } else {
+        // Fallback excerpt when body is not available
+        excerpt = `Answer with ${answer.score} upvotes on ${question.title.slice(0, 60)}...`;
       }
 
       return {
