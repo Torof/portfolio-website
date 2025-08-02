@@ -168,6 +168,7 @@ const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryC
                   width={52}
                   height={52}
                   className="object-contain drop-shadow-lg"
+                  style={{ width: 'auto', height: 'auto', maxWidth: '52px', maxHeight: '52px' }}
                 />
               </div>
 
