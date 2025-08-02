@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { GitHubStats, fetchGitHubStats } from '@/lib/services/github';
+import { GitHubStats } from '@/lib/services/github';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/context/LanguageContext';
@@ -14,10 +14,22 @@ const FeaturedGitHubStats: React.FC = () => {
   useEffect(() => {
     const loadStats = async () => {
       try {
-        const githubStats = await fetchGitHubStats();
-        setStats(githubStats);
+        // Use API route instead of direct GitHub API calls
+        const response = await fetch('/api/github');
+        
+        if (!response.ok) {
+          throw new Error(`API returned ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (data.stats) {
+          setStats(data.stats);
+          console.log('GitHub stats loaded successfully via API route');
+        }
       } catch (error) {
         console.error('Error loading GitHub stats:', error);
+        // Could use fallback data here if needed
       }
     };
 
