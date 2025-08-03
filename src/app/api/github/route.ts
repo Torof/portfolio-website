@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { fetchGitHubStats } from '@/lib/services/github';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     console.log('[API] Fetching GitHub stats');
     
