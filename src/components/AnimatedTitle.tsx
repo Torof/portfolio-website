@@ -156,7 +156,7 @@ export default function AnimatedTitle({
         <span 
           className="absolute inset-0 blur-xl opacity-50"
           style={{
-            background: `linear-gradient(45deg, #4f46e5, #8b5cf6, #06b6d4)`,
+            backgroundImage: `linear-gradient(45deg, #4f46e5, #8b5cf6, #06b6d4)`,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text"
