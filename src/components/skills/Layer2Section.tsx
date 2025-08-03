@@ -337,6 +337,7 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
                       src="/logos/ethereum.svg" 
                       alt="Ethereum logo" 
                       className="w-full h-full object-contain"
+                      style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '100%' }}
                     />
                   </div>
                 </foreignObject>
