@@ -80,8 +80,8 @@ export default function AnimatedTitle({
         transition={{ delay }}
       >
         <motion.span
-          initial={{ x: -50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
+          initial={{ x: -50, opacity: 0, backgroundSize: "100% 100%" }}
+          animate={{ x: 0, opacity: 1, backgroundSize: "100% 100%" }}
           transition={{ delay: delay + 0.2, duration: 0.5, type: "spring" }}
           className="bg-clip-text text-transparent bg-gradient-to-r from-[#4f46e5] to-[#8b5cf6]"
           style={{ backgroundSize: "100% 100%" }}
@@ -89,8 +89,8 @@ export default function AnimatedTitle({
           {firstHalf}
         </motion.span>
         <motion.span
-          initial={{ x: 50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
+          initial={{ x: 50, opacity: 0, backgroundSize: "100% 100%" }}
+          animate={{ x: 0, opacity: 1, backgroundSize: "100% 100%" }}
           transition={{ delay: delay + 0.3, duration: 0.5, type: "spring" }}
           className="bg-clip-text text-transparent bg-gradient-to-r from-[#8b5cf6] to-[#06b6d4]"
           style={{ backgroundSize: "100% 100%" }}
