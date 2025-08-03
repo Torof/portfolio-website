@@ -126,7 +126,7 @@ export default function ContactSection() {
             <motion.div
               className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               style={{
-                background: theme === 'theme-light'
+                backgroundImage: theme === 'theme-light'
                   ? 'linear-gradient(45deg, transparent, rgba(251,146,60,0.3), transparent, rgba(239,68,68,0.3), transparent, rgba(168,85,247,0.3), transparent)'
                   : 'linear-gradient(45deg, transparent, rgba(59,130,246,0.2), transparent, rgba(147,51,234,0.2), transparent)',
                 backgroundSize: '400% 400%',
@@ -251,7 +251,7 @@ export default function ContactSection() {
               <motion.div
                 className="absolute inset-0 -z-5 opacity-0 group-hover:opacity-100"
                 animate={{
-                  background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
+                  backgroundImage: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
                   backgroundSize: '200% 100%',
                   backgroundPosition: ['100% 0%', '0% 0%', '100% 0%'],
                 }}
