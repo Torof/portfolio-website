@@ -45,7 +45,7 @@ export default function SkillsPage() {
 
         {/* What I Can Do For You Section */}
         <motion.div 
-          className="mb-20"
+          className="mb-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -253,6 +253,14 @@ export default function SkillsPage() {
         <div className="mb-20">
           <LiveStackExchangeCard />
         </div>
+      </div>
+      
+      {/* Bottom filler to extend background effect */}
+      <div className={`relative z-10 ${
+        theme === 'theme-light' 
+          ? 'bg-gradient-to-b from-transparent to-gray-50' 
+          : 'bg-gradient-to-b from-transparent to-slate-900'
+      }`} style={{ minHeight: '20vh' }}>
       </div>
     </div>
   );

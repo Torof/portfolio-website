@@ -35,7 +35,7 @@ export default function RootLayout({
         <LanguageProvider>
           <ThemeProvider>
             <Navbar />
-            <main className="pt-16 pb-24">
+            <main className="pt-16">
               {children}
             </main>
           </ThemeProvider>

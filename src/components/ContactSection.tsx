@@ -19,7 +19,7 @@ export default function ContactSection() {
       theme === 'theme-light'
         ? 'bg-gradient-to-br from-[#fef7f0] via-[#fdf4ff] to-[#f0f9ff] border-warm-300'
         : 'bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155] border-slate-700'
-    }`} style={{ minHeight: '90vh' }}>
+    }`} style={{ minHeight: '100vh' }}>
       {/* Animated particles background */}
       <div className="absolute inset-0">
         {[...Array(50)].map((_, i) => {
