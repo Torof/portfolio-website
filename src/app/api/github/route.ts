@@ -16,7 +16,7 @@ export async function GET() {
       );
     }
 
-    console.log(`[API] Successfully fetched GitHub stats - User: ${stats.user?.login || 'N/A'}, Repos: ${stats.repositories?.length || 0}`);
+    console.log(`[API] Successfully fetched GitHub stats - User: ${stats.user?.login || 'N/A'}, Total Repos: ${stats.totalRepos || 0}`);
 
     return NextResponse.json({
       stats,
