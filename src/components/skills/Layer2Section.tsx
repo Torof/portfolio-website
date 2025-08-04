@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { useTheme } from '@/lib/context/ThemeContext';
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { SkillCategory } from '@/lib/types';
@@ -333,11 +334,12 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
                   height="12"
                 >
                   <div className="w-full h-full flex items-center justify-center">
-                    <img 
+                    <Image 
                       src="/logos/ethereum.svg" 
                       alt="Ethereum logo" 
-                      className="w-full h-full object-contain"
-                      style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '100%' }}
+                      width={48}
+                      height={48}
+                      className="object-contain"
                     />
                   </div>
                 </foreignObject>
@@ -395,10 +397,12 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
                         height="8"
                       >
                         <div className="w-full h-full flex items-center justify-center">
-                          <img 
-                            src={getNetworkLogo(skill.id) || ''}
+                          <Image 
+                            src={getNetworkLogo(skill.id) || '/logos/ethereum.svg'}
                             alt={`${skill.name} logo`}
-                            className="w-full h-full object-contain rounded-full"
+                            width={32}
+                            height={32}
+                            className="object-contain rounded-full"
                           />
                         </div>
                       </foreignObject>
@@ -482,10 +486,12 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
                   <div className="flex items-center gap-3 mb-3">
                     <div className="text-lg">
                       {getNetworkLogo(skill.id) ? (
-                        <img 
-                          src={getNetworkLogo(skill.id) || ''} 
+                        <Image 
+                          src={getNetworkLogo(skill.id) || '/logos/ethereum.svg'} 
                           alt={`${skill.name} logo`} 
-                          className="w-6 h-6 object-contain rounded-full"
+                          width={24}
+                          height={24}
+                          className="object-contain rounded-full"
                         />
                       ) : (
                         <span>{skill.icon}</span>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, memo } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { useTheme } from '@/lib/context/ThemeContext';
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { techStack, TechItem } from '@/lib/data/techStack';
@@ -278,19 +279,12 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
                           }`}>
                             {/* Logo */}
                             <div className="relative w-16 h-16 flex items-center justify-center">
-                              <img 
+                              <Image 
                                 src={tech.logo} 
                                 alt={tech.name}
-                                className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
-                                onError={(e) => {
-                                  // Fallback to emoji if logo fails to load
-                                  const target = e.target as HTMLImageElement;
-                                  target.style.display = 'none';
-                                  const nextSibling = target.nextElementSibling;
-                                  if (nextSibling && nextSibling instanceof HTMLElement) {
-                                    nextSibling.style.display = 'block';
-                                  }
-                                }}
+                                width={64}
+                                height={64}
+                                className="object-contain group-hover:scale-110 transition-transform duration-300"
                               />
                               <span className="text-2xl hidden">{tech.icon}</span>
                             </div>
@@ -392,18 +386,12 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
                           >
                             {/* Tech Logo */}
                             <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
-                              <img 
+                              <Image 
                                 src={tech.logo} 
                                 alt={tech.name}
-                                className="w-full h-full object-contain"
-                                onError={(e) => {
-                                  const target = e.target as HTMLImageElement;
-                                  target.style.display = 'none';
-                                  const nextSibling = target.nextElementSibling;
-                                  if (nextSibling && nextSibling instanceof HTMLElement) {
-                                    nextSibling.style.display = 'block';
-                                  }
-                                }}
+                                width={40}
+                                height={40}
+                                className="object-contain"
                               />
                               <span className="text-lg hidden">{tech.icon}</span>
                             </div>

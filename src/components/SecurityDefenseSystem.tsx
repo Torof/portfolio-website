@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { useTheme } from '@/lib/context/ThemeContext';
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { SkillCategory } from '@/lib/types';
@@ -955,14 +956,12 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
               : 'bg-slate-800 border-blue-700 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-900/30'
           }`}>
             <div className="mb-3">
-              <img 
+              <Image 
                 src="/logos/openzeppelin.svg" 
                 alt="OpenZeppelin" 
-                className="w-12 h-12 mx-auto"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
-                }}
+                width={48}
+                height={48}
+                className="mx-auto"
               />
               <div className="text-4xl hidden">🏰</div>
             </div>
@@ -985,14 +984,11 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
             }`}>
               <div className="text-center">
                 <div className="flex justify-center mb-3">
-                  <img 
+                  <Image 
                     src="/logos/openzeppelin.svg" 
                     alt="OpenZeppelin" 
-                    className="w-20 h-20"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
-                    }}
+                    width={80}
+                    height={80}
                   />
                   <div className="text-6xl hidden">🏰</div>
                 </div>
@@ -1020,14 +1016,12 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
               : 'bg-slate-800 border-green-700 hover:border-green-500 hover:shadow-xl hover:shadow-green-900/30'
           }`}>
             <div className="mb-3">
-              <img 
+              <Image 
                 src="/logos/slither.png" 
                 alt="Slither" 
-                className="w-12 h-12 mx-auto"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
-                }}
+                width={48}
+                height={48}
+                className="mx-auto"
               />
               <div className="text-4xl hidden">🐍</div>
             </div>
@@ -1050,14 +1044,11 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
             }`}>
               <div className="text-center">
                 <div className="flex justify-center mb-3">
-                  <img 
+                  <Image 
                     src="/logos/slither.png" 
                     alt="Slither" 
-                    className="w-20 h-20"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
-                    }}
+                    width={80}
+                    height={80}
                   />
                   <div className="text-6xl hidden">🐍</div>
                 </div>
@@ -1085,14 +1076,12 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
               : 'bg-slate-800 border-red-700 hover:border-red-500 hover:shadow-xl hover:shadow-red-900/30'
           }`}>
             <div className="mb-3">
-              <img 
+              <Image 
                 src="/logos/foundry.svg" 
                 alt="Foundry" 
-                className="w-12 h-12 mx-auto"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
-                }}
+                width={48}
+                height={48}
+                className="mx-auto"
               />
               <div className="text-4xl hidden">⚒️</div>
             </div>
@@ -1115,14 +1104,11 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
             }`}>
               <div className="text-center">
                 <div className="flex justify-center mb-3">
-                  <img 
+                  <Image 
                     src="/logos/foundry.svg" 
                     alt="Foundry" 
-                    className="w-20 h-20"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
-                    }}
+                    width={80}
+                    height={80}
                   />
                   <div className="text-6xl hidden">⚒️</div>
                 </div>
@@ -1150,14 +1136,12 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
               : 'bg-slate-800 border-purple-700 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-900/30'
           }`}>
             <div className="mb-3">
-              <img 
+              <Image 
                 src="/logos/echidna.png" 
                 alt="Echidna" 
-                className="w-12 h-12 mx-auto"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
-                }}
+                width={48}
+                height={48}
+                className="mx-auto"
               />
               <div className="text-4xl hidden">🦔</div>
             </div>
@@ -1180,14 +1164,11 @@ export default function SecurityDefenseSystem({ category }: SecurityDefenseSyste
             }`}>
               <div className="text-center">
                 <div className="flex justify-center mb-3">
-                  <img 
+                  <Image 
                     src="/logos/echidna.png" 
                     alt="Echidna" 
-                    className="w-20 h-20"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
-                    }}
+                    width={80}
+                    height={80}
                   />
                   <div className="text-6xl hidden">🦔</div>
                 </div>
