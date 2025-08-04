@@ -94,7 +94,7 @@ const translations = {
     'about.vibeButton': 'Vibe Coding',
     'about.whatIDo': 'What I Do',
     'about.card1.text': 'I\'m a passionate blockchain developer with expertise in smart contract development, having started my journey in {year}. With over {experience} years in the blockchain space, I\'ve gained deep experience in Solidity, EVM, DeFi, and NFTs.',
-    'about.card2.text': 'I enjoy building fullstack Decentralized Applications (dApps) from conception to production, with a focus on security, efficiency, and user experience. My background includes working with various blockchain platforms and technologies, always staying at the cutting edge.',
+    'about.card2.text': 'I build fullstack Decentralized Applications (dApps) from conception to production, with a focus on security, efficiency, and user experience. My background includes working with various blockchain platforms and technologies, always staying at the cutting edge.',
     'about.card3.text': 'Currently expanding my expertise to include Rust, Solana, and Polkadot, I\'m constantly learning and adapting to the evolving blockchain landscape.',
     'about.item1': 'Design and develop secure, efficient smart contracts',
     'about.item2': 'Build full-stack dApps with modern frontend technologies',
@@ -672,7 +672,7 @@ const translations = {
 
     // Home page
     'hero.title': 'Développeur Blockchain',
-    'hero.subtitle': 'Développeur blockchain expérimenté spécialisé dans les contrats intelligents, la DeFi et les NFTs. Construisant l\'avenir décentralisé, une ligne de code à la fois.',
+    'hero.subtitle': 'Développeur blockchain expérimenté spécialisé dans les smart contracts, la DeFi et les NFTs. Construisant l\'avenir décentralisé, une ligne de code à la fois.',
     'hero.cta': 'Voir l\'Expérience',
     'hero.projects': 'Explorer les Projets',
     'hero.contact': 'Me Contacter',
@@ -681,15 +681,15 @@ const translations = {
 
     // About section
     'about.title': 'À Propos de Moi',
-    'about.description': 'Développeur blockchain passionné avec une expertise en contrats intelligents, protocoles DeFi et applications décentralisées. Je combine l\'excellence technique avec la résolution créative de problèmes pour livrer des solutions Web3 robustes.',
+    'about.description': 'Développeur blockchain passionné avec une expertise en smart contracts, protocoles DeFi et applications décentralisées. Je combine l\'excellence technique avec la résolution créative de problèmes pour livrer des solutions Web3 robustes.',
     'about.skills': 'Compétences Techniques',
     'about.interests.vibe': 'Sessions de vibe coding avec musique ambiante et états de flow',
     'about.vibeButton': 'Vibe Coding',
     'about.whatIDo': 'Ce Que Je Fais',
-    'about.card1.text': 'Je suis un développeur blockchain passionné avec une expertise en développement de contrats intelligents, ayant commencé mon parcours en {year}. Avec plus de {experience} années dans l\'espace blockchain, j\'ai acquis une expérience approfondie en Solidity, EVM, DeFi et NFTs.',
-    'about.card2.text': 'J\'aime construire des Applications Décentralisées (dApps) complètes de la conception à la production, en mettant l\'accent sur la sécurité, l\'efficacité et l\'expérience utilisateur. Mon expérience inclut le travail avec diverses plateformes et technologies blockchain, restant toujours à la pointe.',
+    'about.card1.text': 'Je suis un développeur blockchain passionné avec une expertise en développement de smart contracts, ayant commencé mon parcours en {year}. Avec plus de {experience} années dans l\'espace blockchain, j\'ai acquis une expérience approfondie en Solidity, EVM, DeFi et NFTs.',
+    'about.card2.text': 'Je construis des Applications Décentralisées (dApps) complètes de la conception à la production, en mettant l\'accent sur la sécurité, l\'efficacité et l\'expérience utilisateur. Mon expérience inclut le travail avec diverses plateformes et technologies blockchain, restant toujours à la pointe.',
     'about.card3.text': 'Élargissant actuellement mon expertise pour inclure Rust, Solana et Polkadot, j\'apprends et m\'adapte constamment au paysage blockchain en évolution.',
-    'about.item1': 'Concevoir et développer des contrats intelligents sécurisés et efficaces',
+    'about.item1': 'Concevoir et développer des smart contracts sécurisés et efficaces',
     'about.item2': 'Construire des dApps complètes avec des technologies frontend modernes',
     'about.item3': 'Auditer et optimiser les projets blockchain existants',
     'about.item4': 'Créer et implémenter des économies de tokens et systèmes NFT',
@@ -705,7 +705,7 @@ const translations = {
     'skills.matrix': 'Skills Matrix',
     
     // Hard Skills
-    'skills.solidity': 'Solidity & Contrats Intelligents',
+    'skills.solidity': 'Solidity & Smart Contracts',
     'skills.react': 'React & Next.js',
     'skills.typescript': 'TypeScript & JavaScript',
     'skills.vibeCoding': 'Vibe Coding',
@@ -731,7 +731,7 @@ const translations = {
     'skills.hiking': 'Randonnée & Trekking',
     'skills.lateNightCoding': 'Codage Nocturne',
     'skills.hackathons': 'Participation aux Hackathons',
-    'skills.auditing': 'Audit de Contrats Intelligents',
+    'skills.auditing': 'Audit de Smart Contracts',
     'skills.gasOptimization': 'Obsession d\'Optimisation du Gas',
     
     // Experience page
@@ -748,7 +748,7 @@ const translations = {
 
     // Education page
     'education.title': 'Éducation',
-    'education.subtitle': 'Mon parcours académique à travers la technologie blockchain, le développement de contrats intelligents et les systèmes décentralisés.',
+    'education.subtitle': 'Mon parcours académique à travers la technologie blockchain, le développement de smart contracts et les systèmes décentralisés.',
     'education.skillsAcquired': 'COMPÉTENCES ACQUISES',
     'education.courseDetails': 'DÉTAILS DU COURS',
     'education.clickForDetails': 'CLIQUER POUR DÉTAILS',
@@ -758,7 +758,7 @@ const translations = {
 
     // Projects page
     'projects.title': 'Mes Projets',
-    'projects.subtitle': 'Une collection de projets blockchain, contrats intelligents et DApps récupérés directement de mes référentiels GitHub.',
+    'projects.subtitle': 'Une collection de projets blockchain, smart contracts et DApps récupérés directement de mes référentiels GitHub.',
     'projects.github': 'GitHub',
     'projects.demo': 'Démo Live',
     'projects.githubStats': 'Statistiques GitHub',
@@ -772,9 +772,9 @@ const translations = {
     'contact.title': 'Me Contacter',
     'contact.subtitle': 'Discutons de votre prochain projet blockchain.',
     'contact.buildTogether': 'Construisons Ensemble',
-    'contact.vision': 'Prêt à donner vie à votre vision blockchain ? Je me spécialise dans la création de contrats intelligents robustes, de solutions DeFi innovantes et d\'expériences Web3 transparentes.',
+    'contact.vision': 'Prêt à donner vie à votre vision blockchain ? Je me spécialise dans la création de smart contracts robustes, de solutions DeFi innovantes et d\'expériences Web3 transparentes.',
     'contact.innovate': 'Prêt à Innover ?',
-    'contact.discuss': 'Des audits de contrats intelligents au développement complet de dApps, discutons de la façon dont nous pouvons repousser les limites du possible dans le Web3.',
+    'contact.discuss': 'Des audits de smart contracts au développement complet de dApps, discutons de la façon dont nous pouvons repousser les limites du possible dans le Web3.',
     'contact.startConversation': 'Commencer la Conversation',
     'contact.connect': 'Connectons-nous',
     'contact.ready': 'Prêt à collaborer sur des projets blockchain ou discuter d\'opportunités Web3 ? Contactez-moi !',
@@ -790,7 +790,7 @@ const translations = {
     'contact.projectsDelivered': '{count}+ Projets Livrés',
     'contact.responseTime': '{time}h Temps de Réponse',
     'contact.focusCore': 'Focus sur la Logique Cœur',
-    'contact.focusCoreDescription': 'Plus de temps pour l\'optimisation et la sécurité des contrats intelligents',
+    'contact.focusCoreDescription': 'Plus de temps pour l\'optimisation et la sécurité des smart contracts',
 
     // Vibe Coding page
     'vibe-coding.title': 'Vibe Coding',
@@ -801,8 +801,8 @@ const translations = {
     'vibe-coding.workflow': 'Développement Accéléré',
     'vibe-coding.blockchainDev': 'Développement Blockchain',
     'vibe-coding.aiAcceleration': 'Accélération IA',
-    'vibe-coding.approach': 'est mon approche du développement blockchain où de puissants outils IA amplifient mon expertise principale en Solidity et architecture de contrats intelligents.',
-    'vibe-coding.whileIArchitect': 'Pendant que j\'architecture, écris, optimise et audite les contrats intelligents moi-même, l\'IA accélère tout le reste—construire les frontends, backends et intégrations à une vitesse 10x pour créer des écosystèmes dApp complets.',
+    'vibe-coding.approach': 'est mon approche du développement blockchain où de puissants outils IA amplifient mon expertise principale en Solidity et architecture de smart contracts.',
+    'vibe-coding.whileIArchitect': 'Pendant que j\'architecture, écris, optimise et audite les smart contracts moi-même, l\'IA accélère tout le reste—construire les frontends, backends et intégrations à une vitesse 10x pour créer des écosystèmes dApp complets.',
     'vibe-coding.coreExpertise': 'Expertise Blockchain Fondamentale',
     'vibe-coding.aiArsenal': 'Arsenal IA',
     'vibe-coding.arsenalSubtitle': 'Les puissants outils IA qui enflamment ma vélocité de développement',
@@ -811,9 +811,9 @@ const translations = {
     'vibe-coding.fasterFrontendDesc': 'De semaines à jours pour des interfaces dApp complètes',
     'vibe-coding.reducedIntegration': 'Temps d\'Intégration Réduit',
     'vibe-coding.reducedIntegrationDesc': 'Connectivité Web3 et développement API transparents',
-    'vibe-coding.result': 'Résultat : Écosystèmes dApp complets livrés en temps record, sans compromettre la qualité ou la sécurité des contrats intelligents.',
+    'vibe-coding.result': 'Résultat : Écosystèmes dApp complets livrés en temps record, sans compromettre la qualité ou la sécurité des smart contracts.',
     // Vibe Coding Core Expertise Items
-    'vibe-coding.core.architecture': 'Architecture et Conception de Contrats Intelligents',
+    'vibe-coding.core.architecture': 'Architecture et Conception de Smart Contracts',
     'vibe-coding.core.solidity': 'Développement et Optimisation Solidity',
     'vibe-coding.core.gas': 'Efficacité Gas et Patterns de Sécurité',
     'vibe-coding.core.deployment': 'Déploiement et Configuration de Contrats',
@@ -842,11 +842,11 @@ const translations = {
 
     // Tech Stack Section  
     'techStack.title': 'Ma Stack Technique',
-    'techStack.description': 'Technologies et outils que j\'utilise pour donner vie aux projets blockchain. Mon expertise s\'étend du développement de contrats intelligents à l\'implémentation frontend et l\'intégration backend.',
+    'techStack.description': 'Technologies et outils que j\'utilise pour donner vie aux projets blockchain. Mon expertise s\'étend du développement de smart contracts à l\'implémentation frontend et l\'intégration backend.',
     
     // Featured Projects Section
     'featuredProjects.title': 'Projets En Vedette',
-    'featuredProjects.description': 'Explorez mon travail récent de développement blockchain, incluant contrats intelligents, applications DeFi, et intégrations web3. Chaque projet met en valeur différents aspects de mes compétences techniques.',
+    'featuredProjects.description': 'Explorez mon travail récent de développement blockchain, incluant smart contracts, applications DeFi, et intégrations web3. Chaque projet met en valeur différents aspects de mes compétences techniques.',
 
     // GitHub Stats
     'github.topLanguages': 'Langages Principaux',
@@ -861,19 +861,19 @@ const translations = {
 
     // Experience Data Translations
     'exp.ledgity.position': 'Développeur Blockchain',
-    'exp.ledgity.description': 'Développeur blockchain solo responsable du développement de contrats intelligents, de l\'intégration, de la maintenance et des modifications frontend.',
-    'exp.ledgity.achievement.1': 'Développé des contrats intelligents robustes et sécurisés utilisant Solidity sur Ethereum L1 et L2.',
+    'exp.ledgity.description': 'Développeur blockchain solo responsable du développement de smart contracts, de l\'intégration, de la maintenance et des modifications frontend.',
+    'exp.ledgity.achievement.1': 'Développé des smart contracts robustes et sécurisés utilisant Solidity sur Ethereum L1 et L2.',
     'exp.ledgity.achievement.2': 'Effectué des révisions de code et audits pour garantir un code de haute qualité, sans bugs avant le déploiement.',
-    'exp.ledgity.achievement.3': 'Intégré des applications décentralisées (dApps) avec des contrats intelligents pour améliorer l\'expérience utilisateur.',
-    'exp.ledgity.achievement.4': 'Géré le déploiement et la maintenance de contrats intelligents sur plusieurs réseaux blockchain.',
+    'exp.ledgity.achievement.3': 'Intégré des applications décentralisées (dApps) avec des smart contracts pour améliorer l\'expérience utilisateur.',
+    'exp.ledgity.achievement.4': 'Géré le déploiement et la maintenance de smart contracts sur plusieurs réseaux blockchain.',
     'exp.ledgity.achievement.5': 'Développé des interfaces conviviales pour des fonctions blockchain complexes afin d\'améliorer l\'accessibilité.',
 
     'exp.freelance.position': 'Développeur Smart Contract Freelance',
-    'exp.freelance.description': 'Fourni des services de développement blockchain à divers clients, en me concentrant sur la création de contrats intelligents et le développement de dApps.',
+    'exp.freelance.description': 'Fourni des services de développement blockchain à divers clients, en me concentrant sur la création de smart contracts et le développement de dApps.',
     'exp.freelance.achievement.1': 'Créé un contrat de staking pour les NFTs qui a avec succès minté plus de 21 millions de tokens ERC20 et détient actuellement plus de 1400 NFTs en staking.',
     'exp.freelance.achievement.2': 'Développé et déployé des applications décentralisées sur les blockchains EVM utilisant Solidity, React.js, Next.js.',
     'exp.freelance.achievement.3': 'Collaboré avec les clients pour définir les exigences du projet et livrer des solutions évolutives.',
-    'exp.freelance.achievement.4': 'Intégré des oracles pour les flux de données en temps réel dans les contrats intelligents.',
+    'exp.freelance.achievement.4': 'Intégré des oracles pour les flux de données en temps réel dans les smart contracts.',
     'exp.freelance.achievement.5': 'Créé et géré les standards de tokens ERC-20 et ERC-721 pour divers projets.',
     'exp.freelance.achievement.6': 'Effectué des tests approfondis utilisant des frameworks comme Foundry et Hardhat.',
 
@@ -882,24 +882,24 @@ const translations = {
     'exp.tasc.achievement.1': 'Fondé une entreprise pour construire un jeu P2E et dirigé une équipe de développeurs utilisant les méthodologies Agiles (SCRUM).',
     'exp.tasc.achievement.2': 'Développé et implémenté une vision stratégique pour stimuler la croissance et la rentabilité de l\'entreprise.',
     'exp.tasc.achievement.3': 'Géré efficacement les communications de crise pour maintenir l\'intégrité de la marque.',
-    'exp.tasc.achievement.4': 'Développé des contrats intelligents pour les actifs du jeu utilisant Solidity.',
+    'exp.tasc.achievement.4': 'Développé des smart contracts pour les actifs du jeu utilisant Solidity.',
     'exp.tasc.achievement.5': 'Implémenté une économie de tokens basée sur Ethereum pour améliorer l\'engagement des joueurs.',
 
     'exp.future-institution.position': 'Développeur Smart Contract',
-    'exp.future-institution.description': 'Dirigé le développement de contrats intelligents pour un jeu blockchain.',
-    'exp.future-institution.achievement.1': 'Dirigé le développement de contrats intelligents pour un jeu Blockchain.',
-    'exp.future-institution.achievement.2': 'Dirigé la conception et l\'implémentation de contrats intelligents robustes sur Ethereum.',
+    'exp.future-institution.description': 'Dirigé le développement de smart contracts pour un jeu blockchain.',
+    'exp.future-institution.achievement.1': 'Dirigé le développement de smart contracts pour un jeu Blockchain.',
+    'exp.future-institution.achievement.2': 'Dirigé la conception et l\'implémentation de smart contracts robustes sur Ethereum.',
     'exp.future-institution.achievement.3': 'Implémenté les standards de tokens, incluant ERC20 et ERC721, pour faciliter la création et la gestion de tokens.',
 
     'exp.bitcoin-vietnam.position': 'Stagiaire Développeur Web3',
     'exp.bitcoin-vietnam.description': 'Acquis une expérience initiale de développement blockchain grâce à un stage axé sur les technologies Web3.',
     'exp.bitcoin-vietnam.achievement.1': 'Recherché les tokens ERC20, et créé un token ERC20 pour l\'entreprise.',
     'exp.bitcoin-vietnam.achievement.2': 'Collaboré avec une équipe pour développer des applications décentralisées (dApps) utilisant la blockchain Ethereum.',
-    'exp.bitcoin-vietnam.achievement.3': 'Assisté dans le développement de contrats intelligents utilisant Solidity pour automatiser les processus et améliorer la sécurité.',
+    'exp.bitcoin-vietnam.achievement.3': 'Assisté dans le développement de smart contracts utilisant Solidity pour automatiser les processus et améliorer la sécurité.',
     'exp.bitcoin-vietnam.achievement.4': 'Maintenu le front-end du site web',
 
     'exp.alyra-jury.position': 'Jury Technique',
-    'exp.alyra-jury.description': 'Évaluation et certification de la prochaine génération de développeurs blockchain en évaluant leurs projets DApp finaux, s\'assurant qu\'ils respectent les standards de l\'industrie pour la sécurité, l\'architecture et l\'innovation des contrats intelligents.',
+    'exp.alyra-jury.description': 'Évaluation et certification de la prochaine génération de développeurs blockchain en évaluant leurs projets DApp finaux, s\'assurant qu\'ils respectent les standards de l\'industrie pour la sécurité, l\'architecture et l\'innovation des smart contracts.',
     'exp.alyra-jury.achievement.1': 'Septembre 2023 - Jury Finney - POAP : https://collectors.poap.xyz/token/6970868',
     'exp.alyra-jury.achievement.2': 'Avril 2024 - Jury Lovelace - POAP : https://collectors.poap.xyz/token/7112109',
     'exp.alyra-jury.achievement.3': 'Juillet 2024 - Jury Turing - POAP : https://collectors.poap.xyz/token/7191799',
@@ -909,7 +909,7 @@ const translations = {
     'exp.chiliz-hackathon.position': 'Participant Hackathon',
     'exp.chiliz-hackathon.description': 'Construit Chiliz Got Talent - une plateforme innovante pour la découverte de talents sportifs sur la blockchain Chiliz.',
     'exp.chiliz-hackathon.achievement.1': 'Développé une dApp full-stack avec un frontend React TypeScript',
-    'exp.chiliz-hackathon.achievement.2': 'Implémenté des contrats intelligents pour la vérification des talents et les récompenses',
+    'exp.chiliz-hackathon.achievement.2': 'Implémenté des smart contracts pour la vérification des talents et les récompenses',
     'exp.chiliz-hackathon.achievement.3': 'Créé une API backend avec le templating Handlebars',
     'exp.chiliz-hackathon.achievement.4': 'Livré un prototype fonctionnel dans les délais du hackathon',
     'exp.chiliz-hackathon.achievement.5': 'Nom d\'équipe : RedCodeChilizPeppers',
@@ -934,15 +934,15 @@ const translations = {
     // Education Data Translations
     'edu.rareskills.degree': 'Développement Blockchain',
     'edu.rareskills.field': 'Plongée DeFi, NFT & ERC20, Tests & audits, Plongée EVM : Yul/assembly/HUFF',
-    'edu.rareskills.description': 'RareSkills est une plateforme d\'éducation blockchain premium fondée par Jeffrey Scholz, axée sur la sécurité avancée et l\'optimisation des contrats intelligents. Ce programme intensif couvre les protocoles DeFi de pointe, l\'implémentation avancée des standards ERC, les méthodologies de test complètes, les pratiques d\'audit de sécurité, et la programmation EVM de bas niveau incluant Yul et le langage assembly. Le programme est conçu pour les développeurs expérimentés cherchant une expertise en sécurité blockchain et optimisation gas.',
+    'edu.rareskills.description': 'RareSkills est une plateforme d\'éducation blockchain premium fondée par Jeffrey Scholz, axée sur la sécurité avancée et l\'optimisation des smart contracts. Ce programme intensif couvre les protocoles DeFi de pointe, l\'implémentation avancée des standards ERC, les méthodologies de test complètes, les pratiques d\'audit de sécurité, et la programmation EVM de bas niveau incluant Yul et le langage assembly. Le programme est conçu pour les développeurs expérimentés cherchant une expertise en sécurité blockchain et optimisation gas.',
 
     'edu.consensys.degree': 'Développement Blockchain',
     'edu.consensys.field': 'Dapp, Ethereum, Solidity, React.js, Clients blockchain',
     'edu.consensys.description': 'ConsenSys Academy est la branche éducative de ConsenSys, la principale société de logiciels Ethereum fondée par Joseph Lubin. Ce programme complet fournit une éducation blockchain de niveau entreprise, couvrant le développement d\'applications décentralisées full-stack, l\'architecture de l\'écosystème Ethereum, la programmation Solidity avancée, l\'intégration React.js pour les frontends Web3, et l\'implémentation de clients blockchain. L\'académie est reconnue pour produire des développeurs blockchain prêts pour l\'industrie.',
 
     'edu.alyra.degree': 'Développement Blockchain',
-    'edu.alyra.field': 'Ethereum, Contrats Intelligents, Développement Dapp',
-    'edu.alyra.description': 'Alyra est la principale école blockchain de France, offrant des programmes de formation complets en technologie blockchain et développement de contrats intelligents. Ce programme fondamental fournit une expérience pratique avec la blockchain Ethereum, l\'architecture et le déploiement de contrats intelligents, le développement d\'applications décentralisées, et les fondamentaux blockchain. Alyra est connue pour son approche pratique de l\'éducation blockchain et ses fortes connexions industrielles dans l\'écosystème blockchain européen.',
+    'edu.alyra.field': 'Ethereum, Smart Contracts, Développement Dapp',
+    'edu.alyra.description': 'Alyra est la principale école blockchain de France, offrant des programmes de formation complets en technologie blockchain et développement de smart contracts. Ce programme fondamental fournit une expérience pratique avec la blockchain Ethereum, l\'architecture et le déploiement de smart contracts, le développement d\'applications décentralisées, et les fondamentaux blockchain. Alyra est connue pour son approche pratique de l\'éducation blockchain et ses fortes connexions industrielles dans l\'écosystème blockchain européen.',
 
     'edu.alyra-solana.degree': 'Développeur Solana',
     'edu.alyra-solana.field': 'Blockchain Solana, programmation Rust, framework Anchor, tokens SPL',
@@ -974,19 +974,19 @@ const translations = {
 
     'edu.udemy-solidity-advanced.degree': 'Solidity Avancé - Yul et Assembly',
     'edu.udemy-solidity-advanced.field': 'Plongée profonde dans l\'optimisation Solidity utilisant le langage intermédiaire Yul et la programmation assembly EVM',
-    'edu.udemy-solidity-advanced.description': 'Un cours avancé axé sur les techniques d\'optimisation Solidity de bas niveau utilisant le langage intermédiaire Yul et la programmation assembly EVM. Les étudiants apprennent à écrire des contrats intelligents hautement optimisés, comprendre les internals EVM, implémenter des opcodes personnalisés, et réaliser des économies de gas significatives. Connaissance critique pour le développement professionnel de contrats intelligents et l\'audit dans l\'espace DeFi.',
+    'edu.udemy-solidity-advanced.description': 'Un cours avancé axé sur les techniques d\'optimisation Solidity de bas niveau utilisant le langage intermédiaire Yul et la programmation assembly EVM. Les étudiants apprennent à écrire des smart contracts hautement optimisés, comprendre les internals EVM, implémenter des opcodes personnalisés, et réaliser des économies de gas significatives. Connaissance critique pour le développement professionnel de smart contracts et l\'audit dans l\'espace DeFi.',
 
     'edu.udemy-solidity-gas.degree': 'Solidity Avancé - Optimisation Gas',
-    'edu.udemy-solidity-gas.field': 'Techniques avancées pour optimiser l\'usage gas des contrats intelligents et comprendre les internals EVM',
-    'edu.udemy-solidity-gas.description': 'Un cours spécialisé dédié à l\'optimisation gas des contrats intelligents et à l\'efficacité EVM. Couvre les techniques avancées pour réduire les coûts de transaction, les patterns d\'optimisation stockage, l\'efficacité des appels de fonction, et les optimisations niveau EVM. Les étudiants apprennent à analyser la consommation gas, implémenter des patterns de design rentables, et construire des contrats intelligents économiquement durables pour les protocoles DeFi de production.',
+    'edu.udemy-solidity-gas.field': 'Techniques avancées pour optimiser l\'usage gas des smart contracts et comprendre les internals EVM',
+    'edu.udemy-solidity-gas.description': 'Un cours spécialisé dédié à l\'optimisation gas des smart contracts et à l\'efficacité EVM. Couvre les techniques avancées pour réduire les coûts de transaction, les patterns d\'optimisation stockage, l\'efficacité des appels de fonction, et les optimisations niveau EVM. Les étudiants apprennent à analyser la consommation gas, implémenter des patterns de design rentables, et construire des smart contracts économiquement durables pour les protocoles DeFi de production.',
 
     // Skills Page
     'skills.advanced.title': 'Compétences Avancées',
-    'skills.advanced.subtitle': 'Expertise technique approfondie en développement blockchain, contrats intelligents et finance décentralisée',
+    'skills.advanced.subtitle': 'Expertise technique approfondie en développement blockchain, smart contracts et finance décentralisée',
     'skills.whatCanDo.title': 'Ce Que Je Peux Faire Pour Vous',
     'skills.whatCanDo.subtitle': 'Du concept à la production, je livre des solutions blockchain complètes qui génèrent une réelle valeur business',
-    'skills.service1.title': 'Systèmes de Contrats Intelligents Complets',
-    'skills.service1.description': 'J\'architecture et construis des écosystèmes de contrats intelligents entiers de zéro, gérant tout depuis la conception de tokenomics jusqu\'aux mécaniques DeFi complexes.',
+    'skills.service1.title': 'Systèmes de Smart Contracts Complets',
+    'skills.service1.description': 'J\'architecture et construis des écosystèmes de smart contracts entiers de zéro, gérant tout depuis la conception de tokenomics jusqu\'aux mécaniques DeFi complexes.',
     'skills.service1.feature1': 'Standards de tokens personnalisés (ERC-20, ERC-721, ERC-1155)',
     'skills.service1.feature2': 'Protocoles DeFi (AMMs, prêts, staking, yield farming)',
     'skills.service1.feature3': 'Systèmes de gouvernance et DAOs',
@@ -1055,7 +1055,7 @@ const translations = {
 
     // Security Section
     'security.title': 'SÉCURITÉ & AUDIT DE CONTRATS INTELLIGENTS',
-    'security.description.intro': 'La sécurité est primordiale en DeFi. Les contrats intelligents gèrent des milliards en valeur et sont immuables une fois déployés.',
+    'security.description.intro': 'La sécurité est primordiale en DeFi. Les smart contracts gèrent des milliards en valeur et sont immuables une fois déployés.',
     'security.description.vulnerability': 'Une seule vulnérabilité peut conduire à des pertes catastrophiques, rendant l\'analyse de sécurité approfondie essentielle pour tout protocole sérieux.',
     'security.description.focus': 'Je me concentre sur les vecteurs d\'attaque courants comme la reentrancy, les exploits de flash loans, et les failles de contrôle d\'accès.',
     'security.description.watch': 'Observez la détection de menaces en temps réel ci-dessous • Survolez les éléments pour des informations détaillées •',
@@ -1075,10 +1075,10 @@ const translations = {
     'security.arsenal.slither.short': 'Auto-détecte 90+ vulnérabilités',
     'security.arsenal.foundry.short': 'Puissance de fuzz testing illimitée',
     'security.arsenal.echidna.short': 'Fuzz testing basé sur propriétés',
-    'security.arsenal.openzeppelin': 'Bibliothèque standard de l\'industrie de composants de contrats intelligents sécurisés et réutilisables. Fournit des implémentations éprouvées des standards ERC, contrôle d\'accès, et patterns de sécurité utilisés par des milliers de projets.',
-    'security.arsenal.slither': 'Framework d\'analyse statique pour contrats intelligents Solidity. Détecte les vulnérabilités, opportunités d\'optimisation, et problèmes de qualité de code. Outil essentiel pour le scan de sécurité automatisé avec 90+ détecteurs intégrés.',
-    'security.arsenal.foundry': 'Boîte à outils rapide, portable et modulaire pour le développement Ethereum. Propose des tests avancés avec fuzzing, optimisation de gas, et scripting de déploiement. L\'étalon-or pour le développement et test modernes de contrats intelligents.',
-    'security.arsenal.echidna': 'Fuzzer basé sur les propriétés pour contrats intelligents Ethereum par Trail of Bits. Génère des entrées aléatoires pour tester les invariants et trouver les cas limites. Spécialisé dans la découverte de bugs subtils via vérification automatisée de propriétés.',
+    'security.arsenal.openzeppelin': 'Bibliothèque standard de l\'industrie de composants de smart contracts sécurisés et réutilisables. Fournit des implémentations éprouvées des standards ERC, contrôle d\'accès, et patterns de sécurité utilisés par des milliers de projets.',
+    'security.arsenal.slither': 'Framework d\'analyse statique pour smart contracts Solidity. Détecte les vulnérabilités, opportunités d\'optimisation, et problèmes de qualité de code. Outil essentiel pour le scan de sécurité automatisé avec 90+ détecteurs intégrés.',
+    'security.arsenal.foundry': 'Boîte à outils rapide, portable et modulaire pour le développement Ethereum. Propose des tests avancés avec fuzzing, optimisation de gas, et scripting de déploiement. L\'étalon-or pour le développement et test modernes de smart contracts.',
+    'security.arsenal.echidna': 'Fuzzer basé sur les propriétés pour smart contracts Ethereum par Trail of Bits. Génère des entrées aléatoires pour tester les invariants et trouver les cas limites. Spécialisé dans la découverte de bugs subtils via vérification automatisée de propriétés.',
     'security.master.title': 'STATUT AUDITEUR MAÎTRE: DÉBLOQUÉ',
     'security.master.description': 'Tous les outils de sécurité légendaires maîtrisés • 100% de couverture des vulnérabilités',
     'security.status.online': 'SYSTÈMES EN LIGNE',
@@ -1093,7 +1093,7 @@ const translations = {
     'erc.erc721.description': 'Standard de token non-fongible pour actifs numériques uniques',
     'erc.erc4626.description': 'Standard pour les coffres générateurs de rendement et gestion d\'actifs',
     'erc.erc2535.description': 'Système de contrat intelligent modulaire pour contrats évolutifs',
-    'erc.erc4337.description': 'Portefeuilles de contrats intelligents sans changements de protocole',
+    'erc.erc4337.description': 'Portefeuilles de smart contracts sans changements de protocole',
     'erc.erc1155.description': 'Standard pour contrats gérant plusieurs types de tokens',
     'erc.erc2981.description': 'Informations de royalties standardisées pour marchés NFT',
     'erc.erc6551.description': 'NFTs pouvant posséder des actifs et interagir avec applications',
@@ -1106,7 +1106,7 @@ const translations = {
     'erc.erc1967.description': 'Slots de stockage proxy standardisés pour éviter les conflits',
     'erc.erc2767.description': 'Standard pour gouvernance et vote on-chain',
     'erc.erc5805.description': 'Vote standardisé avec capacités de délégation',
-    'erc.proxy-patterns.description': 'Patterns de proxy et mécanismes de mise à niveau pour contrats intelligents',
+    'erc.proxy-patterns.description': 'Patterns de proxy et mécanismes de mise à niveau pour smart contracts',
     'erc.access-control.description': 'Contrôle d\'accès basé sur rôles et gestion des permissions',
     'erc.merkle-trees.description': 'Mécanismes de vérification de données efficaces et listes blanches',
 

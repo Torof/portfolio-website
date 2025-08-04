@@ -66,10 +66,10 @@ export default function HeroSection() {
                   ref={buttonsAnimation.ref}
                   className={`flex flex-wrap gap-4 justify-center md:justify-start ${getAnimationClass(buttonsAnimation.isVisible, 'fadeInUp')}`}
                 >
-                  <a href="./experience.html" className="btn-primary">
+                  <a href="/experience" className="btn-primary">
                     {t('hero.cta')}
                   </a>
-                  <a href="./projects.html" className="btn-outline">
+                  <a href="/projects" className="btn-outline">
                     {t('hero.projects')}
                   </a>
                 </div>
