@@ -216,6 +216,28 @@ export default function VibeCodingPage() {
           </div>
         </section>
 
+        {/* Important Disclaimer */}
+        <section className="py-12 relative">
+          <div className="container-custom">
+            <div className="relative p-8 rounded-2xl bg-gradient-to-br from-red-600/30 to-orange-600/30 backdrop-blur-md border-2 border-red-500/50 shadow-2xl">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-8 py-2 bg-gradient-to-r from-red-600 to-orange-600 rounded-full shadow-lg">
+                <span className="text-white font-bold text-lg">⚠️ {t('vibe-coding.disclaimer.title')}</span>
+              </div>
+              <div className="mt-6 space-y-6">
+                <p className={`text-lg font-semibold leading-relaxed ${theme === 'theme-light' ? 'text-gray-900' : 'text-white'}`}>
+                  🔒 {t('vibe-coding.disclaimer.text')}
+                </p>
+                <p className={`text-lg leading-relaxed ${theme === 'theme-light' ? 'text-gray-800' : 'text-gray-100'}`}>
+                  ✅ {t('vibe-coding.disclaimer.testing')}
+                </p>
+                <p className={`text-xl font-bold text-center ${theme === 'theme-light' ? 'text-red-700' : 'text-red-300'}`}>
+                  🛡️ {t('vibe-coding.disclaimer.blockchain')}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Productivity Impact */}
         <section className="py-12 relative">
           {/* Flame background accent */}

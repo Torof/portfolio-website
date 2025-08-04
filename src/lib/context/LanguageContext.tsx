@@ -208,8 +208,8 @@ const translations = {
     'vibe-coding.workflow': 'Enhanced Workflow',
     'vibe-coding.blockchainDev': 'Blockchain Development',
     'vibe-coding.aiAcceleration': 'AI Acceleration',
-    'vibe-coding.approach': 'is my approach to blockchain development where powerful AI tools amplify my core expertise in Solidity and smart contract architecture.',
-    'vibe-coding.whileIArchitect': 'While I architect, write, optimize, and audit smart contracts myself, AI accelerates everything else—building frontends, backends, and integrations at 10x speed to create complete dApp ecosystems.',
+    'vibe-coding.approach': 'is my approach to development where AI tools accelerate frontend and integration work, while I personally write, test, and audit all blockchain code without AI assistance.',
+    'vibe-coding.whileIArchitect': 'I personally architect, write, optimize, and audit all smart contracts without any AI assistance. AI only accelerates non-blockchain tasks—building frontends, backends, and integrations at 10x speed. Every line of code is thoroughly tested and audited before production.',
     'vibe-coding.coreExpertise': 'Core Blockchain Expertise',
     'vibe-coding.aiArsenal': 'AI Arsenal',
     'vibe-coding.arsenalSubtitle': 'The powerful AI tools that ignite my development velocity',
@@ -218,19 +218,19 @@ const translations = {
     'vibe-coding.fasterFrontendDesc': 'From weeks to days for complete dApp interfaces',
     'vibe-coding.reducedIntegration': 'Reduced Integration Time',
     'vibe-coding.reducedIntegrationDesc': 'Seamless Web3 connectivity and API development',
-    'vibe-coding.result': 'Result: Complete dApp ecosystems delivered in record time, without compromising on smart contract quality or security.',
+    'vibe-coding.result': 'Result: Complete dApp ecosystems delivered in record time. All blockchain code is handwritten, tested, and audited. AI is never used for smart contract development.',
 
     // Vibe Coding Core Expertise Items
-    'vibe-coding.core.architecture': 'Smart Contract Architecture & Design',
-    'vibe-coding.core.solidity': 'Solidity Development & Optimization',
+    'vibe-coding.core.architecture': 'Smart Contract Architecture & Design (100% Handwritten)',
+    'vibe-coding.core.solidity': 'Solidity Development & Optimization (No AI)',
     'vibe-coding.core.gas': 'Gas Efficiency & Security Patterns',
     'vibe-coding.core.deployment': 'Contract Deployment & Configuration',
-    'vibe-coding.core.auditing': 'Security Auditing & Code Review',
+    'vibe-coding.core.auditing': 'Security Auditing & Testing Before Production',
     'vibe-coding.core.defi': 'DeFi Protocol Logic & Tokenomics',
 
     // Vibe Coding AI-Powered Items
-    'vibe-coding.ai.frontend': 'React/Next.js Frontend Development',
-    'vibe-coding.ai.backend': 'Node.js Backend & API Creation',
+    'vibe-coding.ai.frontend': 'React/Next.js Frontend Development (Non-Blockchain)',
+    'vibe-coding.ai.backend': 'Node.js Backend & API Creation (Off-Chain)',
     'vibe-coding.ai.web3': 'Ethers.js Web3 Integrations',
     'vibe-coding.ai.ui': 'UI/UX Design & Component Libraries',
     'vibe-coding.ai.testing': 'Testing Suites & Automation',
@@ -249,6 +249,12 @@ const translations = {
     'vibe-coding.tool.perplexity.desc': 'Real-time research and latest protocol documentation',
     'vibe-coding.tool.v0.name': 'v0 by Vercel',
     'vibe-coding.tool.v0.desc': 'Rapid UI prototyping and component generation',
+
+    // Vibe Coding Disclaimer
+    'vibe-coding.disclaimer.title': 'Important: AI Usage Disclaimer',
+    'vibe-coding.disclaimer.text': 'AI tools are ONLY used for frontend development, UI/UX, and non-blockchain integrations. All smart contracts, DeFi protocols, and blockchain code are written 100% manually without any AI assistance.',
+    'vibe-coding.disclaimer.testing': 'Every line of code—whether AI-assisted or handwritten—undergoes rigorous testing, security audits, and code review before production deployment.',
+    'vibe-coding.disclaimer.blockchain': 'Blockchain Security First: No AI touches smart contract code. Ever.',
 
     // Tech Stack Section  
     'techStack.title': 'My Tech Stack',
@@ -801,8 +807,8 @@ const translations = {
     'vibe-coding.workflow': 'Développement Accéléré',
     'vibe-coding.blockchainDev': 'Développement Blockchain',
     'vibe-coding.aiAcceleration': 'Accélération IA',
-    'vibe-coding.approach': 'est mon approche du développement blockchain où de puissants outils IA amplifient mon expertise principale en Solidity et architecture de smart contracts.',
-    'vibe-coding.whileIArchitect': 'Pendant que j\'architecture, écris, optimise et audite les smart contracts moi-même, l\'IA accélère tout le reste—construire les frontends, backends et intégrations à une vitesse 10x pour créer des écosystèmes dApp complets.',
+    'vibe-coding.approach': 'est mon approche du développement où les outils IA accélèrent le travail frontend et d\'intégration, tandis que j\'écris, teste et audite personnellement tout le code blockchain sans assistance IA.',
+    'vibe-coding.whileIArchitect': 'J\'architecture, écris, optimise et audite personnellement tous les smart contracts sans aucune assistance IA. L\'IA accélère uniquement les tâches non-blockchain—construire les frontends, backends et intégrations à une vitesse 10x. Chaque ligne de code est minutieusement testée et auditée avant la production.',
     'vibe-coding.coreExpertise': 'Expertise Blockchain Fondamentale',
     'vibe-coding.aiArsenal': 'Arsenal IA',
     'vibe-coding.arsenalSubtitle': 'Les puissants outils IA qui enflamment ma vélocité de développement',
@@ -811,17 +817,17 @@ const translations = {
     'vibe-coding.fasterFrontendDesc': 'De semaines à jours pour des interfaces dApp complètes',
     'vibe-coding.reducedIntegration': 'Temps d\'Intégration Réduit',
     'vibe-coding.reducedIntegrationDesc': 'Connectivité Web3 et développement API transparents',
-    'vibe-coding.result': 'Résultat : Écosystèmes dApp complets livrés en temps record, sans compromettre la qualité ou la sécurité des smart contracts.',
+    'vibe-coding.result': 'Résultat : Écosystèmes dApp complets livrés en temps record. Tout le code blockchain est écrit à la main, testé et audité. L\'IA n\'est jamais utilisée pour le développement de smart contracts.',
     // Vibe Coding Core Expertise Items
-    'vibe-coding.core.architecture': 'Architecture et Conception de Smart Contracts',
-    'vibe-coding.core.solidity': 'Développement et Optimisation Solidity',
+    'vibe-coding.core.architecture': 'Architecture et Conception de Smart Contracts (100% Écrit à la Main)',
+    'vibe-coding.core.solidity': 'Développement et Optimisation Solidity (Sans IA)',
     'vibe-coding.core.gas': 'Efficacité Gas et Patterns de Sécurité',
     'vibe-coding.core.deployment': 'Déploiement et Configuration de Contrats',
-    'vibe-coding.core.auditing': 'Audit de Sécurité et Revue de Code',
+    'vibe-coding.core.auditing': 'Audit de Sécurité et Tests Avant Production',
     'vibe-coding.core.defi': 'Logique de Protocole DeFi et Tokenomics',
     // Vibe Coding AI-Powered Items
-    'vibe-coding.ai.frontend': 'Développement Frontend React/Next.js',
-    'vibe-coding.ai.backend': 'Création Backend Node.js et API',
+    'vibe-coding.ai.frontend': 'Développement Frontend React/Next.js (Non-Blockchain)',
+    'vibe-coding.ai.backend': 'Création Backend Node.js et API (Hors-Chaîne)',
     'vibe-coding.ai.web3': 'Intégrations Web3 Ethers.js',
     'vibe-coding.ai.ui': 'Design UI/UX et Bibliothèques de Composants',
     'vibe-coding.ai.testing': 'Suites de Tests et Automatisation',
@@ -839,6 +845,12 @@ const translations = {
     'vibe-coding.tool.perplexity.desc': 'Recherche en temps réel et documentation de protocoles récents',
     'vibe-coding.tool.v0.name': 'v0 by Vercel',
     'vibe-coding.tool.v0.desc': 'Prototypage UI rapide et génération de composants',
+
+    // Vibe Coding Disclaimer
+    'vibe-coding.disclaimer.title': 'Important : Avertissement sur l\'Utilisation de l\'IA',
+    'vibe-coding.disclaimer.text': 'Les outils IA sont UNIQUEMENT utilisés pour le développement frontend, UI/UX, et les intégrations non-blockchain. Tous les smart contracts, protocoles DeFi, et code blockchain sont écrits 100% manuellement sans aucune assistance IA.',
+    'vibe-coding.disclaimer.testing': 'Chaque ligne de code—qu\'elle soit assistée par IA ou écrite à la main—subit des tests rigoureux, des audits de sécurité, et une revue de code avant le déploiement en production.',
+    'vibe-coding.disclaimer.blockchain': 'Sécurité Blockchain Avant Tout : Aucune IA ne touche au code des smart contracts. Jamais.',
 
     // Tech Stack Section  
     'techStack.title': 'Ma Stack Technique',
