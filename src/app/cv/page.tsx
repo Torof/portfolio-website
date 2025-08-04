@@ -3,11 +3,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
-import { useLanguage } from '@/lib/context/LanguageContext';
 
 export default function CVPage() {
   const { theme } = useTheme();
-  const { t } = useLanguage();
   const [isDownloading, setIsDownloading] = useState(false);
 
   const downloadCV = async (format: 'pdf' | 'html') => {
@@ -178,7 +176,7 @@ export default function CVPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <h3 className="text-2xl font-bold light-text mb-6 text-center">
-              What's Included in My CV
+              What&apos;s Included in My CV
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

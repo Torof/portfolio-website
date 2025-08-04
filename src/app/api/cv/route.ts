@@ -1,19 +1,18 @@
 import { NextResponse } from 'next/server';
 import { experiences } from '@/lib/data/experiences';
 import { skillCategories } from '@/lib/data/advancedSkills';
+import { personalInfo as importedPersonalInfo, socialLinks } from '@/lib/data/personalInfo';
 import puppeteer from 'puppeteer';
 
-// Personal information - you can move this to a separate data file if needed
+// Format personal information for CV
 const personalInfo = {
-  name: 'Scott Devines',
-  title: 'Blockchain & Smart Contract Developer',
-  email: 'scott.devines@example.com', // Update with your actual email
-  phone: '+1 (555) 123-4567', // Update with your actual phone
-  location: 'Remote / Available Worldwide',
-  website: 'https://your-portfolio.com', // Update with your actual domain
-  linkedin: 'https://linkedin.com/in/scott-devines', // Update with your LinkedIn
-  github: 'https://github.com/Torof',
-  summary: 'Experienced Full Stack Web3 Developer with 6+ years specializing in blockchain, smart contracts, and dApp development. Proven track record in DeFi protocols, NFT platforms, and Layer 2 solutions. Expert in Solidity, Ethereum ecosystem, and modern Web3 technologies.'
+  name: importedPersonalInfo.name,
+  title: importedPersonalInfo.title,
+  email: importedPersonalInfo.email,
+  location: importedPersonalInfo.location,
+  linkedin: socialLinks.find(link => link.platform === 'LinkedIn')?.url || '',
+  github: socialLinks.find(link => link.platform === 'GitHub')?.url || '',
+  summary: importedPersonalInfo.bio
 };
 
 export async function GET(request: Request) {
@@ -32,13 +31,24 @@ export async function GET(request: Request) {
     
     const htmlContent = generateCVHTML({
       personalInfo,
-      workExperiences,
-      hackathonExperiences,
+      workExperiences: workExperiences.map(exp => ({
+        company: exp.company,
+        position: exp.position,
+        period: `${exp.startDate} - ${exp.endDate}`,
+        location: 'Remote', // Default location as it's not in Experience type
+        achievements: exp.achievements
+      })),
+      hackathonExperiences: hackathonExperiences.map(exp => ({
+        name: exp.company,
+        organizer: exp.company,
+        period: `${exp.startDate} - ${exp.endDate}`,
+        achievements: exp.achievements
+      })),
       skills: {
-        smartContracts: smartContractSkills,
-        defi: defiSkills,
-        security: securitySkills,
-        layer2: layer2Skills
+        smartContracts: smartContractSkills.map(skill => skill.name),
+        defi: defiSkills.map(skill => skill.name),
+        security: securitySkills.map(skill => skill.name),
+        layer2: layer2Skills.map(skill => skill.name)
       }
     });
 
@@ -89,7 +99,37 @@ export async function GET(request: Request) {
   }
 }
 
-function generateCVHTML(data: any): string {
+interface CVData {
+  personalInfo: {
+    name: string;
+    title: string;
+    email: string;
+    linkedin: string;
+    github: string;
+    location: string;
+    phone?: string;
+    website?: string;
+    summary?: string;
+  };
+  workExperiences: Array<{
+    company: string;
+    position: string;
+    period: string;
+    location: string;
+    achievements: string[];
+  }>;
+  hackathonExperiences: Array<{
+    name: string;
+    organizer: string;
+    period: string;
+    achievements: string[];
+  }>;
+  skills: {
+    [category: string]: string[];
+  };
+}
+
+function generateCVHTML(data: CVData): string {
   const { personalInfo, workExperiences, hackathonExperiences, skills } = data;
   
   return `
@@ -303,18 +343,18 @@ function generateCVHTML(data: any): string {
         <div class="title">${personalInfo.title}</div>
         <div class="contact-info">
             <span>📧 ${personalInfo.email}</span>
-            <span>📱 ${personalInfo.phone}</span>
             <span>📍 ${personalInfo.location}</span>
-            <span>🌐 ${personalInfo.website}</span>
-            <span>💼 LinkedIn</span>
-            <span>👨‍💻 GitHub: ${personalInfo.github}</span>
+            <span>💼 ${personalInfo.linkedin}</span>
+            <span>👨‍💻 ${personalInfo.github}</span>
         </div>
     </div>
 
+    ${personalInfo.summary ? `
     <div class="section">
         <div class="section-title">Professional Summary</div>
         <div class="summary">${personalInfo.summary}</div>
     </div>
+    ` : ''}
 
     <div class="section">
         <div class="section-title">Professional Experience</div>
@@ -325,9 +365,9 @@ function generateCVHTML(data: any): string {
                         <div class="job-title">${exp.position}</div>
                         <div class="company">${exp.company}</div>
                     </div>
-                    <div class="duration">${exp.startDate} - ${exp.endDate}</div>
+                    <div class="duration">${exp.period}</div>
                 </div>
-                <div class="description">${exp.description}</div>
+                ${exp.location ? `<div class="location">📍 ${exp.location}</div>` : ''}
                 <ul class="achievements">
                     ${exp.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
                 </ul>
@@ -340,19 +380,19 @@ function generateCVHTML(data: any): string {
         <div class="skills-grid">
             <div class="skill-category">
                 <div class="skill-category-title">Smart Contract Development</div>
-                <div class="skill-list">${skills.smartContracts.slice(0, 6).map(skill => skill.name).join(' • ')}</div>
+                <div class="skill-list">${skills.smartContracts.slice(0, 6).join(' • ')}</div>
             </div>
             <div class="skill-category">
                 <div class="skill-category-title">DeFi Protocols</div>
-                <div class="skill-list">${skills.defi.slice(0, 6).map(skill => skill.name).join(' • ')}</div>
+                <div class="skill-list">${skills.defi.slice(0, 6).join(' • ')}</div>
             </div>
             <div class="skill-category">
                 <div class="skill-category-title">Security & Auditing</div>
-                <div class="skill-list">${skills.security.slice(0, 6).map(skill => skill.name).join(' • ')}</div>
+                <div class="skill-list">${skills.security.slice(0, 6).join(' • ')}</div>
             </div>
             <div class="skill-category">
                 <div class="skill-category-title">Layer 2 Solutions</div>
-                <div class="skill-list">${skills.layer2.slice(0, 6).map(skill => skill.name).join(' • ')}</div>
+                <div class="skill-list">${skills.layer2.slice(0, 6).join(' • ')}</div>
             </div>
         </div>
     </div>
@@ -362,8 +402,9 @@ function generateCVHTML(data: any): string {
         <div class="hackathons">
             ${hackathonExperiences.map(hackathon => `
                 <div class="hackathon-item">
-                    <div class="hackathon-name">${hackathon.company} - ${hackathon.description.split(' - ')[0]}</div>
-                    <div class="hackathon-description">${hackathon.description}</div>
+                    <div class="hackathon-name">${hackathon.name}</div>
+                    <div class="hackathon-organizer">Organized by: ${hackathon.organizer}</div>
+                    <div class="hackathon-period">${hackathon.period}</div>
                     <ul class="achievements">
                         ${hackathon.achievements.slice(0, 3).map(achievement => `<li>${achievement}</li>`).join('')}
                     </ul>
