@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import ProjectCard from '@/components/ProjectCard';
 import CodeRain from '@/components/CodeRain';
 import GitHubMetrics from '@/components/GitHubMetrics';
-import ViewCounter from '@/components/ViewCounter';
 import { fetchProjectsFromGitHub } from '@/lib/services/projects';
 import { fetchGitHubStats } from '@/lib/services/github';
 import { useLanguage } from '@/lib/context/LanguageContext';
@@ -47,11 +46,6 @@ export default function ProjectsPage() {
       {/* Code Rain Background - Fixed to cover full viewport */}
       <div className="fixed inset-0 z-0">
         <CodeRain theme={theme} />
-      </div>
-      
-      {/* View Counter - Fixed position */}
-      <div className="fixed top-4 right-4 z-50">
-        <ViewCounter pageId="projects" />
       </div>
       
       <div className="relative z-10 container-custom py-16">
