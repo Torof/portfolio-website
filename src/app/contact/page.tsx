@@ -4,6 +4,7 @@ import React from 'react';
 import { personalInfo, socialLinks } from '@/lib/data/personalInfo';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import ViewStats from '@/components/ViewStats';
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { useTheme } from '@/lib/context/ThemeContext';
 
@@ -12,6 +13,11 @@ export default function ContactPage() {
   const { theme } = useTheme();
   return (
     <>
+      {/* View Stats - Fixed position */}
+      <div className="fixed top-4 right-4 z-50">
+        <ViewStats />
+      </div>
+      
       {/* Background Effects */}
       <div className="fixed inset-0 z-0">
         <div className={`absolute inset-0 opacity-90 ${

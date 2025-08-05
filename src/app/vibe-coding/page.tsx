@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import AnimatedTitle from "@/components/AnimatedTitle";
+import ViewCounter from "@/components/ViewCounter";
 import { useScrollAnimation, getAnimationClass } from "@/lib/hooks/useScrollAnimation";
 import { useLanguage } from "@/lib/context/LanguageContext";
 import { useTheme } from "@/lib/context/ThemeContext";
@@ -46,6 +47,11 @@ export default function VibeCodingPage() {
         <div className="absolute top-40 left-24 w-1 h-1 bg-red-400 rounded-full animate-pulse delay-500"></div>
         <div className="absolute top-60 left-12 w-1 h-1 bg-yellow-400 rounded-full animate-pulse delay-1000"></div>
         <div className="absolute top-80 left-20 w-1 h-1 bg-orange-300 rounded-full animate-pulse delay-1500"></div>
+      </div>
+      
+      {/* View Counter - Fixed position */}
+      <div className="fixed top-4 right-4 z-50">
+        <ViewCounter pageId="vibe-coding" />
       </div>
       
       <div className="relative z-10">

@@ -8,6 +8,7 @@ import ScrollParallaxBackground from "@/components/ScrollParallaxBackground";
 import FloatingOrbs from "@/components/FloatingOrbs";
 import GridOverlay from "@/components/GridOverlay";
 import SkillsTable from "@/components/SkillsTable";
+import ViewCounter from "@/components/ViewCounter";
 import { fetchProjectsFromGitHub } from '@/lib/services/projects';
 
 export default async function Home() {
@@ -23,6 +24,11 @@ export default async function Home() {
       
       {/* 3D Parallax Background */}
       <ScrollParallaxBackground />
+      
+      {/* View Counter - Fixed position */}
+      <div className="fixed top-4 right-4 z-50">
+        <ViewCounter pageId="home" />
+      </div>
       
       {/* Hero Section */}
       <HeroSection />
