@@ -162,11 +162,11 @@ export default function ExperiencePreview() {
               key={exp.id} 
               ref={index === 0 ? card1Animation.ref : card2Animation.ref}
               className={`
-                relative overflow-hidden rounded-xl p-8 
-                transition-all duration-500 
-                border border-[rgba(255,255,255,0.08)]
+                relative overflow-hidden rounded-xl p-8
+                transition-all duration-500
+                border border-[rgba(255,255,255,0.3)]
                 ${getAnimationClass(
-                  index === 0 ? card1Animation.isVisible : card2Animation.isVisible, 
+                  index === 0 ? card1Animation.isVisible : card2Animation.isVisible,
                   index % 2 === 0 ? 'fadeInLeft' : 'fadeInRight'
                 )}
               `}

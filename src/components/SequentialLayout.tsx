@@ -541,7 +541,7 @@ const SequentialLayout: React.FC<SequentialLayoutProps> = ({ projects }) => {
         <div className="container-custom relative z-10 pt-16 pb-16">
           <div
             ref={projectsTitleAnimation.ref}
-            className={`mb-16 text-center backdrop-blur-sm rounded-2xl p-8 bg-gradient-to-br from-[rgba(59,130,246,0.2)] to-[rgba(147,51,234,0.2)] border border-[rgba(255,255,255,0.2)] ${getAnimationClass(projectsTitleAnimation.isVisible, 'fadeInUp')}`}
+            className={`mb-16 text-center rounded-2xl p-8 bg-gradient-to-br from-[rgba(59,130,246,0.9)] to-[rgba(147,51,234,0.9)] border border-[rgba(255,255,255,0.2)] ${getAnimationClass(projectsTitleAnimation.isVisible, 'fadeInUp')}`}
           >
             <h2 className="section-title text-5xl md:text-6xl font-black mb-6 light-text text-glow tracking-tight">{t('featuredProjects.title')}</h2>
             <p
@@ -560,7 +560,7 @@ const SequentialLayout: React.FC<SequentialLayoutProps> = ({ projects }) => {
           {/* Projects Grid - Full Width but with max-width for readability */}
           <div
             ref={projectsGridAnimation.ref}
-            className={`max-w-4xl mx-auto backdrop-blur-sm rounded-2xl p-8 bg-gradient-to-br from-[rgba(59,130,246,0.3)] to-[rgba(147,51,234,0.3)] border border-[rgba(255,255,255,0.2)] ${getAnimationClass(projectsGridAnimation.isVisible, 'fadeInUp')}`}
+            className={`max-w-4xl mx-auto rounded-2xl p-8 bg-gradient-to-br from-[rgba(59,130,246,0.9)] to-[rgba(147,51,234,0.9)] border border-[rgba(255,255,255,0.2)] ${getAnimationClass(projectsGridAnimation.isVisible, 'fadeInUp')}`}
           >
               <EnhancedProjectsSection projects={projects} />
           </div>

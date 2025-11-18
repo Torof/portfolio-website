@@ -4,14 +4,12 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { techStack } from '../lib/data/techStack';
 import { motion } from 'framer-motion';
-import { useLanguage } from '../lib/context/LanguageContext';
 
 interface InteractiveTechStackProps {
   onCategoryChange?: (category: 'blockchain' | 'frontend' | 'backend') => void;
 }
 
 const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryChange }) => {
-  const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<'blockchain' | 'frontend' | 'backend'>('blockchain');
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
 
@@ -89,55 +87,25 @@ const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryC
 
   return (
     <div className="w-full max-w-5xl mx-auto">
-      {/* Enhanced Category Selector */}
-      <div className="flex flex-col items-center mb-12">
-        <p className="text-gray-300 text-sm mb-4 text-center">
-          Choose a category to explore different technologies
-        </p>
-        <div className="flex items-center gap-2 p-2 rounded-2xl glass-vibrant backdrop-blur-md border border-white/20">
-          {categories.map((category) => {
-            const isActive = activeCategory === category.id;
-            
-            return (
-              <motion.button
-                key={category.id}
-                whileHover={{ scale: 1.02, y: -1 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setActiveCategory(category.id as 'blockchain' | 'frontend' | 'backend')}
-                className={`relative rounded-xl flex flex-col items-center justify-center font-medium transition-all duration-300 cursor-pointer group ${
-                  isActive 
-                    ? 'px-8 py-4 bg-gradient-to-r text-white shadow-lg glow-' + (category.id === 'blockchain' ? 'blue' : category.id === 'frontend' ? 'purple' : 'blue')
-                    : 'px-6 py-3 bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white border border-white/10 hover:border-white/20'
-                }`}
-                style={{
-                  backgroundImage: isActive ? `linear-gradient(135deg, ${category.darkColor}, ${category.baseColor})` : undefined,
-                }}
-              >
-                <div className={`flex items-center justify-center rounded-lg transition-all duration-300 mb-2 ${
-                  isActive 
-                    ? 'w-10 h-10 bg-white/20' 
-                    : 'w-8 h-8 bg-white/5 group-hover:bg-white/10'
-                }`}>
-                  {category.icon(isActive)}
-                </div>
-                <span className={`font-semibold transition-all duration-300 text-center ${
-                  isActive ? 'text-base' : 'text-sm'
-                }`}>
-                  {category.name}
-                </span>
-                
-                {/* Status indicator */}
-                <div className={`text-xs transition-all duration-300 mt-1 ${
-                  isActive 
-                    ? 'text-white/80 font-medium' 
-                    : 'text-gray-400 opacity-70 group-hover:opacity-100'
-                }`}>
-{isActive ? t('common.active') : t('common.clickToView')}
-                </div>
-              </motion.button>
-            );
-          })}
-        </div>
+      {/* Simple Category Selector */}
+      <div className="flex justify-center items-center gap-8 mb-12">
+        {categories.map((category) => {
+          const isActive = activeCategory === category.id;
+
+          return (
+            <button
+              key={category.id}
+              onClick={() => setActiveCategory(category.id as 'blockchain' | 'frontend' | 'backend')}
+              className={`text-lg font-medium transition-all duration-200 cursor-pointer pb-1 border-b-2 ${
+                isActive
+                  ? 'light-text border-[var(--primary-400)]'
+                  : 'light-text opacity-60 hover:opacity-100 border-transparent hover:border-[var(--primary-400)]/50'
+              }`}
+            >
+              {category.name}
+            </button>
+          );
+        })}
       </div>
 
       {/* Tech Grid */}

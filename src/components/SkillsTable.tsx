@@ -121,7 +121,7 @@ export default function SkillsTable() {
           {/* Hard Skills */}
           <motion.div
             variants={columnVariants}
-            className="relative p-6 rounded-xl bg-gradient-to-br from-[rgba(79,70,229,0.2)] to-[rgba(139,92,246,0.2)] backdrop-blur-md border border-[rgba(255,255,255,0.2)] group hover:border-[rgba(79,70,229,0.4)] transition-all duration-300"
+            className="relative p-6 rounded-xl bg-gradient-to-br from-[rgba(79,70,229,0.9)] to-[rgba(139,92,246,0.9)] border border-[rgba(255,255,255,0.2)] group hover:border-[rgba(79,70,229,0.4)] transition-all duration-300"
           >
             <div className="absolute -top-3 left-6 px-4 py-1 bg-gradient-to-r from-[var(--primary-400)] to-[var(--primary-500)] rounded-full">
               <h3 className="text-lg font-semibold text-white pixel-font">{t('skills.hard').toUpperCase().replace(/ /g, '_')}</h3>
@@ -157,7 +157,7 @@ export default function SkillsTable() {
           {/* Soft Skills */}
           <motion.div
             variants={columnVariants}
-            className="relative p-6 rounded-xl bg-gradient-to-br from-[rgba(139,92,246,0.2)] to-[rgba(6,182,212,0.2)] backdrop-blur-md border border-[rgba(255,255,255,0.2)] group hover:border-[rgba(139,92,246,0.4)] transition-all duration-300"
+            className="relative p-6 rounded-xl bg-gradient-to-br from-[rgba(139,92,246,0.9)] to-[rgba(6,182,212,0.9)] border border-[rgba(255,255,255,0.2)] group hover:border-[rgba(139,92,246,0.4)] transition-all duration-300"
           >
             <div className="absolute -top-3 left-6 px-4 py-1 bg-gradient-to-r from-[var(--secondary-400)] to-[var(--secondary-500)] rounded-full">
               <h3 className="text-lg font-semibold text-white pixel-font">{t('skills.soft').toUpperCase().replace(/ /g, '_')}</h3>
@@ -184,7 +184,7 @@ export default function SkillsTable() {
           {/* Mad Skills */}
           <motion.div
             variants={columnVariants}
-            className="relative p-6 rounded-xl bg-gradient-to-br from-[rgba(6,182,212,0.2)] to-[rgba(236,72,153,0.2)] backdrop-blur-md border border-[rgba(255,255,255,0.2)] group hover:border-[rgba(6,182,212,0.4)] transition-all duration-300"
+            className="relative p-6 rounded-xl bg-gradient-to-br from-[rgba(6,182,212,0.9)] to-[rgba(236,72,153,0.9)] border border-[rgba(255,255,255,0.2)] group hover:border-[rgba(6,182,212,0.4)] transition-all duration-300"
           >
             <div className="absolute -top-3 left-6 px-4 py-1 bg-gradient-to-r from-[var(--accent-cyan)] to-[var(--accent-pink)] rounded-full">
               <h3 className="text-lg font-semibold text-white pixel-font">{t('skills.mad').toUpperCase().replace(/ /g, '_')}</h3>

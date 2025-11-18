@@ -1,12 +1,9 @@
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
-import ExperiencePreview from "@/components/ExperiencePreview";
 import ContactSection from "@/components/ContactSection";
 import SequentialLayout from "@/components/SequentialLayout";
 import SectionTransition from "@/components/SectionTransition";
-import ScrollParallaxBackground from "@/components/ScrollParallaxBackground";
 import FloatingOrbs from "@/components/FloatingOrbs";
-import GridOverlay from "@/components/GridOverlay";
 import SkillsTable from "@/components/SkillsTable";
 import ViewCounter from "@/components/ViewCounter";
 import { fetchProjectsFromGitHub } from '@/lib/services/projects';
@@ -16,15 +13,9 @@ export default async function Home() {
   const projects = await fetchProjectsFromGitHub();
   return (
     <div className="min-h-screen relative">
-      {/* Grid Overlay */}
-      <GridOverlay />
-      
       {/* Floating Orbs for Visual Interest */}
       <FloatingOrbs />
-      
-      {/* 3D Parallax Background */}
-      <ScrollParallaxBackground />
-      
+
       {/* View Counter - Fixed position */}
       <div className="fixed top-4 right-4 z-50">
         <ViewCounter pageId="home" />
@@ -51,12 +42,8 @@ export default async function Home() {
       <SectionTransition delay={0.15}>
         <SequentialLayout projects={projects} />
       </SectionTransition>
-      
+
       <SectionTransition delay={0.2}>
-        <ExperiencePreview />
-      </SectionTransition>
-      
-      <SectionTransition delay={0.3}>
         <ContactSection />
       </SectionTransition>
     </div>

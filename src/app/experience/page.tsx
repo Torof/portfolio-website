@@ -3,7 +3,6 @@
 import { experiences } from '@/lib/data/experiences';
 import Image from 'next/image';
 import Link from 'next/link';
-import ScrollParallaxBackground from '@/components/ScrollParallaxBackground';
 import FloatingOrbs from '@/components/FloatingOrbs';
 import FlipCard from '@/components/FlipCard';
 import { useLanguage } from '@/lib/context/LanguageContext';
@@ -16,10 +15,7 @@ export default function ExperiencePage() {
     <>
       {/* Floating Orbs for Visual Interest */}
       <FloatingOrbs />
-      
-      {/* 3D Parallax Background */}
-      <ScrollParallaxBackground />
-      
+
       <div className="section">
         <div className="container-custom py-20">
           {/* Title Section */}

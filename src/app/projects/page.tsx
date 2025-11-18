@@ -38,17 +38,20 @@ export default function ProjectsPage() {
   }, [language]);
 
   return (
-    <div className={`relative min-h-screen border-b ${
-      theme === 'theme-light'
-        ? 'bg-gradient-to-b from-[#f8fafc] to-[#f1f5f9] border-[rgba(0,0,0,0.05)]'
-        : 'bg-gradient-to-b from-[#0f1729] to-[#1e293b] border-[rgba(255,255,255,0.05)]'
-    }`}>
+    <div className="relative min-h-screen">
       {/* Code Rain Background - Fixed to cover full viewport */}
       <div className="fixed inset-0 z-0">
         <CodeRain theme={theme} />
       </div>
-      
-      <div className="relative z-10 container-custom py-16">
+
+      {/* White Corridor Container */}
+      <div className="relative z-10 min-h-screen flex justify-center py-16">
+        <div className={`w-full max-w-6xl mx-4 rounded-2xl shadow-2xl border ${
+          theme === 'theme-light'
+            ? 'bg-white border-gray-200'
+            : 'bg-slate-900 border-[rgba(255,255,255,0.25)]'
+        }`}>
+          <div className="px-8 md:px-12 py-16">
         {/* Header Section */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -108,6 +111,8 @@ export default function ProjectsPage() {
             </p>
           </div>
         )}
+          </div>
+        </div>
       </div>
     </div>
   );

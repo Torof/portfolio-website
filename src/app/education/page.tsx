@@ -3,7 +3,6 @@
 import { educations, certifications } from '@/lib/data/education';
 import Image from 'next/image';
 import Link from 'next/link';
-import ScrollParallaxBackground from '@/components/ScrollParallaxBackground';
 import FloatingOrbs from '@/components/FloatingOrbs';
 import FlipCard from '@/components/FlipCard';
 import { useLanguage } from '@/lib/context/LanguageContext';
@@ -14,10 +13,7 @@ export default function EducationPage() {
     <>
       {/* Floating Orbs for Visual Interest */}
       <FloatingOrbs />
-      
-      {/* 3D Parallax Background */}
-      <ScrollParallaxBackground />
-      
+
       <div className="section">
         <div className="container-custom py-20">
           {/* Title Section */}

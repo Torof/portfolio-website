@@ -19,17 +19,20 @@ export default function SkillsPage() {
   const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
 
   return (
-    <div className={`min-h-screen relative ${
-      theme === 'theme-light' 
-        ? 'bg-gradient-to-br from-gray-50 to-blue-50' 
-        : 'bg-gradient-to-br from-slate-900 to-slate-800'
-    }`}>
+    <div className="min-h-screen relative">
       {/* Blockchain Network Background - Fixed positioning to cover full page */}
       <div className="fixed inset-0 z-0">
         <BlockchainNetwork />
       </div>
-      
-      <div className="container-custom relative z-10 py-24">
+
+      {/* White Corridor Container */}
+      <div className="relative z-10 min-h-screen flex justify-center py-16">
+        <div className={`w-full max-w-6xl mx-4 rounded-2xl shadow-2xl border ${
+          theme === 'theme-light'
+            ? 'bg-white border-gray-200'
+            : 'bg-slate-900 border-[rgba(255,255,255,0.25)]'
+        }`}>
+          <div className="px-8 md:px-12 py-16">
         {/* Title */}
         <div 
           ref={titleAnimation.ref}
@@ -221,14 +224,10 @@ export default function SkillsPage() {
           </motion.div>
         </motion.div>
 
-      </div>
-      
-      {/* My Tech Stack Section - Full Width */}
-      <div className="mb-20">
-        <TechRiver />
-      </div>
-      
-      <div className="container-custom relative z-10">
+        {/* My Tech Stack Section */}
+        <div className="mb-20">
+          <TechRiver />
+        </div>
 
         {/* Themed Skills Sections */}
         <div className="mb-20">
@@ -253,14 +252,8 @@ export default function SkillsPage() {
         <div className="mb-20">
           <LiveStackExchangeCard />
         </div>
-      </div>
-      
-      {/* Bottom filler to extend background effect */}
-      <div className={`relative z-10 ${
-        theme === 'theme-light' 
-          ? 'bg-gradient-to-b from-transparent to-gray-50' 
-          : 'bg-gradient-to-b from-transparent to-slate-900'
-      }`} style={{ minHeight: '20vh' }}>
+          </div>
+        </div>
       </div>
     </div>
   );

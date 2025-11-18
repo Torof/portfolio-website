@@ -116,98 +116,99 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
           z-index: 10;
         }
       `}</style>
-      <section className={`relative py-24 overflow-hidden w-full ${className}`}>
-      <div className={`absolute inset-0 ${
-        theme === 'theme-light'
-          ? 'bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20'
-          : 'bg-gradient-to-br from-slate-900 via-blue-950/30 to-purple-950/20'
-      }`}>
-        {/* Flowing background pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <svg className="w-full h-full" viewBox="0 0 1000 400" preserveAspectRatio="none">
-            {/* Flowing river paths */}
-            {Array.from({ length: 8 }).map((_, i) => (
-              <motion.path
-                key={i}
-                d={generatePathData(i, 0)}
-                fill="none"
-                stroke="url(#riverGradient)"
-                strokeWidth="2"
-                opacity="0.6"
-                animate={mounted ? {
-                  d: [
-                    generatePathData(i, 0),
-                    generatePathData(i, 1),
-                    generatePathData(i, 2)
-                  ]
-                } : {}}
-                initial={{
-                  d: generatePathData(i, 0)
-                }}
-                transition={{
-                  duration: 8 + i * 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-            ))}
-            
-            {/* Gradient definitions */}
-            <defs>
-              <linearGradient id="riverGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3" />
-                <stop offset="25%" stopColor="#8b5cf6" stopOpacity="0.6" />
-                <stop offset="50%" stopColor="#ef4444" stopOpacity="0.4" />
-                <stop offset="75%" stopColor="#f59e0b" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#10b981" stopOpacity="0.3" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-      </div>
-
-      <div className="relative z-10">
-        {/* Section Toggle Button - Top Right Corner */}
-        <motion.button
-          onClick={() => setShowList(!showList)}
-          className={`absolute top-12 right-12 z-20 px-4 py-2 rounded-full border transition-all duration-300 backdrop-blur-sm ${
+      <section className={`py-24 w-full ${className}`}>
+        <div className="container-custom mx-auto px-6">
+          {/* Unified Card Container */}
+          <div className={`relative rounded-2xl border overflow-hidden ${
             theme === 'theme-light'
-              ? 'bg-white/80 border-gray-300 hover:bg-white hover:border-gray-400 text-gray-700 shadow-lg hover:shadow-xl'
-              : 'bg-slate-800/80 border-slate-600 hover:bg-slate-800 hover:border-slate-500 text-gray-200 shadow-lg hover:shadow-xl'
-          }`}
-          whileHover={{ scale: 1.05, y: -2 }}
-          whileTap={{ scale: 0.95 }}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          <div className="flex items-center space-x-2 text-sm font-medium">
-            <span>{showList ? t('skills.techStack.riverView') : t('skills.techStack.listView')}</span>
-          </div>
-        </motion.button>
+              ? 'bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20 border-slate-200'
+              : 'bg-gradient-to-br from-slate-900/90 via-blue-950/30 to-purple-950/20 border-[rgba(255,255,255,0.25)]'
+          }`}>
+            {/* Flowing background pattern */}
+            <div className="absolute inset-0 opacity-10 pointer-events-none">
+              <svg className="w-full h-full" viewBox="0 0 1000 400" preserveAspectRatio="none">
+                {/* Flowing river paths */}
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <motion.path
+                    key={i}
+                    d={generatePathData(i, 0)}
+                    fill="none"
+                    stroke="url(#riverGradient)"
+                    strokeWidth="2"
+                    opacity="0.6"
+                    animate={mounted ? {
+                      d: [
+                        generatePathData(i, 0),
+                        generatePathData(i, 1),
+                        generatePathData(i, 2)
+                      ]
+                    } : {}}
+                    initial={{
+                      d: generatePathData(i, 0)
+                    }}
+                    transition={{
+                      duration: 8 + i * 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                ))}
 
-        {/* Header */}
-        <div className="text-center mb-16 container-custom mx-auto px-6">
-          <motion.h2 
-            className={`text-5xl font-light mb-6 ${
-              theme === 'theme-light' ? 'text-slate-800' : 'text-slate-100'
-            }`}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            {t('skills.techStack.title')}
-          </motion.h2>
-          
-          <motion.p 
-            className="text-xl light-text opacity-70 max-w-3xl mx-auto font-light leading-relaxed mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            {t('skills.techStack.description')}
-          </motion.p>
-        </div>
+                {/* Gradient definitions */}
+                <defs>
+                  <linearGradient id="riverGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3" />
+                    <stop offset="25%" stopColor="#8b5cf6" stopOpacity="0.6" />
+                    <stop offset="50%" stopColor="#ef4444" stopOpacity="0.4" />
+                    <stop offset="75%" stopColor="#f59e0b" stopOpacity="0.5" />
+                    <stop offset="100%" stopColor="#10b981" stopOpacity="0.3" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+
+            <div className="relative z-10 p-8 md:p-12">
+              {/* Section Toggle Button - Top Right */}
+              <motion.button
+                onClick={() => setShowList(!showList)}
+                className={`absolute top-6 right-6 z-20 px-4 py-2 rounded-full border transition-all duration-300 ${
+                  theme === 'theme-light'
+                    ? 'bg-white/80 border-gray-300 hover:bg-white hover:border-gray-400 text-gray-700 shadow-lg hover:shadow-xl'
+                    : 'bg-slate-800/80 border-slate-600 hover:bg-slate-800 hover:border-slate-500 text-gray-200 shadow-lg hover:shadow-xl'
+                }`}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+              >
+                <div className="flex items-center space-x-2 text-sm font-medium">
+                  <span>{showList ? t('skills.techStack.riverView') : t('skills.techStack.listView')}</span>
+                </div>
+              </motion.button>
+
+              {/* Header */}
+              <div className="text-center mb-12">
+                <motion.h2
+                  className={`text-4xl md:text-5xl font-bold mb-4 ${
+                    theme === 'theme-light' ? 'text-slate-800' : 'text-slate-100'
+                  }`}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  {t('skills.techStack.title')}
+                </motion.h2>
+
+                <motion.p
+                  className="text-lg light-text opacity-70 max-w-2xl mx-auto font-light"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                >
+                  {t('skills.techStack.description')}
+                </motion.p>
+              </div>
 
         {/* Toggle between River View and List View */}
         {!showList ? (
@@ -411,8 +412,9 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
             </div>
           </motion.div>
         )}
-
-      </div>
+            </div>
+          </div>
+        </div>
       </section>
     </>
   );
