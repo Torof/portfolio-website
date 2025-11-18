@@ -1,13 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { kv } from '@vercel/kv';
+import { createClient } from 'redis';
 
-// Fallback in-memory storage when KV is not available (development)
+// Fallback in-memory storage when Redis is not available (development)
 const fallbackViewCounts: Record<string, number> = {};
 const fallbackUniqueVisitors: Record<string, Set<string>> = {};
 
-// KV keys
+// Redis keys
 const VIEWS_KEY = 'page_views';
 const VISITORS_KEY = 'unique_visitors';
+
+// Redis client singleton
+let redis: ReturnType<typeof createClient> | null = null;
+
+// Initialize Redis client
+async function getRedisClient() {
+  if (!redis) {
+    try {
+      redis = createClient({
+        url: process.env.REDIS_URL,
+      });
+      await redis.connect();
+    } catch (error) {
+      console.warn('Redis not available, using fallback storage:', error);
+      return null;
+    }
+  }
+  return redis;
+}
 
 // Helper to generate a simple visitor ID from request headers
 function getVisitorId(request: NextRequest): string {
@@ -19,37 +38,66 @@ function getVisitorId(request: NextRequest): string {
   return Buffer.from(ip + userAgent).toString('base64').slice(0, 16);
 }
 
-// Helper functions for KV operations with fallbacks
+// Helper functions for Redis operations with fallbacks
 async function getViewCounts(): Promise<Record<string, number>> {
+  const client = await getRedisClient();
+  if (!client) {
+    return fallbackViewCounts;
+  }
+  
   try {
-    const counts = await kv.hgetall(VIEWS_KEY);
-    return counts as Record<string, number> || {};
+    const counts = await client.hGetAll(VIEWS_KEY);
+    // Convert string values to numbers
+    const result: Record<string, number> = {};
+    for (const [key, value] of Object.entries(counts || {})) {
+      result[key] = parseInt(value as string, 10) || 0;
+    }
+    return result;
   } catch (error) {
-    console.warn('KV not available, using fallback storage:', error);
+    console.warn('Redis operation failed, using fallback storage:', error);
     return fallbackViewCounts;
   }
 }
 
 async function setViewCount(pageId: string, count: number): Promise<void> {
+  const client = await getRedisClient();
+  if (!client) {
+    fallbackViewCounts[pageId] = count;
+    return;
+  }
+  
   try {
-    await kv.hset(VIEWS_KEY, { [pageId]: count });
+    await client.hSet(VIEWS_KEY, pageId, count.toString());
   } catch (error) {
-    console.warn('KV not available, using fallback storage:', error);
+    console.warn('Redis operation failed, using fallback storage:', error);
     fallbackViewCounts[pageId] = count;
   }
 }
 
 async function getUniqueVisitors(): Promise<Record<string, string[]>> {
-  try {
-    const visitors = await kv.hgetall(VISITORS_KEY);
-    // Convert arrays back to Sets for processing
+  const client = await getRedisClient();
+  if (!client) {
     const result: Record<string, string[]> = {};
-    for (const [pageId, visitorArray] of Object.entries(visitors || {})) {
-      result[pageId] = Array.isArray(visitorArray) ? visitorArray : [];
+    for (const [pageId, visitorSet] of Object.entries(fallbackUniqueVisitors)) {
+      result[pageId] = Array.from(visitorSet);
+    }
+    return result;
+  }
+  
+  try {
+    const visitors = await client.hGetAll(VISITORS_KEY);
+    const result: Record<string, string[]> = {};
+    for (const [pageId, visitorString] of Object.entries(visitors || {})) {
+      // Parse JSON string back to array
+      try {
+        result[pageId] = JSON.parse(visitorString as string) || [];
+      } catch {
+        result[pageId] = [];
+      }
     }
     return result;
   } catch (error) {
-    console.warn('KV not available, using fallback storage:', error);
+    console.warn('Redis operation failed, using fallback storage:', error);
     const result: Record<string, string[]> = {};
     for (const [pageId, visitorSet] of Object.entries(fallbackUniqueVisitors)) {
       result[pageId] = Array.from(visitorSet);
@@ -59,15 +107,34 @@ async function getUniqueVisitors(): Promise<Record<string, string[]>> {
 }
 
 async function addUniqueVisitor(pageId: string, visitorId: string): Promise<void> {
+  const client = await getRedisClient();
+  if (!client) {
+    if (!fallbackUniqueVisitors[pageId]) {
+      fallbackUniqueVisitors[pageId] = new Set();
+    }
+    fallbackUniqueVisitors[pageId].add(visitorId);
+    return;
+  }
+  
   try {
     // Get current visitors for this page
-    const currentVisitors = await kv.hget(VISITORS_KEY, pageId) as string[] || [];
+    const currentVisitorsString = await client.hGet(VISITORS_KEY, pageId);
+    let currentVisitors: string[] = [];
+    
+    if (currentVisitorsString) {
+      try {
+        currentVisitors = JSON.parse(currentVisitorsString) || [];
+      } catch {
+        currentVisitors = [];
+      }
+    }
+    
     if (!currentVisitors.includes(visitorId)) {
       currentVisitors.push(visitorId);
-      await kv.hset(VISITORS_KEY, { [pageId]: currentVisitors });
+      await client.hSet(VISITORS_KEY, pageId, JSON.stringify(currentVisitors));
     }
   } catch (error) {
-    console.warn('KV not available, using fallback storage:', error);
+    console.warn('Redis operation failed, using fallback storage:', error);
     if (!fallbackUniqueVisitors[pageId]) {
       fallbackUniqueVisitors[pageId] = new Set();
     }
@@ -152,25 +219,36 @@ export async function DELETE(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const pageId = searchParams.get('page');
+    const client = await getRedisClient();
 
     if (pageId) {
       // Reset specific page
-      try {
-        await kv.hdel(VIEWS_KEY, pageId);
-        await kv.hdel(VISITORS_KEY, pageId);
-      } catch (error) {
-        console.warn('KV not available, using fallback storage:', error);
+      if (client) {
+        try {
+          await client.hDel(VIEWS_KEY, pageId);
+          await client.hDel(VISITORS_KEY, pageId);
+        } catch (error) {
+          console.warn('Redis operation failed, using fallback storage:', error);
+          delete fallbackViewCounts[pageId];
+          delete fallbackUniqueVisitors[pageId];
+        }
+      } else {
         delete fallbackViewCounts[pageId];
         delete fallbackUniqueVisitors[pageId];
       }
       return NextResponse.json({ success: true, message: `Views reset for ${pageId}` });
     } else {
       // Reset all views
-      try {
-        await kv.del(VIEWS_KEY);
-        await kv.del(VISITORS_KEY);
-      } catch (error) {
-        console.warn('KV not available, using fallback storage:', error);
+      if (client) {
+        try {
+          await client.del(VIEWS_KEY);
+          await client.del(VISITORS_KEY);
+        } catch (error) {
+          console.warn('Redis operation failed, using fallback storage:', error);
+          Object.keys(fallbackViewCounts).forEach(key => delete fallbackViewCounts[key]);
+          Object.keys(fallbackUniqueVisitors).forEach(key => delete fallbackUniqueVisitors[key]);
+        }
+      } else {
         Object.keys(fallbackViewCounts).forEach(key => delete fallbackViewCounts[key]);
         Object.keys(fallbackUniqueVisitors).forEach(key => delete fallbackUniqueVisitors[key]);
       }
