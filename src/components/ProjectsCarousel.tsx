@@ -134,10 +134,17 @@ export default function FeaturedProjectsCarousel() {
               {/* Grid of 2 projects */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {currentProjects.map((project) => (
-                  <div key={project.id} className="flex flex-col">
+                  <div
+                    key={project.id}
+                    className={`flex flex-col p-4 rounded-lg border transition-all duration-300 ${
+                      theme === 'theme-light'
+                        ? 'bg-white border-gray-300 hover:border-blue-400 hover:shadow-lg'
+                        : 'bg-slate-800/60 border-slate-600 hover:border-blue-500/60 hover:shadow-xl'
+                    }`}
+                  >
                     {/* Project Image */}
                     <div
-                      className={`w-full h-32 rounded-lg flex items-center justify-center text-white text-sm font-bold mb-3 ${
+                      className={`w-full h-32 rounded-lg flex items-center justify-center text-white text-sm font-bold mb-4 ${
                         theme === 'theme-light'
                           ? 'bg-gradient-to-br from-blue-400 to-purple-500'
                           : 'bg-gradient-to-br from-blue-600 to-purple-700'
