@@ -16,28 +16,30 @@ export default function EducationPage() {
 
       <div className="section">
         <div className="container-custom py-20">
-          {/* Title Section */}
-          <div className="text-center mb-20 backdrop-blur-sm rounded-2xl p-12 bg-gradient-to-br from-[rgba(218,165,32,0.15)] to-[rgba(255,140,0,0.15)] dark:from-[rgba(218,165,32,0.1)] dark:to-[rgba(255,140,0,0.1)] border border-[rgba(218,165,32,0.3)] dark:border-[rgba(255,255,255,0.1)]">
-            <div className="flex items-center justify-center mb-6">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#DAA520] to-[#FFD700] flex items-center justify-center shadow-lg mr-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                  <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-                </svg>
+          {/* Unified Education Section */}
+          <div className="backdrop-blur-sm rounded-2xl p-8 md:p-12 bg-gradient-to-br from-[rgba(218,165,32,0.15)] to-[rgba(255,140,0,0.15)] dark:from-[rgba(218,165,32,0.1)] dark:to-[rgba(255,140,0,0.1)] border border-[rgba(218,165,32,0.3)] dark:border-[rgba(255,255,255,0.1)]">
+            {/* Title Section */}
+            <div className="text-center mb-12">
+              <div className="flex items-center justify-center mb-6">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#DAA520] to-[#FFD700] flex items-center justify-center shadow-lg mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                  </svg>
+                </div>
+                <h1 className="text-6xl md:text-7xl font-black tracking-tight">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#DAA520] to-[#FFD700]">
+                    {t('education.title')}
+                  </span>
+                </h1>
               </div>
-              <h1 className="text-6xl md:text-7xl font-black tracking-tight">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#DAA520] to-[#FFD700]">
-                  {t('education.title')}
-                </span>
-              </h1>
+              <p className="text-xl md:text-2xl light-text max-w-3xl mx-auto leading-relaxed font-light">
+                {t('education.subtitle')}
+              </p>
             </div>
-            <p className="text-xl md:text-2xl light-text max-w-3xl mx-auto leading-relaxed font-light">
-              {t('education.subtitle')}
-            </p>
-          </div>
-      
-          {/* Education Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+
+            {/* Education Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
 {educations.map((education) => (
               <FlipCard 
                 key={education.id}
@@ -173,8 +175,9 @@ export default function EducationPage() {
                 }
               />
             ))}
+            </div>
           </div>
-          
+
           {/* Certifications Section (if any) */}
           {certifications.length > 0 && (
             <>
