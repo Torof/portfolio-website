@@ -40,46 +40,53 @@ export default function HeroSection() {
             <div className="flex flex-col md:flex-row items-center gap-12">
               {/* Content */}
               <div className="flex-1 text-center md:text-left">
-                <div 
-                  ref={titleAnimation.ref}
-                  className={`mb-4 inline-block py-2 px-6 rounded-full glass-vibrant text-base text-[var(--primary-300)] font-semibold tracking-wide uppercase ${getAnimationClass(titleAnimation.isVisible, 'fadeInUp')}`}
-                >
-                  {t('hero.title')}
-                </div>
-                
-                <h1 
+                <h1
                   ref={titleAnimation.ref}
                   className={`text-5xl md:text-7xl font-black mb-8 light-text tracking-tight ${getAnimationClass(titleAnimation.isVisible, 'fadeInUp')}`}
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
                   {personalInfo.name}
                 </h1>
-                
-                <p 
+
+                <p
                   ref={textAnimation.ref}
                   className={`text-xl md:text-2xl mb-10 light-text leading-relaxed font-light max-w-2xl ${getAnimationClass(textAnimation.isVisible, 'fadeInLeft')}`}
                 >
                   {t('hero.subtitle')}
                 </p>
-                
-                <div 
+
+                {/* Developer Type Badges */}
+                <div
                   ref={buttonsAnimation.ref}
-                  className={`flex flex-wrap gap-4 justify-center md:justify-start ${getAnimationClass(buttonsAnimation.isVisible, 'fadeInUp')}`}
+                  className={`flex flex-wrap gap-3 justify-center md:justify-start ${getAnimationClass(buttonsAnimation.isVisible, 'fadeInUp')}`}
                 >
-                  <a href="/experience" className="btn-primary">
-                    {t('hero.cta')}
-                  </a>
-                  <a href="/projects" className="btn-outline">
-                    {t('hero.projects')}
-                  </a>
-                </div>
-                
-                <div 
-                  ref={infoAnimation.ref}
-                  className={`mt-8 flex items-center gap-2 justify-center md:justify-start ${getAnimationClass(infoAnimation.isVisible, 'fadeInLeft')}`}
-                >
-                  <div className="w-12 h-0.5 bg-[var(--primary-400)]"></div>
-                  <p className="light-text text-base font-medium tracking-wide">{t('hero.experienceYears', { year: personalInfo.startedBlockchain })}</p>
+                  <div
+                    className={`py-2 px-6 rounded-full glass-vibrant text-base font-semibold tracking-wide ${
+                      theme === 'theme-light'
+                        ? 'text-blue-700 bg-blue-100 border border-blue-200'
+                        : 'text-blue-300 bg-blue-900/30 border border-blue-700'
+                    }`}
+                  >
+                    {t('hero.title')}
+                  </div>
+                  <div
+                    className={`py-2 px-6 rounded-full glass-vibrant text-base font-semibold tracking-wide ${
+                      theme === 'theme-light'
+                        ? 'text-purple-700 bg-purple-100 border border-purple-200'
+                        : 'text-purple-300 bg-purple-900/30 border border-purple-700'
+                    }`}
+                  >
+                    Front End Developer
+                  </div>
+                  <div
+                    className={`py-2 px-6 rounded-full glass-vibrant text-base font-semibold tracking-wide ${
+                      theme === 'theme-light'
+                        ? 'text-green-700 bg-green-100 border border-green-200'
+                        : 'text-green-300 bg-green-900/30 border border-green-700'
+                    }`}
+                  >
+                    App Developer
+                  </div>
                 </div>
               </div>
               

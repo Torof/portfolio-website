@@ -1,18 +1,13 @@
 'use client';
 
-import EnhancedProjectsSection from './EnhancedProjectsSection';
+import FeaturedProjectsCarousel from './FeaturedProjectsCarousel';
 import InteractiveTechStack from './InteractiveTechStack';
-import FeaturedGitHubStats from './FeaturedGitHubStats';
 import { useScrollAnimation, getAnimationClass } from "@/lib/hooks/useScrollAnimation";
-import { Project } from '@/lib/types';
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { useTheme } from '@/lib/context/ThemeContext';
+import { featuredProjects } from '@/lib/data/featuredProjects';
 
-interface SequentialLayoutProps {
-  projects: Project[];
-}
-
-const SequentialLayout: React.FC<SequentialLayoutProps> = ({ projects }) => {
+const SequentialLayout: React.FC = () => {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
@@ -539,30 +534,12 @@ const SequentialLayout: React.FC<SequentialLayoutProps> = ({ projects }) => {
         </div>
         
         <div className="container-custom relative z-10 pt-16 pb-16">
-          <div
-            ref={projectsTitleAnimation.ref}
-            className={`mb-16 text-center rounded-2xl p-8 bg-gradient-to-br from-[rgba(59,130,246,0.9)] to-[rgba(147,51,234,0.9)] border border-[rgba(255,255,255,0.2)] ${getAnimationClass(projectsTitleAnimation.isVisible, 'fadeInUp')}`}
-          >
-            <h2 className="section-title text-5xl md:text-6xl font-black mb-6 light-text text-glow tracking-tight">{t('featuredProjects.title')}</h2>
-            <p
-              ref={projectsTextAnimation.ref}
-              className={`light-text mt-4 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light ${getAnimationClass(projectsTextAnimation.isVisible, 'fadeInUp')}`}
-            >
-              {t('featuredProjects.description')}
-            </p>
-          </div>
-
-          {/* GitHub Stats Preview */}
-          <div className="max-w-4xl mx-auto mb-8">
-            <FeaturedGitHubStats />
-          </div>
-
-          {/* Projects Grid - Full Width but with max-width for readability */}
+          {/* Featured Projects Carousel with Header */}
           <div
             ref={projectsGridAnimation.ref}
-            className={`max-w-4xl mx-auto rounded-2xl p-8 bg-gradient-to-br from-[rgba(59,130,246,0.9)] to-[rgba(147,51,234,0.9)] border border-[rgba(255,255,255,0.2)] ${getAnimationClass(projectsGridAnimation.isVisible, 'fadeInUp')}`}
+            className={`max-w-5xl mx-auto ${getAnimationClass(projectsGridAnimation.isVisible, 'fadeInUp')}`}
           >
-              <EnhancedProjectsSection projects={projects} />
+            <FeaturedProjectsCarousel projects={featuredProjects} />
           </div>
         </div>
       </section>

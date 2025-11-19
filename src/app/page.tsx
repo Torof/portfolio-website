@@ -5,11 +5,8 @@ import SequentialLayout from "@/components/SequentialLayout";
 import SectionTransition from "@/components/SectionTransition";
 import FloatingOrbs from "@/components/FloatingOrbs";
 import SkillsTable from "@/components/SkillsTable";
-import { fetchProjectsFromGitHub } from '@/lib/services/projects';
 
-export default async function Home() {
-  // Fetch projects server-side, exactly like the projects page
-  const projects = await fetchProjectsFromGitHub();
+export default function Home() {
   return (
     <div className="min-h-screen relative">
       {/* Floating Orbs for Visual Interest */}
@@ -34,7 +31,7 @@ export default async function Home() {
       </SectionTransition>
       
       <SectionTransition delay={0.15}>
-        <SequentialLayout projects={projects} />
+        <SequentialLayout />
       </SectionTransition>
 
       <SectionTransition delay={0.2}>
