@@ -46,9 +46,9 @@ export default function MatrixRain() {
       if (!ctx || !canvas) return;
       
       // Theme-aware background with opacity for trail effect
-      ctx.fillStyle = theme === 'theme-light' 
-        ? "rgba(243, 244, 246, 0.08)" 
-        : "rgba(5, 5, 5, 0.08)";
+      ctx.fillStyle = theme === 'theme-light'
+        ? "rgba(243, 244, 246, 0.05)"
+        : "rgba(5, 5, 5, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       // Set text properties
@@ -70,16 +70,16 @@ export default function MatrixRain() {
         if (Math.random() > 0.98) {
           // Occasional bright characters
           ctx.fillStyle = theme === 'theme-light'
-            ? `rgba(79, 70, 229, ${opacity * 0.9})`
-            : `rgba(79, 70, 229, ${opacity})`;
+            ? `rgba(79, 70, 229, ${opacity * 0.95})`
+            : `rgba(79, 70, 229, ${opacity * 1.1})`;
         } else if (Math.random() > 0.95) {
           ctx.fillStyle = theme === 'theme-light'
-            ? `rgba(139, 92, 246, ${opacity * 0.9})`
-            : `rgba(139, 92, 246, ${opacity})`;
+            ? `rgba(139, 92, 246, ${opacity * 0.95})`
+            : `rgba(139, 92, 246, ${opacity * 1.1})`;
         } else {
           ctx.fillStyle = theme === 'theme-light'
-            ? `rgba(6, 182, 212, ${opacity * 0.7})`
-            : `rgba(6, 182, 212, ${opacity * 0.8})`;
+            ? `rgba(6, 182, 212, ${opacity * 0.8})`
+            : `rgba(6, 182, 212, ${opacity * 0.95})`;
         }
         
         ctx.fillText(text, x, y);
@@ -109,7 +109,7 @@ export default function MatrixRain() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 opacity-60 pointer-events-none"
+      className="absolute inset-0 opacity-70 pointer-events-none"
       style={{ zIndex: 0 }}
     />
   );
