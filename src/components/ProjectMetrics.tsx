@@ -3,6 +3,8 @@
 import { useTheme } from '@/lib/context/ThemeContext';
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { GitHubStats } from '@/lib/services/github';
+import Image from 'next/image';
+import Link from 'next/link';
 
 interface ProjectMetricsProps {
   stats: GitHubStats | null;
@@ -46,8 +48,8 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
 
         {/* Right: Metrics skeleton */}
         <div className="flex-1 space-y-4">
-          <div className="grid grid-cols-2 gap-3">
-            {[1, 2].map((i) => (
+          <div className="grid grid-cols-3 gap-3">
+            {[1, 2, 3].map((i) => (
               <div
                 key={i}
                 className={`p-4 rounded-lg border animate-pulse ${
@@ -104,8 +106,8 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
 
       {/* Right: Metrics (80%) */}
       <div className="flex-1 space-y-4">
-        {/* Stats Cards - only 2 */}
-        <div className="grid grid-cols-2 gap-3">
+        {/* Stats Cards - 2 metrics + 1 profile */}
+        <div className="grid grid-cols-3 gap-3">
           {metrics.map((metric) => (
             <div
               key={metric.label}
@@ -134,6 +136,46 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
               </div>
             </div>
           ))}
+
+          {/* GitHub Profile Card */}
+          {stats?.user && (
+            <Link
+              href={`https://github.com/${stats.user.login}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`p-4 rounded-lg border transition-all duration-300 hover:scale-105 ${
+                theme === 'theme-light'
+                  ? 'bg-white border-gray-200 hover:border-blue-400 hover:shadow-md'
+                  : 'bg-slate-800/60 border-slate-600/50 hover:border-blue-500/60 hover:shadow-lg'
+              }`}
+            >
+              <div className="flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-full overflow-hidden mb-2 ring-2 ring-blue-400/30">
+                  <Image
+                    src={stats.user.avatar_url}
+                    alt={stats.user.login}
+                    width={48}
+                    height={48}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p
+                  className={`text-sm font-semibold mb-1 ${
+                    theme === 'theme-light' ? 'text-gray-900' : 'text-white'
+                  }`}
+                >
+                  @{stats.user.login}
+                </p>
+                <p
+                  className={`text-xs ${
+                    theme === 'theme-light' ? 'text-gray-600' : 'text-gray-400'
+                  }`}
+                >
+                  GitHub Profile
+                </p>
+              </div>
+            </Link>
+          )}
         </div>
 
         {/* Language Card - Unified */}
