@@ -138,18 +138,18 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
           ))}
 
           {/* GitHub Profile Card */}
-          {stats?.user && (
-            <Link
-              href={`https://github.com/${stats.user.login}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`p-4 rounded-lg border transition-all duration-300 hover:scale-105 ${
-                theme === 'theme-light'
-                  ? 'bg-white border-gray-200 hover:border-blue-400 hover:shadow-md'
-                  : 'bg-slate-800/60 border-slate-600/50 hover:border-blue-500/60 hover:shadow-lg'
-              }`}
-            >
-              <div className="flex flex-col items-center text-center">
+          <Link
+            href={stats?.user ? `https://github.com/${stats.user.login}` : 'https://github.com/torof'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`p-4 rounded-lg border transition-all duration-300 hover:scale-105 ${
+              theme === 'theme-light'
+                ? 'bg-white border-gray-200 hover:border-blue-400 hover:shadow-md'
+                : 'bg-slate-800/60 border-slate-600/50 hover:border-blue-500/60 hover:shadow-lg'
+            }`}
+          >
+            <div className="flex flex-col items-center text-center">
+              {stats?.user ? (
                 <div className="w-12 h-12 rounded-full overflow-hidden mb-2 ring-2 ring-blue-400/30">
                   <Image
                     src={stats.user.avatar_url}
@@ -159,23 +159,27 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <p
-                  className={`text-sm font-semibold mb-1 ${
-                    theme === 'theme-light' ? 'text-gray-900' : 'text-white'
-                  }`}
-                >
-                  @{stats.user.login}
-                </p>
-                <p
-                  className={`text-xs ${
-                    theme === 'theme-light' ? 'text-gray-600' : 'text-gray-400'
-                  }`}
-                >
-                  GitHub Profile
-                </p>
-              </div>
-            </Link>
-          )}
+              ) : (
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mb-2 ring-2 ring-blue-400/30">
+                  <span className="text-white text-xl font-bold">T</span>
+                </div>
+              )}
+              <p
+                className={`text-sm font-semibold mb-1 ${
+                  theme === 'theme-light' ? 'text-gray-900' : 'text-white'
+                }`}
+              >
+                @{stats?.user?.login || 'torof'}
+              </p>
+              <p
+                className={`text-xs ${
+                  theme === 'theme-light' ? 'text-gray-600' : 'text-gray-400'
+                }`}
+              >
+                GitHub Profile
+              </p>
+            </div>
+          </Link>
         </div>
 
         {/* Language Card - Unified */}
