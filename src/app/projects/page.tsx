@@ -72,6 +72,11 @@ export default function ProjectsPage() {
 
         {/* Featured Projects Carousel */}
         <div className="mb-8">
+          <h2 className={`text-2xl font-bold mb-4 ${
+            theme === 'theme-light' ? 'text-gray-900' : 'text-white'
+          }`}>
+            {t('projects.somePublishedProjects')}
+          </h2>
           <FeaturedProjectsCarousel />
         </div>
 
