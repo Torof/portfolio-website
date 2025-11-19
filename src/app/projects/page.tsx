@@ -86,33 +86,45 @@ export default function ProjectsPage() {
         </div>
 
         {/* Projects Grid */}
-        {loading ? (
-          <div className="text-center py-16">
-            <div className="text-6xl mb-4">🚧</div>
-            <h3 className={`text-xl font-semibold mb-2 ${
-              theme === 'theme-light' ? 'text-gray-800' : 'text-[var(--dark-100)]'
-            }`}>{t('projects.loading')}</h3>
-            <p className={theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-200)]'}>
-              {t('projects.loadingDescription')}
-            </p>
-          </div>
-        ) : projects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-16">
-            <div className="text-6xl mb-4">🚧</div>
-            <h3 className={`text-xl font-semibold mb-2 ${
-              theme === 'theme-light' ? 'text-gray-800' : 'text-[var(--dark-100)]'
-            }`}>{t('projects.noProjects')}</h3>
-            <p className={theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-200)]'}>
-              {t('projects.noProjectsDescription')}
-            </p>
-          </div>
-        )}
+        <div className={`p-6 rounded-lg border ${
+          theme === 'theme-light'
+            ? 'bg-white border-gray-300'
+            : 'bg-slate-800/60 border-slate-600'
+        }`}>
+          <h2 className={`text-2xl font-bold mb-6 ${
+            theme === 'theme-light' ? 'text-gray-900' : 'text-white'
+          }`}>
+            {t('projects.githubRepositories')}
+          </h2>
+
+          {loading ? (
+            <div className="text-center py-16">
+              <div className="text-6xl mb-4">🚧</div>
+              <h3 className={`text-xl font-semibold mb-2 ${
+                theme === 'theme-light' ? 'text-gray-800' : 'text-[var(--dark-100)]'
+              }`}>{t('projects.loading')}</h3>
+              <p className={theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-200)]'}>
+                {t('projects.loadingDescription')}
+              </p>
+            </div>
+          ) : projects.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {projects.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <div className="text-6xl mb-4">🚧</div>
+              <h3 className={`text-xl font-semibold mb-2 ${
+                theme === 'theme-light' ? 'text-gray-800' : 'text-[var(--dark-100)]'
+              }`}>{t('projects.noProjects')}</h3>
+              <p className={theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-200)]'}>
+                {t('projects.noProjectsDescription')}
+              </p>
+            </div>
+          )}
+        </div>
           </div>
         </div>
       </div>
