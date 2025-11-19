@@ -6,7 +6,7 @@ import CodeRain from '@/components/CodeRain';
 import ProjectMetrics from '@/components/ProjectMetrics';
 import FeaturedProjectsCarousel from '@/components/ProjectsCarousel';
 import { fetchProjectsFromGitHub } from '@/lib/services/projects';
-import { fetchGitHubStats, GitHubStats } from '@/lib/services/github';
+import { GitHubStats } from '@/lib/services/github';
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { useTheme } from '@/lib/context/ThemeContext';
 import { Project } from '@/lib/types';
@@ -36,11 +36,13 @@ export default function ProjectsPage() {
         setLoading(false);
       });
 
-    // Fetch GitHub stats
-    fetchGitHubStats()
-      .then((statsData) => {
-        console.log('GitHub stats loaded:', statsData);
-        setGithubStats(statsData);
+    // Fetch GitHub stats from API route (server-side)
+    fetch('/api/github')
+      .then(async (res) => {
+        if (!res.ok) throw new Error('Failed to fetch GitHub stats');
+        const data = await res.json();
+        console.log('GitHub stats loaded:', data.stats);
+        setGithubStats(data.stats);
         setStatsLoading(false);
       })
       .catch(error => {
