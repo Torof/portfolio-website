@@ -3,13 +3,13 @@
 import { useEffect, useState } from 'react';
 import ProjectCard from '@/components/ProjectCard';
 import CodeRain from '@/components/CodeRain';
-import GitHubMetrics from '@/components/GitHubMetrics';
+import ProjectMetrics from '@/components/ProjectMetrics';
+import FeaturedProjectsCarousel from '@/components/ProjectsCarousel';
 import { fetchProjectsFromGitHub } from '@/lib/services/projects';
-import { fetchGitHubStats } from '@/lib/services/github';
+import { fetchGitHubStats, GitHubStats } from '@/lib/services/github';
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { useTheme } from '@/lib/context/ThemeContext';
 import { Project } from '@/lib/types';
-import { GitHubStats } from '@/lib/services/github';
 
 export default function ProjectsPage() {
   const { t, language } = useLanguage();
@@ -17,24 +17,37 @@ export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [githubStats, setGithubStats] = useState<GitHubStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [statsLoading, setStatsLoading] = useState(true);
 
   useEffect(() => {
     // Clear existing data when language changes
     setProjects([]);
     setLoading(true);
-    
-    // Fetch projects and stats from GitHub in parallel
-    Promise.all([
-      fetchProjectsFromGitHub(language),
-      fetchGitHubStats()
-    ]).then(([projectsData, statsData]) => {
-      setProjects(projectsData);
-      setGithubStats(statsData);
-      setLoading(false);
-    }).catch(error => {
-      console.error('Error fetching data:', error);
-      setLoading(false);
-    });
+    setStatsLoading(true);
+
+    // Fetch projects from GitHub
+    fetchProjectsFromGitHub(language)
+      .then((projectsData) => {
+        setProjects(projectsData);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching projects:', error);
+        setLoading(false);
+      });
+
+    // Fetch GitHub stats
+    fetchGitHubStats()
+      .then((statsData) => {
+        console.log('GitHub stats loaded:', statsData);
+        setGithubStats(statsData);
+        setStatsLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching GitHub stats:', error);
+        setGithubStats(null);
+        setStatsLoading(false);
+      });
   }, [language]);
 
   return (
@@ -51,36 +64,15 @@ export default function ProjectsPage() {
             ? 'bg-white border-gray-200'
             : 'bg-slate-900 border-[rgba(255,255,255,0.25)]'
         }`}>
-          <div className="px-8 md:px-12 py-16">
-        {/* Header Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary-400)] to-[var(--secondary-400)]">
-              {t('projects.title')}
-            </span>
-          </h1>
-          <p className={`text-lg max-w-3xl mx-auto ${
-            theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-200)]'
-          }`}>
-            {t('projects.subtitle')}
-          </p>
+          <div className="px-6 md:px-8 py-8">
+        {/* Project Metrics */}
+        <div className="mb-8">
+          <ProjectMetrics stats={githubStats} loading={statsLoading} />
         </div>
 
-        {/* GitHub Metrics Section */}
-        <div className="mb-16">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary-400)] to-[var(--secondary-400)]">
-                {t('projects.githubStats')}
-              </span>
-            </h2>
-            <p className={`max-w-2xl mx-auto ${
-              theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-200)]'
-            }`}>
-              {t('projects.githubStatsSubtitle')}
-            </p>
-          </div>
-          {githubStats && <GitHubMetrics stats={githubStats} />}
+        {/* Featured Projects Carousel */}
+        <div className="mb-8">
+          <FeaturedProjectsCarousel />
         </div>
 
         {/* Projects Grid */}
@@ -95,7 +87,7 @@ export default function ProjectsPage() {
             </p>
           </div>
         ) : projects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {projects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
