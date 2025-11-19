@@ -5,7 +5,6 @@ import ProjectCard from '@/components/ProjectCard';
 import CodeRain from '@/components/CodeRain';
 import ProjectMetrics from '@/components/ProjectMetrics';
 import FeaturedProjectsCarousel from '@/components/ProjectsCarousel';
-import { fetchProjectsFromGitHub } from '@/lib/services/projects';
 import { GitHubStats } from '@/lib/services/github';
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { useTheme } from '@/lib/context/ThemeContext';
@@ -25,14 +24,18 @@ export default function ProjectsPage() {
     setLoading(true);
     setStatsLoading(true);
 
-    // Fetch projects from GitHub
-    fetchProjectsFromGitHub(language)
-      .then((projectsData) => {
-        setProjects(projectsData);
+    // Fetch projects from API route (server-side)
+    fetch(`/api/projects?language=${language}`)
+      .then(async (res) => {
+        if (!res.ok) throw new Error('Failed to fetch projects');
+        const data = await res.json();
+        console.log('Projects loaded:', data.projects);
+        setProjects(data.projects);
         setLoading(false);
       })
       .catch(error => {
         console.error('Error fetching projects:', error);
+        setProjects([]);
         setLoading(false);
       });
 
