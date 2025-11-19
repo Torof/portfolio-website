@@ -17,6 +17,7 @@ export default function ProjectsPage() {
   const [githubStats, setGithubStats] = useState<GitHubStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [statsLoading, setStatsLoading] = useState(true);
+  const [visibleProjects, setVisibleProjects] = useState(3);
 
   useEffect(() => {
     // Clear existing data when language changes
@@ -108,11 +109,45 @@ export default function ProjectsPage() {
               </p>
             </div>
           ) : projects.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {projects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {projects.slice(0, visibleProjects).map((project) => (
+                  <ProjectCard key={project.id} project={project} />
+                ))}
+              </div>
+
+              {/* Show More Button */}
+              {visibleProjects < projects.length && (
+                <div className="flex justify-center mt-6">
+                  <button
+                    onClick={() => setVisibleProjects(prev => prev + 3)}
+                    className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                      theme === 'theme-light'
+                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                        : 'bg-blue-600 hover:bg-blue-700 text-white'
+                    }`}
+                  >
+                    {t('projects.showMore')} ({projects.length - visibleProjects} {t('projects.remaining')})
+                  </button>
+                </div>
+              )}
+
+              {/* Show Less Button */}
+              {visibleProjects >= projects.length && projects.length > 3 && (
+                <div className="flex justify-center mt-6">
+                  <button
+                    onClick={() => setVisibleProjects(3)}
+                    className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                      theme === 'theme-light'
+                        ? 'bg-gray-600 hover:bg-gray-700 text-white'
+                        : 'bg-gray-600 hover:bg-gray-700 text-white'
+                    }`}
+                  >
+                    {t('projects.showLess')}
+                  </button>
+                </div>
+              )}
+            </>
           ) : (
             <div className="text-center py-16">
               <div className="text-6xl mb-4">🚧</div>
