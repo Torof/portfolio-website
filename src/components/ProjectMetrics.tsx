@@ -149,21 +149,15 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
             }`}
           >
             <div className="flex flex-col items-center text-center">
-              {stats?.user ? (
-                <div className="w-12 h-12 rounded-full overflow-hidden mb-2 ring-2 ring-blue-400/30">
-                  <Image
-                    src={stats.user.avatar_url}
-                    alt={stats.user.login}
-                    width={48}
-                    height={48}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ) : (
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mb-2 ring-2 ring-blue-400/30">
-                  <span className="text-white text-xl font-bold">T</span>
-                </div>
-              )}
+              <div className="w-12 h-12 rounded-full overflow-hidden mb-2 ring-2 ring-blue-400/30">
+                <Image
+                  src={stats?.user?.avatar_url || 'https://github.com/torof.png'}
+                  alt={stats?.user?.login || 'torof'}
+                  width={48}
+                  height={48}
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <p
                 className={`text-sm font-semibold mb-1 ${
                   theme === 'theme-light' ? 'text-gray-900' : 'text-white'
