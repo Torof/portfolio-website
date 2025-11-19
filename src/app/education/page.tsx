@@ -15,7 +15,7 @@ export default function EducationPage() {
       <FloatingOrbs />
 
       <div className="section">
-        <div className="container-custom py-20">
+        <div className="container-custom pt-8 pb-20">
           {/* Unified Education Section */}
           <div className="backdrop-blur-sm rounded-2xl p-8 md:p-12 bg-gradient-to-br from-[rgba(218,165,32,0.15)] to-[rgba(255,140,0,0.15)] dark:from-[rgba(218,165,32,0.1)] dark:to-[rgba(255,140,0,0.1)] border border-[rgba(218,165,32,0.3)] dark:border-[rgba(255,255,255,0.1)]">
             {/* Title Section */}
