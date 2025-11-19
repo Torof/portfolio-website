@@ -18,23 +18,25 @@ export default function ExperiencePage() {
 
       <div className="section">
         <div className="container-custom py-20">
-          {/* Title Section */}
-          <div className={`text-center mb-20 backdrop-blur-sm rounded-2xl p-12 border ${
+          {/* Unified Experience Section */}
+          <div className={`backdrop-blur-sm rounded-2xl p-8 md:p-12 border ${
             theme === 'theme-light'
-              ? 'bg-gradient-to-br from-[rgba(59,130,246,0.1)] to-[rgba(147,51,234,0.1)] border-[rgba(59,130,246,0.3)]'
+              ? 'bg-gradient-to-br from-[rgba(59,130,246,0.15)] to-[rgba(147,51,234,0.15)] border-[rgba(59,130,246,0.3)]'
               : 'bg-gradient-to-br from-[rgba(59,130,246,0.15)] to-[rgba(147,51,234,0.15)] border-[rgba(255,255,255,0.1)]'
           }`}>
-            <h1 className="text-6xl md:text-7xl font-black mb-6 tracking-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary-400)] to-[var(--secondary-400)]">
-                {t('experience.title')}
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl light-text max-w-3xl mx-auto leading-relaxed font-light">
-              {t('experience.subtitle')}
-            </p>
-          </div>
-      
-          {/* Experience Cards Grid */}
+            {/* Title Section */}
+            <div className="text-center mb-12">
+              <h1 className="text-6xl md:text-7xl font-black mb-6 tracking-tight">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary-400)] to-[var(--secondary-400)]">
+                  {t('experience.title')}
+                </span>
+              </h1>
+              <p className="text-xl md:text-2xl light-text max-w-3xl mx-auto leading-relaxed font-light">
+                {t('experience.subtitle')}
+              </p>
+            </div>
+
+            {/* Experience Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
 {experiences.map((exp) => (
               <FlipCard 
@@ -230,6 +232,7 @@ export default function ExperiencePage() {
                 }
               />
             ))}
+            </div>
           </div>
         </div>
       </div>
