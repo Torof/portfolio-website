@@ -24,16 +24,12 @@ const skillsData: SkillsData = {
     { key: "skills.solidity", icon: "⚡" },
     { key: "skills.react", icon: "⚛️" },
     { key: "skills.typescript", icon: "📘" },
-    { key: "skills.vibeCoding", icon: "💻" },
-    { key: "skills.web3", icon: "🔗" },
     { key: "skills.nodejs", icon: "🟢" },
     { key: "skills.hardhat", icon: "🔨" },
     { key: "skills.git", icon: "📚" },
   ],
   soft: [
     { key: "skills.listening", icon: "👂" },
-    { key: "skills.motivation", icon: "💪" },
-    { key: "skills.leadership", icon: "🤲" },
     { key: "skills.problemSolving", icon: "🧩" },
     { key: "skills.collaboration", icon: "🤝" },
     { key: "skills.communication", icon: "💬" },
@@ -45,10 +41,8 @@ const skillsData: SkillsData = {
     { key: "skills.climbing", icon: "🧗" },
     { key: "skills.paragliding", icon: "🪂" },
     { key: "skills.hiking", icon: "🥾" },
-    { key: "skills.lateNightCoding", icon: "🌙" },
     { key: "skills.hackathons", icon: "🏴‍☠️" },
     { key: "skills.auditing", icon: "🔍" },
-    { key: "skills.gasOptimization", icon: "⛽" },
   ],
 };
 
@@ -121,7 +115,11 @@ export default function SkillsTable() {
           {/* Hard Skills */}
           <motion.div
             variants={columnVariants}
-            className="relative p-6 rounded-xl bg-gradient-to-br from-[rgba(79,70,229,0.9)] to-[rgba(139,92,246,0.9)] border border-[rgba(255,255,255,0.2)] group hover:border-[rgba(79,70,229,0.4)] transition-all duration-300"
+            className={`relative p-6 rounded-xl border group transition-all duration-300 backdrop-blur-md ${
+              theme === 'theme-light'
+                ? 'bg-white/80 border-gray-300 hover:border-blue-400 hover:shadow-lg'
+                : 'bg-slate-800/40 border-slate-600/50 hover:border-cyan-400/60 hover:shadow-[0_0_20px_rgba(34,211,238,0.3)]'
+            }`}
           >
             <div className="absolute -top-3 left-6 px-4 py-1 bg-gradient-to-r from-[var(--primary-400)] to-[var(--primary-500)] rounded-full">
               <h3 className="text-lg font-semibold text-white pixel-font">{t('skills.hard').toUpperCase().replace(/ /g, '_')}</h3>
@@ -157,7 +155,11 @@ export default function SkillsTable() {
           {/* Soft Skills */}
           <motion.div
             variants={columnVariants}
-            className="relative p-6 rounded-xl bg-gradient-to-br from-[rgba(139,92,246,0.9)] to-[rgba(6,182,212,0.9)] border border-[rgba(255,255,255,0.2)] group hover:border-[rgba(139,92,246,0.4)] transition-all duration-300"
+            className={`relative p-6 rounded-xl border group transition-all duration-300 backdrop-blur-md ${
+              theme === 'theme-light'
+                ? 'bg-white/80 border-gray-300 hover:border-purple-400 hover:shadow-lg'
+                : 'bg-slate-800/40 border-slate-600/50 hover:border-purple-400/60 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]'
+            }`}
           >
             <div className="absolute -top-3 left-6 px-4 py-1 bg-gradient-to-r from-[var(--secondary-400)] to-[var(--secondary-500)] rounded-full">
               <h3 className="text-lg font-semibold text-white pixel-font">{t('skills.soft').toUpperCase().replace(/ /g, '_')}</h3>
@@ -184,7 +186,11 @@ export default function SkillsTable() {
           {/* Mad Skills */}
           <motion.div
             variants={columnVariants}
-            className="relative p-6 rounded-xl bg-gradient-to-br from-[rgba(6,182,212,0.9)] to-[rgba(236,72,153,0.9)] border border-[rgba(255,255,255,0.2)] group hover:border-[rgba(6,182,212,0.4)] transition-all duration-300"
+            className={`relative p-6 rounded-xl border group transition-all duration-300 backdrop-blur-md ${
+              theme === 'theme-light'
+                ? 'bg-white/80 border-gray-300 hover:border-pink-400 hover:shadow-lg'
+                : 'bg-slate-800/40 border-slate-600/50 hover:border-pink-400/60 hover:shadow-[0_0_20px_rgba(236,72,153,0.3)]'
+            }`}
           >
             <div className="absolute -top-3 left-6 px-4 py-1 bg-gradient-to-r from-[var(--accent-cyan)] to-[var(--accent-pink)] rounded-full">
               <h3 className="text-lg font-semibold text-white pixel-font">{t('skills.mad').toUpperCase().replace(/ /g, '_')}</h3>
