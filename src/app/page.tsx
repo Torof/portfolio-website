@@ -5,7 +5,6 @@ import SequentialLayout from "@/components/SequentialLayout";
 import SectionTransition from "@/components/SectionTransition";
 import FloatingOrbs from "@/components/FloatingOrbs";
 import SkillsTable from "@/components/SkillsTable";
-import ViewCounter from "@/components/ViewCounter";
 import { fetchProjectsFromGitHub } from '@/lib/services/projects';
 
 export default async function Home() {
@@ -16,11 +15,6 @@ export default async function Home() {
       {/* Floating Orbs for Visual Interest */}
       <FloatingOrbs />
 
-      {/* View Counter - Fixed position */}
-      <div className="fixed top-4 right-4 z-50">
-        <ViewCounter pageId="home" />
-      </div>
-      
       {/* Hero Section */}
       <HeroSection />
 

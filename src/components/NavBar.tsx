@@ -57,18 +57,7 @@ export default function Navbar() {
   return (
     <nav className={navClasses + (mounted && scrolled ? ' navbar-scrolled' : '')}>
       <div className="container-custom flex justify-between items-center">
-        <a href="./" className="relative group">
-          <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-[var(--primary-400)] to-[var(--secondary-500)] opacity-70 blur-md group-hover:opacity-100 transition duration-500"></div>
-          <div className={`relative flex items-center justify-center w-10 h-10 rounded-full border text-lg font-bold transition-colors duration-300 ${
-            theme === 'theme-light' 
-              ? 'bg-white border-[rgba(0,0,0,0.1)] text-black' 
-              : 'bg-[#050505] border-[rgba(255,255,255,0.1)] text-white'
-          }`}>
-            SD
-          </div>
-        </a>
-
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center">
           <div className="flex space-x-1">
             {navLinks.map((link) => (
               <Link
@@ -84,21 +73,23 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
-          
+        </div>
+
+        <div className="hidden md:flex items-center space-x-4">
           <div className={`h-6 w-px ${
-            theme === 'theme-light' 
-              ? 'bg-[rgba(0,0,0,0.1)]' 
+            theme === 'theme-light'
+              ? 'bg-[rgba(0,0,0,0.1)]'
               : 'bg-[rgba(255,255,255,0.1)]'
           }`}></div>
-          
+
           <div className="flex items-center space-x-2">
             <div className="flex items-center space-x-1 mr-2">
               <button
                 onClick={() => setLanguage('en')}
                 className={`flex items-center justify-center w-8 h-8 rounded-full transition-all ${
-                  language === 'en' 
+                  language === 'en'
                     ? theme === 'theme-light'
-                      ? 'bg-[rgba(59,130,246,0.15)] ring-2 ring-[rgba(59,130,246,0.4)]' 
+                      ? 'bg-[rgba(59,130,246,0.15)] ring-2 ring-[rgba(59,130,246,0.4)]'
                       : 'bg-[rgba(255,255,255,0.15)] ring-2 ring-[rgba(255,255,255,0.3)]'
                     : theme === 'theme-light'
                       ? 'bg-[rgba(0,0,0,0.05)] hover:bg-[rgba(0,0,0,0.1)]'
@@ -106,10 +97,10 @@ export default function Navbar() {
                 }`}
                 aria-label="Switch to English"
               >
-                <Image 
-                  src={'/flags/en.svg'} 
-                  alt="English" 
-                  width={16} 
+                <Image
+                  src={'/flags/en.svg'}
+                  alt="English"
+                  width={16}
                   height={12}
                   className="rounded-sm"
                 />
@@ -117,9 +108,9 @@ export default function Navbar() {
               <button
                 onClick={() => setLanguage('fr')}
                 className={`flex items-center justify-center w-8 h-8 rounded-full transition-all ${
-                  language === 'fr' 
+                  language === 'fr'
                     ? theme === 'theme-light'
-                      ? 'bg-[rgba(59,130,246,0.15)] ring-2 ring-[rgba(59,130,246,0.4)]' 
+                      ? 'bg-[rgba(59,130,246,0.15)] ring-2 ring-[rgba(59,130,246,0.4)]'
                       : 'bg-[rgba(255,255,255,0.15)] ring-2 ring-[rgba(255,255,255,0.3)]'
                     : theme === 'theme-light'
                       ? 'bg-[rgba(0,0,0,0.05)] hover:bg-[rgba(0,0,0,0.1)]'
@@ -127,10 +118,10 @@ export default function Navbar() {
                 }`}
                 aria-label="Changer vers le français"
               >
-                <Image 
-                  src={'/flags/fr.svg'} 
-                  alt="Français" 
-                  width={16} 
+                <Image
+                  src={'/flags/fr.svg'}
+                  alt="Français"
+                  width={16}
                   height={12}
                   className="rounded-sm"
                 />
