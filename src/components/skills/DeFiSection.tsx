@@ -10,8 +10,8 @@ interface DeFiSectionProps {
   category: SkillCategory;
 }
 
-// DeFi - Retro Trading Terminal Theme
-const DeFiSection = ({ category }: DeFiSectionProps) => {
+// DeFi Trading Terminal Component
+const DeFiTradingTerminal = ({ category }: DeFiSectionProps) => {
   const { theme } = useTheme();
   const { t } = useLanguage();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -63,12 +63,11 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
   };
 
   return (
-    <section className="mb-24">
-      <div className={`relative overflow-hidden rounded-lg border-2 ${
-        theme === 'theme-light'
-          ? 'bg-amber-50 border-amber-900 shadow-xl'
-          : 'bg-black border-green-500 shadow-2xl shadow-green-500/20'
-      }`}>
+    <div className={`relative overflow-hidden rounded-lg border-2 ${
+      theme === 'theme-light'
+        ? 'bg-amber-50 border-amber-900 shadow-xl'
+        : 'bg-black border-green-500 shadow-2xl shadow-green-500/20'
+    }`}>
         
         {/* CRT Screen Effect Overlay */}
         <div className="absolute inset-0 pointer-events-none">
@@ -393,6 +392,91 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
             </div>
           </div>
         </div>
+      </div>
+  );
+};
+
+// Main DeFi Section Wrapper
+const DeFiSection = ({ category }: DeFiSectionProps) => {
+  const { theme } = useTheme();
+  const { t } = useLanguage();
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <section className="mb-12">
+      <div className={`rounded-2xl border p-8 transition-all duration-300 ${
+        theme === 'theme-light'
+          ? 'bg-white/90 backdrop-blur-sm border-gray-200 hover:shadow-lg'
+          : 'bg-slate-900/90 backdrop-blur-sm border-[rgba(255,255,255,0.25)] hover:border-[rgba(255,255,255,0.35)]'
+      }`}>
+        {/* Header with Title and Description */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className={`p-2 rounded-lg ${
+                theme === 'theme-light'
+                  ? 'bg-green-100 text-green-600'
+                  : 'bg-green-900/30 text-green-400'
+              }`}>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className={`text-2xl font-bold ${
+                theme === 'theme-light' ? 'text-slate-800' : 'text-white'
+              }`}>
+                DeFi Protocol Expertise
+              </h3>
+            </div>
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-200 ${
+                theme === 'theme-light'
+                  ? 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-700'
+                  : 'bg-slate-800 hover:bg-slate-700 border-slate-600 text-slate-200'
+              }`}
+            >
+              <span>{isExpanded ? 'Collapse' : 'Expand'}</span>
+              <svg
+                className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+          <p className={`text-base leading-relaxed ${
+            theme === 'theme-light' ? 'text-gray-600' : 'text-gray-300'
+          }`}>
+            Deep expertise in decentralized finance protocols and mechanisms. I have hands-on experience
+            building and integrating with <strong>AMMs (Automated Market Makers)</strong>, <strong>lending protocols</strong>,
+            <strong>yield farming systems</strong>, and <strong>tokenomics designs</strong>. My work spans across
+            <strong>liquidity pool mechanics</strong>, <strong>flash loan implementations</strong>, <strong>oracle
+            integrations</strong>, and <strong>vault strategies</strong>. I understand the intricate details of
+            DeFi primitives, from <strong>Uniswap V2/V3</strong> mathematics to <strong>Compound-style interest
+            rate models</strong>, and have built protocols handling significant TVL with robust security measures
+            and gas-optimized implementations.
+          </p>
+        </div>
+
+        {/* Expandable Content - DeFi Trading Terminal */}
+        <AnimatePresence>
+          {isExpanded && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-slate-700">
+                <DeFiTradingTerminal category={category} />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

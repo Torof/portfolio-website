@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { fetchCompleteStackExchangeData } from '@/lib/services/stackexchange'; // Fallback for static builds
@@ -35,12 +35,14 @@ const LiveStackExchangeCard = () => {
       .trim();
   };
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
   useEffect(() => {
     const fetchLiveData = async () => {
       try {
         // Try API route first (server-side, better rate limiting)
         console.log('🔄 Attempting to fetch live Stack Exchange data via API route...');
-        
+
         const response = await fetch('/api/stackexchange?userId=52251', {
           method: 'GET',
           headers: {
@@ -50,13 +52,13 @@ const LiveStackExchangeCard = () => {
 
         if (response.ok) {
           const data = await response.json();
-          
+
           if (data.profile) {
             setProfile(data.profile);
             setIsLiveData(true);
             console.log('✅ Successfully fetched live Stack Exchange profile via API route');
           }
-          
+
           if (data.answers && data.answers.length > 0) {
             setAnswers(data.answers.slice(0, 4));
             console.log(`✅ Successfully fetched ${data.answers.length} live Stack Exchange answers via API route`);
@@ -67,25 +69,25 @@ const LiveStackExchangeCard = () => {
         } else {
           throw new Error(`API route returned ${response.status}`);
         }
-        
+
       } catch (apiError) {
         console.log('⚠️ API route failed, trying direct Stack Exchange API...', apiError);
-        
+
         try {
           // Fallback: Direct Stack Exchange API call (may be rate limited)
           const { profile: liveProfile, answers: liveAnswers } = await fetchCompleteStackExchangeData('52251');
-          
+
           if (liveProfile) {
             setProfile(liveProfile);
             setIsLiveData(true);
             console.log('✅ Successfully fetched live Stack Exchange profile via direct API');
           }
-          
+
           if (liveAnswers && liveAnswers.length > 0) {
             setAnswers(liveAnswers.slice(0, 4));
             console.log(`✅ Successfully fetched ${liveAnswers.length} live Stack Exchange answers via direct API`);
           }
-          
+
         } catch {
           console.log('⚠️ Both API route and direct Stack Exchange API failed, using static data');
           console.log('📋 Displaying static Stack Exchange data');
@@ -100,30 +102,83 @@ const LiveStackExchangeCard = () => {
   }, []);
 
   return (
-    <motion.div 
-      className="relative"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-    >
-      {/* Section Header */}
-      <div className="text-center mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold light-text mb-6">
-          {t('community.title')}
-        </h2>
-        <p className="text-xl light-text opacity-80 max-w-3xl mx-auto">
-          {t('community.subtitle')}
-        </p>
-      </div>
+    <section className="mb-12">
+      <div className={`rounded-2xl border p-8 transition-all duration-300 ${
+        theme === 'theme-light'
+          ? 'bg-white/90 backdrop-blur-sm border-gray-200 hover:shadow-lg'
+          : 'bg-slate-900/90 backdrop-blur-sm border-[rgba(255,255,255,0.25)] hover:border-[rgba(255,255,255,0.35)]'
+      }`}>
+        {/* Header with Title and Description */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className={`p-2 rounded-lg ${
+                theme === 'theme-light'
+                  ? 'bg-orange-100 text-orange-600'
+                  : 'bg-orange-900/30 text-orange-400'
+              }`}>
+                <svg className="w-6 h-6" viewBox="0 0 120 120" fill="currentColor">
+                  <polygon points="84,93 84,70 92,70 92,101 22,101 22,70 30,70 30,93"/>
+                  <path d="m38,68.4l36.9,7.9 1.6,-7.6l-36.9,-7.9l-1.6,7.6zm4.9,-18.2l34.2,16.2 3.3,-7l-34.2,-16.2l-3.3,7zm9.5,-17.3l29.1,24.7 5,-5.9l-29.1,-24.7l-5,5.9zm18.7,-16.8l-6.1,4.6 22.6,30.2 6.1,-4.6l-22.6,-30.2zm-5.3,-19.3l-6.9,3.2 15.9,34.2 6.9,-3.2l-15.9,-34.2z" />
+                </svg>
+              </div>
+              <h3 className={`text-2xl font-bold ${
+                theme === 'theme-light' ? 'text-slate-800' : 'text-white'
+              }`}>
+                Stack Exchange Contributions
+              </h3>
+            </div>
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-200 ${
+                theme === 'theme-light'
+                  ? 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-700'
+                  : 'bg-slate-800 hover:bg-slate-700 border-slate-600 text-slate-200'
+              }`}
+            >
+              <span>{isExpanded ? 'Collapse' : 'Expand'}</span>
+              <svg
+                className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+          <p className={`text-base leading-relaxed ${
+            theme === 'theme-light' ? 'text-gray-600' : 'text-gray-300'
+          }`}>
+            Active contributor to the <strong>Ethereum Stack Exchange</strong> community, helping developers solve
+            complex smart contract and blockchain problems. With <strong>{profile.reputation.toLocaleString()} reputation</strong> and
+            <strong> {profile.badges.silver} silver</strong> and <strong>{profile.badges.bronze} bronze badges</strong>,
+            I provide detailed technical answers on topics including <strong>Solidity</strong>, <strong>EVM</strong>,
+            <strong>NFTs</strong>, and <strong>smart contract security</strong>. My contributions focus on practical
+            solutions to real-world blockchain development challenges, sharing knowledge gained from years of
+            hands-on experience building production smart contracts.
+          </p>
+        </div>
 
-      <motion.div
-        className={`relative p-8 rounded-3xl border backdrop-blur-md transition-all duration-300 group overflow-hidden ${
-          theme === 'theme-light'
-            ? 'bg-gradient-to-br from-white/95 via-orange-50/95 to-amber-50/95 border-orange-200 hover:border-orange-300 hover:shadow-2xl'
-            : 'bg-gradient-to-br from-slate-800/90 via-orange-900/20 to-amber-900/20 border-orange-700/50 hover:border-orange-600/50'
-        }`}
-        whileHover={{ scale: 1.01 }}
-      >
+        {/* Expandable Content - Stack Exchange Profile */}
+        <AnimatePresence>
+          {isExpanded && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-slate-700">
+                <motion.div
+                  className={`relative p-8 rounded-3xl border backdrop-blur-md transition-all duration-300 group overflow-hidden ${
+                    theme === 'theme-light'
+                      ? 'bg-gradient-to-br from-white/95 via-orange-50/95 to-amber-50/95 border-orange-200 hover:border-orange-300 hover:shadow-2xl'
+                      : 'bg-gradient-to-br from-slate-800/90 via-orange-900/20 to-amber-900/20 border-orange-700/50 hover:border-orange-600/50'
+                  }`}
+                  whileHover={{ scale: 1.01 }}
+                >
         {/* Live Data Indicator */}
         {isLiveData && (
           <div className="absolute top-4 right-4 flex items-center space-x-2">
@@ -391,8 +446,13 @@ const LiveStackExchangeCard = () => {
             </Link>
           </div>
         </div>
-      </motion.div>
-    </motion.div>
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </section>
   );
 };
 

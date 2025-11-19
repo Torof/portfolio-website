@@ -248,8 +248,17 @@ export default function SkillsPage() {
           ]} />
         </div>
 
-        {/* Stack Exchange Integration */}
+        {/* Community Contributions Section */}
         <div className="mb-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold light-text mb-6">
+              {t('community.title')}
+            </h2>
+            <p className="text-xl light-text opacity-80 max-w-3xl mx-auto">
+              {t('community.subtitle')}
+            </p>
+          </div>
+
           <LiveStackExchangeCard />
         </div>
           </div>

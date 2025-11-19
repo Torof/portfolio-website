@@ -1,155 +1,96 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
+import { useLanguage } from '@/lib/context/LanguageContext';
 import { SkillCategory } from '@/lib/types';
+import SecurityDefenseSystem from '@/components/SecurityDefenseSystem';
 
 interface SecuritySectionProps {
   category: SkillCategory;
 }
 
-// Security - High-End Surveillance Theme
 const SecuritySection = ({ category }: SecuritySectionProps) => {
   const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Generate deterministic pattern based on index to avoid hydration mismatch
-  const getGridPattern = (index: number) => {
-    // Use deterministic logic instead of Math.random()
-    const isActive = (index * 7) % 13 === 0; // Every ~13th item
-    const isAnimated = (index * 11) % 17 === 0; // Every ~17th item
-    return { isActive, isAnimated };
-  };
+  const { t } = useLanguage();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <section className="mb-32">
-      <div className={`relative p-12 rounded-3xl border backdrop-blur-xl overflow-hidden ${
+    <section className="mb-12">
+      <div className={`rounded-2xl border p-8 transition-all duration-300 ${
         theme === 'theme-light'
-          ? 'bg-gradient-to-br from-slate-50/80 via-red-50/40 to-orange-50/30 border-slate-200/30 shadow-2xl shadow-red-500/5'
-          : 'bg-gradient-to-br from-slate-900/90 via-red-900/10 to-orange-900/10 border-slate-700/50 shadow-2xl shadow-red-500/5'
+          ? 'bg-white/90 backdrop-blur-sm border-gray-200 hover:shadow-lg'
+          : 'bg-slate-900/90 backdrop-blur-sm border-[rgba(255,255,255,0.25)] hover:border-[rgba(255,255,255,0.35)]'
       }`}>
-        
-        {/* Surveillance grid pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="grid grid-cols-10 grid-rows-6 gap-2 h-full">
-            {Array.from({ length: 60 }).map((_, i) => {
-              const { isActive, isAnimated } = getGridPattern(i);
-              return (
-                <motion.div
-                  key={i}
-                  className={`border ${
-                    theme === 'theme-light' ? 'border-slate-300' : 'border-slate-700'
-                  } ${
-                    mounted && isActive ? 'bg-red-500/20' : ''
-                  }`}
-                  animate={mounted && isAnimated ? {
-                    opacity: [0.3, 1, 0.3],
-                    backgroundColor: [
-                      "rgba(239, 68, 68, 0.1)",
-                      "rgba(239, 68, 68, 0.3)",
-                      "rgba(239, 68, 68, 0.1)"
-                    ]
-                  } : {}}
-                  transition={{
-                    duration: 2 + (i % 3), // Deterministic duration based on index
-                    repeat: Infinity,
-                    delay: (i % 5) * 0.8, // Deterministic delay based on index
-                  }}
-                />
-              );
-            })}
+        {/* Header with Title and Description */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className={`p-2 rounded-lg ${
+                theme === 'theme-light'
+                  ? 'bg-red-100 text-red-600'
+                  : 'bg-red-900/30 text-red-400'
+              }`}>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 className={`text-2xl font-bold ${
+                theme === 'theme-light' ? 'text-slate-800' : 'text-white'
+              }`}>
+                Smart Contract Security & Auditing
+              </h3>
+            </div>
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-200 ${
+                theme === 'theme-light'
+                  ? 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-700'
+                  : 'bg-slate-800 hover:bg-slate-700 border-slate-600 text-slate-200'
+              }`}
+            >
+              <span>{isExpanded ? 'Collapse' : 'Expand'}</span>
+              <svg
+                className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
           </div>
+          <p className={`text-base leading-relaxed ${
+            theme === 'theme-light' ? 'text-gray-600' : 'text-gray-300'
+          }`}>
+            With extensive experience in smart contract security, I specialize in identifying and mitigating
+            vulnerabilities before they become exploits. My approach combines <strong>manual code review</strong>,
+            <strong>automated static analysis</strong>, and <strong>property-based testing</strong> to ensure
+            comprehensive security coverage. I have deep knowledge of common attack vectors including
+            <strong> reentrancy</strong>, <strong>flash loan attacks</strong>, <strong>MEV exploitation</strong>,
+            <strong>oracle manipulation</strong>, and more. Using industry-standard tools like <strong>Slither</strong>,
+            <strong>Foundry</strong>, and <strong>Echidna</strong>, I conduct thorough security audits and implement
+            robust defense mechanisms to protect protocols and their users.
+          </p>
         </div>
 
-        <div className="relative z-10">
-          <div className="text-center mb-16">
-            <motion.div 
-              className="inline-block mb-6"
-              whileHover={{ scale: 1.1 }}
-              animate={{
-                rotateY: [0, 5, 0, -5, 0],
-              }}
-              transition={{ duration: 4, repeat: Infinity }}
+        {/* Expandable Content - Security Defense System */}
+        <AnimatePresence>
+          {isExpanded && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
             >
-              <div className={`p-6 rounded-2xl ${
-                theme === 'theme-light' 
-                  ? 'bg-gradient-to-br from-slate-700 to-red-600 shadow-xl shadow-red-500/25' 
-                  : 'bg-gradient-to-br from-slate-800 to-red-700 shadow-xl shadow-red-500/25'
-              }`}>
-                <span className="text-6xl text-white">🛡️</span>
+              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-slate-700">
+                <SecurityDefenseSystem category={category} />
               </div>
             </motion.div>
-            <h3 className={`text-4xl font-light mb-4 ${
-              theme === 'theme-light' ? 'text-slate-800' : 'text-slate-100'
-            }`}>
-              Security <span className="font-bold bg-gradient-to-r from-slate-700 to-red-600 bg-clip-text text-transparent">& Auditing</span>
-            </h3>
-            <p className="text-xl light-text opacity-70 max-w-3xl mx-auto font-light leading-relaxed">
-              Military-grade security protocols and comprehensive vulnerability assessment
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {category.skills.map((skill, index) => (
-              <motion.div
-                key={skill.id}
-                className={`group relative p-8 rounded-2xl backdrop-blur-xl border-2 transition-all duration-500 overflow-hidden ${
-                  theme === 'theme-light'
-                    ? 'bg-gradient-to-br from-white/90 to-slate-50/60 border-slate-200/50 hover:border-red-300/50 hover:shadow-2xl hover:shadow-red-500/10'
-                    : 'bg-gradient-to-br from-slate-800/90 to-slate-900/60 border-slate-700/50 hover:border-red-500/50 hover:shadow-2xl hover:shadow-red-500/10'
-                }`}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.15, duration: 0.6, type: "spring" }}
-                whileHover={{ y: -8, scale: 1.02 }}
-              >
-                {/* Security scan line effect */}
-                <motion.div
-                  className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-transparent via-red-500 to-transparent opacity-0 group-hover:opacity-100"
-                  animate={{
-                    y: ["-100%", "100%"],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    repeatType: "loop",
-                  }}
-                />
-
-                <div className="flex items-start justify-between mb-6">
-                  <div className="flex items-center">
-                    <motion.div 
-                      className={`p-4 rounded-xl mr-4 ${
-                        theme === 'theme-light' 
-                          ? 'bg-gradient-to-br from-slate-100 to-red-100' 
-                          : 'bg-gradient-to-br from-slate-700 to-red-900/50'
-                      }`}
-                      whileHover={{ rotateX: 15, rotateY: 15 }}
-                    >
-                      <span className="text-2xl">{skill.icon}</span>
-                    </motion.div>
-                    <div>
-                      <h4 className="text-xl font-semibold light-text mb-2 group-hover:text-blue-600 transition-colors">
-                        {skill.name}
-                      </h4>
-                    </div>
-                  </div>
-                  
-                </div>
-
-                <p className="text-sm light-text opacity-70 leading-relaxed mb-6">
-                  {skill.description}
-                </p>
-
-              </motion.div>
-            ))}
-          </div>
-        </div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

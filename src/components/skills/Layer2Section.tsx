@@ -11,8 +11,8 @@ interface Layer2SectionProps {
   category: SkillCategory;
 }
 
-// Layer 2 - Network Topology with Official Logos
-const Layer2Section = ({ category }: Layer2SectionProps) => {
+// Layer 2 Network Topology Visualization
+const Layer2NetworkTopology = ({ category }: Layer2SectionProps) => {
   const { theme } = useTheme();
   const { t } = useLanguage();
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
@@ -119,12 +119,11 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
   }
 
   return (
-    <section className="mb-24">
-      <div className={`relative p-8 rounded-lg border overflow-hidden ${
-        theme === 'theme-light'
-          ? 'bg-gradient-to-br from-slate-50 to-indigo-50 border-gray-200 shadow-lg'
-          : 'bg-gradient-to-br from-slate-900 to-indigo-950 border-slate-700 shadow-lg'
-      }`}>
+    <div className={`relative p-8 rounded-lg border overflow-hidden ${
+      theme === 'theme-light'
+        ? 'bg-gradient-to-br from-slate-50 to-indigo-50 border-gray-200 shadow-lg'
+        : 'bg-gradient-to-br from-slate-900 to-indigo-950 border-slate-700 shadow-lg'
+    }`}>
         
         {/* Animated Grid Background */}
         <div className="absolute inset-0 opacity-10">
@@ -525,6 +524,92 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
             
           </div>
         </div>
+      </div>
+  );
+};
+
+// Main Layer 2 Section Wrapper
+const Layer2Section = ({ category }: Layer2SectionProps) => {
+  const { theme } = useTheme();
+  const { t } = useLanguage();
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <section className="mb-12">
+      <div className={`rounded-2xl border p-8 transition-all duration-300 ${
+        theme === 'theme-light'
+          ? 'bg-white/90 backdrop-blur-sm border-gray-200 hover:shadow-lg'
+          : 'bg-slate-900/90 backdrop-blur-sm border-[rgba(255,255,255,0.25)] hover:border-[rgba(255,255,255,0.35)]'
+      }`}>
+        {/* Header with Title and Description */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className={`p-2 rounded-lg ${
+                theme === 'theme-light'
+                  ? 'bg-purple-100 text-purple-600'
+                  : 'bg-purple-900/30 text-purple-400'
+              }`}>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className={`text-2xl font-bold ${
+                theme === 'theme-light' ? 'text-slate-800' : 'text-white'
+              }`}>
+                Layer 2 Scaling Solutions
+              </h3>
+            </div>
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-200 ${
+                theme === 'theme-light'
+                  ? 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-700'
+                  : 'bg-slate-800 hover:bg-slate-700 border-slate-600 text-slate-200'
+              }`}
+            >
+              <span>{isExpanded ? 'Collapse' : 'Expand'}</span>
+              <svg
+                className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+          <p className={`text-base leading-relaxed ${
+            theme === 'theme-light' ? 'text-gray-600' : 'text-gray-300'
+          }`}>
+            Extensive experience building and deploying on multiple Layer 2 scaling solutions. I have deep
+            knowledge of different L2 architectures including <strong>Optimistic Rollups</strong> (Arbitrum,
+            Optimism, Base), <strong>ZK Rollups</strong> (zkSync Era, Scroll), <strong>Sidechains</strong> (Polygon,
+            Gnosis), and <strong>alternative L1s</strong> (Berachain). My expertise spans <strong>cross-chain
+            bridge implementations</strong>, <strong>gas optimization strategies</strong> specific to each network,
+            <strong>sequencer interactions</strong>, and understanding the <strong>security trade-offs</strong> between
+            different scaling approaches. I've deployed and maintained protocols across multiple networks, handling
+            <strong>L1-L2 communication</strong>, <strong>state management</strong>, and <strong>multi-chain
+            architecture patterns</strong>.
+          </p>
+        </div>
+
+        {/* Expandable Content - Layer 2 Network Topology */}
+        <AnimatePresence>
+          {isExpanded && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-slate-700">
+                <Layer2NetworkTopology category={category} />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
