@@ -30,7 +30,7 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
     return (
       <div className="flex gap-6">
         {/* Left: Title skeleton */}
-        <div className="w-1/5">
+        <div className="w-[30%]">
           <div className={`h-8 rounded mb-2 animate-pulse ${
             theme === 'theme-light' ? 'bg-gray-200' : 'bg-slate-700'
           }`}></div>
@@ -83,8 +83,8 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
 
   return (
     <div className="flex gap-6 items-start">
-      {/* Left: Title & Description (20%) */}
-      <div className="w-1/5 flex-shrink-0">
+      {/* Left: Title & Description (30%) */}
+      <div className="w-[30%] flex-shrink-0">
         <h2 className={`text-2xl font-bold mb-3 ${
           theme === 'theme-light' ? 'text-gray-900' : 'text-white'
         }`}>
@@ -136,54 +136,53 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
           ))}
         </div>
 
-        {/* Language Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {languages.map((language) => (
-            <div
-              key={language.name}
-              className={`p-4 rounded-lg border transition-all duration-300 ${
-                theme === 'theme-light'
-                  ? 'bg-white border-gray-200 hover:shadow-md'
-                  : 'bg-slate-800/60 border-slate-600/50 hover:shadow-lg'
-              }`}
-            >
-              <div className="flex flex-col">
-                <div className="flex items-center justify-between mb-2">
-                  <span
-                    className={`text-sm font-semibold ${
-                      theme === 'theme-light' ? 'text-gray-900' : 'text-white'
-                    }`}
-                  >
-                    {language.name}
-                  </span>
-                  <div
-                    className="w-3 h-3 rounded-full ring-2 ring-white/20"
-                    style={{ backgroundColor: language.color }}
-                  ></div>
-                </div>
+        {/* Language Card - Unified */}
+        <div
+          className={`p-4 rounded-lg border transition-all duration-300 ${
+            theme === 'theme-light'
+              ? 'bg-white border-gray-200 hover:shadow-md'
+              : 'bg-slate-800/60 border-slate-600/50 hover:shadow-lg'
+          }`}
+        >
+          <div className="space-y-3">
+            {languages.map((language) => (
+              <div key={language.name} className="flex items-center gap-3">
                 <div
-                  className={`text-xl font-bold mb-2 ${
+                  className="w-3 h-3 rounded-full ring-2 ring-white/20 flex-shrink-0"
+                  style={{ backgroundColor: language.color }}
+                ></div>
+                <span
+                  className={`text-sm font-semibold w-24 flex-shrink-0 ${
                     theme === 'theme-light' ? 'text-gray-900' : 'text-white'
                   }`}
                 >
-                  {language.percentage}%
-                </div>
-                <div
-                  className={`w-full h-2 rounded-full overflow-hidden ${
-                    theme === 'theme-light' ? 'bg-gray-200' : 'bg-gray-700'
-                  }`}
-                >
+                  {language.name}
+                </span>
+                <div className="flex-1 flex items-center gap-2">
                   <div
-                    className="h-full rounded-full transition-all duration-1000"
-                    style={{
-                      backgroundColor: language.color,
-                      width: `${language.percentage}%`,
-                    }}
-                  ></div>
+                    className={`flex-1 h-2 rounded-full overflow-hidden ${
+                      theme === 'theme-light' ? 'bg-gray-200' : 'bg-gray-700'
+                    }`}
+                  >
+                    <div
+                      className="h-full rounded-full transition-all duration-1000"
+                      style={{
+                        backgroundColor: language.color,
+                        width: `${language.percentage}%`,
+                      }}
+                    ></div>
+                  </div>
+                  <span
+                    className={`text-sm font-bold w-12 text-right flex-shrink-0 ${
+                      theme === 'theme-light' ? 'text-gray-900' : 'text-white'
+                    }`}
+                  >
+                    {language.percentage}%
+                  </span>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
