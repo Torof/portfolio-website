@@ -17,7 +17,7 @@ export default function ExperiencePage() {
       <FloatingOrbs />
 
       <div className="section">
-        <div className="container-custom pt-8 pb-20">
+        <div className="container-custom pt-4 pb-20">
           {/* Unified Experience Section */}
           <div className={`backdrop-blur-sm rounded-2xl p-8 md:p-12 border ${
             theme === 'theme-light'
