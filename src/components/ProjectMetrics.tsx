@@ -5,6 +5,7 @@ import { useLanguage } from '@/lib/context/LanguageContext';
 import { GitHubStats } from '@/lib/services/github';
 import Image from 'next/image';
 import Link from 'next/link';
+import ContributionGraph from './ContributionGraph';
 
 interface ProjectMetricsProps {
   stats: GitHubStats | null;
@@ -18,7 +19,6 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
   // Fallback data when API fails
   const fallbackMetrics = [
     { label: 'Total Contributions', value: '1,200+', icon: '📊' },
-    { label: 'Public Repos', value: '42', icon: '📦' },
   ];
 
   const fallbackLanguages = [
@@ -62,6 +62,15 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
               </div>
             ))}
           </div>
+
+          {/* Contribution graph skeleton */}
+          <div className={`p-4 rounded-lg border animate-pulse ${
+            theme === 'theme-light'
+              ? 'bg-gray-100 border-gray-200'
+              : 'bg-slate-800/60 border-slate-600/50'
+          }`}>
+            <div className="h-48"></div>
+          </div>
         </div>
       </div>
     );
@@ -73,11 +82,6 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
       label: 'Total Contributions',
       value: stats.yearlyContributions?.toLocaleString() || '0',
       icon: '📊'
-    },
-    {
-      label: 'Public Repos',
-      value: stats.user?.public_repos?.toString() || '0',
-      icon: '📦'
     },
   ] : fallbackMetrics;
 
@@ -106,8 +110,9 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
 
       {/* Right: Metrics (80%) */}
       <div className="flex-1 space-y-4">
-        {/* Stats Cards - 2 metrics + 1 profile */}
+        {/* Stats Cards - 1 metric + 1 languages + 1 profile */}
         <div className="grid grid-cols-3 gap-3">
+          {/* Total Contributions */}
           {metrics.map((metric) => (
             <div
               key={metric.label}
@@ -137,53 +142,14 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
             </div>
           ))}
 
-          {/* GitHub Profile Card */}
-          <Link
-            href={stats?.user ? `https://github.com/${stats.user.login}` : 'https://github.com/torof'}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`p-4 rounded-lg border transition-all duration-300 hover:scale-105 ${
+          {/* Languages Card */}
+          <div
+            className={`p-4 rounded-lg border transition-all duration-300 ${
               theme === 'theme-light'
-                ? 'bg-white border-gray-200 hover:border-blue-400 hover:shadow-md'
-                : 'bg-slate-800/60 border-slate-600/50 hover:border-blue-500/60 hover:shadow-lg'
+                ? 'bg-white border-gray-200 hover:shadow-md'
+                : 'bg-slate-800/60 border-slate-600/50 hover:shadow-lg'
             }`}
           >
-            <div className="flex flex-col items-center text-center">
-              <div className="w-12 h-12 rounded-full overflow-hidden mb-2 ring-2 ring-blue-400/30">
-                <Image
-                  src={stats?.user?.avatar_url || 'https://github.com/torof.png'}
-                  alt={stats?.user?.login || 'torof'}
-                  width={48}
-                  height={48}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p
-                className={`text-sm font-semibold mb-1 ${
-                  theme === 'theme-light' ? 'text-gray-900' : 'text-white'
-                }`}
-              >
-                @{stats?.user?.login || 'torof'}
-              </p>
-              <p
-                className={`text-xs ${
-                  theme === 'theme-light' ? 'text-gray-600' : 'text-gray-400'
-                }`}
-              >
-                GitHub Profile
-              </p>
-            </div>
-          </Link>
-        </div>
-
-        {/* Language Card - Unified */}
-        <div
-          className={`p-4 rounded-lg border transition-all duration-300 ${
-            theme === 'theme-light'
-              ? 'bg-white border-gray-200 hover:shadow-md'
-              : 'bg-slate-800/60 border-slate-600/50 hover:shadow-lg'
-          }`}
-        >
           <div className="space-y-3">
             {languages.map((language) => (
               <div key={language.name} className="flex items-center gap-3">
@@ -224,6 +190,48 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
             ))}
           </div>
         </div>
+
+          {/* GitHub Profile Card */}
+          <Link
+            href={stats?.user ? `https://github.com/${stats.user.login}` : 'https://github.com/torof'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`p-4 rounded-lg border transition-all duration-300 hover:scale-105 ${
+              theme === 'theme-light'
+                ? 'bg-white border-gray-200 hover:border-blue-400 hover:shadow-md'
+                : 'bg-slate-800/60 border-slate-600/50 hover:border-blue-500/60 hover:shadow-lg'
+            }`}
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full overflow-hidden mb-2 ring-2 ring-blue-400/30">
+                <Image
+                  src={stats?.user?.avatar_url || 'https://github.com/torof.png'}
+                  alt={stats?.user?.login || 'torof'}
+                  width={48}
+                  height={48}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p
+                className={`text-sm font-semibold mb-1 ${
+                  theme === 'theme-light' ? 'text-gray-900' : 'text-white'
+                }`}
+              >
+                @{stats?.user?.login || 'torof'}
+              </p>
+              <p
+                className={`text-xs ${
+                  theme === 'theme-light' ? 'text-gray-600' : 'text-gray-400'
+                }`}
+              >
+                GitHub Profile
+              </p>
+            </div>
+          </Link>
+        </div>
+
+        {/* Contribution Graph */}
+        <ContributionGraph yearlyContributions={stats?.yearlyContributions || 1200} />
       </div>
     </div>
   );
