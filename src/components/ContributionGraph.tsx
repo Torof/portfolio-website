@@ -110,13 +110,6 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
   return (
     <div className={`${className}`}>
       <div className="flex flex-col items-center">
-        <h3 className={`text-lg font-semibold mb-4 flex items-center ${
-          theme === 'theme-light' ? 'text-gray-800' : 'text-white'
-        }`}>
-          <span className="text-xl mr-2">📊</span>
-          Contribution Activity
-        </h3>
-        
         {/* Contribution Graph */}
         <div 
           className={`
