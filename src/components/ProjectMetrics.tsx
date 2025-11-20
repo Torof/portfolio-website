@@ -85,7 +85,7 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
     },
   ] : fallbackMetrics;
 
-  const languages = (stats?.topLanguages?.slice(0, 4)) || fallbackLanguages;
+  const languages = (stats?.topLanguages?.slice(0, 3)) || fallbackLanguages.slice(0, 3);
 
   return (
     <div className="flex gap-6 items-start">
@@ -144,29 +144,30 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
 
           {/* Languages Card */}
           <div
-            className={`p-4 rounded-lg border transition-all duration-300 ${
+            className={`p-3 rounded-lg border transition-all duration-300 ${
               theme === 'theme-light'
                 ? 'bg-white border-gray-200 hover:shadow-md'
                 : 'bg-slate-800/60 border-slate-600/50 hover:shadow-lg'
             }`}
           >
-          <div className="space-y-3">
+          <div className="space-y-2">
             {languages.map((language) => (
-              <div key={language.name} className="flex items-center gap-3">
+              <div key={language.name} className="flex items-center gap-2">
                 <div
-                  className="w-3 h-3 rounded-full ring-2 ring-white/20 flex-shrink-0"
+                  className="w-2 h-2 rounded-full flex-shrink-0"
                   style={{ backgroundColor: language.color }}
                 ></div>
                 <span
-                  className={`text-sm font-semibold w-24 flex-shrink-0 ${
+                  className={`text-xs font-semibold truncate ${
                     theme === 'theme-light' ? 'text-gray-900' : 'text-white'
                   }`}
+                  style={{ maxWidth: '60px' }}
                 >
                   {language.name}
                 </span>
-                <div className="flex-1 flex items-center gap-2">
+                <div className="flex-1 flex items-center gap-1 min-w-0">
                   <div
-                    className={`flex-1 h-2 rounded-full overflow-hidden ${
+                    className={`flex-1 h-1.5 rounded-full overflow-hidden ${
                       theme === 'theme-light' ? 'bg-gray-200' : 'bg-gray-700'
                     }`}
                   >
@@ -179,7 +180,7 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
                     ></div>
                   </div>
                   <span
-                    className={`text-sm font-bold w-12 text-right flex-shrink-0 ${
+                    className={`text-xs font-bold flex-shrink-0 ${
                       theme === 'theme-light' ? 'text-gray-900' : 'text-white'
                     }`}
                   >
@@ -231,7 +232,9 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
         </div>
 
         {/* Contribution Graph */}
-        <ContributionGraph yearlyContributions={stats?.yearlyContributions || 1200} />
+        <div className="overflow-x-auto">
+          <ContributionGraph yearlyContributions={stats?.yearlyContributions || 1200} />
+        </div>
       </div>
     </div>
   );
