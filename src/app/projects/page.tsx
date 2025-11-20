@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import ProjectCard from '@/components/ProjectCard';
 import CodeRain from '@/components/CodeRain';
 import ProjectMetrics from '@/components/ProjectMetrics';
-import FeaturedProjectsCarousel from '@/components/ProjectsCarousel';
 import { GitHubStats } from '@/lib/services/github';
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { useTheme } from '@/lib/context/ThemeContext';
@@ -76,19 +75,6 @@ export default function ProjectsPage() {
           <ProjectMetrics stats={githubStats} loading={statsLoading} />
         </div>
 
-        {/* Featured Projects Carousel */}
-        <div className={`mb-8 p-6 rounded-lg border ${
-          theme === 'theme-light'
-            ? 'bg-white border-gray-300'
-            : 'bg-slate-800/60 border-slate-600'
-        }`}>
-          <h2 className={`text-2xl font-bold mb-6 ${
-            theme === 'theme-light' ? 'text-gray-900' : 'text-white'
-          }`}>
-            {t('projects.somePublishedProjects')}
-          </h2>
-          <FeaturedProjectsCarousel />
-        </div>
 
         {/* Projects Grid */}
         <div className={`p-6 rounded-lg border ${
