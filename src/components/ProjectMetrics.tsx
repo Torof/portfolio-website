@@ -32,7 +32,7 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
     return (
       <div className="flex gap-6">
         {/* Left: Title skeleton */}
-        <div className="w-[30%]">
+        <div className="w-[20%]">
           <div className={`h-8 rounded mb-2 animate-pulse ${
             theme === 'theme-light' ? 'bg-gray-200' : 'bg-slate-700'
           }`}></div>
@@ -89,8 +89,8 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
 
   return (
     <div className="flex gap-6 items-start">
-      {/* Left: Title & Description (30%) */}
-      <div className="w-[30%] flex-shrink-0">
+      {/* Left: Title & Description (20%) */}
+      <div className="w-[20%] flex-shrink-0">
         <h2 className={`text-2xl font-bold mb-3 ${
           theme === 'theme-light' ? 'text-gray-900' : 'text-white'
         }`}>
