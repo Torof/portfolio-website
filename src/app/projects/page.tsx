@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import ProjectCard from '@/components/ProjectCard';
 import CodeRain from '@/components/CodeRain';
 import ProjectMetrics from '@/components/ProjectMetrics';
+import FeaturedProjectsCarousel from '@/components/ProjectsCarousel';
 import { GitHubStats } from '@/lib/services/github';
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { useTheme } from '@/lib/context/ThemeContext';
@@ -66,27 +67,57 @@ export default function ProjectsPage() {
       <div className="relative z-10 min-h-screen flex justify-center py-16">
         <div className={`w-full max-w-6xl mx-4 rounded-2xl shadow-2xl border ${
           theme === 'theme-light'
-            ? 'bg-white border-gray-200'
-            : 'bg-slate-900 border-[rgba(255,255,255,0.25)]'
+            ? 'bg-white border-gray-400'
+            : 'bg-slate-900 border-[rgba(255,255,255,0.4)]'
         }`}>
           <div className="px-6 md:px-8 py-8">
         {/* Project Metrics */}
-        <div className="mb-8">
+        <div className="mb-16">
           <ProjectMetrics stats={githubStats} loading={statsLoading} />
         </div>
 
+        {/* Separator */}
+        <div className="mb-16 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent dark:via-slate-500"></div>
+
+        {/* Projects Section Title */}
+        <div className="mb-12">
+          <h2 className={`text-2xl font-bold mb-3 underline ${
+            theme === 'theme-light' ? 'text-gray-900' : 'text-white'
+          }`}>
+            {t('projects.projectsTitle')}
+          </h2>
+          <p className={`text-sm leading-relaxed ${
+            theme === 'theme-light' ? 'text-gray-600' : 'text-gray-400'
+          }`}>
+            {t('projects.projectsDescription')}
+          </p>
+        </div>
+
+        {/* Featured Projects Carousel */}
+        <div className={`mb-16 p-6 rounded-lg border ${
+          theme === 'theme-light'
+            ? 'bg-white border-gray-300'
+            : 'bg-slate-800/60 border-slate-700'
+        }`}>
+          <h3 className={`text-sm font-semibold mb-8 underline text-center ${
+            theme === 'theme-light' ? 'text-gray-900' : 'text-white'
+          }`}>
+            {t('projects.somePublishedProjects')}
+          </h3>
+          <FeaturedProjectsCarousel />
+        </div>
 
         {/* Projects Grid */}
         <div className={`p-6 rounded-lg border ${
           theme === 'theme-light'
             ? 'bg-white border-gray-300'
-            : 'bg-slate-800/60 border-slate-600'
+            : 'bg-slate-800/60 border-slate-700'
         }`}>
-          <h2 className={`text-2xl font-bold mb-6 ${
+          <h3 className={`text-sm font-semibold mb-8 underline text-center ${
             theme === 'theme-light' ? 'text-gray-900' : 'text-white'
           }`}>
             {t('projects.githubRepositories')}
-          </h2>
+          </h3>
 
           {loading ? (
             <div className="text-center py-16">

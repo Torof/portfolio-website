@@ -87,20 +87,20 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
   };
 
   const getContributionColor = (level: number) => {
-    const colors = theme === 'theme-light' 
+    const colors = theme === 'theme-light'
       ? [
           'rgba(0, 0, 0, 0.05)',     // No contributions
-          'rgba(99, 126, 234, 0.4)', // Low (Ethereum blue)
-          'rgba(99, 126, 234, 0.6)', // Medium-low
-          'rgba(99, 126, 234, 0.8)', // Medium-high
-          'rgba(99, 126, 234, 1.0)'  // High
+          'rgba(34, 197, 94, 0.4)',  // Low (green)
+          'rgba(34, 197, 94, 0.6)',  // Medium-low
+          'rgba(34, 197, 94, 0.8)',  // Medium-high
+          'rgba(34, 197, 94, 1.0)'   // High
         ]
       : [
           'rgba(255, 255, 255, 0.05)', // No contributions
-          'rgba(99, 126, 234, 0.3)',   // Low (Ethereum blue)
-          'rgba(99, 126, 234, 0.5)',   // Medium-low
-          'rgba(99, 126, 234, 0.7)',   // Medium-high
-          'rgba(99, 126, 234, 0.9)'    // High
+          'rgba(34, 197, 94, 0.3)',    // Low (green)
+          'rgba(34, 197, 94, 0.5)',    // Medium-low
+          'rgba(34, 197, 94, 0.7)',    // Medium-high
+          'rgba(34, 197, 94, 0.9)'     // High
         ];
     return colors[level];
   };
@@ -149,7 +149,7 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
                       style={{
                         backgroundColor: getContributionColor(level),
                         transitionDelay: `${delay}ms`,
-                        border: level > 0 ? '1px solid rgba(99, 126, 234, 0.2)' : '1px solid rgba(255, 255, 255, 0.05)'
+                        border: level > 0 ? '1px solid rgba(34, 197, 94, 0.2)' : '1px solid rgba(255, 255, 255, 0.05)'
                       }}
                       title={`${contributions} contributions`}
                     />

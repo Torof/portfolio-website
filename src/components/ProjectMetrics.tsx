@@ -91,22 +91,20 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
     <div className="flex gap-6 items-start">
       {/* Left: Title & Description (20%) */}
       <div className="w-[20%] flex-shrink-0">
-        <h2 className={`text-2xl font-bold mb-3 ${
+        <h2 className={`text-2xl font-bold mb-3 underline ${
           theme === 'theme-light' ? 'text-gray-900' : 'text-white'
         }`}>
-          {t('projects.someOfMyProjects')}
+          {t('projects.githubStats')}
         </h2>
         <p className={`text-sm leading-relaxed ${
           theme === 'theme-light' ? 'text-gray-600' : 'text-gray-400'
         }`}>
-          {t('projects.metricsDescription')}
+          {t('projects.githubStatsSubtitle')}
         </p>
       </div>
 
       {/* Separator */}
-      <div className={`w-px self-stretch ${
-        theme === 'theme-light' ? 'bg-gray-300' : 'bg-slate-600'
-      }`}></div>
+      <div className="w-px self-stretch bg-gradient-to-b from-transparent via-gray-400 to-transparent dark:via-slate-500"></div>
 
       {/* Right: Metrics (80%) */}
       <div className="flex-1 space-y-4">
@@ -118,8 +116,8 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
               key={metric.label}
               className={`p-4 rounded-lg border transition-all duration-300 hover:scale-105 ${
                 theme === 'theme-light'
-                  ? 'bg-white border-gray-200 hover:shadow-md'
-                  : 'bg-slate-800/60 border-slate-600/50 hover:shadow-lg'
+                  ? 'bg-white border-gray-400 hover:shadow-md'
+                  : 'bg-slate-800/60 border-slate-500 hover:shadow-lg'
               }`}
             >
               <div className="flex flex-col items-center text-center">
@@ -146,8 +144,8 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
           <div
             className={`p-3 rounded-lg border transition-all duration-300 ${
               theme === 'theme-light'
-                ? 'bg-white border-gray-200 hover:shadow-md'
-                : 'bg-slate-800/60 border-slate-600/50 hover:shadow-lg'
+                ? 'bg-white border-gray-400 hover:shadow-md'
+                : 'bg-slate-800/60 border-slate-500 hover:shadow-lg'
             }`}
           >
           <div className="space-y-2">
@@ -199,8 +197,8 @@ export default function ProjectMetrics({ stats, loading }: ProjectMetricsProps) 
             rel="noopener noreferrer"
             className={`p-4 rounded-lg border transition-all duration-300 hover:scale-105 ${
               theme === 'theme-light'
-                ? 'bg-white border-gray-200 hover:border-blue-400 hover:shadow-md'
-                : 'bg-slate-800/60 border-slate-600/50 hover:border-blue-500/60 hover:shadow-lg'
+                ? 'bg-white border-gray-400 hover:border-blue-500 hover:shadow-md'
+                : 'bg-slate-800/60 border-slate-500 hover:border-blue-400 hover:shadow-lg'
             }`}
           >
             <div className="flex flex-col items-center text-center">

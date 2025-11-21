@@ -22,8 +22,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       {...cardProps}
       className={`group block rounded-xl overflow-hidden border mb-6 w-full backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer ${
         theme === 'theme-light'
-          ? 'bg-[rgba(255,255,255,0.95)] border-[rgba(0,0,0,0.1)] hover:shadow-[rgba(124,58,237,0.2)] hover:border-[rgba(124,58,237,0.3)]'
-          : 'bg-[rgba(15,23,42,0.7)] border-[rgba(255,255,255,0.1)] hover:shadow-[rgba(124,58,237,0.3)] hover:border-[rgba(124,58,237,0.4)]'
+          ? 'bg-[rgba(255,255,255,0.95)] border-gray-400 hover:shadow-[rgba(124,58,237,0.2)] hover:border-blue-500'
+          : 'bg-[rgba(15,23,42,0.7)] border-slate-500 hover:shadow-[rgba(124,58,237,0.3)] hover:border-blue-400'
       }`}
     >
       <div className="h-48 relative overflow-hidden project-card-image">

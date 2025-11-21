@@ -92,13 +92,7 @@ export default function FeaturedProjectsCarousel() {
   const currentProjects = featuredProjects.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <div
-      className={`rounded-lg border p-4 ${
-        theme === 'theme-light'
-          ? 'bg-white border-gray-200'
-          : 'bg-slate-800/60 border-slate-600/50'
-      }`}
-    >
+    <div>
       <div className="flex items-center gap-4">
         {/* Left Arrow */}
         <button
@@ -138,8 +132,8 @@ export default function FeaturedProjectsCarousel() {
                     key={project.id}
                     className={`flex flex-col p-4 rounded-lg border transition-all duration-300 ${
                       theme === 'theme-light'
-                        ? 'bg-white border-gray-300 hover:border-blue-400 hover:shadow-lg'
-                        : 'bg-slate-800/60 border-slate-600 hover:border-blue-500/60 hover:shadow-xl'
+                        ? 'bg-white border-gray-500 hover:border-blue-500 hover:shadow-lg'
+                        : 'bg-slate-800/60 border-slate-500 hover:border-blue-400 hover:shadow-xl'
                     }`}
                   >
                     {/* Project Image */}
