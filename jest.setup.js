@@ -23,7 +23,8 @@ jest.mock('next/navigation', () => ({
 // Mock Next.js Image component
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: (props) => {
+  default: ({ priority, loading, quality, fill, sizes, ...props }) => {
+    // Filter out Next.js-specific props that aren't valid on <img> elements
     // eslint-disable-next-line @next/next/no-img-element
     return <img {...props} alt={props.alt} />
   },
@@ -38,19 +39,30 @@ jest.mock('next/link', () => ({
 }))
 
 // Mock framer-motion
-jest.mock('framer-motion', () => ({
-  motion: {
-    div: ({ children, ...props }) => <div {...props}>{children}</div>,
-    section: ({ children, ...props }) => <section {...props}>{children}</section>,
-    span: ({ children, ...props }) => <span {...props}>{children}</span>,
-    h1: ({ children, ...props }) => <h1 {...props}>{children}</h1>,
-    h2: ({ children, ...props }) => <h2 {...props}>{children}</h2>,
-    p: ({ children, ...props }) => <p {...props}>{children}</p>,
-    ul: ({ children, ...props }) => <ul {...props}>{children}</ul>,
-    li: ({ children, ...props }) => <li {...props}>{children}</li>,
-  },
-  AnimatePresence: ({ children }) => children,
-}))
+jest.mock('framer-motion', () => {
+  // Helper to filter out framer-motion props
+  const filterMotionProps = ({
+    animate, initial, exit, variants, transition,
+    whileHover, whileTap, whileFocus, whileInView,
+    drag, dragConstraints, dragElastic, dragMomentum,
+    layout, layoutId, style, onAnimationComplete,
+    ...props
+  }) => props;
+
+  return {
+    motion: {
+      div: ({ children, ...props }) => <div {...filterMotionProps(props)}>{children}</div>,
+      section: ({ children, ...props }) => <section {...filterMotionProps(props)}>{children}</section>,
+      span: ({ children, ...props }) => <span {...filterMotionProps(props)}>{children}</span>,
+      h1: ({ children, ...props }) => <h1 {...filterMotionProps(props)}>{children}</h1>,
+      h2: ({ children, ...props }) => <h2 {...filterMotionProps(props)}>{children}</h2>,
+      p: ({ children, ...props }) => <p {...filterMotionProps(props)}>{children}</p>,
+      ul: ({ children, ...props }) => <ul {...filterMotionProps(props)}>{children}</ul>,
+      li: ({ children, ...props }) => <li {...filterMotionProps(props)}>{children}</li>,
+    },
+    AnimatePresence: ({ children }) => children,
+  };
+})
 
 // Mock @react-three/fiber and @react-three/drei for 3D components
 jest.mock('@react-three/fiber', () => ({
