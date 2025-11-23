@@ -90,8 +90,6 @@ const translations = {
     'about.title': 'About Me',
     'about.description': 'Passionate blockchain developer with expertise in smart contracts, DeFi protocols, and decentralized applications. I combine technical excellence with creative problem-solving to deliver robust Web3 solutions.',
     'about.skills': 'Technical Skills',
-    'about.interests.vibe': 'Vibe coding sessions with ambient music and flow states',
-    'about.vibeButton': 'Vibe Coding',
     'about.whatIDo': 'What I Do',
     'about.card1.text': 'I\'m a passionate blockchain developer with expertise in smart contract development, having started my journey in {year}. With over {experience} years in the blockchain space, I\'ve gained deep experience in Solidity, EVM, DeFi, and NFTs.',
     'about.card2.text': 'I build fullstack Decentralized Applications (dApps) from conception to production, with a focus on security, efficiency, and user experience. My background includes working with various blockchain platforms and technologies, always staying at the cutting edge.',
@@ -100,6 +98,7 @@ const translations = {
     'about.item2': 'Build full-stack dApps with modern frontend technologies',
     'about.item3': 'Audit and optimize existing blockchain projects',
     'about.item4': 'Create and implement token economies and NFT systems',
+    'about.item5': 'Build complete web applications and websites from front-end to back-end',
 
     // Skills section
     'skills.blockchain': 'Blockchain',
@@ -723,8 +722,6 @@ const translations = {
     'about.title': 'À Propos de Moi',
     'about.description': 'Développeur blockchain passionné avec une expertise en smart contracts, protocoles DeFi et applications décentralisées. Je combine l\'excellence technique avec la résolution créative de problèmes pour livrer des solutions Web3 robustes.',
     'about.skills': 'Compétences Techniques',
-    'about.interests.vibe': 'Sessions de vibe coding avec musique ambiante et états de flow',
-    'about.vibeButton': 'Vibe Coding',
     'about.whatIDo': 'Ce Que Je Fais',
     'about.card1.text': 'Je suis un développeur blockchain passionné avec une expertise en développement de smart contracts, ayant commencé mon parcours en {year}. Avec plus de {experience} années dans l\'espace blockchain, j\'ai acquis une expérience approfondie en Solidity, EVM, DeFi et NFTs.',
     'about.card2.text': 'Je construis des Applications Décentralisées (dApps) complètes de la conception à la production, en mettant l\'accent sur la sécurité, l\'efficacité et l\'expérience utilisateur. Mon expérience inclut le travail avec diverses plateformes et technologies blockchain, restant toujours à la pointe.',
@@ -733,6 +730,7 @@ const translations = {
     'about.item2': 'Construire des dApps complètes avec des technologies frontend modernes',
     'about.item3': 'Auditer et optimiser les projets blockchain existants',
     'about.item4': 'Créer et implémenter des économies de tokens et systèmes NFT',
+    'about.item5': 'Construire des applications web et sites web complets du front-end au back-end',
 
     // Skills section
     'skills.blockchain': 'Blockchain',

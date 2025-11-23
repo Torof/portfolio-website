@@ -150,17 +150,9 @@ export default function AboutSection() {
             </div>
             <div className={`flex items-start p-3 rounded-lg transition-all duration-300 group ${theme === 'theme-light' ? 'hover:bg-[rgba(0,0,0,0.05)]' : 'hover:bg-[rgba(255,255,255,0.05)]'}`}>
               <span className="text-2xl mr-3 shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
-                💻
+                🌐
               </span>
-              <div className="flex items-center justify-between w-full">
-                <span className="leading-tight">{t('about.interests.vibe')}</span>
-                <Link
-                  href="/vibe-coding"
-                  className="ml-4 px-4 py-2 bg-gradient-to-r from-[var(--primary-400)] to-[var(--secondary-400)] text-white text-sm font-medium rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300"
-                >
-                  {t('about.vibeButton')}
-                </Link>
-              </div>
+              <span className="leading-tight">{t('about.item5')}</span>
             </div>
           </div>
         </div>
