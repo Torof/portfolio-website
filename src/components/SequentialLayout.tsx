@@ -13,8 +13,6 @@ const SequentialLayout: React.FC = () => {
   const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
   const textAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
   const techStackAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 400 });
-  const projectsTitleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
-  const projectsTextAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
   const projectsGridAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 400 });
 
   return (

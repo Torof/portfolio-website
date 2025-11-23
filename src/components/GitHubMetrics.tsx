@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { GitHubStats } from '@/lib/services/github';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useLanguage } from '@/lib/context/LanguageContext';
 import { useTheme } from '@/lib/context/ThemeContext';
 
 interface GitHubMetricsProps {
@@ -13,7 +12,6 @@ interface GitHubMetricsProps {
 
 
 const GitHubMetrics: React.FC<GitHubMetricsProps> = ({ stats }) => {
-  const { t } = useLanguage();
   const { theme } = useTheme();
   const [isVisible, setIsVisible] = useState(false);
 

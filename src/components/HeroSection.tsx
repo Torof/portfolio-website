@@ -14,7 +14,6 @@ export default function HeroSection() {
   const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
   const textAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
   const buttonsAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 400 });
-  const infoAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 600 });
   const profileAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 300 });
 
   return (

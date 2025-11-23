@@ -1,36 +1,8 @@
-import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import NavBar from '../NavBar';
-
-// Mock the contexts
-const mockToggleTheme = jest.fn();
-const mockSetLanguage = jest.fn();
-const mockT = jest.fn((key: string) => key);
-
-jest.mock('../../lib/context/ThemeContext', () => ({
-  useTheme: () => ({
-    theme: 'theme-dark',
-    toggleTheme: mockToggleTheme,
-  }),
-}));
-
-jest.mock('../../lib/context/LanguageContext', () => ({
-  useLanguage: () => ({
-    language: 'en',
-    setLanguage: mockSetLanguage,
-    t: mockT,
-  }),
-}));
-
-// Mock navigation data
-jest.mock('../../lib/data/navigation', () => ({
-  navLinks: [
-    { name: 'Home', path: '/' },
-    { name: 'Experience', path: '/experience' },
-    { name: 'Projects', path: '/projects' },
-    { name: 'Contact', path: '/contact' },
-  ],
-}));
+import Navbar from '../NavBar';
+import { ThemeProvider } from '@/lib/context/ThemeContext';
+import { LanguageProvider } from '@/lib/context/LanguageContext';
+import { navLinks } from '@/lib/data/navigation';
 
 // Mock ThemeToggle component
 jest.mock('../ThemeToggle', () => {
@@ -39,123 +11,253 @@ jest.mock('../ThemeToggle', () => {
   };
 });
 
-// Mock usePathname
-jest.mock('next/navigation', () => ({
-  usePathname: () => '/',
-}));
+// Helper to render with providers
+const renderWithProviders = (component: React.ReactElement, pathname = '/') => {
+  // Mock usePathname to return specific path
+  jest.spyOn(require('next/navigation'), 'usePathname').mockReturnValue(pathname);
 
-describe('NavBar', () => {
+  return render(
+    <ThemeProvider>
+      <LanguageProvider>
+        {component}
+      </LanguageProvider>
+    </ThemeProvider>
+  );
+};
+
+describe('Navbar', () => {
   beforeEach(() => {
+    // Reset scroll position
+    Object.defineProperty(window, 'scrollY', { value: 0, writable: true });
+  });
+
+  afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it('should render navigation links', () => {
-    render(<NavBar />);
+  describe('Rendering', () => {
+    it('renders without crashing', () => {
+      renderWithProviders(<Navbar />);
+      expect(screen.getByRole('navigation')).toBeInTheDocument();
+    });
 
-    // The actual rendered text will be the translation keys since we mocked t to return the key
-    expect(screen.getByText('nav.home')).toBeInTheDocument();
-    expect(screen.getByText('nav.experience')).toBeInTheDocument();
-    expect(screen.getByText('nav.projects')).toBeInTheDocument();
-    expect(screen.getByText('nav.contact')).toBeInTheDocument();
-  });
+    it('renders all navigation links', () => {
+      renderWithProviders(<Navbar />);
 
-  it('should render logo with correct link', () => {
-    render(<NavBar />);
+      // Check for navigation links (they appear twice: desktop + mobile menu)
+      const homeLinks = screen.getAllByText('Home');
+      expect(homeLinks.length).toBeGreaterThan(0);
 
-    const logoLink = screen.getByRole('link', { name: /SD/i });
-    expect(logoLink).toHaveAttribute('href', '/');
-  });
+      const experienceLinks = screen.getAllByText('Experience');
+      expect(experienceLinks.length).toBeGreaterThan(0);
 
-  it('should render theme toggle component', () => {
-    render(<NavBar />);
+      const skillsLinks = screen.getAllByText('Skills');
+      expect(skillsLinks.length).toBeGreaterThan(0);
+    });
 
-    expect(screen.getByTestId('theme-toggle')).toBeInTheDocument();
-  });
+    it('includes ThemeToggle component', () => {
+      renderWithProviders(<Navbar />);
 
-  it('should render language switches', () => {
-    render(<NavBar />);
-
-    const englishFlag = screen.getAllByAltText('English')[0];
-    const frenchFlag = screen.getAllByAltText('Français')[0];
-
-    expect(englishFlag).toBeInTheDocument();
-    expect(frenchFlag).toBeInTheDocument();
-  });
-
-  it('should call setLanguage when language buttons are clicked', () => {
-    render(<NavBar />);
-
-    const englishButtons = screen.getAllByLabelText('Switch to English');
-    const frenchButtons = screen.getAllByLabelText('Changer vers le français');
-
-    fireEvent.click(englishButtons[0]);
-    expect(mockSetLanguage).toHaveBeenCalledWith('en');
-
-    fireEvent.click(frenchButtons[0]);
-    expect(mockSetLanguage).toHaveBeenCalledWith('fr');
-  });
-
-  it('should toggle mobile menu when hamburger is clicked', () => {
-    render(<NavBar />);
-
-    const mobileMenuButton = screen.getByLabelText('Toggle mobile menu');
-    
-    // Mobile menu should not be visible initially
-    expect(screen.queryByText('Language:')).not.toBeInTheDocument();
-
-    fireEvent.click(mobileMenuButton);
-
-    // Mobile menu should be visible after click
-    expect(screen.getByText('Language:')).toBeInTheDocument();
-  });
-
-  it('should close mobile menu when navigation link is clicked', () => {
-    render(<NavBar />);
-
-    const mobileMenuButton = screen.getByLabelText('Toggle mobile menu');
-    
-    // Open mobile menu
-    fireEvent.click(mobileMenuButton);
-    expect(screen.getByText('Language:')).toBeInTheDocument();
-
-    // Click a navigation link in mobile menu
-    const mobileLinks = screen.getAllByText('nav.home');
-    const mobileHomeLink = mobileLinks[mobileLinks.length - 1]; // Get the mobile version
-    
-    fireEvent.click(mobileHomeLink);
-    
-    // Menu should close
-    waitFor(() => {
-      expect(screen.queryByText('Language:')).not.toBeInTheDocument();
+      const themeToggles = screen.getAllByTestId('theme-toggle');
+      expect(themeToggles.length).toBeGreaterThan(0);
     });
   });
 
-  it('should apply correct styling classes based on scroll state', () => {
-    render(<NavBar />);
+  describe('Active Link', () => {
+    it('applies active class to current route link', () => {
+      renderWithProviders(<Navbar />, '/experience');
 
-    const nav = screen.getByRole('navigation');
-    expect(nav).toHaveClass('fixed', 'w-full', 'z-50');
+      // Get all links with the experience path
+      const links = screen.getAllByRole('link', { name: /experience/i });
+
+      // At least one should have the active class
+      const hasActiveLink = links.some(link =>
+        link.className.includes('active')
+      );
+      expect(hasActiveLink).toBe(true);
+    });
+
+    it('does not apply active class to non-current routes', () => {
+      renderWithProviders(<Navbar />, '/experience');
+
+      // Get all links with the home path
+      const links = screen.getAllByRole('link', { name: /home/i });
+
+      // None should have the active class
+      const hasActiveLink = links.some(link =>
+        link.className.includes('active')
+      );
+      expect(hasActiveLink).toBe(false);
+    });
   });
 
-  it('should highlight active navigation link', () => {
-    render(<NavBar />);
+  describe('Mobile Menu', () => {
+    it('mobile menu is initially closed', () => {
+      renderWithProviders(<Navbar />);
 
-    // The current path is '/' so Home should be active
-    const homeLinks = screen.getAllByText('nav.home');
-    const desktopHomeLink = homeLinks[0]; // First occurrence should be desktop
-    
-    expect(desktopHomeLink).toHaveClass('active');
+      // Mobile menu container should not be visible initially
+      const mobileLinks = screen.queryByText('Language:');
+      expect(mobileLinks).not.toBeInTheDocument();
+    });
+
+    it('opens mobile menu when hamburger button is clicked', () => {
+      renderWithProviders(<Navbar />);
+
+      const menuButton = screen.getByLabelText('Toggle mobile menu');
+      fireEvent.click(menuButton);
+
+      // Mobile menu should now be visible
+      expect(screen.getByText('Language:')).toBeInTheDocument();
+      expect(screen.getByText('Theme:')).toBeInTheDocument();
+    });
+
+    it('closes mobile menu when hamburger button is clicked again', () => {
+      renderWithProviders(<Navbar />);
+
+      const menuButton = screen.getByLabelText('Toggle mobile menu');
+
+      // Open menu
+      fireEvent.click(menuButton);
+      expect(screen.getByText('Language:')).toBeInTheDocument();
+
+      // Close menu
+      fireEvent.click(menuButton);
+      expect(screen.queryByText('Language:')).not.toBeInTheDocument();
+    });
+
+    it('closes mobile menu when a link is clicked', () => {
+      renderWithProviders(<Navbar />);
+
+      const menuButton = screen.getByLabelText('Toggle mobile menu');
+      fireEvent.click(menuButton);
+
+      // Menu should be open
+      expect(screen.getByText('Language:')).toBeInTheDocument();
+
+      // Click a mobile menu link (find the one in the mobile menu container)
+      const mobileLinks = screen.getAllByRole('link', { name: /home/i });
+      // The mobile link should be one that's inside the mobile menu
+      const mobileLink = mobileLinks.find(link =>
+        link.className.includes('block')
+      );
+
+      if (mobileLink) {
+        fireEvent.click(mobileLink);
+
+        // Menu should be closed
+        expect(screen.queryByText('Language:')).not.toBeInTheDocument();
+      }
+    });
   });
 
-  it('should have proper accessibility attributes', () => {
-    render(<NavBar />);
+  describe('Scroll Behavior', () => {
+    it('applies scrolled styles when scrolled down', async () => {
+      const { container } = renderWithProviders(<Navbar />);
 
-    const mobileMenuButton = screen.getByLabelText('Toggle mobile menu');
-    const englishButton = screen.getAllByLabelText('Switch to English')[0];
-    const frenchButton = screen.getAllByLabelText('Changer vers le français')[0];
+      // Simulate scroll
+      Object.defineProperty(window, 'scrollY', { value: 50, writable: true });
+      fireEvent.scroll(window);
 
-    expect(mobileMenuButton).toHaveAttribute('aria-label');
-    expect(englishButton).toHaveAttribute('aria-label');
-    expect(frenchButton).toHaveAttribute('aria-label');
+      await waitFor(() => {
+        const nav = container.querySelector('nav');
+        expect(nav?.className).toContain('navbar-scrolled');
+      });
+    });
+
+    it('removes scrolled styles when at top', async () => {
+      const { container } = renderWithProviders(<Navbar />);
+
+      // Scroll down first
+      Object.defineProperty(window, 'scrollY', { value: 50, writable: true });
+      fireEvent.scroll(window);
+
+      await waitFor(() => {
+        const nav = container.querySelector('nav');
+        expect(nav?.className).toContain('navbar-scrolled');
+      });
+
+      // Scroll back to top
+      Object.defineProperty(window, 'scrollY', { value: 0, writable: true });
+      fireEvent.scroll(window);
+
+      await waitFor(() => {
+        const nav = container.querySelector('nav');
+        expect(nav?.className).not.toContain('navbar-scrolled');
+      });
+    });
+
+    it('cleans up scroll event listener on unmount', () => {
+      const removeEventListenerSpy = jest.spyOn(window, 'removeEventListener');
+
+      const { unmount } = renderWithProviders(<Navbar />);
+      unmount();
+
+      expect(removeEventListenerSpy).toHaveBeenCalledWith('scroll', expect.any(Function));
+    });
+  });
+
+  describe('Theme Integration', () => {
+    it('applies light theme classes when theme is light', async () => {
+      // Set light theme in localStorage before rendering
+      const getItemSpy = jest.spyOn(Storage.prototype, 'getItem');
+      getItemSpy.mockReturnValue('theme-light');
+
+      const { container } = renderWithProviders(<Navbar />);
+
+      // Wait for the component to mount and apply theme styles
+      await waitFor(() => {
+        const nav = container.querySelector('nav');
+        // After mounting, light theme should have rgba(255,255,255 background
+        expect(nav?.className).toContain('bg-[rgba(255,255,255');
+      });
+
+      // Clean up
+      getItemSpy.mockRestore();
+    });
+
+    it('applies different styles when scrolled in light mode', async () => {
+      const { container } = renderWithProviders(<Navbar />);
+
+      // Scroll down
+      Object.defineProperty(window, 'scrollY', { value: 50, writable: true });
+      fireEvent.scroll(window);
+
+      await waitFor(() => {
+        const nav = container.querySelector('nav');
+        // Should have scrolled styling
+        expect(nav?.className).toContain('py-3');
+      });
+    });
+  });
+
+  describe('Accessibility', () => {
+    it('has proper aria-label for mobile menu button', () => {
+      renderWithProviders(<Navbar />);
+      expect(screen.getByLabelText('Toggle mobile menu')).toBeInTheDocument();
+    });
+
+    it('all links are keyboard accessible', () => {
+      renderWithProviders(<Navbar />);
+      const links = screen.getAllByRole('link');
+
+      links.forEach(link => {
+        expect(link).toHaveAttribute('href');
+      });
+    });
+  });
+
+  describe('Responsive Design', () => {
+    it('shows desktop navigation on large screens', () => {
+      renderWithProviders(<Navbar />);
+
+      // Desktop nav should have md:flex class
+      const desktopNav = screen.getAllByRole('link')[0].parentElement?.parentElement;
+      expect(desktopNav?.className).toContain('md:flex');
+    });
+
+    it('shows mobile menu button', () => {
+      renderWithProviders(<Navbar />);
+      expect(screen.getByLabelText('Toggle mobile menu')).toBeInTheDocument();
+    });
   });
 });

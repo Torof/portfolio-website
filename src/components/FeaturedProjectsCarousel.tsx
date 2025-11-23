@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
 import { useTheme } from '@/lib/context/ThemeContext';
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { FeaturedProject } from '@/lib/data/featuredProjects';
