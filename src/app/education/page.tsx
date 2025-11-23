@@ -50,17 +50,17 @@ export default function EducationPage() {
                     
                     {/* Institution Header */}
                     <div className="flex items-start gap-4 mb-6">
-                      <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-[rgba(218,165,32,0.3)] to-[rgba(255,140,0,0.3)] dark:from-[rgba(218,165,32,0.2)] dark:to-[rgba(255,140,0,0.2)] border border-[rgba(218,165,32,0.3)] dark:border-[rgba(255,255,255,0.2)] flex items-center justify-center overflow-hidden flex-shrink-0">
+                      <div className="w-28 h-28 rounded-xl bg-gradient-to-br from-[rgba(218,165,32,0.3)] to-[rgba(255,140,0,0.3)] dark:from-[rgba(218,165,32,0.2)] dark:to-[rgba(255,140,0,0.2)] border border-[rgba(218,165,32,0.3)] dark:border-[rgba(255,255,255,0.2)] flex items-center justify-center overflow-hidden flex-shrink-0">
                         {education.logo ? (
-                          <Image 
-                            src={education.logo} 
-                            alt={`${education.institution} logo`} 
-                            width={60} 
-                            height={60} 
+                          <Image
+                            src={education.logo}
+                            alt={`${education.institution} logo`}
+                            width={80}
+                            height={80}
                             className="object-contain"
                           />
                         ) : (
-                          <span className="text-xl font-black text-[#DAA520] tracking-wide">
+                          <span className="text-3xl font-black text-[#DAA520] tracking-wide">
                             {education.institution.charAt(0)}
                           </span>
                         )}
@@ -69,32 +69,27 @@ export default function EducationPage() {
                         <h3 className="text-xl font-black light-text mb-2 line-clamp-2 tracking-tight leading-tight">
                           {t(`edu.${education.id}.degree`)}
                         </h3>
-                        {education.website ? (
-                          <Link 
-                            href={education.website} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-sm text-[#DAA520] hover:text-[#FFD700] font-semibold tracking-wide transition-colors duration-300 block"
-                          >
-                            {education.website.replace('https://', '').replace('http://', '')}
-                          </Link>
-                        ) : (
-                          <p className="text-sm text-[#DAA520] font-semibold tracking-wide uppercase">{education.institution}</p>
-                        )}
+                        <div className="flex items-center justify-between">
+                          {education.website ? (
+                            <Link
+                              href={education.website}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-sm text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 font-semibold tracking-wide transition-colors duration-300 truncate"
+                            >
+                              {(() => {
+                                const cleanUrl = education.website.replace('https://', '').replace('http://', '');
+                                return cleanUrl.length > 25 ? cleanUrl.substring(0, 25) + '...' : cleanUrl;
+                              })()}
+                            </Link>
+                          ) : (
+                            <p className="text-sm text-[#DAA520] font-semibold tracking-wide uppercase">{education.institution}</p>
+                          )}
+                          <p className="light-text text-sm underline flex-shrink-0">
+                            {education.startDate} - {education.endDate}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    
-                    {/* Date Badge */}
-                    <div className="mb-6">
-                      <span className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[rgba(218,165,32,0.25)] to-[rgba(255,140,0,0.25)] dark:from-[rgba(218,165,32,0.2)] dark:to-[rgba(255,140,0,0.2)] border border-[rgba(218,165,32,0.3)] dark:border-[rgba(255,255,255,0.2)] light-text text-xs font-bold tracking-wider">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 opacity-60">
-                          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                          <line x1="16" y1="2" x2="16" y2="6"></line>
-                          <line x1="8" y1="2" x2="8" y2="6"></line>
-                          <line x1="3" y1="10" x2="21" y2="10"></line>
-                        </svg>
-                        {education.startDate} - {education.endDate}
-                      </span>
                     </div>
                     
                     {/* Skills Section */}
@@ -111,9 +106,9 @@ export default function EducationPage() {
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {education.skills?.map((skill) => (
-                          <span 
+                          <span
                             key={skill}
-                            className="px-3 py-2 text-xs bg-gradient-to-r from-[rgba(218,165,32,0.25)] to-[rgba(255,140,0,0.25)] dark:from-[rgba(218,165,32,0.2)] dark:to-[rgba(255,140,0,0.2)] text-[#B8860B] dark:text-[#DAA520] rounded-full border border-[rgba(218,165,32,0.3)] dark:border-[rgba(255,255,255,0.2)] font-semibold tracking-wide transition-all duration-300 hover:scale-105"
+                            className="px-3 py-2 text-xs bg-gradient-to-r from-[rgba(218,165,32,0.25)] to-[rgba(255,140,0,0.25)] dark:from-[rgba(218,165,32,0.2)] dark:to-[rgba(255,140,0,0.2)] text-[#6B5310] dark:text-[#FFD700] rounded-full border-2 border-[rgba(218,165,32,0.6)] dark:border-[rgba(218,165,32,0.5)] font-bold tracking-wide transition-all duration-300 hover:scale-105 shadow-sm"
                           >
                             {t(`skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`) !== `skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}` ? t(`skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`) : skill}
                           </span>
@@ -122,27 +117,20 @@ export default function EducationPage() {
                     </div>
                     
                     {/* Flip Indicator */}
-                    <div className="mt-auto flex items-center justify-center text-[#DAA520] opacity-60 group-hover:opacity-100 transition-all duration-300">
-                      <span className="text-xs mr-3 font-medium tracking-wide">{t('education.clickForDetails')}</span>
-                      <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[#DAA520] to-[#FFD700] flex items-center justify-center animate-pulse">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                          <polyline points="23 4 23 10 17 10"></polyline>
-                          <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-                        </svg>
-                      </div>
+                    <div className="mt-auto flex items-center justify-center light-text opacity-60 group-hover:opacity-100 transition-all duration-300">
+                      <span className="text-xs mr-2 font-medium tracking-wide">{t('education.clickForDetails')}</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
                     </div>
                   </div>
                 }
                 backContent={
                   <div className="h-full backdrop-blur-md rounded-xl p-6 bg-gradient-to-br from-[rgba(255,140,0,0.2)] to-[rgba(218,165,32,0.2)] dark:from-[rgba(255,255,255,0.15)] dark:to-[rgba(255,255,255,0.05)] border border-[rgba(255,140,0,0.3)] dark:border-[rgba(255,255,255,0.2)] cursor-pointer flex flex-col">
-                    {/* Header */}
-                    <div className="mb-6">
-                      <h3 className="text-2xl font-black light-text mb-2 tracking-tight leading-tight">{t(`edu.${education.id}.degree`)}</h3>
-                      <p className="text-sm text-[#DAA520] font-bold tracking-wider uppercase opacity-80">{education.institution}</p>
-                    </div>
-                    
+
                     {/* Detailed Description - Main Focus */}
-                    <div className="flex-1 overflow-hidden flex flex-col">
+                    <div className="flex-1 overflow-hidden flex flex-col mb-6">
                       <h4 className="text-xl font-black light-text mb-6 flex items-center flex-shrink-0 border-b-2 border-[#DAA520] pb-3">
                         <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#DAA520] to-[#FFD700] flex items-center justify-center mr-4 shadow-lg">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
@@ -153,22 +141,23 @@ export default function EducationPage() {
                         <span className="tracking-wide">{t('education.courseDetails')}</span>
                       </h4>
                       <div className="overflow-y-auto flex-1 pr-2 custom-scrollbar">
-                        <p className="light-text text-sm leading-relaxed font-medium opacity-95">
-                          {t(`edu.${education.id}.description`) !== `edu.${education.id}.description` 
-                            ? t(`edu.${education.id}.description`) 
-                            : education.description || education.field}
-                        </p>
+                        <p
+                          className="light-text text-base leading-loose font-normal"
+                          dangerouslySetInnerHTML={{
+                            __html: t(`edu.${education.id}.description`) !== `edu.${education.id}.description`
+                              ? t(`edu.${education.id}.description`)
+                              : education.description || education.field
+                          }}
+                        />
                       </div>
                     </div>
                     
                     {/* Back Indicator */}
-                    <div className="mt-auto flex items-center justify-center text-[#DAA520] opacity-60 group-hover:opacity-100 transition-all duration-300">
-                      <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[#DAA520] to-[#FFD700] flex items-center justify-center mr-3 animate-pulse">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                          <polyline points="1 4 1 10 7 10"></polyline>
-                          <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
-                        </svg>
-                      </div>
+                    <div className="mt-auto flex items-center justify-center light-text opacity-60 group-hover:opacity-100 transition-all duration-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                      </svg>
                       <span className="text-xs font-medium tracking-wide">{t('education.clickForSkills')}</span>
                     </div>
                   </div>

@@ -38,7 +38,7 @@ const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
               <h3 className={`text-2xl font-bold ${
                 theme === 'theme-light' ? 'text-slate-800' : 'text-white'
               }`}>
-                Smart Contract Expertise
+                {t('skills.smartContracts.title')}
               </h3>
             </div>
             <button
@@ -49,7 +49,7 @@ const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
                   : 'bg-slate-800 hover:bg-slate-700 border-slate-600 text-slate-200'
               }`}
             >
-              <span>{isExpanded ? 'Collapse' : 'Expand'}</span>
+              <span>{isExpanded ? t('skills.section.collapse') : t('skills.section.expand')}</span>
               <svg
                 className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
                 fill="none"
@@ -60,15 +60,12 @@ const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
               </svg>
             </button>
           </div>
-          <p className={`text-base leading-relaxed ${
-            theme === 'theme-light' ? 'text-gray-600' : 'text-gray-300'
-          }`}>
-            With over 7 years of experience as a smart contract developer, I have comprehensive
-            knowledge of all major ERC standards and blockchain development patterns. I specialize
-            in building secure, gas-optimized contracts for <strong>DeFi protocols</strong>, <strong>NFT platforms</strong>,
-            and more. Deep expertise across the full spectrum of <strong>Ethereum standards</strong> including
-            token standards, governance mechanisms, proxy patterns, and advanced DeFi primitives.
-          </p>
+          <p
+            className={`text-base leading-relaxed ${
+              theme === 'theme-light' ? 'text-gray-600' : 'text-gray-300'
+            }`}
+            dangerouslySetInnerHTML={{ __html: t('skills.smartContracts.description') }}
+          />
         </div>
 
         {/* Expandable Content */}
@@ -87,14 +84,14 @@ const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
                   <h4 className={`text-lg font-semibold ${
                     theme === 'theme-light' ? 'text-slate-700' : 'text-slate-200'
                   }`}>
-                    ERC Standards & Contract Patterns
+                    {t('skills.smartContracts.tableTitle')}
                   </h4>
                   <span className={`text-sm px-3 py-1 rounded-full ${
                     theme === 'theme-light'
                       ? 'bg-blue-100 text-blue-700'
                       : 'bg-blue-900/30 text-blue-400'
                   }`}>
-                    {category.skills.length} Standards
+                    {category.skills.length} {t('skills.section.standards')}
                   </span>
                 </div>
                 <div className={`rounded-lg border overflow-hidden ${
@@ -113,22 +110,17 @@ const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
                           <th className={`px-6 py-3 text-left text-sm font-semibold ${
                             theme === 'theme-light' ? 'text-gray-700' : 'text-gray-200'
                           }`}>
-                            Standard
+                            {t('skills.section.standard')}
                           </th>
                           <th className={`px-6 py-3 text-left text-sm font-semibold ${
                             theme === 'theme-light' ? 'text-gray-700' : 'text-gray-200'
                           }`}>
-                            Category
+                            {t('skills.section.category')}
                           </th>
                           <th className={`px-6 py-3 text-left text-sm font-semibold ${
                             theme === 'theme-light' ? 'text-gray-700' : 'text-gray-200'
                           }`}>
-                            Description
-                          </th>
-                          <th className={`px-6 py-3 text-center text-sm font-semibold ${
-                            theme === 'theme-light' ? 'text-gray-700' : 'text-gray-200'
-                          }`}>
-                            Expertise
+                            {t('skills.section.description')}
                           </th>
                         </tr>
                       </thead>
@@ -164,23 +156,6 @@ const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
                               {t(`erc.${skill.id}.description`) !== `erc.${skill.id}.description`
                                 ? t(`erc.${skill.id}.description`)
                                 : skill.description}
-                            </td>
-                            <td className="px-6 py-4 text-center">
-                              <span className={`inline-flex px-3 py-1 text-xs font-medium rounded-full ${
-                                skill.level === 5
-                                  ? theme === 'theme-light'
-                                    ? 'bg-green-100 text-green-700'
-                                    : 'bg-green-900/30 text-green-400'
-                                  : skill.level === 4
-                                  ? theme === 'theme-light'
-                                    ? 'bg-blue-100 text-blue-700'
-                                    : 'bg-blue-900/30 text-blue-400'
-                                  : theme === 'theme-light'
-                                    ? 'bg-gray-100 text-gray-700'
-                                    : 'bg-gray-800 text-gray-400'
-                              }`}>
-                                {skill.level === 5 ? 'Expert' : skill.level === 4 ? 'Advanced' : skill.level === 3 ? 'Intermediate' : 'Beginner'}
-                              </span>
                             </td>
                           </motion.tr>
                         ))}

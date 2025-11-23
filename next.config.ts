@@ -6,7 +6,18 @@ const nextConfig: NextConfig = {
   
   // Configure images
   images: {
-    domains: ['avatars.githubusercontent.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.sstatic.net',
+        pathname: '/**',
+      },
+    ],
   },
   
   // Standard trailing slash behavior

@@ -39,7 +39,7 @@ const SecuritySection = ({ category }: SecuritySectionProps) => {
               <h3 className={`text-2xl font-bold ${
                 theme === 'theme-light' ? 'text-slate-800' : 'text-white'
               }`}>
-                Smart Contract Security & Auditing
+                {t('skills.security.title')}
               </h3>
             </div>
             <button
@@ -50,7 +50,7 @@ const SecuritySection = ({ category }: SecuritySectionProps) => {
                   : 'bg-slate-800 hover:bg-slate-700 border-slate-600 text-slate-200'
               }`}
             >
-              <span>{isExpanded ? 'Collapse' : 'Expand'}</span>
+              <span>{isExpanded ? t('skills.section.collapse') : t('skills.section.expand')}</span>
               <svg
                 className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
                 fill="none"
@@ -61,18 +61,12 @@ const SecuritySection = ({ category }: SecuritySectionProps) => {
               </svg>
             </button>
           </div>
-          <p className={`text-base leading-relaxed ${
-            theme === 'theme-light' ? 'text-gray-600' : 'text-gray-300'
-          }`}>
-            With extensive experience in smart contract security, I specialize in identifying and mitigating
-            vulnerabilities before they become exploits. My approach combines <strong>manual code review</strong>,
-            <strong>automated static analysis</strong>, and <strong>property-based testing</strong> to ensure
-            comprehensive security coverage. I have deep knowledge of common attack vectors including
-            <strong> reentrancy</strong>, <strong>flash loan attacks</strong>, <strong>MEV exploitation</strong>,
-            <strong>oracle manipulation</strong>, and more. Using industry-standard tools like <strong>Slither</strong>,
-            <strong>Foundry</strong>, and <strong>Echidna</strong>, I conduct thorough security audits and implement
-            robust defense mechanisms to protect protocols and their users.
-          </p>
+          <p
+            className={`text-base leading-relaxed ${
+              theme === 'theme-light' ? 'text-gray-600' : 'text-gray-300'
+            }`}
+            dangerouslySetInnerHTML={{ __html: t('skills.security.description') }}
+          />
         </div>
 
         {/* Expandable Content - Security Defense System */}

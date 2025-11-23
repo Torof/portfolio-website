@@ -60,7 +60,7 @@ const LiveStackExchangeCard = () => {
           }
 
           if (data.answers && data.answers.length > 0) {
-            setAnswers(data.answers.slice(0, 4));
+            setAnswers(data.answers.slice(0, 2));
             console.log(`✅ Successfully fetched ${data.answers.length} live Stack Exchange answers via API route`);
           }
 
@@ -84,7 +84,7 @@ const LiveStackExchangeCard = () => {
           }
 
           if (liveAnswers && liveAnswers.length > 0) {
-            setAnswers(liveAnswers.slice(0, 4));
+            setAnswers(liveAnswers.slice(0, 2));
             console.log(`✅ Successfully fetched ${liveAnswers.length} live Stack Exchange answers via direct API`);
           }
 
@@ -125,7 +125,7 @@ const LiveStackExchangeCard = () => {
               <h3 className={`text-2xl font-bold ${
                 theme === 'theme-light' ? 'text-slate-800' : 'text-white'
               }`}>
-                Stack Exchange Contributions
+                {t('community.cardTitle')}
               </h3>
             </div>
             <button
@@ -136,7 +136,7 @@ const LiveStackExchangeCard = () => {
                   : 'bg-slate-800 hover:bg-slate-700 border-slate-600 text-slate-200'
               }`}
             >
-              <span>{isExpanded ? 'Collapse' : 'Expand'}</span>
+              <span>{isExpanded ? t('skills.section.collapse') : t('skills.section.expand')}</span>
               <svg
                 className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
                 fill="none"
@@ -147,17 +147,17 @@ const LiveStackExchangeCard = () => {
               </svg>
             </button>
           </div>
-          <p className={`text-base leading-relaxed ${
-            theme === 'theme-light' ? 'text-gray-600' : 'text-gray-300'
-          }`}>
-            Active contributor to the <strong>Ethereum Stack Exchange</strong> community, helping developers solve
-            complex smart contract and blockchain problems. With <strong>{profile.reputation.toLocaleString()} reputation</strong> and
-            <strong> {profile.badges.silver} silver</strong> and <strong>{profile.badges.bronze} bronze badges</strong>,
-            I provide detailed technical answers on topics including <strong>Solidity</strong>, <strong>EVM</strong>,
-            <strong>NFTs</strong>, and <strong>smart contract security</strong>. My contributions focus on practical
-            solutions to real-world blockchain development challenges, sharing knowledge gained from years of
-            hands-on experience building production smart contracts.
-          </p>
+          <p
+            className={`text-base leading-relaxed ${
+              theme === 'theme-light' ? 'text-gray-600' : 'text-gray-300'
+            }`}
+            dangerouslySetInnerHTML={{
+              __html: t('community.description')
+                .replace('{reputation}', profile.reputation.toLocaleString())
+                .replace('{silver}', profile.badges.silver.toString())
+                .replace('{bronze}', profile.badges.bronze.toString())
+            }}
+          />
         </div>
 
         {/* Expandable Content - Stack Exchange Profile */}

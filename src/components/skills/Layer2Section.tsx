@@ -557,7 +557,7 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
               <h3 className={`text-2xl font-bold ${
                 theme === 'theme-light' ? 'text-slate-800' : 'text-white'
               }`}>
-                Layer 2 Scaling Solutions
+                {t('skills.layer2.title')}
               </h3>
             </div>
             <button
@@ -568,7 +568,7 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
                   : 'bg-slate-800 hover:bg-slate-700 border-slate-600 text-slate-200'
               }`}
             >
-              <span>{isExpanded ? 'Collapse' : 'Expand'}</span>
+              <span>{isExpanded ? t('skills.section.collapse') : t('skills.section.expand')}</span>
               <svg
                 className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
                 fill="none"
@@ -579,19 +579,12 @@ const Layer2Section = ({ category }: Layer2SectionProps) => {
               </svg>
             </button>
           </div>
-          <p className={`text-base leading-relaxed ${
-            theme === 'theme-light' ? 'text-gray-600' : 'text-gray-300'
-          }`}>
-            Extensive experience building and deploying on multiple Layer 2 scaling solutions. I have deep
-            knowledge of different L2 architectures including <strong>Optimistic Rollups</strong> (Arbitrum,
-            Optimism, Base), <strong>ZK Rollups</strong> (zkSync Era, Scroll), <strong>Sidechains</strong> (Polygon,
-            Gnosis), and <strong>alternative L1s</strong> (Berachain). My expertise spans <strong>cross-chain
-            bridge implementations</strong>, <strong>gas optimization strategies</strong> specific to each network,
-            <strong>sequencer interactions</strong>, and understanding the <strong>security trade-offs</strong> between
-            different scaling approaches. I've deployed and maintained protocols across multiple networks, handling
-            <strong>L1-L2 communication</strong>, <strong>state management</strong>, and <strong>multi-chain
-            architecture patterns</strong>.
-          </p>
+          <p
+            className={`text-base leading-relaxed ${
+              theme === 'theme-light' ? 'text-gray-600' : 'text-gray-300'
+            }`}
+            dangerouslySetInnerHTML={{ __html: t('skills.layer2.description') }}
+          />
         </div>
 
         {/* Expandable Content - Layer 2 Network Topology */}

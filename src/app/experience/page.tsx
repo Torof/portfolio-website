@@ -47,75 +47,77 @@ export default function ExperiencePage() {
                   <div className="h-full backdrop-blur-md rounded-xl p-6 bg-gradient-to-br from-[rgba(59,130,246,0.15)] to-[rgba(147,51,234,0.15)] dark:from-[rgba(255,255,255,0.15)] dark:to-[rgba(255,255,255,0.05)] border border-[rgba(59,130,246,0.3)] dark:border-[rgba(255,255,255,0.2)] transition-all duration-500 hover:shadow-2xl hover:border-[rgba(59,130,246,0.5)] dark:hover:border-[rgba(59,130,246,0.4)] cursor-pointer flex flex-col">
                     {/* Logo and Company */}
                     <div className="flex items-start gap-4 mb-6">
-                      <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-[rgba(59,130,246,0.3)] to-[rgba(147,51,234,0.3)] dark:from-[rgba(59,130,246,0.2)] dark:to-[rgba(147,51,234,0.2)] border border-[rgba(59,130,246,0.3)] dark:border-[rgba(255,255,255,0.2)] flex items-center justify-center overflow-hidden flex-shrink-0">
+                      <div className="w-28 h-28 rounded-xl bg-gradient-to-br from-[rgba(59,130,246,0.3)] to-[rgba(147,51,234,0.3)] dark:from-[rgba(59,130,246,0.2)] dark:to-[rgba(147,51,234,0.2)] border border-[rgba(59,130,246,0.3)] dark:border-[rgba(255,255,255,0.2)] flex items-center justify-center overflow-hidden flex-shrink-0">
                         {exp.logo ? (
-                          <Image 
-                            src={exp.logo} 
-                            alt={`${exp.company} logo`} 
-                            width={60} 
-                            height={60} 
+                          <Image
+                            src={exp.logo}
+                            alt={`${exp.company} logo`}
+                            width={80}
+                            height={80}
                             className="object-contain"
                           />
                         ) : (
-                          <span className="text-xl font-black light-text tracking-wide">
+                          <span className="text-3xl font-black light-text tracking-wide">
                             {exp.company.charAt(0)}
                           </span>
                         )}
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-black light-text mb-2 line-clamp-1 tracking-tight leading-tight">{t(`exp.${exp.id}.position`)}</h3>
-                        {exp.website ? (
-                          <Link 
-                            href={exp.website} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-sm text-[var(--primary-400)] hover:text-[var(--secondary-400)] font-semibold tracking-wide transition-colors duration-300 block"
-                          >
-                            {exp.website.replace('https://', '').replace('http://', '')}
-                          </Link>
-                        ) : (
-                          <p className="text-sm text-[var(--primary-400)] font-semibold tracking-wide uppercase">{exp.company}</p>
-                        )}
+                        <h3 className="text-xl font-black light-text mb-2 line-clamp-2 tracking-tight leading-tight">{t(`exp.${exp.id}.position`)}</h3>
+                        <div className="flex items-center justify-between">
+                          {exp.website ? (
+                            <Link
+                              href={exp.website}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-sm text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 font-semibold tracking-wide transition-colors duration-300 truncate"
+                            >
+                              {(() => {
+                                const cleanUrl = exp.website.replace('https://', '').replace('http://', '');
+                                return cleanUrl.length > 25 ? cleanUrl.substring(0, 25) + '...' : cleanUrl;
+                              })()}
+                            </Link>
+                          ) : (
+                            <p className="text-sm text-[var(--primary-400)] font-semibold tracking-wide uppercase">{exp.company}</p>
+                          )}
+                          <p className="light-text text-sm underline flex-shrink-0">
+                            {exp.startDate} - {exp.endDate || t('experience.present')}
+                          </p>
+                        </div>
                       </div>
                     </div>
                     
-                    {/* Date Badge */}
-                    <div className="mb-6">
-                      <span className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[rgba(59,130,246,0.25)] to-[rgba(147,51,234,0.25)] dark:from-[rgba(59,130,246,0.2)] dark:to-[rgba(147,51,234,0.2)] border border-[rgba(59,130,246,0.3)] dark:border-[rgba(255,255,255,0.2)] light-text text-xs font-bold tracking-wider">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 opacity-60">
-                          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                          <line x1="16" y1="2" x2="16" y2="6"></line>
-                          <line x1="8" y1="2" x2="8" y2="6"></line>
-                          <line x1="3" y1="10" x2="21" y2="10"></line>
-                        </svg>
-                        {exp.startDate} - {exp.endDate || t('experience.present')}
-                      </span>
-                    </div>
-                    
-                    {/* Short Description */}
-                    <p className="light-text text-sm leading-relaxed line-clamp-3 mb-6 font-light opacity-90">{t(`exp.${exp.id}.description`)}</p>
-                    
-                    {/* All Skills */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {exp.skills.map((skill) => (
-                        <span 
-                          key={skill}
-                          className="px-3 py-2 text-xs bg-gradient-to-r from-[rgba(59,130,246,0.25)] to-[rgba(147,51,234,0.25)] dark:from-[rgba(59,130,246,0.2)] dark:to-[rgba(147,51,234,0.2)] text-[var(--primary-600)] dark:text-[var(--primary-400)] rounded-full border border-[rgba(59,130,246,0.3)] dark:border-[rgba(255,255,255,0.2)] font-semibold tracking-wide transition-all duration-300 hover:scale-105"
-                        >
-                          {t(`skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`) !== `skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}` ? t(`skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`) : skill}
-                        </span>
-                      ))}
+                    {/* Skills Section */}
+                    <div className="flex-1 mb-6 flex flex-col justify-center">
+                      <h4 className="text-sm font-black light-text mb-4 flex items-center border-b-2 border-[var(--primary-400)] pb-2">
+                        <div className="w-5 h-5 rounded-full bg-gradient-to-r from-[var(--primary-400)] to-[var(--secondary-400)] flex items-center justify-center mr-3 shadow-sm">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            <circle cx="12" cy="12" r="10"></circle>
+                          </svg>
+                        </div>
+                        <span className="tracking-wide">{t('experience.skillsUsed')}</span>
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {exp.skills.map((skill) => (
+                          <span
+                            key={skill}
+                            className="px-3 py-2 text-xs bg-gradient-to-r from-[rgba(59,130,246,0.25)] to-[rgba(147,51,234,0.25)] dark:from-[rgba(59,130,246,0.2)] dark:to-[rgba(147,51,234,0.2)] text-[#1E40AF] dark:text-[#60A5FA] rounded-full border-2 border-[rgba(59,130,246,0.6)] dark:border-[rgba(59,130,246,0.5)] font-bold tracking-wide transition-all duration-300 hover:scale-105 shadow-sm"
+                          >
+                            {t(`skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`) !== `skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}` ? t(`skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`) : skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                     
                     {/* Flip Indicator */}
-                    <div className="mt-auto flex items-center justify-center text-[var(--primary-400)] opacity-60 group-hover:opacity-100 transition-all duration-300">
-                      <span className="text-xs mr-3 font-medium tracking-wide">{t('experience.clickForAchievements')}</span>
-                      <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[var(--primary-400)] to-[var(--secondary-400)] flex items-center justify-center animate-pulse">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                          <polyline points="23 4 23 10 17 10"></polyline>
-                          <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-                        </svg>
-                      </div>
+                    <div className="mt-auto flex items-center justify-center light-text opacity-60 group-hover:opacity-100 transition-all duration-300">
+                      <span className="text-xs mr-2 font-medium tracking-wide">{t('experience.clickForAchievements')}</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
                     </div>
                   </div>
                 }
@@ -162,12 +164,7 @@ export default function ExperiencePage() {
                         border-color: rgba(255, 255, 255, 1);
                       }
                     `}</style>
-                    {/* Header */}
-                    <div className="mb-6">
-                      <h3 className="text-2xl font-black light-text mb-2 tracking-tight leading-tight">{t(`exp.${exp.id}.position`)}</h3>
-                      <p className="text-sm text-[var(--secondary-400)] font-bold tracking-wider uppercase opacity-80">{exp.company}</p>
-                    </div>
-                    
+
                     {/* Key Achievements - Clean Highlighted Section */}
                     <div className="flex-1 overflow-hidden flex flex-col">
                       <h4 className="text-2xl font-black light-text mb-6 flex items-center flex-shrink-0 border-b-2 border-[var(--secondary-400)] pb-4">
@@ -189,13 +186,13 @@ export default function ExperiencePage() {
                                 <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[var(--secondary-400)] to-[var(--primary-400)] flex items-center justify-center flex-shrink-0 mt-1 shadow-sm group-hover:scale-110 transition-transform duration-200">
                                   <span className="text-white text-xs font-bold">{idx + 1}</span>
                                 </div>
-                                <span className="text-sm leading-relaxed break-words light-text font-medium opacity-95 group-hover:opacity-100 transition-opacity duration-200">
+                                <span className="text-base leading-loose break-words light-text font-normal opacity-95 group-hover:opacity-100 transition-opacity duration-200">
                                   {exp.id === 'alyra-jury' && achievement.includes('https://') ? (
                                     <span>
-                                      {achievement.split(' - POAP: ')[0]} - 
-                                      <a 
-                                        href={achievement.split('POAP: ')[1]} 
-                                        target="_blank" 
+                                      {achievement.split(' - POAP: ')[0]} -
+                                      <a
+                                        href={achievement.split('POAP: ')[1]}
+                                        target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-[var(--primary-400)] hover:text-[var(--primary-500)] underline ml-1"
                                         onClick={(e) => e.stopPropagation()}
@@ -204,9 +201,13 @@ export default function ExperiencePage() {
                                       </a>
                                     </span>
                                   ) : (
-                                    t(`exp.${exp.id}.achievement.${idx + 1}`) !== `exp.${exp.id}.achievement.${idx + 1}` 
-                                      ? t(`exp.${exp.id}.achievement.${idx + 1}`)
-                                      : achievement
+                                    <span
+                                      dangerouslySetInnerHTML={{
+                                        __html: t(`exp.${exp.id}.achievement.${idx + 1}`) !== `exp.${exp.id}.achievement.${idx + 1}`
+                                          ? t(`exp.${exp.id}.achievement.${idx + 1}`)
+                                          : achievement
+                                      }}
+                                    />
                                   )}
                                 </span>
                               </li>
@@ -219,13 +220,11 @@ export default function ExperiencePage() {
                     </div>
                     
                     {/* Back Indicator */}
-                    <div className="mt-auto flex items-center justify-center text-[var(--secondary-400)] opacity-60 group-hover:opacity-100 transition-all duration-300">
-                      <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[var(--secondary-400)] to-[var(--primary-400)] flex items-center justify-center mr-3 animate-pulse">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                          <polyline points="1 4 1 10 7 10"></polyline>
-                          <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
-                        </svg>
-                      </div>
+                    <div className="mt-auto flex items-center justify-center light-text opacity-60 group-hover:opacity-100 transition-all duration-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                      </svg>
                       <span className="text-xs font-medium tracking-wide">{t('experience.clickForDetails')}</span>
                     </div>
                   </div>

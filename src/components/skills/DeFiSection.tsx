@@ -121,7 +121,7 @@ const DeFiTradingTerminal = ({ category }: DeFiSectionProps) => {
           <div className="p-6">
             {/* Title Section */}
             <div className="mb-6 text-center">
-              <motion.h3 
+              <motion.h3
                 className={`font-mono text-3xl font-bold mb-2 ${
                   theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
                 }`}
@@ -130,59 +130,6 @@ const DeFiTradingTerminal = ({ category }: DeFiSectionProps) => {
               >
                 ═══ DEFI PROTOCOL EXPERTISE ═══
               </motion.h3>
-              <div className={`font-mono text-sm ${
-                theme === 'theme-light' ? 'text-amber-700' : 'text-green-500'
-              }`}>
-                SYSTEM: {category.skills.length} PROTOCOLS LOADED | STATUS: OPERATIONAL
-              </div>
-            </div>
-
-            {/* Market Stats Bar */}
-            <div className={`grid grid-cols-3 gap-4 mb-6 p-3 border ${
-              theme === 'theme-light' 
-                ? 'bg-amber-100/50 border-amber-800' 
-                : 'bg-green-950/30 border-green-600'
-            }`}>
-              <div className="text-center">
-                <div className={`font-mono text-xs mb-1 ${
-                  theme === 'theme-light' ? 'text-amber-700' : 'text-green-600'
-                }`}>
-                  TOTAL TVL
-                </div>
-                <motion.div 
-                  className={`font-mono font-bold ${
-                    theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
-                  }`}
-                  animate={{ opacity: [1, 0.7, 1] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                >
-                  $2.5B
-                </motion.div>
-              </div>
-              <div className="text-center">
-                <div className={`font-mono text-xs mb-1 ${
-                  theme === 'theme-light' ? 'text-amber-700' : 'text-green-600'
-                }`}>
-                  AVG APY
-                </div>
-                <div className={`font-mono font-bold ${
-                  theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
-                }`}>
-                  12.8%
-                </div>
-              </div>
-              <div className="text-center">
-                <div className={`font-mono text-xs mb-1 ${
-                  theme === 'theme-light' ? 'text-amber-700' : 'text-green-600'
-                }`}>
-                  GAS SAVED
-                </div>
-                <div className={`font-mono font-bold ${
-                  theme === 'theme-light' ? 'text-amber-900' : 'text-green-400'
-                }`}>
-                  $124K
-                </div>
-              </div>
             </div>
 
             {/* Protocol List - Trading Style */}
@@ -425,7 +372,7 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
               <h3 className={`text-2xl font-bold ${
                 theme === 'theme-light' ? 'text-slate-800' : 'text-white'
               }`}>
-                DeFi Protocol Expertise
+                {t('skills.defi.title')}
               </h3>
             </div>
             <button
@@ -436,7 +383,7 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
                   : 'bg-slate-800 hover:bg-slate-700 border-slate-600 text-slate-200'
               }`}
             >
-              <span>{isExpanded ? 'Collapse' : 'Expand'}</span>
+              <span>{isExpanded ? t('skills.section.collapse') : t('skills.section.expand')}</span>
               <svg
                 className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
                 fill="none"
@@ -447,18 +394,12 @@ const DeFiSection = ({ category }: DeFiSectionProps) => {
               </svg>
             </button>
           </div>
-          <p className={`text-base leading-relaxed ${
-            theme === 'theme-light' ? 'text-gray-600' : 'text-gray-300'
-          }`}>
-            Deep expertise in decentralized finance protocols and mechanisms. I have hands-on experience
-            building and integrating with <strong>AMMs (Automated Market Makers)</strong>, <strong>lending protocols</strong>,
-            <strong>yield farming systems</strong>, and <strong>tokenomics designs</strong>. My work spans across
-            <strong>liquidity pool mechanics</strong>, <strong>flash loan implementations</strong>, <strong>oracle
-            integrations</strong>, and <strong>vault strategies</strong>. I understand the intricate details of
-            DeFi primitives, from <strong>Uniswap V2/V3</strong> mathematics to <strong>Compound-style interest
-            rate models</strong>, and have built protocols handling significant TVL with robust security measures
-            and gas-optimized implementations.
-          </p>
+          <p
+            className={`text-base leading-relaxed ${
+              theme === 'theme-light' ? 'text-gray-600' : 'text-gray-300'
+            }`}
+            dangerouslySetInnerHTML={{ __html: t('skills.defi.description') }}
+          />
         </div>
 
         {/* Expandable Content - DeFi Trading Terminal */}
