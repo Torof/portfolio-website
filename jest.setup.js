@@ -44,6 +44,7 @@ jest.mock('framer-motion', () => ({
     section: ({ children, ...props }) => <section {...props}>{children}</section>,
     span: ({ children, ...props }) => <span {...props}>{children}</span>,
     h1: ({ children, ...props }) => <h1 {...props}>{children}</h1>,
+    h2: ({ children, ...props }) => <h2 {...props}>{children}</h2>,
     p: ({ children, ...props }) => <p {...props}>{children}</p>,
   },
   AnimatePresence: ({ children }) => children,
@@ -96,6 +97,17 @@ global.ResizeObserver = jest.fn().mockImplementation(() => ({
   observe: jest.fn(),
   unobserve: jest.fn(),
   disconnect: jest.fn(),
+}))
+
+// Mock IntersectionObserver
+global.IntersectionObserver = jest.fn().mockImplementation((callback) => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn(),
+  root: null,
+  rootMargin: '',
+  thresholds: [],
+  takeRecords: jest.fn(() => []),
 }))
 
 // Mock Canvas API for testing canvas components
