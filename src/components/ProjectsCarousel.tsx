@@ -110,7 +110,7 @@ export default function FeaturedProjectsCarousel() {
         </button>
 
         {/* Carousel Content */}
-        <div className="flex-1 relative overflow-hidden min-h-[380px]">
+        <div className="flex-1 relative overflow-hidden">
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={currentPage}
