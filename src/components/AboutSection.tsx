@@ -71,7 +71,7 @@ export default function AboutSection() {
             </p>
           </div>
           
-          <div 
+          <div
             ref={text3Animation.ref}
             className={`relative p-6 rounded-xl backdrop-blur-md group transition-all duration-300 ${
               theme === 'theme-light'
@@ -80,7 +80,7 @@ export default function AboutSection() {
             } ${getAnimationClass(text3Animation.isVisible, 'fadeInLeft')}`}
           >
             <div className="absolute top-4 left-4 text-2xl opacity-50 group-hover:opacity-70 transition-opacity">
-              🌱
+              💻
             </div>
             <p className="text-lg light-text leading-relaxed pl-8">
               {t('about.card3.text')}

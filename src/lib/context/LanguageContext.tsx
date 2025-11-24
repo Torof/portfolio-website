@@ -79,7 +79,7 @@ const translations = {
 
     // Home page
     'hero.title': 'Blockchain Developer',
-    'hero.subtitle': 'Experienced blockchain developer specializing in smart contracts, DeFi, and NFTs. Building the decentralized future, one line of code at a time.',
+    'hero.subtitle': 'Experienced blockchain developer and full-stack web developer specializing in smart contracts, DeFi, NFTs, and modern web applications. Building the decentralized future and dynamic websites, one line of code at a time.',
     'hero.cta': 'View Experience',
     'hero.projects': 'Explore Projects',
     'hero.contact': 'Get In Touch',
@@ -93,7 +93,7 @@ const translations = {
     'about.whatIDo': 'What I Do',
     'about.card1.text': 'I\'m a passionate blockchain developer with expertise in smart contract development, having started my journey in {year}. With over {experience} years in the blockchain space, I\'ve gained deep experience in Solidity, EVM, DeFi, and NFTs.',
     'about.card2.text': 'I build fullstack Decentralized Applications (dApps) from conception to production, with a focus on security, efficiency, and user experience. My background includes working with various blockchain platforms and technologies, always staying at the cutting edge.',
-    'about.card3.text': 'Currently expanding my expertise to include Rust, Solana, and Polkadot, I\'m constantly learning and adapting to the evolving blockchain landscape.',
+    'about.card3.text': 'I build complete web applications and websites from front-end to back-end, creating responsive, modern interfaces and robust server architectures. I also develop simple mobile applications, delivering end-to-end solutions across all platforms.',
     'about.item1': 'Design and develop secure, efficient smart contracts',
     'about.item2': 'Build full-stack dApps with modern frontend technologies',
     'about.item3': 'Audit and optimize existing blockchain projects',
@@ -466,6 +466,8 @@ const translations = {
     'skills.defi.description': 'Deep expertise in decentralized finance protocols and mechanisms. I have hands-on experience building and integrating with <strong>AMMs (Automated Market Makers)</strong>, <strong>lending protocols</strong>, <strong>yield farming systems</strong>, and <strong>tokenomics designs</strong>. My work spans across <strong>liquidity pool mechanics</strong>, <strong>flash loan implementations</strong>, <strong>oracle integrations</strong>, and <strong>vault strategies</strong>. I understand the intricate details of DeFi primitives, from <strong>Uniswap V2/V3</strong> mathematics to <strong>Compound-style interest rate models</strong>, and have built protocols handling significant TVL with robust security measures and gas-optimized implementations.',
     'skills.layer2.title': 'Layer 2 Scaling Solutions',
     'skills.layer2.description': 'Extensive experience building and deploying on multiple Layer 2 scaling solutions. I have deep knowledge of different L2 architectures including <strong>Optimistic Rollups</strong> (Arbitrum, Optimism, Base), <strong>ZK Rollups</strong> (zkSync Era, Scroll), <strong>Sidechains</strong> (Polygon, Gnosis), and <strong>alternative L1s</strong> (Berachain). My expertise spans <strong>cross-chain bridge implementations</strong>, <strong>gas optimization strategies</strong> specific to each network, <strong>sequencer interactions</strong>, and understanding the <strong>security trade-offs</strong> between different scaling approaches. I\'ve deployed and maintained protocols across multiple networks, handling <strong>L1-L2 communication</strong>, <strong>state management</strong>, and <strong>multi-chain architecture patterns</strong>.',
+    'skills.webDev.title': 'Web Development',
+    'skills.webDev.description': 'Full-stack web development expertise spanning modern technologies and frameworks. I build complete web applications and websites with <strong>payment integration</strong> (Stripe, PayPal), <strong>user authentication systems</strong> (JWT, OAuth), and <strong>database management</strong> (PostgreSQL, MongoDB). My capabilities include creating <strong>e-commerce platforms</strong>, <strong>content management systems</strong>, <strong>RESTful APIs</strong>, and <strong>responsive designs</strong> that work seamlessly across all devices. I deliver end-to-end solutions from front-end interfaces to back-end architectures, including <strong>simple mobile applications</strong>, always focusing on user experience, security, and scalability.',
 
     // DeFi Section Dropdown
     'defi.dropdown.protocols': 'PROTOCOLS',
@@ -711,7 +713,7 @@ const translations = {
 
     // Home page
     'hero.title': 'Développeur Blockchain',
-    'hero.subtitle': 'Développeur blockchain expérimenté spécialisé dans les smart contracts, la DeFi et les NFTs. Construisant l\'avenir décentralisé, une ligne de code à la fois.',
+    'hero.subtitle': 'Développeur blockchain expérimenté et développeur web full-stack spécialisé dans les smart contracts, la DeFi, les NFTs et les applications web modernes. Construisant l\'avenir décentralisé et des sites web dynamiques, une ligne de code à la fois.',
     'hero.cta': 'Voir l\'Expérience',
     'hero.projects': 'Explorer les Projets',
     'hero.contact': 'Me Contacter',
@@ -725,7 +727,7 @@ const translations = {
     'about.whatIDo': 'Ce Que Je Fais',
     'about.card1.text': 'Je suis un développeur blockchain passionné avec une expertise en développement de smart contracts, ayant commencé mon parcours en {year}. Avec plus de {experience} années dans l\'espace blockchain, j\'ai acquis une expérience approfondie en Solidity, EVM, DeFi et NFTs.',
     'about.card2.text': 'Je construis des Applications Décentralisées (dApps) complètes de la conception à la production, en mettant l\'accent sur la sécurité, l\'efficacité et l\'expérience utilisateur. Mon expérience inclut le travail avec diverses plateformes et technologies blockchain, restant toujours à la pointe.',
-    'about.card3.text': 'Élargissant actuellement mon expertise pour inclure Rust, Solana et Polkadot, j\'apprends et m\'adapte constamment au paysage blockchain en évolution.',
+    'about.card3.text': 'Je construis des applications web et des sites web complets du front-end au back-end, créant des interfaces modernes et responsives et des architectures serveur robustes. Je développe également des applications mobiles simples, offrant des solutions complètes sur toutes les plateformes.',
     'about.item1': 'Concevoir et développer des smart contracts sécurisés et efficaces',
     'about.item2': 'Construire des dApps complètes avec des technologies frontend modernes',
     'about.item3': 'Auditer et optimiser les projets blockchain existants',
@@ -1095,6 +1097,8 @@ const translations = {
     'skills.defi.description': 'Expertise approfondie des protocoles et mécanismes de finance décentralisée. J\'ai une expérience pratique dans la construction et l\'intégration avec les <strong>AMMs (Automated Market Makers)</strong>, les <strong>protocoles de prêt</strong>, les <strong>systèmes de yield farming</strong>, et les <strong>conceptions de tokenomics</strong>. Mon travail couvre les <strong>mécaniques de pools de liquidité</strong>, les <strong>implémentations de flash loans</strong>, les <strong>intégrations d\'oracles</strong>, et les <strong>stratégies de vaults</strong>. Je comprends les détails complexes des primitives DeFi, des mathématiques d\'<strong>Uniswap V2/V3</strong> aux <strong>modèles de taux d\'intérêt type Compound</strong>, et j\'ai construit des protocoles gérant une TVL significative avec des mesures de sécurité robustes et des implémentations optimisées en gas.',
     'skills.layer2.title': 'Solutions de Scalabilité Layer 2',
     'skills.layer2.description': 'Expérience étendue dans la construction et le déploiement sur plusieurs solutions de scalabilité Layer 2. J\'ai une connaissance approfondie des différentes architectures L2 incluant les <strong>Optimistic Rollups</strong> (Arbitrum, Optimism, Base), les <strong>ZK Rollups</strong> (zkSync Era, Scroll), les <strong>Sidechains</strong> (Polygon, Gnosis), et les <strong>L1 alternatives</strong> (Berachain). Mon expertise couvre les <strong>implémentations de bridges cross-chain</strong>, les <strong>stratégies d\'optimisation de gas</strong> spécifiques à chaque réseau, les <strong>interactions avec les sequencers</strong>, et la compréhension des <strong>compromis de sécurité</strong> entre les différentes approches de scalabilité. J\'ai déployé et maintenu des protocoles sur plusieurs réseaux, gérant la <strong>communication L1-L2</strong>, la <strong>gestion d\'état</strong>, et les <strong>patterns d\'architecture multi-chain</strong>.',
+    'skills.webDev.title': 'Développement Web',
+    'skills.webDev.description': 'Expertise complète en développement web full-stack couvrant les technologies et frameworks modernes. Je construis des applications web et sites web complets avec <strong>intégration de paiement</strong> (Stripe, PayPal), <strong>systèmes d\'authentification utilisateur</strong> (JWT, OAuth), et <strong>gestion de bases de données</strong> (PostgreSQL, MongoDB). Mes compétences incluent la création de <strong>plateformes e-commerce</strong>, <strong>systèmes de gestion de contenu</strong>, <strong>APIs RESTful</strong>, et <strong>designs responsives</strong> qui fonctionnent parfaitement sur tous les appareils. Je livre des solutions end-to-end depuis les interfaces front-end jusqu\'aux architectures back-end, incluant des <strong>applications mobiles simples</strong>, en privilégiant toujours l\'expérience utilisateur, la sécurité et la scalabilité.',
 
     // DeFi Section Dropdown
     'defi.dropdown.protocols': 'PROTOCOLES',

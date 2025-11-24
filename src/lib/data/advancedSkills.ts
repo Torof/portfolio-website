@@ -672,6 +672,81 @@ export const skillCategories: SkillCategory[] = [
         projects: ['Smart contract audits', 'Automated security scanning', 'CI/CD integration']
       }
     ]
+  },
+  {
+    id: 'web-development',
+    name: 'Web Development',
+    description: 'Full-stack web development with modern technologies',
+    icon: '🌐',
+    color: 'from-green-500 to-teal-600',
+    skills: [
+      {
+        id: 'ecommerce',
+        name: 'E-Commerce Platforms',
+        description: 'Complete online stores with payment integration',
+        level: 5,
+        category: 'web-development',
+        subcategory: 'Full-Stack Applications',
+        icon: '🛒',
+        examples: ['Payment gateways', 'Shopping carts', 'Inventory management'],
+        projects: ['Stripe integration', 'PayPal checkout', 'Product catalogs with admin panels']
+      },
+      {
+        id: 'user-auth',
+        name: 'User Authentication Systems',
+        description: 'Secure login and registration with database management',
+        level: 5,
+        category: 'web-development',
+        subcategory: 'Backend Development',
+        icon: '🔐',
+        examples: ['JWT authentication', 'OAuth integration', 'Session management'],
+        projects: ['User dashboards', 'Role-based access control', 'Password reset flows']
+      },
+      {
+        id: 'databases',
+        name: 'Database Management',
+        description: 'SQL and NoSQL database design and optimization',
+        level: 5,
+        category: 'web-development',
+        subcategory: 'Backend Development',
+        icon: '💾',
+        examples: ['PostgreSQL', 'MongoDB', 'Database migrations'],
+        projects: ['User data storage', 'Real-time data sync', 'Complex queries and indexing']
+      },
+      {
+        id: 'responsive-design',
+        name: 'Responsive Web Design',
+        description: 'Mobile-first, cross-browser compatible websites',
+        level: 5,
+        category: 'web-development',
+        subcategory: 'Frontend Development',
+        icon: '📱',
+        examples: ['Mobile optimization', 'CSS frameworks', 'Progressive web apps'],
+        projects: ['Responsive portfolios', 'Mobile-friendly dashboards', 'Cross-device compatibility']
+      },
+      {
+        id: 'api-development',
+        name: 'RESTful APIs',
+        description: 'Backend API design and implementation',
+        level: 5,
+        category: 'web-development',
+        subcategory: 'Backend Development',
+        icon: '🔌',
+        examples: ['REST endpoints', 'API documentation', 'Rate limiting'],
+        projects: ['Third-party integrations', 'Microservices', 'GraphQL APIs']
+      },
+      {
+        id: 'realtime-features',
+        name: 'Real-time Features',
+        description: 'Live updates and real-time communication systems',
+        level: 5,
+        category: 'web-development',
+        subcategory: 'Full-Stack Applications',
+        icon: '⚡',
+        examples: ['WebSockets', 'Live chat', 'Real-time notifications', 'Server-Sent Events'],
+        projects: ['Live dashboards', 'Chat applications', 'Collaborative tools', 'Real-time analytics']
+      }
+    ]
   }
 ];
 
