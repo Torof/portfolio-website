@@ -2,6 +2,46 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import ProjectsCarousel from '../ProjectsCarousel';
 import { ThemeProvider } from '@/lib/context/ThemeContext';
 import { LanguageProvider } from '@/lib/context/LanguageContext';
+import { FeaturedProject } from '@/lib/data/featuredProjects';
+
+// Mock projects data
+const mockProjects: FeaturedProject[] = [
+  {
+    id: '1',
+    title: 'DeFi Lending Protocol',
+    description: 'Decentralized lending platform with automated interest rates and collateral management.',
+    image: '/projects/defi-lending.jpg',
+    websiteUrl: 'https://example.com',
+    githubUrl: 'https://github.com/username/defi-lending',
+    tags: ['Solidity', 'React', 'DeFi'],
+  },
+  {
+    id: '2',
+    title: 'NFT Marketplace',
+    description: 'Full-featured NFT marketplace with minting, trading, and royalty distribution.',
+    image: '/projects/nft-marketplace.jpg',
+    websiteUrl: 'https://example.com/nft',
+    githubUrl: 'https://github.com/username/nft-marketplace',
+    tags: ['Solidity', 'Next.js', 'NFT'],
+  },
+  {
+    id: '3',
+    title: 'DAO Governance Platform',
+    description: 'Decentralized autonomous organization with on-chain voting and proposal management.',
+    image: '/projects/dao-platform.jpg',
+    githubUrl: 'https://github.com/username/dao-platform',
+    tags: ['Solidity', 'TypeScript', 'DAO'],
+  },
+  {
+    id: '4',
+    title: 'Cross-Chain Bridge',
+    description: 'Secure asset bridge enabling transfers between Ethereum, Polygon, and Arbitrum.',
+    image: '/projects/bridge.jpg',
+    websiteUrl: 'https://example.com/bridge',
+    githubUrl: 'https://github.com/username/bridge',
+    tags: ['Solidity', 'Web3', 'Layer2'],
+  },
+];
 
 // Helper to render with providers
 const renderWithProviders = (component: React.ReactElement) => {
@@ -17,14 +57,14 @@ const renderWithProviders = (component: React.ReactElement) => {
 describe('ProjectsCarousel', () => {
   describe('Structure', () => {
     it('renders without crashing', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
       // DeFi Lending Protocol appears in both image placeholder and title
       const defiElements = screen.getAllByText('DeFi Lending Protocol');
       expect(defiElements.length).toBeGreaterThan(0);
     });
 
     it('has navigation arrows', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       const prevButton = screen.getByLabelText('Previous projects');
       const nextButton = screen.getByLabelText('Next projects');
@@ -34,7 +74,7 @@ describe('ProjectsCarousel', () => {
     });
 
     it('has page indicators (dots)', () => {
-      const { container } = renderWithProviders(<ProjectsCarousel />);
+      const { container } = renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       // With 4 projects and 2 per page, should have 2 dots
       const dots = container.querySelectorAll('button[aria-label*="Go to page"]');
@@ -44,7 +84,7 @@ describe('ProjectsCarousel', () => {
 
   describe('Initial Display', () => {
     it('shows first 2 projects initially', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       // Both projects appear in image and title
       expect(screen.getAllByText('DeFi Lending Protocol').length).toBeGreaterThan(0);
@@ -52,14 +92,14 @@ describe('ProjectsCarousel', () => {
     });
 
     it('does not show projects from second page initially', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       expect(screen.queryByText('DAO Governance Platform')).not.toBeInTheDocument();
       expect(screen.queryByText('Cross-Chain Bridge')).not.toBeInTheDocument();
     });
 
     it('first page indicator is active', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       const firstDot = screen.getByLabelText('Go to page 1');
       expect(firstDot.className).toContain('w-6'); // Active dot has w-6 class
@@ -68,7 +108,7 @@ describe('ProjectsCarousel', () => {
 
   describe('Project Cards', () => {
     it('renders project titles', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       // Titles appear in both image and h3
       expect(screen.getAllByText('DeFi Lending Protocol').length).toBeGreaterThan(0);
@@ -76,14 +116,14 @@ describe('ProjectsCarousel', () => {
     });
 
     it('renders project descriptions', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       expect(screen.getByText(/Decentralized lending platform/i)).toBeInTheDocument();
       expect(screen.getByText(/Full-featured NFT marketplace/i)).toBeInTheDocument();
     });
 
     it('renders project tags', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       // DeFi Lending Protocol has tags: Solidity, React, DeFi
       // Solidity appears in multiple projects, so use getAllByText
@@ -93,14 +133,14 @@ describe('ProjectsCarousel', () => {
     });
 
     it('renders Code link for all projects', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       const codeButtons = screen.getAllByText('Code');
       expect(codeButtons.length).toBe(2); // 2 projects visible, each has a Code button
     });
 
     it('renders Visit link only when websiteUrl exists', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       // DeFi Lending Protocol and NFT Marketplace both have websiteUrl
       const visitButtons = screen.getAllByText('Visit');
@@ -108,7 +148,7 @@ describe('ProjectsCarousel', () => {
     });
 
     it('Code links have correct attributes', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       const codeButtons = screen.getAllByText('Code');
       const firstCodeLink = codeButtons[0].closest('a');
@@ -119,7 +159,7 @@ describe('ProjectsCarousel', () => {
     });
 
     it('Visit links have correct attributes', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       const visitButton = screen.getAllByText('Visit')[0];
       const visitLink = visitButton.closest('a');
@@ -132,7 +172,7 @@ describe('ProjectsCarousel', () => {
 
   describe('Navigation', () => {
     it('navigates to next page when right arrow clicked', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       const nextButton = screen.getByLabelText('Next projects');
       fireEvent.click(nextButton);
@@ -143,7 +183,7 @@ describe('ProjectsCarousel', () => {
     });
 
     it('navigates to previous page when left arrow clicked', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       // Go to page 2
       const nextButton = screen.getByLabelText('Next projects');
@@ -159,7 +199,7 @@ describe('ProjectsCarousel', () => {
     });
 
     it('wraps to last page when clicking previous on first page', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       const prevButton = screen.getByLabelText('Previous projects');
       fireEvent.click(prevButton);
@@ -170,7 +210,7 @@ describe('ProjectsCarousel', () => {
     });
 
     it('wraps to first page when clicking next on last page', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       // Go to last page
       const nextButton = screen.getByLabelText('Next projects');
@@ -185,7 +225,7 @@ describe('ProjectsCarousel', () => {
     });
 
     it('navigates using dot indicators', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       // Click second dot to go to page 2
       const secondDot = screen.getByLabelText('Go to page 2');
@@ -199,7 +239,7 @@ describe('ProjectsCarousel', () => {
 
   describe('Page Indicators', () => {
     it('highlights current page indicator', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       const firstDot = screen.getByLabelText('Go to page 1');
       const secondDot = screen.getByLabelText('Go to page 2');
@@ -212,7 +252,7 @@ describe('ProjectsCarousel', () => {
     });
 
     it('updates highlighted indicator when page changes', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       // Navigate to page 2
       const nextButton = screen.getByLabelText('Next projects');
@@ -230,7 +270,7 @@ describe('ProjectsCarousel', () => {
 
   describe('Theme Integration', () => {
     it('applies theme-aware styling to navigation buttons', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       const prevButton = screen.getByLabelText('Previous projects');
       const nextButton = screen.getByLabelText('Next projects');
@@ -240,7 +280,7 @@ describe('ProjectsCarousel', () => {
     });
 
     it('applies theme-aware styling to project cards', () => {
-      const { container } = renderWithProviders(<ProjectsCarousel />);
+      const { container } = renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       // Project cards have rounded-lg class
       const cards = container.querySelectorAll('.rounded-lg.border');
@@ -250,14 +290,14 @@ describe('ProjectsCarousel', () => {
 
   describe('Grid Layout', () => {
     it('uses 2-column grid for projects', () => {
-      const { container } = renderWithProviders(<ProjectsCarousel />);
+      const { container } = renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       const grid = container.querySelector('.grid.grid-cols-1.md\\:grid-cols-2');
       expect(grid).toBeInTheDocument();
     });
 
     it('displays 2 projects per page', () => {
-      const { container } = renderWithProviders(<ProjectsCarousel />);
+      const { container } = renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       // Count visible project cards (h3 titles only, not image placeholders)
       const projectTitles = container.querySelectorAll('h3.text-base.font-bold');
@@ -267,21 +307,21 @@ describe('ProjectsCarousel', () => {
 
   describe('Accessibility', () => {
     it('navigation buttons have proper aria-labels', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       expect(screen.getByLabelText('Previous projects')).toBeInTheDocument();
       expect(screen.getByLabelText('Next projects')).toBeInTheDocument();
     });
 
     it('page indicators have proper aria-labels', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       expect(screen.getByLabelText('Go to page 1')).toBeInTheDocument();
       expect(screen.getByLabelText('Go to page 2')).toBeInTheDocument();
     });
 
     it('external links have proper rel attribute', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       const codeButton = screen.getAllByText('Code')[0];
       const codeLink = codeButton.closest('a');
@@ -290,7 +330,7 @@ describe('ProjectsCarousel', () => {
     });
 
     it('buttons are keyboard accessible', () => {
-      const { container } = renderWithProviders(<ProjectsCarousel />);
+      const { container } = renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       const buttons = container.querySelectorAll('button');
       buttons.forEach(button => {
@@ -301,7 +341,7 @@ describe('ProjectsCarousel', () => {
 
   describe('Hardcoded Projects Data', () => {
     it('renders all 4 hardcoded projects across pages', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       // Page 1 projects
       expect(screen.getAllByText('DeFi Lending Protocol').length).toBeGreaterThan(0);
@@ -317,7 +357,7 @@ describe('ProjectsCarousel', () => {
     });
 
     it('renders correct tags for each project', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       // Page 1: DeFi Lending Protocol has Solidity, React, DeFi
       expect(screen.getAllByText('Solidity').length).toBeGreaterThan(0);
@@ -338,7 +378,7 @@ describe('ProjectsCarousel', () => {
     });
 
     it('third project (DAO) does not have website URL', () => {
-      renderWithProviders(<ProjectsCarousel />);
+      renderWithProviders(<ProjectsCarousel projects={mockProjects} />);
 
       // Navigate to page 2
       const nextButton = screen.getByLabelText('Next projects');

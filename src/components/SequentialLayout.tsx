@@ -1,6 +1,6 @@
 'use client';
 
-import FeaturedProjectsCarousel from './FeaturedProjectsCarousel';
+import ProjectsCarousel from './ProjectsCarousel';
 import InteractiveTechStack from './InteractiveTechStack';
 import { useScrollAnimation, getAnimationClass } from "@/lib/hooks/useScrollAnimation";
 import { useLanguage } from '@/lib/context/LanguageContext';
@@ -540,7 +540,7 @@ const SequentialLayout: React.FC = () => {
             ref={projectsGridAnimation.ref}
             className={`max-w-5xl mx-auto ${getAnimationClass(projectsGridAnimation.isVisible, 'fadeInUp')}`}
           >
-            <FeaturedProjectsCarousel projects={featuredProjects} />
+            <ProjectsCarousel projects={featuredProjects} />
           </div>
         </div>
       </section>

@@ -3,62 +3,19 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/lib/context/ThemeContext';
+import { FeaturedProject } from '@/lib/data/featuredProjects';
 
-interface FeaturedProject {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  websiteUrl?: string;
-  githubUrl: string;
-  tags: string[];
+interface ProjectsCarouselProps {
+  projects: FeaturedProject[];
 }
 
-const featuredProjects: FeaturedProject[] = [
-  {
-    id: '1',
-    title: 'DeFi Lending Protocol',
-    description: 'Decentralized lending platform with automated interest rates and collateral management.',
-    image: '/projects/defi-lending.jpg',
-    websiteUrl: 'https://example.com',
-    githubUrl: 'https://github.com/username/defi-lending',
-    tags: ['Solidity', 'React', 'DeFi'],
-  },
-  {
-    id: '2',
-    title: 'NFT Marketplace',
-    description: 'Full-featured NFT marketplace with minting, trading, and royalty distribution.',
-    image: '/projects/nft-marketplace.jpg',
-    websiteUrl: 'https://example.com/nft',
-    githubUrl: 'https://github.com/username/nft-marketplace',
-    tags: ['Solidity', 'Next.js', 'NFT'],
-  },
-  {
-    id: '3',
-    title: 'DAO Governance Platform',
-    description: 'Decentralized autonomous organization with on-chain voting and proposal management.',
-    image: '/projects/dao-platform.jpg',
-    githubUrl: 'https://github.com/username/dao-platform',
-    tags: ['Solidity', 'TypeScript', 'DAO'],
-  },
-  {
-    id: '4',
-    title: 'Cross-Chain Bridge',
-    description: 'Secure asset bridge enabling transfers between Ethereum, Polygon, and Arbitrum.',
-    image: '/projects/bridge.jpg',
-    websiteUrl: 'https://example.com/bridge',
-    githubUrl: 'https://github.com/username/bridge',
-    tags: ['Solidity', 'Web3', 'Layer2'],
-  },
-];
-
-export default function FeaturedProjectsCarousel() {
+export default function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
   const { theme } = useTheme();
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState(0);
 
   const itemsPerPage = 2;
-  const totalPages = Math.ceil(featuredProjects.length / itemsPerPage);
+  const totalPages = Math.ceil(projects.length / itemsPerPage);
 
   const slideVariants = {
     enter: (direction: number) => ({
@@ -89,7 +46,7 @@ export default function FeaturedProjectsCarousel() {
 
   // Get the current page's projects
   const startIndex = currentPage * itemsPerPage;
-  const currentProjects = featuredProjects.slice(startIndex, startIndex + itemsPerPage);
+  const currentProjects = projects.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div>

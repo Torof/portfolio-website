@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import ProjectCard from '@/components/ProjectCard';
 import CodeRain from '@/components/CodeRain';
 import ProjectMetrics from '@/components/ProjectMetrics';
-import FeaturedProjectsCarousel from '@/components/ProjectsCarousel';
+import ProjectsCarousel from '@/components/ProjectsCarousel';
+import { featuredProjects } from '@/lib/data/featuredProjects';
 import { GitHubStats } from '@/lib/services/github';
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { useTheme } from '@/lib/context/ThemeContext';
@@ -104,7 +105,7 @@ export default function ProjectsPage() {
           }`}>
             {t('projects.somePublishedProjects')}
           </h3>
-          <FeaturedProjectsCarousel />
+          <ProjectsCarousel projects={featuredProjects} />
         </div>
 
         {/* Projects Grid */}
