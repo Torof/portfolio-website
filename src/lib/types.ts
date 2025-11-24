@@ -83,7 +83,7 @@ export interface Experience {
     name: string;
     description: string;
     level: 1 | 2 | 3 | 4 | 5; // Expert level
-    category: 'smart-contracts' | 'defi' | 'layer2' | 'security' | 'development' | 'auditing';
+    category: 'smart-contracts' | 'defi' | 'layer2' | 'security' | 'development' | 'auditing' | 'web-development';
     subcategory?: string;
     icon?: string;
     examples?: string[];
