@@ -104,7 +104,7 @@ describe('ContactSection', () => {
     });
 
     it('button contains text and arrow icon', () => {
-      const { container } = renderWithProviders(<ContactSection />);
+      renderWithProviders(<ContactSection />);
 
       const link = screen.getByRole('link');
       expect(link).toBeInTheDocument();

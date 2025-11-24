@@ -2,7 +2,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Navbar from '../NavBar';
 import { ThemeProvider } from '@/lib/context/ThemeContext';
 import { LanguageProvider } from '@/lib/context/LanguageContext';
-import { navLinks } from '@/lib/data/navigation';
+import * as nextNavigation from 'next/navigation';
 
 // Mock ThemeToggle component
 jest.mock('../ThemeToggle', () => {
@@ -14,7 +14,7 @@ jest.mock('../ThemeToggle', () => {
 // Helper to render with providers
 const renderWithProviders = (component: React.ReactElement, pathname = '/') => {
   // Mock usePathname to return specific path
-  jest.spyOn(require('next/navigation'), 'usePathname').mockReturnValue(pathname);
+  jest.spyOn(nextNavigation, 'usePathname').mockReturnValue(pathname);
 
   return render(
     <ThemeProvider>

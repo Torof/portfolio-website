@@ -23,7 +23,7 @@ describe('TechStackGrid', () => {
     });
 
     it('renders three category sections', () => {
-      const { container } = renderWithProviders(<TechStackGrid />);
+      renderWithProviders(<TechStackGrid />);
 
       expect(screen.getByText('Blockchain')).toBeInTheDocument();
       expect(screen.getByText('Frontend')).toBeInTheDocument();

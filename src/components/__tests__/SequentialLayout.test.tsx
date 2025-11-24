@@ -6,7 +6,7 @@ import { LanguageProvider } from '@/lib/context/LanguageContext';
 // Mock the ProjectsCarousel component
 jest.mock('../ProjectsCarousel', () => ({
   __esModule: true,
-  default: ({ projects }: { projects: any[] }) => (
+  default: ({ projects }: { projects: unknown[] }) => (
     <div data-testid="projects-carousel">
       <div data-testid="carousel-projects-count">{projects.length}</div>
     </div>

@@ -1,6 +1,5 @@
 'use client';
 
-import Link from "next/link";
 import { personalInfo } from "@/lib/data";
 import { useScrollAnimation, getAnimationClass } from "@/lib/hooks/useScrollAnimation";
 import AnimatedTitle from "@/components/AnimatedTitle";
