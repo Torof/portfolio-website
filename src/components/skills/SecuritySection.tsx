@@ -18,10 +18,10 @@ const SecuritySection = ({ category }: SecuritySectionProps) => {
 
   return (
     <section className="mb-12">
-      <div className={`rounded-2xl border p-8 transition-all duration-300 ${
+      <div className={`rounded-2xl border-2 p-8 transition-all duration-300 ${
         theme === 'theme-light'
-          ? 'bg-white/90 backdrop-blur-sm border-gray-200 hover:shadow-lg'
-          : 'bg-slate-900/90 backdrop-blur-sm border-[rgba(255,255,255,0.25)] hover:border-[rgba(255,255,255,0.35)]'
+          ? 'bg-white/90 backdrop-blur-sm border-gray-400 hover:shadow-lg'
+          : 'bg-slate-900/90 backdrop-blur-sm border-[rgba(255,255,255,0.4)] hover:border-[rgba(255,255,255,0.5)]'
       }`}>
         {/* Header with Title and Description */}
         <div className="mb-6">
