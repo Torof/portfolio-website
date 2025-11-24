@@ -79,7 +79,7 @@ const translations = {
 
     // Home page
     'hero.title': 'Blockchain Developer',
-    'hero.subtitle': 'Experienced blockchain developer specializing in smart contracts, DeFi, and NFTs. Building the decentralized future, one line of code at a time.',
+    'hero.subtitle': 'Experienced blockchain developer and full-stack web developer specializing in smart contracts, DeFi, NFTs, and modern web applications. Building the decentralized future and dynamic websites, one line of code at a time.',
     'hero.cta': 'View Experience',
     'hero.projects': 'Explore Projects',
     'hero.contact': 'Get In Touch',
@@ -711,7 +711,7 @@ const translations = {
 
     // Home page
     'hero.title': 'Développeur Blockchain',
-    'hero.subtitle': 'Développeur blockchain expérimenté spécialisé dans les smart contracts, la DeFi et les NFTs. Construisant l\'avenir décentralisé, une ligne de code à la fois.',
+    'hero.subtitle': 'Développeur blockchain expérimenté et développeur web full-stack spécialisé dans les smart contracts, la DeFi, les NFTs et les applications web modernes. Construisant l\'avenir décentralisé et des sites web dynamiques, une ligne de code à la fois.',
     'hero.cta': 'Voir l\'Expérience',
     'hero.projects': 'Explorer les Projets',
     'hero.contact': 'Me Contacter',
