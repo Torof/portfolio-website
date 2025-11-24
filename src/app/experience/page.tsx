@@ -49,7 +49,9 @@ export default function ExperiencePage() {
                     <div className="flex items-start gap-4 mb-6">
                       <div className={`w-28 h-28 rounded-xl border flex items-center justify-center overflow-hidden flex-shrink-0 ${
                         exp.logo
-                          ? 'bg-white border-gray-200'
+                          ? exp.id === 'bitcoin-vietnam'
+                            ? 'bg-gray-100 border-gray-300'
+                            : 'bg-white border-gray-200'
                           : `bg-gradient-to-br border ${
                               theme === 'theme-light'
                                 ? 'from-[rgba(59,130,246,0.3)] to-[rgba(147,51,234,0.3)] border-[rgba(59,130,246,0.3)]'
