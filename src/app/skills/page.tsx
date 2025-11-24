@@ -241,11 +241,11 @@ export default function SkillsPage() {
           </div>
 
           <PremiumSkillSections categories={[
+            skillCategories.find(cat => cat.id === 'web-development')!,
             skillCategories.find(cat => cat.id === 'smart-contracts')!,
             skillCategories.find(cat => cat.id === 'security')!,
             skillCategories.find(cat => cat.id === 'defi')!,
-            skillCategories.find(cat => cat.id === 'layer2')!,
-            skillCategories.find(cat => cat.id === 'web-development')!
+            skillCategories.find(cat => cat.id === 'layer2')!
           ]} />
         </div>
 
