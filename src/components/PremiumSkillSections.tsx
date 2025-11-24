@@ -1,7 +1,7 @@
 "use client";
 
 import { SkillCategory } from '@/lib/types';
-import { SmartContractsSection, SecuritySection, DeFiSection, Layer2Section } from './skills';
+import { SmartContractsSection, SecuritySection, DeFiSection, Layer2Section, WebDevSection } from './skills';
 
 interface PremiumSkillSectionsProps {
   categories: SkillCategory[];
@@ -13,6 +13,7 @@ export default function PremiumSkillSections({ categories }: PremiumSkillSection
     'security': SecuritySection,
     'defi': DeFiSection,
     'layer2': Layer2Section,
+    'web-development': WebDevSection,
   };
 
   return (

@@ -244,7 +244,8 @@ export default function SkillsPage() {
             skillCategories.find(cat => cat.id === 'smart-contracts')!,
             skillCategories.find(cat => cat.id === 'security')!,
             skillCategories.find(cat => cat.id === 'defi')!,
-            skillCategories.find(cat => cat.id === 'layer2')!
+            skillCategories.find(cat => cat.id === 'layer2')!,
+            skillCategories.find(cat => cat.id === 'web-development')!
           ]} />
         </div>
 
