@@ -83,29 +83,32 @@ jest.mock('three', () => ({
   LineBasicMaterial: jest.fn(),
 }))
 
-// Mock localStorage
-const localStorageMock = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  removeItem: jest.fn(),
-  clear: jest.fn(),
-}
-global.localStorage = localStorageMock
+// Browser-specific mocks (only in jsdom environment)
+if (typeof window !== 'undefined') {
+  // Mock localStorage
+  const localStorageMock = {
+    getItem: jest.fn(),
+    setItem: jest.fn(),
+    removeItem: jest.fn(),
+    clear: jest.fn(),
+  }
+  global.localStorage = localStorageMock
 
-// Mock matchMedia
-Object.defineProperty(window, 'matchMedia', {
-  writable: true,
-  value: jest.fn().mockImplementation(query => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(), // deprecated
-    removeListener: jest.fn(), // deprecated
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
-})
+  // Mock matchMedia
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: jest.fn().mockImplementation(query => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(), // deprecated
+      removeListener: jest.fn(), // deprecated
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    })),
+  })
+}
 
 // Mock ResizeObserver
 global.ResizeObserver = jest.fn().mockImplementation(() => ({
@@ -125,21 +128,23 @@ global.IntersectionObserver = jest.fn().mockImplementation((callback) => ({
   takeRecords: jest.fn(() => []),
 }))
 
-// Mock Canvas API for testing canvas components
-const mockCanvas = {
-  getContext: jest.fn(() => ({
-    fillStyle: '',
-    fillRect: jest.fn(),
-    fillText: jest.fn(),
-    font: '',
-    clearRect: jest.fn(),
-    beginPath: jest.fn(),
-    moveTo: jest.fn(),
-    lineTo: jest.fn(),
-    stroke: jest.fn(),
-  })),
-  width: 800,
-  height: 600,
-}
+// Mock Canvas API for testing canvas components (only in jsdom environment)
+if (typeof HTMLCanvasElement !== 'undefined') {
+  const mockCanvas = {
+    getContext: jest.fn(() => ({
+      fillStyle: '',
+      fillRect: jest.fn(),
+      fillText: jest.fn(),
+      font: '',
+      clearRect: jest.fn(),
+      beginPath: jest.fn(),
+      moveTo: jest.fn(),
+      lineTo: jest.fn(),
+      stroke: jest.fn(),
+    })),
+    width: 800,
+    height: 600,
+  }
 
-global.HTMLCanvasElement.prototype.getContext = mockCanvas.getContext
+  global.HTMLCanvasElement.prototype.getContext = mockCanvas.getContext
+}
