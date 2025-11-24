@@ -51,12 +51,11 @@ const SequentialLayout: React.FC = () => {
 
       {/* Projects Section */}
       <section className={`relative overflow-hidden border-b ${
-        theme === 'theme-light' 
-          ? 'section-bg-secondary theme-light:border-warm-300' 
+        theme === 'theme-light'
+          ? 'section-bg-secondary theme-light:border-warm-300'
           : 'bg-gradient-to-br from-blue-900 via-slate-800 to-blue-900 border-gray-700'
-      }`} style={{ 
-        minHeight: '90vh', 
-        backgroundColor: theme === 'theme-light' ? '#FFF8E1' : undefined 
+      }`} style={{
+        backgroundColor: theme === 'theme-light' ? '#FFF8E1' : undefined
       }}>
         {/* Ethereum Logo Columns Background */}
         <div className="absolute inset-0 opacity-100">
