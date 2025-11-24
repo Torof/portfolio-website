@@ -47,7 +47,15 @@ export default function ExperiencePage() {
                   <div className="h-full backdrop-blur-md rounded-xl p-6 bg-gradient-to-br from-[rgba(59,130,246,0.15)] to-[rgba(147,51,234,0.15)] dark:from-[rgba(255,255,255,0.15)] dark:to-[rgba(255,255,255,0.05)] border border-[rgba(59,130,246,0.3)] dark:border-[rgba(255,255,255,0.2)] transition-all duration-500 hover:shadow-2xl hover:border-[rgba(59,130,246,0.5)] dark:hover:border-[rgba(59,130,246,0.4)] cursor-pointer flex flex-col">
                     {/* Logo and Company */}
                     <div className="flex items-start gap-4 mb-6">
-                      <div className="w-28 h-28 rounded-xl bg-gradient-to-br from-[rgba(59,130,246,0.3)] to-[rgba(147,51,234,0.3)] dark:from-[rgba(59,130,246,0.2)] dark:to-[rgba(147,51,234,0.2)] border border-[rgba(59,130,246,0.3)] dark:border-[rgba(255,255,255,0.2)] flex items-center justify-center overflow-hidden flex-shrink-0">
+                      <div className={`w-28 h-28 rounded-xl border flex items-center justify-center overflow-hidden flex-shrink-0 ${
+                        exp.logo
+                          ? 'bg-white border-gray-200'
+                          : `bg-gradient-to-br border ${
+                              theme === 'theme-light'
+                                ? 'from-[rgba(59,130,246,0.3)] to-[rgba(147,51,234,0.3)] border-[rgba(59,130,246,0.3)]'
+                                : 'from-[rgba(59,130,246,0.2)] to-[rgba(147,51,234,0.2)] border-[rgba(255,255,255,0.2)]'
+                            }`
+                      }`}>
                         {exp.logo ? (
                           <Image
                             src={exp.logo}

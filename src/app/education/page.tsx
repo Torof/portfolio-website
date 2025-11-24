@@ -52,7 +52,15 @@ export default function EducationPage() {
                     
                     {/* Institution Header */}
                     <div className="flex items-start gap-4 mb-6">
-                      <div className="w-28 h-28 rounded-xl bg-gradient-to-br from-[rgba(218,165,32,0.3)] to-[rgba(255,140,0,0.3)] dark:from-[rgba(218,165,32,0.2)] dark:to-[rgba(255,140,0,0.2)] border border-[rgba(218,165,32,0.3)] dark:border-[rgba(255,255,255,0.2)] flex items-center justify-center overflow-hidden flex-shrink-0">
+                      <div className={`w-28 h-28 rounded-xl border flex items-center justify-center overflow-hidden flex-shrink-0 ${
+                        education.logo
+                          ? 'bg-white border-gray-200'
+                          : `bg-gradient-to-br border ${
+                              theme === 'theme-light'
+                                ? 'from-[rgba(218,165,32,0.3)] to-[rgba(255,140,0,0.3)] border-[rgba(218,165,32,0.3)]'
+                                : 'from-[rgba(218,165,32,0.2)] to-[rgba(255,140,0,0.2)] border-[rgba(255,255,255,0.2)]'
+                            }`
+                      }`}>
                         {education.logo ? (
                           <Image
                             src={education.logo}
