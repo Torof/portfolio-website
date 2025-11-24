@@ -540,7 +540,13 @@ const SequentialLayout: React.FC = () => {
             ref={projectsGridAnimation.ref}
             className={`max-w-5xl mx-auto ${getAnimationClass(projectsGridAnimation.isVisible, 'fadeInUp')}`}
           >
-            <ProjectsCarousel projects={featuredProjects} />
+            <div className={`rounded-2xl border p-8 transition-all duration-300 ${
+              theme === 'theme-light'
+                ? 'bg-white/90 backdrop-blur-sm border-gray-200 shadow-lg'
+                : 'bg-slate-900/90 backdrop-blur-sm border-slate-700 shadow-lg'
+            }`}>
+              <ProjectsCarousel projects={featuredProjects} />
+            </div>
           </div>
         </div>
       </section>
