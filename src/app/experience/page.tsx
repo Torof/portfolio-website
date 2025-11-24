@@ -57,7 +57,7 @@ export default function ExperiencePage() {
                             className="object-contain"
                           />
                         ) : (
-                          <span className="text-3xl font-black light-text tracking-wide">
+                          <span className="text-3xl font-black text-slate-900 tracking-wide">
                             {exp.company.charAt(0)}
                           </span>
                         )}
