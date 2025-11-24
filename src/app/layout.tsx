@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@fontsource-variable/space-grotesk";
 import "@fontsource-variable/jetbrains-mono";
+import "@fontsource-variable/caveat";
 import "./globals.css";
 import Navbar from "@/components/NavBar";
 import { ThemeProvider } from "@/lib/context/ThemeContext";
