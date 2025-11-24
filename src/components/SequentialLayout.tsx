@@ -50,7 +50,7 @@ const SequentialLayout: React.FC = () => {
 
 
       {/* Projects Section */}
-      <section className={`relative overflow-hidden border-b ${
+      <section className={`relative overflow-hidden border-t border-b ${
         theme === 'theme-light'
           ? 'section-bg-secondary theme-light:border-warm-300'
           : 'bg-gradient-to-br from-blue-900 via-slate-800 to-blue-900 border-gray-700'
