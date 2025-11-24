@@ -545,7 +545,7 @@ const SequentialLayout: React.FC = () => {
                 ? 'bg-white/90 backdrop-blur-sm border-gray-200 shadow-lg'
                 : 'bg-slate-900/90 backdrop-blur-sm border-slate-700 shadow-lg'
             }`}>
-              <h2 className={`text-4xl md:text-5xl font-black mb-8 text-center underline tracking-tight light-text text-glow font-['Space_Grotesk'] ${
+              <h2 className={`text-4xl md:text-5xl font-black mb-8 text-center underline tracking-wider light-text text-glow font-['JetBrains_Mono'] uppercase ${
                 theme === 'theme-light'
                   ? 'bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent'
                   : 'bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent'
