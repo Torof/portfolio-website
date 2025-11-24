@@ -62,7 +62,7 @@ export default function EducationPage() {
                             className="object-contain"
                           />
                         ) : (
-                          <span className="text-3xl font-black text-slate-900 tracking-wide">
+                          <span className="text-3xl font-black tracking-wide" style={{ color: '#0f172a' }}>
                             {education.institution.charAt(0)}
                           </span>
                         )}
