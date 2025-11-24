@@ -45,7 +45,8 @@ jest.mock('framer-motion', () => {
     animate, initial, exit, variants, transition,
     whileHover, whileTap, whileFocus, whileInView,
     drag, dragConstraints, dragElastic, dragMomentum,
-    layout, layoutId, style, onAnimationComplete,
+    onDrag, onDragStart, onDragEnd,
+    layout, layoutId, style, onAnimationComplete, custom,
     ...props
   }) => props;
 
