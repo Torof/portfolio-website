@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import HeroSection from '@/components/HeroSection';
+import HeroSection from '../HeroSection';
 import { ThemeProvider } from '@/lib/context/ThemeContext';
 import { LanguageProvider } from '@/lib/context/LanguageContext';
 import { personalInfo } from '@/lib/data/personalInfo';
 
 // Mock BlockchainRain component using relative path
-jest.mock('../../components/BlockchainRain', () => ({
+jest.mock('../BlockchainRain', () => ({
   __esModule: true,
   default: () => <div data-testid="blockchain-rain" />,
 }));
@@ -21,8 +21,8 @@ const renderWithProviders = (component: React.ReactElement) => {
   );
 };
 
-describe('Home Page', () => {
-  describe('HeroSection - Title', () => {
+describe('HeroSection', () => {
+  describe('Title', () => {
     it('renders the main title with the person\'s name', () => {
       renderWithProviders(<HeroSection />);
 
@@ -51,7 +51,7 @@ describe('Home Page', () => {
     });
   });
 
-  describe('HeroSection - Subtitle', () => {
+  describe('Subtitle', () => {
     it('renders the subtitle text', () => {
       renderWithProviders(<HeroSection />);
 
@@ -78,7 +78,7 @@ describe('Home Page', () => {
     });
   });
 
-  describe('HeroSection - Developer Badge', () => {
+  describe('Developer Badge', () => {
     it('renders the main developer type badge', () => {
       renderWithProviders(<HeroSection />);
 
@@ -119,7 +119,7 @@ describe('Home Page', () => {
     });
   });
 
-  describe('HeroSection - Profile Image', () => {
+  describe('Profile Image', () => {
     it('renders the profile image', () => {
       renderWithProviders(<HeroSection />);
 
@@ -148,7 +148,7 @@ describe('Home Page', () => {
     });
   });
 
-  describe('HeroSection - Structure and Layout', () => {
+  describe('Structure and Layout', () => {
     it('renders as a section element', () => {
       const { container } = renderWithProviders(<HeroSection />);
 
@@ -176,7 +176,7 @@ describe('Home Page', () => {
     });
   });
 
-  describe('HeroSection - Theme Integration', () => {
+  describe('Theme Integration', () => {
     it('applies theme-aware background gradient', () => {
       const { container } = renderWithProviders(<HeroSection />);
 
