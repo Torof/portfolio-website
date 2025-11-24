@@ -50,7 +50,7 @@ export default function ExperiencePage() {
                       <div className={`w-28 h-28 rounded-xl border flex items-center justify-center overflow-hidden flex-shrink-0 ${
                         exp.logo
                           ? exp.id === 'bitcoin-vietnam'
-                            ? 'bg-gray-100 border-gray-300'
+                            ? 'bg-slate-300 border-slate-400'
                             : 'bg-white border-gray-200'
                           : `bg-gradient-to-br border ${
                               theme === 'theme-light'
