@@ -6,9 +6,11 @@ import Link from 'next/link';
 import FloatingOrbs from '@/components/FloatingOrbs';
 import FlipCard from '@/components/FlipCard';
 import { useLanguage } from '@/lib/context/LanguageContext';
+import { useTheme } from '@/lib/context/ThemeContext';
 
 export default function EducationPage() {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   return (
     <>
       {/* Floating Orbs for Visual Interest */}
@@ -108,7 +110,11 @@ export default function EducationPage() {
                         {education.skills?.map((skill) => (
                           <span
                             key={skill}
-                            className="px-3 py-2 text-xs bg-gradient-to-r from-[rgba(218,165,32,0.25)] to-[rgba(255,140,0,0.25)] dark:from-[rgba(218,165,32,0.2)] dark:to-[rgba(255,140,0,0.2)] text-[#6B5310] dark:text-white rounded-full border-2 border-[rgba(218,165,32,0.6)] dark:border-[rgba(218,165,32,0.5)] font-bold tracking-wide transition-all duration-300 hover:scale-105 shadow-sm"
+                            className={`px-3 py-2 text-xs bg-gradient-to-r rounded-full border-2 font-bold tracking-wide transition-all duration-300 hover:scale-105 shadow-sm ${
+                              theme === 'theme-light'
+                                ? 'from-[rgba(218,165,32,0.25)] to-[rgba(255,140,0,0.25)] text-[#6B5310] border-[rgba(218,165,32,0.6)]'
+                                : 'from-[rgba(218,165,32,0.2)] to-[rgba(255,140,0,0.2)] text-white border-[rgba(218,165,32,0.5)]'
+                            }`}
                           >
                             {t(`skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`) !== `skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}` ? t(`skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`) : skill}
                           </span>

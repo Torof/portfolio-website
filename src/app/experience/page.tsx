@@ -103,7 +103,11 @@ export default function ExperiencePage() {
                         {exp.skills.map((skill) => (
                           <span
                             key={skill}
-                            className="px-3 py-2 text-xs bg-gradient-to-r from-[rgba(59,130,246,0.25)] to-[rgba(147,51,234,0.25)] dark:from-[rgba(59,130,246,0.2)] dark:to-[rgba(147,51,234,0.2)] text-[#1E40AF] dark:text-white rounded-full border-2 border-[rgba(59,130,246,0.6)] dark:border-[rgba(59,130,246,0.5)] font-bold tracking-wide transition-all duration-300 hover:scale-105 shadow-sm"
+                            className={`px-3 py-2 text-xs bg-gradient-to-r rounded-full border-2 font-bold tracking-wide transition-all duration-300 hover:scale-105 shadow-sm ${
+                              theme === 'theme-light'
+                                ? 'from-[rgba(59,130,246,0.25)] to-[rgba(147,51,234,0.25)] text-[#1E40AF] border-[rgba(59,130,246,0.6)]'
+                                : 'from-[rgba(59,130,246,0.2)] to-[rgba(147,51,234,0.2)] text-white border-[rgba(59,130,246,0.5)]'
+                            }`}
                           >
                             {t(`skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`) !== `skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}` ? t(`skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`) : skill}
                           </span>
