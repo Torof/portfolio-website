@@ -545,7 +545,7 @@ const SequentialLayout: React.FC = () => {
                 ? 'bg-white/90 backdrop-blur-sm border-gray-200 shadow-lg'
                 : 'bg-slate-900/90 backdrop-blur-sm border-slate-700 shadow-lg'
             }`}>
-              <h2 className={`text-4xl md:text-5xl font-bold mb-8 text-center ${
+              <h2 className={`text-4xl md:text-5xl font-black mb-8 text-center underline tracking-tight ${
                 theme === 'theme-light' ? 'text-slate-900' : 'text-white'
               }`}>
                 {t('featuredProjects.title')}
