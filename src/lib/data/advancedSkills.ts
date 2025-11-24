@@ -734,6 +734,17 @@ export const skillCategories: SkillCategory[] = [
         icon: '🔌',
         examples: ['REST endpoints', 'API documentation', 'Rate limiting'],
         projects: ['Third-party integrations', 'Microservices', 'GraphQL APIs']
+      },
+      {
+        id: 'realtime-features',
+        name: 'Real-time Features',
+        description: 'Live updates and real-time communication systems',
+        level: 5,
+        category: 'web-development',
+        subcategory: 'Full-Stack Applications',
+        icon: '⚡',
+        examples: ['WebSockets', 'Live chat', 'Real-time notifications', 'Server-Sent Events'],
+        projects: ['Live dashboards', 'Chat applications', 'Collaborative tools', 'Real-time analytics']
       }
     ]
   }
