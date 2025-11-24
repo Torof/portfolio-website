@@ -725,17 +725,6 @@ export const skillCategories: SkillCategory[] = [
         projects: ['Responsive portfolios', 'Mobile-friendly dashboards', 'Cross-device compatibility']
       },
       {
-        id: 'cms-integration',
-        name: 'CMS & Content Management',
-        description: 'Custom CMS and headless CMS integration',
-        level: 4,
-        category: 'web-development',
-        subcategory: 'Full-Stack Applications',
-        icon: '📝',
-        examples: ['Admin panels', 'Content editing', 'Media management'],
-        projects: ['Blog platforms', 'Content-driven websites', 'Multi-user publishing systems']
-      },
-      {
         id: 'api-development',
         name: 'RESTful APIs',
         description: 'Backend API design and implementation',
