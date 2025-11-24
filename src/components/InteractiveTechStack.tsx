@@ -10,7 +10,7 @@ interface InteractiveTechStackProps {
 }
 
 const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryChange }) => {
-  const [activeCategory, setActiveCategory] = useState<'blockchain' | 'frontend' | 'backend'>('blockchain');
+  const [activeCategory, setActiveCategory] = useState<'blockchain' | 'frontend' | 'backend'>('frontend');
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
 
   // Notify parent component when category changes
@@ -38,24 +38,9 @@ const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryC
   };
 
   const categories = [
-    { 
-      id: 'blockchain', 
-      name: 'Blockchain', 
-      icon: (active: boolean) => (
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "white" : "#0ea5e9"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-        </svg>
-      ),
-      color: (active: boolean) => active ? 'from-[#036aa3] to-[#0284c9]' : 'from-[#0ea5e9] to-[#38b2f8]',
-      baseColor: '#0ea5e9',
-      brightColor: '#38b2f8',
-      darkColor: '#036aa3',
-      textColor: (active: boolean) => active ? 'white' : '#0ea5e9'
-    },
-    { 
-      id: 'frontend', 
-      name: 'Frontend', 
+    {
+      id: 'frontend',
+      name: 'Frontend',
       icon: (active: boolean) => (
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "white" : "#7c3aed"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="16 18 22 12 16 6"></polyline>
@@ -68,9 +53,24 @@ const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryC
       darkColor: '#5b21b6',
       textColor: (active: boolean) => active ? 'white' : '#7c3aed'
     },
-    { 
-      id: 'backend', 
-      name: 'Backend', 
+    {
+      id: 'blockchain',
+      name: 'Blockchain',
+      icon: (active: boolean) => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "white" : "#0ea5e9"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+        </svg>
+      ),
+      color: (active: boolean) => active ? 'from-[#036aa3] to-[#0284c9]' : 'from-[#0ea5e9] to-[#38b2f8]',
+      baseColor: '#0ea5e9',
+      brightColor: '#38b2f8',
+      darkColor: '#036aa3',
+      textColor: (active: boolean) => active ? 'white' : '#0ea5e9'
+    },
+    {
+      id: 'backend',
+      name: 'Backend',
       icon: (active: boolean) => (
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "white" : "#06b6d4"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
@@ -88,7 +88,7 @@ const InteractiveTechStack: React.FC<InteractiveTechStackProps> = ({ onCategoryC
   return (
     <div className="w-full max-w-5xl mx-auto">
       {/* Simple Category Selector */}
-      <div className="flex justify-center items-center gap-8 mb-12">
+      <div className="flex justify-center items-center gap-8 pt-12 mb-12">
         {categories.map((category) => {
           const isActive = activeCategory === category.id;
 
