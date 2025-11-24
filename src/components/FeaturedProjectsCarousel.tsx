@@ -211,7 +211,7 @@ const FeaturedProjectsCarousel = ({ projects }: FeaturedProjectsCarouselProps) =
         </button>
 
         {/* Carousel Display Area */}
-        <div className="flex-1 relative min-h-[480px] overflow-hidden">
+        <div className="flex-1 relative overflow-hidden">
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={currentPage}
