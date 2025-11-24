@@ -108,7 +108,7 @@ export default function EducationPage() {
                         {education.skills?.map((skill) => (
                           <span
                             key={skill}
-                            className="px-3 py-2 text-xs bg-gradient-to-r from-[rgba(218,165,32,0.25)] to-[rgba(255,140,0,0.25)] dark:from-[rgba(218,165,32,0.2)] dark:to-[rgba(255,140,0,0.2)] text-[#6B5310] dark:text-[#FFD700] rounded-full border-2 border-[rgba(218,165,32,0.6)] dark:border-[rgba(218,165,32,0.5)] font-bold tracking-wide transition-all duration-300 hover:scale-105 shadow-sm"
+                            className="px-3 py-2 text-xs bg-gradient-to-r from-[rgba(218,165,32,0.25)] to-[rgba(255,140,0,0.25)] dark:from-[rgba(218,165,32,0.2)] dark:to-[rgba(255,140,0,0.2)] text-[#6B5310] dark:text-white rounded-full border-2 border-[rgba(218,165,32,0.6)] dark:border-[rgba(218,165,32,0.5)] font-bold tracking-wide transition-all duration-300 hover:scale-105 shadow-sm"
                           >
                             {t(`skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`) !== `skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}` ? t(`skills.${skill.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`) : skill}
                           </span>
