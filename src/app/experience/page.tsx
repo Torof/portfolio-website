@@ -70,7 +70,11 @@ export default function ExperiencePage() {
                               href={exp.website}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-sm text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 font-semibold tracking-wide transition-colors duration-300 truncate"
+                              className={`text-sm font-semibold tracking-wide transition-colors duration-300 truncate ${
+                                theme === 'theme-light'
+                                  ? 'text-slate-900 hover:text-blue-600'
+                                  : 'text-white hover:text-blue-400'
+                              }`}
                             >
                               {(() => {
                                 const cleanUrl = exp.website.replace('https://', '').replace('http://', '');
