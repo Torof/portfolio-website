@@ -44,4 +44,21 @@ export const featuredProjects: FeaturedProject[] = [
     githubUrl: 'https://github.com/yourusername/cross-chain-bridge',
     tags: ['Solidity', 'Web3', 'Cross-Chain', 'Layer2'],
   },
+  {
+    id: 'project-5',
+    title: 'Staking Platform',
+    description: 'A non-custodial staking platform with liquid staking derivatives and multi-token reward distribution.',
+    image: '/projects/staking.jpg',
+    websiteUrl: 'https://example.com/staking',
+    githubUrl: 'https://github.com/yourusername/staking-platform',
+    tags: ['Solidity', 'React', 'Staking', 'DeFi'],
+  },
+  {
+    id: 'project-6',
+    title: 'On-Chain Analytics',
+    description: 'Real-time blockchain analytics dashboard with transaction monitoring, whale tracking, and protocol metrics.',
+    image: '/projects/analytics.jpg',
+    githubUrl: 'https://github.com/yourusername/onchain-analytics',
+    tags: ['TypeScript', 'GraphQL', 'The Graph', 'Data'],
+  },
 ];

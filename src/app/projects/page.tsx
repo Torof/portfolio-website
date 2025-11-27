@@ -66,7 +66,7 @@ export default function ProjectsPage() {
 
       {/* White Corridor Container */}
       <div className="relative z-10 min-h-screen flex justify-center py-16">
-        <div className={`w-full max-w-6xl mx-4 rounded-2xl shadow-2xl border ${
+        <div className={`w-full max-w-7xl mx-4 rounded-2xl shadow-2xl border ${
           theme === 'theme-light'
             ? 'bg-white border-gray-400'
             : 'bg-slate-900 border-[rgba(255,255,255,0.4)]'
