@@ -3,20 +3,14 @@ import { fetchGitHubStats } from '@/lib/services/github';
 
 export async function GET() {
   try {
-    console.log('[API] Fetching GitHub stats');
-    
-    // Fetch data from GitHub API (server-side, with authentication if available)
     const stats = await fetchGitHubStats();
 
     if (!stats) {
-      console.log('[API] No GitHub stats found, returning error');
       return NextResponse.json(
         { error: 'No GitHub data found' },
         { status: 404 }
       );
     }
-
-    console.log(`[API] Successfully fetched GitHub stats - User: ${stats.user?.login || 'N/A'}, Total Repos: ${stats.totalRepos || 0}`);
 
     return NextResponse.json({
       stats,
@@ -25,10 +19,8 @@ export async function GET() {
     });
 
   } catch (error) {
-    console.error('[API] Error fetching GitHub data:', error);
-    
     return NextResponse.json(
-      { 
+      {
         error: 'Failed to fetch GitHub data',
         details: error instanceof Error ? error.message : 'Unknown error'
       },

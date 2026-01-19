@@ -56,26 +56,18 @@ const GITHUB_API_BASE = 'https://api.github.com';
  */
 export async function fetchGitHubRepositories(): Promise<GitHubRepository[]> {
   try {
-    console.log('🔍 GitHub Token available:', !!process.env.GITHUB_TOKEN);
-    console.log('📡 Fetching repositories for user:', GITHUB_USERNAME);
-    
     const headers: Record<string, string> = {
       'Accept': 'application/vnd.github.v3+json',
     };
-    
-    // Add GitHub token if available for higher rate limits
+
     if (process.env.GITHUB_TOKEN) {
       headers['Authorization'] = `Bearer ${process.env.GITHUB_TOKEN}`;
-      console.log('🔑 Using authenticated request');
-    } else {
-      console.log('⚠️ Using unauthenticated request (rate limited)');
     }
-    
+
     const response = await fetch(
       `${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`,
       {
         headers,
-        // Cache for 1 hour in production to reduce API calls
         next: { revalidate: 3600 }
       }
     );
@@ -85,16 +77,14 @@ export async function fetchGitHubRepositories(): Promise<GitHubRepository[]> {
     }
 
     const repositories: GitHubRepository[] = await response.json();
-    
-    // Filter out forks, archived repos, and private repos
-    return repositories.filter(repo => 
-      !repo.fork && 
-      !repo.archived && 
+
+    return repositories.filter(repo =>
+      !repo.fork &&
+      !repo.archived &&
       !repo.private &&
-      repo.description // Only include repos with descriptions
+      repo.description
     );
-  } catch (error) {
-    console.error('Error fetching GitHub repositories:', error);
+  } catch {
     return [];
   }
 }
@@ -122,8 +112,7 @@ export async function fetchGitHubUser(): Promise<GitHubUser | null> {
     }
 
     return await response.json();
-  } catch (error) {
-    console.error('Error fetching GitHub user:', error);
+  } catch {
     return null;
   }
 }
@@ -151,8 +140,7 @@ export async function fetchRepositoryLanguages(repoName: string): Promise<Record
     }
 
     return await response.json();
-  } catch (error) {
-    console.error(`Error fetching languages for ${repoName}:`, error);
+  } catch {
     return {};
   }
 }
@@ -162,16 +150,12 @@ export async function fetchRepositoryLanguages(repoName: string): Promise<Record
  */
 export async function fetchGitHubStats(): Promise<GitHubStats | null> {
   try {
-    console.log('Fetching GitHub statistics...');
-    
-    // Fetch user and repositories in parallel
     const [user, repositories] = await Promise.all([
       fetchGitHubUser(),
       fetchGitHubRepositories()
     ]);
 
     if (!user || repositories.length === 0) {
-      console.warn('Could not fetch user or repository data');
       return null;
     }
 
@@ -182,16 +166,15 @@ export async function fetchGitHubStats(): Promise<GitHubStats | null> {
     // Aggregate languages across all repositories
     const allLanguages: Record<string, number> = {};
     
-    for (const repo of repositories.slice(0, 10)) { // Limit to prevent rate limiting
+    for (const repo of repositories.slice(0, 10)) {
       try {
         const languages = await fetchRepositoryLanguages(repo.name);
         for (const [lang, bytes] of Object.entries(languages)) {
           allLanguages[lang] = (allLanguages[lang] || 0) + bytes;
         }
-        // Small delay to prevent rate limiting
         await new Promise(resolve => setTimeout(resolve, 100));
       } catch {
-        console.warn(`Failed to fetch languages for ${repo.name}`);
+        // Continue with other repos
       }
     }
 
@@ -241,11 +224,9 @@ export async function fetchGitHubStats(): Promise<GitHubStats | null> {
       user
     };
 
-    console.log(`✅ GitHub stats calculated: ${stats.totalRepos} repos, ${stats.totalStars} stars`);
     return stats;
 
-  } catch (error) {
-    console.error('Error fetching GitHub stats:', error);
+  } catch {
     return null;
   }
 }

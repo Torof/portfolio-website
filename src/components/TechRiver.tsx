@@ -279,13 +279,13 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
                               : 'bg-slate-800/80 border-slate-700/50 group-hover:bg-slate-800 group-hover:border-slate-600 group-hover:shadow-xl'
                           }`}>
                             {/* Logo */}
-                            <div className="relative w-16 h-16 flex items-center justify-center">
-                              <Image 
-                                src={tech.logo} 
+                            <div className="relative w-16 h-16 group-hover:scale-110 transition-transform duration-300">
+                              <Image
+                                src={tech.logo}
                                 alt={tech.name}
-                                width={64}
-                                height={64}
-                                className="object-contain group-hover:scale-110 transition-transform duration-300"
+                                fill
+                                sizes="64px"
+                                className="object-contain"
                               />
                               <span className="text-2xl hidden">{tech.icon}</span>
                             </div>

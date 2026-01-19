@@ -66,36 +66,12 @@ function fetchJsonp(url: string): Promise<unknown> {
 const isBrowser = typeof window !== 'undefined';
 
 // Helper function to handle API responses with rate limit awareness
-async function handleApiResponse(response: Response, context: string): Promise<unknown> {
+async function handleApiResponse(response: Response): Promise<unknown> {
   if (!response.ok) {
-    if (response.status === 400) {
-      console.error(`Stack Exchange API Bad Request (${context}):`, response.status);
-      return null;
-    }
-    if (response.status === 429) {
-      console.error(`Stack Exchange API Rate Limited (${context}):`, response.status);
-      return null;
-    }
-    if (response.status === 502 || response.status === 503) {
-      console.error(`Stack Exchange API Server Error (${context}):`, response.status);
-      return null;
-    }
-    console.error(`Stack Exchange API Error (${context}):`, response.status);
     return null;
   }
 
   const data = await response.json();
-  
-  // Check for API quota exceeded
-  if (data.quota_remaining !== undefined && data.quota_remaining < 10) {
-    console.warn(`Stack Exchange API quota low: ${data.quota_remaining} requests remaining`);
-  }
-  
-  // Handle backoff if present
-  if (data.backoff) {
-    console.warn(`Stack Exchange API backoff requested: ${data.backoff} seconds`);
-  }
-  
   return data;
 }
 
@@ -136,45 +112,31 @@ export interface StackExchangeQuestion {
 export async function fetchStackExchangeProfile(userId: string): Promise<StackOverflowProfile | null> {
   try {
     const apiUrl = buildApiUrl(`/users/${userId}`, {});
-    
-    console.log('API URL:', apiUrl);
-    
+
     let data: unknown;
-    
+
     if (isBrowser) {
-      // Try direct fetch first (Stack Exchange API supports CORS)
-      console.log('Making direct fetch request to:', apiUrl);
       try {
         const response = await fetch(apiUrl);
         if (response.ok) {
           data = await response.json();
-          console.log('Direct fetch response received:', data);
         } else {
-          console.log('Direct fetch failed, trying JSONP...');
           data = await fetchJsonp(apiUrl);
-          console.log('JSONP response received:', data);
         }
-      } catch (fetchError) {
-        console.log('Direct fetch failed with error, trying JSONP:', fetchError);
+      } catch {
         data = await fetchJsonp(apiUrl);
-        console.log('JSONP response received:', data);
       }
     } else {
-      // Use regular fetch for server-side requests
       const response = await fetch(apiUrl, {
         headers: {
           'Accept': 'application/json',
           'User-Agent': 'Portfolio-Website/1.0 (torof-portfolio)',
         },
       });
-      data = await handleApiResponse(response, 'profile');
+      data = await handleApiResponse(response);
     }
-    
-    console.log('Stack Exchange API response:', data);
-    
+
     if (!data || !(data as { items?: unknown[] }).items || (data as { items: unknown[] }).items.length === 0) {
-      console.error('No user data found');
-      console.error('Data structure:', data);
       return null;
     }
 
@@ -201,14 +163,13 @@ export async function fetchStackExchangeProfile(userId: string): Promise<StackOv
         tagsData = await fetchJsonp(tagsApiUrl);
       }
     } else {
-      // Use regular fetch for server-side requests
       const tagsResponse = await fetch(tagsApiUrl, {
         headers: {
           'Accept': 'application/json',
           'User-Agent': 'Portfolio-Website/1.0 (torof-portfolio)',
         },
       });
-      tagsData = await handleApiResponse(tagsResponse, 'tags');
+      tagsData = await handleApiResponse(tagsResponse);
     }
     if (tagsData && (tagsData as { items?: { tag_name: string }[] }).items && (tagsData as { items: { tag_name: string }[] }).items.length > 0) {
       topTags = (tagsData as { items: { tag_name: string }[] }).items.map((tag: { tag_name: string }) => tag.tag_name);
@@ -229,8 +190,7 @@ export async function fetchStackExchangeProfile(userId: string): Promise<StackOv
     };
 
     return profile;
-  } catch (error) {
-    console.error('Error fetching Stack Exchange profile:', error);
+  } catch {
     return null;
   }
 }
@@ -263,22 +223,18 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
         answersData = await fetchJsonp(answersApiUrl);
       }
     } else {
-      // Use regular fetch for server-side requests
       const answersResponse = await fetch(answersApiUrl, {
         headers: {
           'Accept': 'application/json',
           'User-Agent': 'Portfolio-Website/1.0 (torof-portfolio)',
         },
       });
-      answersData = await handleApiResponse(answersResponse, 'answers');
+      answersData = await handleApiResponse(answersResponse);
     }
-    
+
     if (!answersData || !(answersData as { items?: unknown[] }).items || (answersData as { items: unknown[] }).items.length === 0) {
-      console.log('No answers data found or empty items array');
       return [];
     }
-    
-    console.log(`Found ${(answersData as { items: unknown[] }).items.length} answers from Stack Exchange API`);
     
 
     // Get question IDs to fetch question details
@@ -303,14 +259,13 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
         questionsData = await fetchJsonp(questionsApiUrl);
       }
     } else {
-      // Use regular fetch for server-side requests
       const questionsResponse = await fetch(questionsApiUrl, {
         headers: {
           'Accept': 'application/json',
           'User-Agent': 'Portfolio-Website/1.0 (torof-portfolio)',
         },
       });
-      questionsData = await handleApiResponse(questionsResponse, 'questions');
+      questionsData = await handleApiResponse(questionsResponse);
     }
     if (questionsData && (questionsData as { items?: unknown[] }).items) {
       questionsMap = (questionsData as { items: { question_id: number; title: string; link: string; tags: string[] }[] }).items.reduce((map: { [key: number]: StackExchangeQuestion }, question: { question_id: number; title: string; link: string; tags: string[] }) => {
@@ -336,20 +291,11 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
       let excerpt = '';
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const answerBody = (answer as any).body;
-      
-      console.log(`Processing answer ${answer.answer_id}:`, {
-        hasBody: !!answerBody,
-        bodyType: typeof answerBody,
-        bodyLength: answerBody ? answerBody.length : 0,
-        bodyPreview: answerBody ? answerBody.slice(0, 100) + '...' : 'No body'
-      });
-      
+
       if (answerBody && typeof answerBody === 'string' && answerBody.trim().length > 0) {
         // Clean HTML from the answer body to create a readable excerpt
         excerpt = answerBody
-          // Remove HTML tags
           .replace(/<[^>]*>/g, '')
-          // Replace HTML entities
           .replace(/&lt;/g, '<')
           .replace(/&gt;/g, '>')
           .replace(/&amp;/g, '&')
@@ -357,25 +303,18 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
           .replace(/&#39;/g, "'")
           .replace(/&nbsp;/g, ' ')
           .replace(/&hellip;/g, '...')
-          // Clean up whitespace and line breaks
           .replace(/\s+/g, ' ')
           .replace(/\n+/g, ' ')
           .trim();
-          
-        // Truncate if too long
+
         if (excerpt.length > 180) {
           excerpt = excerpt.slice(0, 180).trim() + '...';
         }
-        
-        console.log(`Created excerpt from body: "${excerpt}"`);
       } else {
-        // Enhanced fallback with more context when body is not available
         const shortTitle = question.title.length > 50 ? question.title.slice(0, 50) + '...' : question.title;
         const scoreText = answer.score === 1 ? '1 upvote' : `${answer.score} upvotes`;
         const acceptedText = answer.is_accepted ? ' (accepted)' : '';
         excerpt = `Solution with ${scoreText}${acceptedText} for: "${shortTitle}"`;
-        
-        console.log(`Using fallback excerpt: "${excerpt}"`);
       }
 
       return {
@@ -391,8 +330,7 @@ export async function fetchStackExchangeAnswers(userId: string, limit: number = 
     });
 
     return featuredAnswers;
-  } catch (error) {
-    console.error('Error fetching Stack Exchange answers:', error);
+  } catch {
     return [];
   }
 }

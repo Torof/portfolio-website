@@ -221,34 +221,23 @@ async function transformRepositoryToProject(repo: GitHubRepository, language: st
  */
 export async function fetchProjectsFromGitHub(language: string = 'en'): Promise<Project[]> {
   try {
-    console.log('Fetching projects from GitHub...');
     const repositories = await fetchGitHubRepositories();
-    
+
     if (repositories.length === 0) {
-      console.warn('No repositories found, using fallback data');
       return fallbackProjects;
     }
-    
-    console.log(`Found ${repositories.length} repositories`);
-    
-    // Transform repositories to projects
+
     const projects = await Promise.all(
       repositories.map(repo => transformRepositoryToProject(repo, language))
     );
-    
-    // Sort by featured first, then by stars, then by update date
+
     return projects.sort((a, b) => {
       if (a.featured && !b.featured) return -1;
       if (!a.featured && b.featured) return 1;
-      
-      // For repositories, we'd need to access the original repo data for sorting
-      // For now, just keep the GitHub API order (sorted by updated)
       return 0;
     });
-    
-  } catch (error) {
-    console.error('Error fetching projects from GitHub:', error);
-    console.log('Using fallback projects');
+
+  } catch {
     return fallbackProjects;
   }
 }
