@@ -10,6 +10,7 @@ import BlockchainNetwork from '@/components/BlockchainNetwork';
 import PremiumSkillSections from '@/components/PremiumSkillSections';
 import TechRiver from '@/components/TechRiver';
 import LiveStackExchangeCard from '@/components/LiveStackExchangeCard';
+import SkillsTable from '@/components/SkillsTable';
 
 
 
@@ -264,6 +265,11 @@ export default function SkillsPage() {
         </div>
           </div>
         </div>
+      </div>
+
+      {/* Skills Matrix Section - Full Width with Background */}
+      <div className="relative z-10">
+        <SkillsTable />
       </div>
     </div>
   );

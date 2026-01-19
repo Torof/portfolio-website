@@ -11,16 +11,35 @@ interface TechRiverProps {
   className?: string;
 }
 
+type ViewMode = 'river' | 'list' | 'grid';
+
 const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
   const { theme } = useTheme();
   const { t } = useLanguage();
   const [mounted, setMounted] = useState(false);
-  const [showList, setShowList] = useState(false);
+  const [viewMode, setViewMode] = useState<ViewMode>('river');
+  const [activeCategory, setActiveCategory] = useState<'blockchain' | 'frontend' | 'backend'>('frontend');
   
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Cycle through view modes
+  const cycleView = () => {
+    setViewMode(prev => {
+      if (prev === 'river') return 'list';
+      if (prev === 'list') return 'grid';
+      return 'river';
+    });
+  };
+
+  // Get the label for the next view (what clicking will switch to)
+  const getNextViewLabel = () => {
+    if (viewMode === 'river') return t('skills.techStack.listView');
+    if (viewMode === 'list') return t('skills.techStack.gridView');
+    return t('skills.techStack.riverView');
+  };
 
   // Generate stable path data to avoid hydration issues
   const generatePathData = (index: number, phase: number = 0) => {
@@ -170,7 +189,7 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
             <div className="relative z-10 p-8 md:p-12">
               {/* Section Toggle Button - Top Right */}
               <motion.button
-                onClick={() => setShowList(!showList)}
+                onClick={cycleView}
                 className={`absolute top-6 right-6 z-20 px-4 py-2 rounded-full border transition-all duration-300 ${
                   theme === 'theme-light'
                     ? 'bg-white/80 border-gray-300 hover:bg-white hover:border-gray-400 text-gray-700 shadow-lg hover:shadow-xl'
@@ -183,7 +202,7 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
                 transition={{ duration: 0.6, delay: 0.8 }}
               >
                 <div className="flex items-center space-x-2 text-sm font-medium">
-                  <span>{showList ? t('skills.techStack.riverView') : t('skills.techStack.listView')}</span>
+                  <span>{getNextViewLabel()}</span>
                 </div>
               </motion.button>
 
@@ -210,8 +229,8 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
                 </motion.p>
               </div>
 
-        {/* Toggle between River View and List View */}
-        {!showList ? (
+        {/* Toggle between River View, List View, and Grid View */}
+        {viewMode === 'river' ? (
           /* Tech River Streams - Full Width */
           <div className="relative h-96 w-full overflow-hidden">
             {streams.map((streamTechs, streamIndex) => (
@@ -326,9 +345,9 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
               </div>
             ))}
           </div>
-        ) : (
+        ) : viewMode === 'list' ? (
           /* Technology List Table */
-          <motion.div 
+          <motion.div
             className="w-full max-w-6xl mx-auto container-custom px-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -387,8 +406,8 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
                           >
                             {/* Tech Logo */}
                             <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
-                              <Image 
-                                src={tech.logo} 
+                              <Image
+                                src={tech.logo}
                                 alt={tech.name}
                                 width={40}
                                 height={40}
@@ -396,7 +415,7 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
                               />
                               <span className="text-lg hidden">{tech.icon}</span>
                             </div>
-                            
+
                             {/* Tech Name */}
                             <span className={`font-medium ${
                               theme === 'theme-light' ? 'text-slate-700' : 'text-slate-200'
@@ -410,6 +429,71 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
                 ))}
               </div>
             </div>
+          </motion.div>
+        ) : (
+          /* Grid View - Interactive Tech Stack Style */
+          <motion.div
+            className="w-full max-w-5xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            {/* Category Selector */}
+            <div className="flex justify-center items-center gap-8 mb-12">
+              {(['frontend', 'blockchain', 'backend'] as const).map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setActiveCategory(category)}
+                  className={`text-lg font-medium transition-all duration-200 cursor-pointer pb-1 border-b-2 capitalize ${
+                    activeCategory === category
+                      ? `${theme === 'theme-light' ? 'text-slate-800' : 'text-white'} border-[var(--primary-400)]`
+                      : `${theme === 'theme-light' ? 'text-slate-600' : 'text-slate-400'} opacity-60 hover:opacity-100 border-transparent hover:border-[var(--primary-400)]/50`
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+
+            {/* Tech Grid */}
+            <motion.div
+              key={activeCategory}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"
+            >
+              {techStack[activeCategory].map((tech, index) => (
+                <motion.div
+                  key={tech.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.4 }}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                  className={`relative flex flex-col items-center rounded-xl p-5 transition-all duration-300 border ${
+                    theme === 'theme-light'
+                      ? 'bg-white/60 border-gray-200 hover:border-[var(--primary-400)] hover:bg-white hover:shadow-lg'
+                      : 'bg-slate-800/60 border-slate-700 hover:border-[var(--primary-400)] hover:bg-slate-800 hover:shadow-lg'
+                  }`}
+                >
+                  <div className="h-16 w-16 relative mb-4 flex items-center justify-center">
+                    <Image
+                      src={tech.logo}
+                      alt={`${tech.name} logo`}
+                      width={52}
+                      height={52}
+                      className="object-contain drop-shadow-lg"
+                      style={{ width: 'auto', height: 'auto', maxWidth: '52px', maxHeight: '52px' }}
+                    />
+                  </div>
+                  <h3 className={`text-center text-sm font-medium ${
+                    theme === 'theme-light' ? 'text-slate-800' : 'text-white'
+                  }`}>
+                    {tech.name}
+                  </h3>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
         )}
             </div>

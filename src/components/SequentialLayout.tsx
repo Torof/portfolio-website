@@ -1,7 +1,6 @@
 'use client';
 
 import ProjectsCarousel from './ProjectsCarousel';
-import InteractiveTechStack from './InteractiveTechStack';
 import { useScrollAnimation, getAnimationClass } from "@/lib/hooks/useScrollAnimation";
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { useTheme } from '@/lib/context/ThemeContext';
@@ -10,45 +9,10 @@ import { featuredProjects } from '@/lib/data/featuredProjects';
 const SequentialLayout: React.FC = () => {
   const { t } = useLanguage();
   const { theme } = useTheme();
-  const titleAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
-  const textAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 200 });
-  const techStackAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 400 });
   const projectsGridAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 400 });
 
   return (
     <div>
-      {/* Tech Stack Section */}
-      <section className="section relative overflow-hidden" style={{ minHeight: '80vh' }}>
-        
-        <div className="container-custom relative z-10">
-          {/* Unified Tech Stack Section */}
-          <div
-            ref={titleAnimation.ref}
-            className={`w-full backdrop-blur-sm rounded-2xl p-8 glass-card ${getAnimationClass(titleAnimation.isVisible, 'fadeInUp')}`}
-          >
-            {/* Header */}
-            <div className="text-center mb-8">
-              <h2 className="section-title text-5xl md:text-6xl font-black mb-6 light-text text-glow tracking-tight">{t('techStack.title')}</h2>
-              <p
-                ref={textAnimation.ref}
-                className={`light-text mt-4 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light ${getAnimationClass(textAnimation.isVisible, 'fadeInUp')}`}
-              >
-                {t('techStack.description')}
-              </p>
-            </div>
-
-            {/* Tech Grid */}
-            <div
-              ref={techStackAnimation.ref}
-              className={getAnimationClass(techStackAnimation.isVisible, 'scaleIn')}
-            >
-              <InteractiveTechStack />
-            </div>
-          </div>
-        </div>
-      </section>
-
-
       {/* Projects Section */}
       <section className={`relative overflow-hidden border-t border-b ${
         theme === 'theme-light'

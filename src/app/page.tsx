@@ -4,7 +4,6 @@ import ContactSection from "@/components/ContactSection";
 import SequentialLayout from "@/components/SequentialLayout";
 import SectionTransition from "@/components/SectionTransition";
 import FloatingOrbs from "@/components/FloatingOrbs";
-import SkillsTable from "@/components/SkillsTable";
 
 export default function Home() {
   return (
@@ -25,16 +24,12 @@ export default function Home() {
           </div>
         </section>
       </SectionTransition>
-      
+
       <SectionTransition delay={0.1}>
-        <SkillsTable />
-      </SectionTransition>
-      
-      <SectionTransition delay={0.15}>
         <SequentialLayout />
       </SectionTransition>
 
-      <SectionTransition delay={0.2}>
+      <SectionTransition delay={0.15}>
         <ContactSection />
       </SectionTransition>
     </div>
