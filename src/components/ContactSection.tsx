@@ -105,10 +105,10 @@ export default function ContactSection() {
           className={`${getAnimationClass(centralCardAnimation.isVisible, 'scaleIn')}`}
         >
           <motion.div 
-            className={`relative overflow-hidden rounded-2xl p-8 md:p-12 backdrop-blur-md border transition-all duration-500 group ${
+            className={`relative overflow-hidden rounded-2xl p-8 md:p-12 backdrop-blur-md border-2 transition-all duration-500 group ${
               theme === 'theme-light'
-                ? 'bg-gradient-to-br from-[rgba(255,255,255,0.9)] via-[rgba(254,252,232,0.9)] to-[rgba(255,247,237,0.9)] border-[rgba(212,192,161,0.3)] shadow-xl'
-                : 'bg-gradient-to-br from-[rgba(59,130,246,0.1)] to-[rgba(147,51,234,0.1)] border-[rgba(255,255,255,0.3)]'
+                ? 'bg-gradient-to-br from-[rgba(255,255,255,0.9)] via-[rgba(254,252,232,0.9)] to-[rgba(255,247,237,0.9)] border-gray-400 shadow-xl'
+                : 'bg-gradient-to-br from-[rgba(59,130,246,0.1)] to-[rgba(147,51,234,0.1)] border-slate-500 shadow-[0_0_30px_rgba(148,163,184,0.15)]'
             }`}
             whileHover={{ 
               scale: 1.02,

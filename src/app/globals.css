@@ -1214,12 +1214,13 @@ pre code {
 /* Themed Card Styles */
 .glass-card {
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 2px solid rgb(100, 116, 139);
+  box-shadow: 0 0 30px rgba(148, 163, 184, 0.15);
 }
 
 .theme-light .glass-card {
   background: rgba(254, 253, 248, 0.6);
-  border: 1px solid var(--warm-300);
+  border: 2px solid rgb(156, 163, 175);
   backdrop-filter: blur(10px);
 }
 
@@ -1227,7 +1228,7 @@ pre code {
 @media (prefers-color-scheme: light) {
   :root:not(.theme-dark):not(.theme-light) .glass-card {
     background: rgba(254, 253, 248, 0.6);
-    border: 1px solid rgba(240, 232, 214, 0.7);
+    border: 2px solid rgb(156, 163, 175);
     backdrop-filter: blur(10px);
   }
 }

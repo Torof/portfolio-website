@@ -78,8 +78,8 @@ export default function SkillsPage() {
             <motion.div
               className={`relative p-8 rounded-2xl border backdrop-blur-md transition-all duration-300 group hover:scale-105 ${
                 theme === 'theme-light'
-                  ? 'bg-gradient-to-br from-blue-50/90 to-purple-50/90 border-blue-200 hover:border-purple-300'
-                  : 'bg-gradient-to-br from-blue-900/30 to-purple-900/30 border-blue-700/50 hover:border-purple-600/50'
+                  ? 'bg-gradient-to-br from-blue-100 to-purple-100 border-blue-300 hover:border-purple-400'
+                  : 'bg-gradient-to-br from-blue-900/50 to-purple-900/50 border-blue-600/60 hover:border-purple-500/70'
               }`}
               whileHover={{ y: -5 }}
             >
@@ -118,8 +118,8 @@ export default function SkillsPage() {
             <motion.div
               className={`relative p-8 rounded-2xl border backdrop-blur-md transition-all duration-300 group hover:scale-105 ${
                 theme === 'theme-light'
-                  ? 'bg-gradient-to-br from-green-50/90 to-emerald-50/90 border-green-200 hover:border-emerald-300'
-                  : 'bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-green-700/50 hover:border-emerald-600/50'
+                  ? 'bg-gradient-to-br from-green-100 to-emerald-100 border-green-300 hover:border-emerald-400'
+                  : 'bg-gradient-to-br from-green-900/50 to-emerald-900/50 border-green-600/60 hover:border-emerald-500/70'
               }`}
               whileHover={{ y: -5 }}
             >
@@ -158,8 +158,8 @@ export default function SkillsPage() {
             <motion.div
               className={`relative p-8 rounded-2xl border backdrop-blur-md transition-all duration-300 group hover:scale-105 ${
                 theme === 'theme-light'
-                  ? 'bg-gradient-to-br from-orange-50/90 to-red-50/90 border-orange-200 hover:border-red-300'
-                  : 'bg-gradient-to-br from-orange-900/30 to-red-900/30 border-orange-700/50 hover:border-red-600/50'
+                  ? 'bg-gradient-to-br from-orange-100 to-red-100 border-orange-300 hover:border-red-400'
+                  : 'bg-gradient-to-br from-orange-900/50 to-red-900/50 border-orange-600/60 hover:border-red-500/70'
               }`}
               whileHover={{ y: -5 }}
             >
@@ -199,8 +199,8 @@ export default function SkillsPage() {
           <motion.div
             className={`relative p-10 rounded-2xl border backdrop-blur-md text-center mt-16 ${
               theme === 'theme-light'
-                ? 'bg-gradient-to-r from-purple-50/90 via-pink-50/90 to-blue-50/90 border-purple-200'
-                : 'bg-gradient-to-r from-purple-900/20 via-pink-900/20 to-blue-900/20 border-purple-700/50'
+                ? 'bg-gradient-to-r from-purple-100 via-pink-100 to-blue-100 border-purple-300'
+                : 'bg-gradient-to-r from-purple-900/40 via-pink-900/40 to-blue-900/40 border-purple-600/60'
             }`}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
