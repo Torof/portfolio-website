@@ -87,16 +87,18 @@ export default function SkillsTable() {
   };
 
   return (
-    <section className={`section relative overflow-hidden ${
-      theme === 'theme-light' 
-        ? 'section-bg-primary' 
-        : 'bg-gradient-to-br from-slate-900 via-gray-800 to-slate-900 border-y border-slate-700'
+    <div className={`relative overflow-hidden rounded-2xl border-2 ${
+      theme === 'theme-light'
+        ? 'bg-gradient-to-br from-slate-100 via-gray-50 to-slate-100 border-gray-300'
+        : 'bg-gradient-to-br from-slate-900 via-gray-800 to-slate-900 border-slate-500 shadow-[0_0_30px_rgba(148,163,184,0.15)]'
     }`}>
-      {/* Matrix Rain Background */}
-      <MatrixRain />
-      
-      <div className="container-custom relative z-10">
-        <div 
+      {/* Matrix Rain Background - contained within card */}
+      <div className="absolute inset-0 overflow-hidden rounded-2xl">
+        <MatrixRain />
+      </div>
+
+      <div className="relative z-10 p-8 md:p-12">
+        <div
           ref={titleAnimation.ref}
           className={`flex justify-center mb-12 ${getAnimationClass(titleAnimation.isVisible, 'fadeInUp')}`}
         >
@@ -214,11 +216,11 @@ export default function SkillsTable() {
             </motion.ul>
           </motion.div>
         </motion.div>
-
-        {/* Decorative elements */}
-        <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-br from-[var(--primary-400)] to-[var(--secondary-400)] rounded-full blur-3xl opacity-20"></div>
-        <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-gradient-to-br from-[var(--accent-cyan)] to-[var(--accent-pink)] rounded-full blur-3xl opacity-20"></div>
       </div>
-    </section>
+
+      {/* Decorative elements - contained within card */}
+      <div className="absolute -top-10 -left-10 w-40 h-40 bg-gradient-to-br from-[var(--primary-400)] to-[var(--secondary-400)] rounded-full blur-3xl opacity-20 pointer-events-none"></div>
+      <div className="absolute -bottom-10 -right-10 w-60 h-60 bg-gradient-to-br from-[var(--accent-cyan)] to-[var(--accent-pink)] rounded-full blur-3xl opacity-20 pointer-events-none"></div>
+    </div>
   );
 }

@@ -138,10 +138,10 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
       <section className={`py-24 w-full ${className}`}>
         <div className="container-custom mx-auto px-6">
           {/* Unified Card Container */}
-          <div className={`relative rounded-2xl border overflow-hidden ${
+          <div className={`relative rounded-2xl border-2 overflow-hidden ${
             theme === 'theme-light'
-              ? 'bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20 border-slate-200'
-              : 'bg-gradient-to-br from-slate-900/90 via-blue-950/30 to-purple-950/20 border-[rgba(255,255,255,0.25)]'
+              ? 'bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20 border-gray-300'
+              : 'bg-gradient-to-br from-slate-900/90 via-blue-950/30 to-purple-950/20 border-slate-500 shadow-[0_0_30px_rgba(148,163,184,0.15)]'
           }`}>
             {/* Flowing background pattern */}
             <div className="absolute inset-0 opacity-10 pointer-events-none">
