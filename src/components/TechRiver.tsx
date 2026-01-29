@@ -120,8 +120,19 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
           0% { transform: translateX(150%); }
           100% { transform: translateX(-150%); }
         }
+        @keyframes flow-left {
+          0% { transform: translateX(-150%); }
+          100% { transform: translateX(150%); }
+        }
         .animate-flow-right {
           animation: flow-right linear infinite;
+          z-index: 1;
+          position: absolute;
+          display: flex;
+          align-items: center;
+        }
+        .animate-flow-left {
+          animation: flow-left linear infinite;
           z-index: 1;
           position: absolute;
           display: flex;
@@ -135,79 +146,9 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
           z-index: 10;
         }
       `}</style>
-      <section className={`py-24 w-full ${className}`}>
-        <div className="container-custom mx-auto px-6">
-          {/* Unified Card Container */}
-          <div className={`relative rounded-2xl border-2 overflow-hidden ${
-            theme === 'theme-light'
-              ? 'bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20 border-gray-300'
-              : 'bg-gradient-to-br from-slate-900/90 via-blue-950/30 to-purple-950/20 border-slate-500 shadow-[0_0_30px_rgba(148,163,184,0.15)]'
-          }`}>
-            {/* Flowing background pattern */}
-            <div className="absolute inset-0 opacity-10 pointer-events-none">
-              <svg className="w-full h-full" viewBox="0 0 1000 400" preserveAspectRatio="none">
-                {/* Flowing river paths */}
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <motion.path
-                    key={i}
-                    d={generatePathData(i, 0)}
-                    fill="none"
-                    stroke="url(#riverGradient)"
-                    strokeWidth="2"
-                    opacity="0.6"
-                    animate={mounted ? {
-                      d: [
-                        generatePathData(i, 0),
-                        generatePathData(i, 1),
-                        generatePathData(i, 2)
-                      ]
-                    } : {}}
-                    initial={{
-                      d: generatePathData(i, 0)
-                    }}
-                    transition={{
-                      duration: 8 + i * 2,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
-                ))}
-
-                {/* Gradient definitions */}
-                <defs>
-                  <linearGradient id="riverGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3" />
-                    <stop offset="25%" stopColor="#8b5cf6" stopOpacity="0.6" />
-                    <stop offset="50%" stopColor="#ef4444" stopOpacity="0.4" />
-                    <stop offset="75%" stopColor="#f59e0b" stopOpacity="0.5" />
-                    <stop offset="100%" stopColor="#10b981" stopOpacity="0.3" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-
-            <div className="relative z-10 p-8 md:p-12">
-              {/* Section Toggle Button - Top Right */}
-              <motion.button
-                onClick={cycleView}
-                className={`absolute top-6 right-6 z-20 px-4 py-2 rounded-full border transition-all duration-300 ${
-                  theme === 'theme-light'
-                    ? 'bg-white/80 border-gray-300 hover:bg-white hover:border-gray-400 text-gray-700 shadow-lg hover:shadow-xl'
-                    : 'bg-slate-800/80 border-slate-600 hover:bg-slate-800 hover:border-slate-500 text-gray-200 shadow-lg hover:shadow-xl'
-                }`}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-              >
-                <div className="flex items-center space-x-2 text-sm font-medium">
-                  <span>{getNextViewLabel()}</span>
-                </div>
-              </motion.button>
-
-              {/* Header */}
-              <div className="text-center mb-12">
+      <div className={`relative w-full ${className}`}>
+        {/* Header */}
+        <div className="text-center mb-8">
                 <motion.h2
                   className={`text-4xl md:text-5xl font-bold mb-4 ${
                     theme === 'theme-light' ? 'text-slate-800' : 'text-slate-100'
@@ -220,13 +161,58 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
                 </motion.h2>
 
                 <motion.p
-                  className="text-lg light-text opacity-70 max-w-2xl mx-auto font-light"
+                  className="text-lg light-text opacity-70 max-w-2xl mx-auto font-light mb-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
                 >
                   {t('skills.techStack.description')}
                 </motion.p>
+
+                {/* View Mode Buttons */}
+                <motion.div
+                  className="flex justify-center gap-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                >
+                  <button
+                    onClick={() => setViewMode('river')}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                      viewMode === 'river'
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                        : theme === 'theme-light'
+                          ? 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                          : 'bg-slate-700 text-gray-200 hover:bg-slate-600'
+                    }`}
+                  >
+                    {t('skills.techStack.riverView')}
+                  </button>
+                  <button
+                    onClick={() => setViewMode('list')}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                      viewMode === 'list'
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                        : theme === 'theme-light'
+                          ? 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                          : 'bg-slate-700 text-gray-200 hover:bg-slate-600'
+                    }`}
+                  >
+                    {t('skills.techStack.listView')}
+                  </button>
+                  <button
+                    onClick={() => setViewMode('grid')}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                      viewMode === 'grid'
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md'
+                        : theme === 'theme-light'
+                          ? 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                          : 'bg-slate-700 text-gray-200 hover:bg-slate-600'
+                    }`}
+                  >
+                    {t('skills.techStack.gridView')}
+                  </button>
+                </motion.div>
               </div>
 
         {/* Toggle between River View, List View, and Grid View */}
@@ -242,14 +228,6 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
                   height: '40%'
                 }}
               >
-                {/* Stream background flow - static for testing */}
-                <div
-                  className={`absolute inset-0 rounded-full opacity-10 ${
-                    theme === 'theme-light' 
-                      ? 'bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200'
-                      : 'bg-gradient-to-r from-blue-800 via-purple-800 to-pink-800'
-                  }`}
-                />
 
                 {/* Flowing tech logos */}
                 <div className="relative h-full flex items-center">
@@ -257,14 +235,14 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
                   {Array.from({ length: 3 }).map((_, copyIndex) => (
                     <div
                       key={copyIndex}
-                      className="absolute flex items-center animate-flow-right"
+                      className={`absolute flex items-center ${streamIndex === 0 ? 'animate-flow-right' : 'animate-flow-left'}`}
                       style={{
                         left: 0,
                         willChange: 'transform',
                         backfaceVisibility: 'hidden',
                         transform: 'translateZ(0)',
-                        animationDelay: `${copyIndex * -20}s`,
-                        animationDuration: '60s'
+                        animationDelay: `${copyIndex * -40}s`,
+                        animationDuration: '120s'
                       }}
                     >
                       {streamTechs.map((tech, techIndex) => (
@@ -496,10 +474,7 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
             </motion.div>
           </motion.div>
         )}
-            </div>
-          </div>
-        </div>
-      </section>
+      </div>
     </>
   );
 });
