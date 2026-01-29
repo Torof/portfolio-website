@@ -25,38 +25,6 @@ const TechRiver = memo(function TechRiver({ className = '' }: TechRiverProps) {
     setMounted(true);
   }, []);
 
-  // Cycle through view modes
-  const cycleView = () => {
-    setViewMode(prev => {
-      if (prev === 'river') return 'list';
-      if (prev === 'list') return 'grid';
-      return 'river';
-    });
-  };
-
-  // Get the label for the next view (what clicking will switch to)
-  const getNextViewLabel = () => {
-    if (viewMode === 'river') return t('skills.techStack.listView');
-    if (viewMode === 'list') return t('skills.techStack.gridView');
-    return t('skills.techStack.riverView');
-  };
-
-  // Generate stable path data to avoid hydration issues
-  const generatePathData = (index: number, phase: number = 0) => {
-    // Ensure all values are numbers and not NaN
-    const safeIndex = typeof index === 'number' && !isNaN(index) ? index : 0;
-    const safePhase = typeof phase === 'number' && !isNaN(phase) ? phase : 0;
-    
-    const baseY = 50 + safeIndex * 40;
-    const controlY = 30 + safeIndex * 40 + Math.sin(safeIndex + safePhase) * 20;
-    
-    // Ensure all calculated values are valid numbers
-    const safeBaseY = !isNaN(baseY) ? baseY : 50;
-    const safeControlY = !isNaN(controlY) ? controlY : 30;
-    
-    return `M0,${safeBaseY} Q250,${safeControlY} 500,${safeBaseY} T1000,${safeBaseY}`;
-  };
-
   // Flatten all tech items and add more diverse technologies
   const techItems: (TechItem & { category: string })[] = [
     // Blockchain technologies
