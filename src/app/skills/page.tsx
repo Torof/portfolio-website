@@ -263,8 +263,8 @@ export default function SkillsPage() {
         </div>
       </div>
 
-      {/* Corridor Section 5: Technical Expertise + Community Contributions */}
-      <div className="relative z-10 flex justify-center pt-8 pb-16">
+      {/* Corridor Section 5: Technical Expertise */}
+      <div className="relative z-10 flex justify-center pt-8">
         <div className={`w-full max-w-6xl mx-4 rounded-2xl shadow-2xl border-2 ${
           theme === 'theme-light'
             ? 'bg-white border-gray-300'
@@ -272,38 +272,44 @@ export default function SkillsPage() {
         }`}>
           <div className="px-8 md:px-12 py-16">
             {/* Themed Skills Sections */}
-            <div className="mb-20">
-              <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold light-text mb-6">
-                  {t('skills.expertise.title')}
-                </h2>
-                <p className="text-xl light-text opacity-80 max-w-3xl mx-auto">
-                  {t('skills.expertise.subtitle')}
-                </p>
-              </div>
-
-              <PremiumSkillSections categories={[
-                skillCategories.find(cat => cat.id === 'web-development')!,
-                skillCategories.find(cat => cat.id === 'smart-contracts')!,
-                skillCategories.find(cat => cat.id === 'security')!,
-                skillCategories.find(cat => cat.id === 'defi')!,
-                skillCategories.find(cat => cat.id === 'layer2')!
-              ]} />
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold light-text mb-6">
+                {t('skills.expertise.title')}
+              </h2>
+              <p className="text-xl light-text opacity-80 max-w-3xl mx-auto">
+                {t('skills.expertise.subtitle')}
+              </p>
             </div>
 
-            {/* Community Contributions Section */}
-            <div>
-              <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold light-text mb-6">
-                  {t('community.title')}
-                </h2>
-                <p className="text-xl light-text opacity-80 max-w-3xl mx-auto">
-                  {t('community.subtitle')}
-                </p>
-              </div>
+            <PremiumSkillSections categories={[
+              skillCategories.find(cat => cat.id === 'web-development')!,
+              skillCategories.find(cat => cat.id === 'smart-contracts')!,
+              skillCategories.find(cat => cat.id === 'security')!,
+              skillCategories.find(cat => cat.id === 'defi')!,
+              skillCategories.find(cat => cat.id === 'layer2')!
+            ]} />
+          </div>
+        </div>
+      </div>
 
-              <LiveStackExchangeCard />
+      {/* Corridor Section 6: Community Contributions */}
+      <div className="relative z-10 flex justify-center py-8 pb-16">
+        <div className={`w-full max-w-6xl mx-4 rounded-2xl shadow-2xl border-2 ${
+          theme === 'theme-light'
+            ? 'bg-white border-gray-300'
+            : 'bg-slate-900 border-slate-500 shadow-[0_0_30px_rgba(148,163,184,0.15)]'
+        }`}>
+          <div className="px-8 md:px-12 py-16">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold light-text mb-6">
+                {t('community.title')}
+              </h2>
+              <p className="text-xl light-text opacity-80 max-w-3xl mx-auto">
+                {t('community.subtitle')}
+              </p>
             </div>
+
+            <LiveStackExchangeCard />
           </div>
         </div>
       </div>

@@ -24,41 +24,21 @@ const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
       }`}>
         {/* Header with Title and Description */}
         <div className="mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <div className={`p-2 rounded-lg ${
-                theme === 'theme-light'
-                  ? 'bg-blue-100 text-blue-600'
-                  : 'bg-blue-900/30 text-blue-400'
-              }`}>
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <h3 className={`text-2xl font-bold ${
-                theme === 'theme-light' ? 'text-slate-800' : 'text-white'
-              }`}>
-                {t('skills.smartContracts.title')}
-              </h3>
-            </div>
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-200 ${
-                theme === 'theme-light'
-                  ? 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-700'
-                  : 'bg-slate-800 hover:bg-slate-700 border-slate-600 text-slate-200'
-              }`}
-            >
-              <span>{isExpanded ? t('skills.section.collapse') : t('skills.section.expand')}</span>
-              <svg
-                className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          <div className="flex items-center gap-3 mb-4">
+            <div className={`p-2 rounded-lg ${
+              theme === 'theme-light'
+                ? 'bg-blue-100 text-blue-600'
+                : 'bg-blue-900/30 text-blue-400'
+            }`}>
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-            </button>
+            </div>
+            <h3 className={`text-2xl font-bold ${
+              theme === 'theme-light' ? 'text-slate-800' : 'text-white'
+            }`}>
+              {t('skills.smartContracts.title')}
+            </h3>
           </div>
           <p
             className={`text-base leading-relaxed ${
@@ -167,6 +147,28 @@ const SmartContractsSection = ({ category }: SmartContractsSectionProps) => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Expand/Collapse Button */}
+        <div className="mt-6 flex justify-center">
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className={`flex items-center gap-2 px-6 py-2 rounded-full border transition-all duration-200 ${
+              theme === 'theme-light'
+                ? 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-700'
+                : 'bg-slate-800 hover:bg-slate-700 border-slate-600 text-slate-200'
+            }`}
+          >
+            <span>{isExpanded ? t('skills.section.collapse') : t('skills.section.expand')}</span>
+            <svg
+              className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
   );

@@ -32,31 +32,23 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const getNavClasses = () => {
+  const getNavBarClasses = () => {
     if (!mounted) {
-      return "fixed w-full z-50 transition-all duration-300 py-5 bg-transparent";
+      return "backdrop-blur-lg bg-[rgba(255,255,255,0.8)] border border-gray-200";
     }
-    
-    const baseClasses = "fixed w-full z-50 transition-all duration-300";
-    
+
     if (theme === 'theme-light') {
-      // Consistent light mode styling - always have some background
-      return scrolled 
-        ? `${baseClasses} py-3 backdrop-blur-lg bg-[rgba(255,255,255,0.95)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] border-b border-[rgba(0,0,0,0.1)]`
-        : `${baseClasses} py-5 backdrop-blur-md bg-[rgba(255,255,255,0.8)] border-b border-[rgba(0,0,0,0.05)]`;
+      return "backdrop-blur-lg bg-[rgba(255,255,255,0.9)] border border-gray-300 shadow-lg";
     } else {
-      // Dark mode styling
-      return scrolled
-        ? `${baseClasses} py-3 backdrop-blur-lg bg-[rgba(5,5,5,0.8)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] border-b border-[rgba(255,255,255,0.05)]`
-        : `${baseClasses} py-5 bg-transparent`;
+      return "backdrop-blur-lg bg-[rgba(15,23,42,0.85)] border border-slate-600 shadow-lg";
     }
   };
-  
-  const navClasses = getNavClasses();
+
+  const navBarClasses = getNavBarClasses();
 
   return (
-    <nav className={navClasses + (mounted && scrolled ? ' navbar-scrolled' : '')}>
-      <div className="container-custom flex justify-between items-center">
+    <nav className="fixed w-full z-50 py-4 px-4">
+      <div className={`max-w-4xl mx-auto rounded-full px-6 py-3 flex justify-between items-center transition-all duration-300 ${navBarClasses}`}>
         <div className="hidden md:flex items-center">
           <div className="flex space-x-1">
             {navLinks.map((link) => (
@@ -163,12 +155,12 @@ export default function Navbar() {
       </div>
 
       {isMenuOpen && (
-        <div className={`md:hidden backdrop-blur-lg border-t ${
-          theme === 'theme-light' 
-            ? 'bg-[rgba(255,255,255,0.95)] border-[rgba(0,0,0,0.1)]' 
-            : 'bg-[rgba(5,5,5,0.95)] border-[rgba(255,255,255,0.1)]'
+        <div className={`md:hidden mt-2 max-w-4xl mx-auto rounded-2xl overflow-hidden ${
+          theme === 'theme-light'
+            ? 'backdrop-blur-lg bg-[rgba(255,255,255,0.95)] border border-gray-300 shadow-lg'
+            : 'backdrop-blur-lg bg-[rgba(15,23,42,0.95)] border border-slate-600 shadow-lg'
         }`}>
-          <div className="container-custom py-4">
+          <div className="py-4 px-4">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
