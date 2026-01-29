@@ -28,17 +28,17 @@ export default function ExperiencePage() {
           </div>
 
           {/* Experience Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {experiences.map((exp) => (
-              <FlipCard 
+              <FlipCard
                 key={exp.id}
-                height="400px"
+                height="480px"
                 colorScheme="experience"
                 frontContent={
                   <div className="h-full backdrop-blur-md rounded-xl p-6 bg-gradient-to-br from-[rgba(59,130,246,0.15)] to-[rgba(147,51,234,0.15)] dark:from-[rgba(255,255,255,0.15)] dark:to-[rgba(255,255,255,0.05)] border border-[rgba(59,130,246,0.3)] dark:border-[rgba(255,255,255,0.2)] transition-all duration-500 hover:shadow-2xl hover:border-[rgba(59,130,246,0.5)] dark:hover:border-[rgba(59,130,246,0.4)] cursor-pointer flex flex-col">
                     {/* Logo and Company */}
-                    <div className="flex items-start gap-4 mb-6">
-                      <div className={`w-28 h-28 rounded-xl border flex items-center justify-center overflow-hidden flex-shrink-0 ${
+                    <div className="flex items-start gap-3 mb-4">
+                      <div className={`w-20 h-20 rounded-xl border flex items-center justify-center overflow-hidden flex-shrink-0 ${
                         exp.logo
                           ? exp.id === 'bitcoin-vietnam'
                             ? 'bg-slate-300 border-slate-400'
@@ -53,19 +53,19 @@ export default function ExperiencePage() {
                           <Image
                             src={exp.logo}
                             alt={`${exp.company} logo`}
-                            width={80}
-                            height={80}
+                            width={60}
+                            height={60}
                             className="object-contain"
                           />
                         ) : (
-                          <span className="text-3xl font-black tracking-wide" style={{ color: '#0f172a' }}>
+                          <span className="text-2xl font-black tracking-wide" style={{ color: '#0f172a' }}>
                             {exp.company.charAt(0)}
                           </span>
                         )}
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-black light-text mb-2 line-clamp-2 tracking-tight leading-tight">{t(`exp.${exp.id}.position`)}</h3>
-                        <div className="flex items-center justify-between">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-lg font-black light-text mb-2 line-clamp-2 tracking-tight leading-tight">{t(`exp.${exp.id}.position`)}</h3>
+                        <div className="flex flex-col gap-1">
                           {exp.website ? (
                             <Link
                               href={exp.website}
@@ -85,7 +85,7 @@ export default function ExperiencePage() {
                           ) : (
                             <p className="text-sm text-[var(--primary-400)] font-semibold tracking-wide uppercase">{exp.company}</p>
                           )}
-                          <p className="light-text text-sm underline flex-shrink-0">
+                          <p className="light-text text-xs opacity-75">
                             {exp.startDate} - {exp.endDate || t('experience.present')}
                           </p>
                         </div>
@@ -105,7 +105,7 @@ export default function ExperiencePage() {
                         <span className="tracking-wide">{t('experience.skillsUsed')}</span>
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {exp.skills.map((skill) => (
+                        {exp.skills.slice(0, 5).map((skill) => (
                           <span
                             key={skill}
                             className={`px-3 py-2 text-xs bg-gradient-to-r rounded-full border-2 font-bold tracking-wide transition-all duration-300 hover:scale-105 shadow-sm ${
@@ -136,43 +136,28 @@ export default function ExperiencePage() {
                   <div className="h-full backdrop-blur-md rounded-xl p-6 bg-gradient-to-br from-[rgba(147,51,234,0.2)] to-[rgba(59,130,246,0.2)] dark:from-[rgba(255,255,255,0.15)] dark:to-[rgba(255,255,255,0.05)] border border-[rgba(147,51,234,0.3)] dark:border-[rgba(255,255,255,0.2)] cursor-pointer flex flex-col">
                     <style jsx global>{`
                       .achievement-scrollbar::-webkit-scrollbar {
-                        width: 12px;
+                        width: 4px;
                       }
-                      
-                      /* Dark mode styles (default) */
+
                       .achievement-scrollbar::-webkit-scrollbar-track {
-                        background: rgba(30, 41, 59, 0.5);
-                        border-radius: 10px;
-                        border: 1px solid rgba(148, 163, 184, 0.2);
+                        background: transparent;
                       }
-                      
+
                       .achievement-scrollbar::-webkit-scrollbar-thumb {
-                        background: linear-gradient(180deg, #9333ea 0%, #3b82f6 100%);
-                        border-radius: 10px;
-                        border: 2px solid rgba(255, 255, 255, 0.2);
-                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+                        background: rgba(148, 163, 184, 0.4);
+                        border-radius: 4px;
                       }
-                      
+
                       .achievement-scrollbar::-webkit-scrollbar-thumb:hover {
-                        background: linear-gradient(180deg, #a855f7 0%, #60a5fa 100%);
-                        border-color: rgba(255, 255, 255, 0.3);
+                        background: rgba(148, 163, 184, 0.6);
                       }
-                      
-                      /* Light mode overrides using theme class */
-                      .theme-light .achievement-scrollbar::-webkit-scrollbar-track {
-                        background: rgba(226, 232, 240, 0.8);
-                        border: 1px solid rgba(203, 213, 225, 0.5);
-                      }
-                      
+
                       .theme-light .achievement-scrollbar::-webkit-scrollbar-thumb {
-                        background: linear-gradient(180deg, #c084fc 0%, #93c5fd 100%);
-                        border: 2px solid rgba(255, 255, 255, 0.9);
-                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                        background: rgba(100, 116, 139, 0.3);
                       }
-                      
+
                       .theme-light .achievement-scrollbar::-webkit-scrollbar-thumb:hover {
-                        background: linear-gradient(180deg, #d8b4fe 0%, #bfdbfe 100%);
-                        border-color: rgba(255, 255, 255, 1);
+                        background: rgba(100, 116, 139, 0.5);
                       }
                     `}</style>
 
@@ -188,7 +173,7 @@ export default function ExperiencePage() {
                       </h4>
                       <div className="overflow-y-auto flex-1 pr-2 achievement-scrollbar" style={{
                         scrollbarWidth: 'thin',
-                        scrollbarColor: '#9333ea #1f2937'
+                        scrollbarColor: 'rgba(148, 163, 184, 0.4) transparent'
                       }}>
                         {exp.achievements && exp.achievements.length > 0 ? (
                           <ul className="space-y-5">
