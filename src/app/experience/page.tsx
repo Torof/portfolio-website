@@ -121,12 +121,14 @@ export default function ExperiencePage() {
                     </div>
                     
                     {/* Flip Indicator */}
-                    <div className="mt-auto flex items-center justify-center light-text opacity-60 group-hover:opacity-100 transition-all duration-300">
-                      <span className="text-xs mr-2 font-medium tracking-wide">{t('experience.clickForAchievements')}</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                      </svg>
+                    <div className="mt-auto flex items-center justify-center">
+                      <div className="flex items-center px-4 py-2 bg-white rounded-full shadow-md hover:shadow-lg transition-all duration-300">
+                        <span className="text-xs mr-2 font-medium tracking-wide text-gray-700">{t('experience.clickForAchievements')}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-700">
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                          <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 }
@@ -229,12 +231,14 @@ export default function ExperiencePage() {
                     </div>
                     
                     {/* Back Indicator */}
-                    <div className="mt-auto flex items-center justify-center light-text opacity-60 group-hover:opacity-100 transition-all duration-300">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
-                        <line x1="19" y1="12" x2="5" y2="12"></line>
-                        <polyline points="12 19 5 12 12 5"></polyline>
-                      </svg>
-                      <span className="text-xs font-medium tracking-wide">{t('experience.clickForDetails')}</span>
+                    <div className="mt-auto flex items-center justify-center">
+                      <div className="flex items-center px-4 py-2 bg-white rounded-full shadow-md hover:shadow-lg transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 text-gray-700">
+                          <line x1="19" y1="12" x2="5" y2="12"></line>
+                          <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        <span className="text-xs font-medium tracking-wide text-gray-700">{t('experience.clickForDetails')}</span>
+                      </div>
                     </div>
                   </div>
                 }
