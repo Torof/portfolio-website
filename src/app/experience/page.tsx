@@ -18,27 +18,18 @@ export default function ExperiencePage() {
 
       <div className="section">
         <div className="container-custom pt-4 pb-20">
-          {/* Unified Experience Section */}
-          <div className={`backdrop-blur-sm rounded-2xl p-8 md:p-12 border ${
-            theme === 'theme-light'
-              ? 'bg-gradient-to-br from-[rgba(59,130,246,0.15)] to-[rgba(147,51,234,0.15)] border-[rgba(59,130,246,0.3)]'
-              : 'bg-gradient-to-br from-[rgba(59,130,246,0.15)] to-[rgba(147,51,234,0.15)] border-[rgba(255,255,255,0.1)]'
-          }`}>
-            {/* Title Section */}
-            <div className="text-center mb-12">
-              <h1 className="text-6xl md:text-7xl font-black mb-6 tracking-tight">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary-400)] to-[var(--secondary-400)]">
-                  {t('experience.title')}
-                </span>
-              </h1>
-              <p className="text-xl md:text-2xl light-text max-w-3xl mx-auto leading-relaxed font-light">
-                {t('experience.subtitle')}
-              </p>
-            </div>
+          {/* Title Section */}
+          <div className="text-center mb-12">
+            <h1 className={`text-6xl md:text-7xl font-black mb-6 tracking-tight ${
+              theme === 'theme-light' ? 'text-gray-900' : 'text-white'
+            }`}>
+              My Professional Experience
+            </h1>
+          </div>
 
-            {/* Experience Cards Grid */}
+          {/* Experience Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-{experiences.map((exp) => (
+            {experiences.map((exp) => (
               <FlipCard 
                 key={exp.id}
                 height="400px"
@@ -249,7 +240,6 @@ export default function ExperiencePage() {
                 }
               />
             ))}
-            </div>
           </div>
         </div>
       </div>
