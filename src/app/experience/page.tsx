@@ -179,23 +179,30 @@ export default function ExperiencePage() {
                           <ul className="space-y-5">
                             {exp.achievements.map((achievement, idx) => (
                               <li key={idx} className="flex items-start gap-4 group">
-                                <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[var(--secondary-400)] to-[var(--primary-400)] flex items-center justify-center flex-shrink-0 mt-1 shadow-sm group-hover:scale-110 transition-transform duration-200">
-                                  <span className="text-white text-xs font-bold">{idx + 1}</span>
-                                </div>
+                                <div className="w-2 h-2 rounded-full bg-gradient-to-r from-[var(--secondary-400)] to-[var(--primary-400)] flex-shrink-0 mt-2.5 shadow-sm group-hover:scale-125 transition-transform duration-200"></div>
                                 <span className="text-base leading-loose break-words light-text font-normal opacity-95 group-hover:opacity-100 transition-opacity duration-200">
                                   {exp.id === 'alyra-jury' && achievement.includes('https://') ? (
-                                    <span>
-                                      {achievement.split(' - POAP: ')[0]} -
-                                      <a
-                                        href={achievement.split('POAP: ')[1]}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-[var(--primary-400)] hover:text-[var(--primary-500)] underline ml-1"
-                                        onClick={(e) => e.stopPropagation()}
-                                      >
-                                        View POAP
-                                      </a>
-                                    </span>
+                                    (() => {
+                                      const translatedAchievement = t(`exp.${exp.id}.achievement.${idx + 1}`) !== `exp.${exp.id}.achievement.${idx + 1}`
+                                        ? t(`exp.${exp.id}.achievement.${idx + 1}`)
+                                        : achievement;
+                                      const poapUrl = achievement.split('POAP: ')[1] || translatedAchievement.split('POAP : ')[1];
+                                      const textPart = translatedAchievement.split(/ - POAP[ :]?/)[0];
+                                      return (
+                                        <span>
+                                          {textPart} -
+                                          <a
+                                            href={poapUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-[var(--primary-400)] hover:text-[var(--primary-500)] underline ml-1"
+                                            onClick={(e) => e.stopPropagation()}
+                                          >
+                                            POAP
+                                          </a>
+                                        </span>
+                                      );
+                                    })()
                                   ) : (
                                     <span
                                       dangerouslySetInnerHTML={{
