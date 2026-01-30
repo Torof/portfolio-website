@@ -19,7 +19,8 @@ export interface ContributionData {
  * Fetch contribution data from our API route
  * The API route uses GitHub's official GraphQL API for accurate data
  */
-export async function fetchGitHubContributions(_username: string = 'Torof'): Promise<ContributionData | null> {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function fetchGitHubContributions(username: string = 'Torof'): Promise<ContributionData | null> {
   try {
     console.log('📊 Fetching GitHub contributions from API...');
 
