@@ -50,6 +50,133 @@ export interface GitHubStats {
 
 const GITHUB_USERNAME = 'Torof';
 const GITHUB_API_BASE = 'https://api.github.com';
+const GITHUB_GRAPHQL_API = 'https://api.github.com/graphql';
+
+/**
+ * Fetch contribution data from GitHub GraphQL API
+ */
+interface ContributionData {
+  totalContributions: number;
+  weeks: Array<{
+    contributionDays: Array<{
+      contributionCount: number;
+      date: string;
+    }>;
+  }>;
+}
+
+interface GraphQLContributionResponse {
+  data: {
+    user: {
+      contributionsCollection: {
+        totalCommitContributions: number;
+        restrictedContributionsCount: number;
+        contributionCalendar: ContributionData;
+      };
+    };
+  };
+}
+
+async function fetchContributionData(): Promise<{
+  totalContributions: number;
+  totalCommits: number;
+  currentStreak: number;
+  longestStreak: number;
+} | null> {
+  if (!process.env.GITHUB_TOKEN) {
+    console.warn('GITHUB_TOKEN not set, contribution data will not be available');
+    return null;
+  }
+
+  const query = `
+    query($username: String!) {
+      user(login: $username) {
+        contributionsCollection {
+          totalCommitContributions
+          restrictedContributionsCount
+          contributionCalendar {
+            totalContributions
+            weeks {
+              contributionDays {
+                contributionCount
+                date
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const response = await fetch(GITHUB_GRAPHQL_API, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.GITHUB_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query,
+        variables: { username: GITHUB_USERNAME }
+      }),
+      next: { revalidate: 3600 }
+    });
+
+    if (!response.ok) {
+      throw new Error(`GraphQL API error: ${response.status}`);
+    }
+
+    const result: GraphQLContributionResponse = await response.json();
+    const calendar = result.data.user.contributionsCollection.contributionCalendar;
+    const totalCommits = result.data.user.contributionsCollection.totalCommitContributions +
+                         result.data.user.contributionsCollection.restrictedContributionsCount;
+
+    // Calculate streaks from contribution calendar
+    const allDays = calendar.weeks.flatMap(week => week.contributionDays);
+
+    // Current streak (count backwards from today)
+    let currentStreak = 0;
+    const today = new Date().toISOString().split('T')[0];
+    const sortedDays = [...allDays].sort((a, b) => b.date.localeCompare(a.date));
+
+    for (const day of sortedDays) {
+      // Skip future dates
+      if (day.date > today) continue;
+
+      if (day.contributionCount > 0) {
+        currentStreak++;
+      } else {
+        // Allow one day gap (today might not have contributions yet)
+        if (day.date === today) continue;
+        break;
+      }
+    }
+
+    // Longest streak
+    let longestStreak = 0;
+    let tempStreak = 0;
+    const chronologicalDays = [...allDays].sort((a, b) => a.date.localeCompare(b.date));
+
+    for (const day of chronologicalDays) {
+      if (day.contributionCount > 0) {
+        tempStreak++;
+        longestStreak = Math.max(longestStreak, tempStreak);
+      } else {
+        tempStreak = 0;
+      }
+    }
+
+    return {
+      totalContributions: calendar.totalContributions,
+      totalCommits,
+      currentStreak,
+      longestStreak
+    };
+  } catch (error) {
+    console.error('Error fetching contribution data:', error);
+    return null;
+  }
+}
 
 /**
  * Fetch user repositories from GitHub API
@@ -150,9 +277,10 @@ export async function fetchRepositoryLanguages(repoName: string): Promise<Record
  */
 export async function fetchGitHubStats(): Promise<GitHubStats | null> {
   try {
-    const [user, repositories] = await Promise.all([
+    const [user, repositories, contributionData] = await Promise.all([
       fetchGitHubUser(),
-      fetchGitHubRepositories()
+      fetchGitHubRepositories(),
+      fetchContributionData()
     ]);
 
     if (!user || repositories.length === 0) {
@@ -165,7 +293,7 @@ export async function fetchGitHubStats(): Promise<GitHubStats | null> {
 
     // Aggregate languages across all repositories
     const allLanguages: Record<string, number> = {};
-    
+
     for (const repo of repositories.slice(0, 10)) {
       try {
         const languages = await fetchRepositoryLanguages(repo.name);
@@ -181,7 +309,7 @@ export async function fetchGitHubStats(): Promise<GitHubStats | null> {
     // Calculate language percentages and assign colors
     const languageColors: Record<string, string> = {
       'Solidity': '#627EEA',
-      'TypeScript': '#3178C6', 
+      'TypeScript': '#3178C6',
       'JavaScript': '#F7DF1E',
       'Rust': '#CE422B',
       'Python': '#3776AB',
@@ -204,23 +332,16 @@ export async function fetchGitHubStats(): Promise<GitHubStats | null> {
       .sort((a, b) => b.bytes - a.bytes)
       .slice(0, 6); // Top 6 languages
 
-    // Estimate commits (this is approximate since GitHub API doesn't provide total commits easily)
-    const accountAge = Math.floor((Date.now() - new Date(user.created_at).getTime()) / (1000 * 60 * 60 * 24));
-    const estimatedCommits = Math.floor(repositories.length * 15 + accountAge * 0.8); // Rough estimate
-
-    // Estimate yearly contributions (simplified)
-    const yearlyContributions = Math.floor(estimatedCommits * 0.7); // Rough estimate for current year
-
     const stats: GitHubStats = {
       totalRepos: user.public_repos,
       totalStars,
       totalForks,
-      totalCommits: estimatedCommits,
+      totalCommits: contributionData?.totalCommits ?? 0,
       languages: allLanguages,
       topLanguages,
-      yearlyContributions,
-      longestStreak: Math.floor(Math.random() * 50 + 20), // This would need GitHub's contribution graph API
-      currentStreak: Math.floor(Math.random() * 15 + 1),   // This would need GitHub's contribution graph API
+      yearlyContributions: contributionData?.totalContributions ?? 0,
+      longestStreak: contributionData?.longestStreak ?? 0,
+      currentStreak: contributionData?.currentStreak ?? 0,
       user
     };
 

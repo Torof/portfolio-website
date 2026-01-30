@@ -164,16 +164,27 @@ const ContributionGraph: React.FC<ContributionGraphProps> = ({
           </div>
           )}
           
-          {/* Legend */}
+          {/* Legend - Shows months for the last 52 weeks */}
           <div className={`flex items-center justify-between mt-4 text-xs ${
             theme === 'theme-light' ? 'text-gray-600' : 'text-[var(--dark-300)]'
           }`}>
-            <span>Jan</span>
-            <span>Mar</span>
-            <span>May</span>
-            <span>Jul</span>
-            <span>Sep</span>
-            <span>Nov</span>
+            {(() => {
+              const today = new Date();
+              const startDate = new Date(today);
+              startDate.setDate(startDate.getDate() - (52 * 7)); // 52 weeks ago
+
+              // Get month labels at roughly equal intervals across 52 weeks
+              const labels = [];
+              for (let i = 0; i < 6; i++) {
+                const date = new Date(startDate);
+                date.setDate(date.getDate() + Math.floor(i * (52 * 7) / 5));
+                labels.push(date.toLocaleDateString('en-US', { month: 'short' }));
+              }
+
+              return labels.map((month, idx) => (
+                <span key={idx}>{month}</span>
+              ));
+            })()}
           </div>
           
           <div className="flex items-center justify-end mt-2 gap-2">

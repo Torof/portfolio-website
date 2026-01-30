@@ -1,6 +1,6 @@
 'use client';
 
-import ProjectsCarousel from './ProjectsCarousel';
+import FeaturedProjectsGrid from './FeaturedProjectsGrid';
 import { useScrollAnimation, getAnimationClass } from "@/lib/hooks/useScrollAnimation";
 import { useLanguage } from '@/lib/context/LanguageContext';
 import { useTheme } from '@/lib/context/ThemeContext';
@@ -498,24 +498,18 @@ const SequentialLayout: React.FC = () => {
           </div>
         </div>
         
-        <div className="container-custom relative z-10 pt-16 pb-16">
-          {/* Featured Projects Carousel with Header */}
+        <div className="relative z-10 py-20 md:py-24 overflow-x-auto">
+          {/* Featured Projects Grid with Header */}
           <div
             ref={projectsGridAnimation.ref}
-            className={`max-w-5xl mx-auto ${getAnimationClass(projectsGridAnimation.isVisible, 'fadeInUp')}`}
+            className={`${getAnimationClass(projectsGridAnimation.isVisible, 'fadeInUp')}`}
           >
-            <div className={`rounded-2xl border p-8 transition-all duration-300 ${
-              theme === 'theme-light'
-                ? 'bg-white/90 backdrop-blur-sm border-gray-200 shadow-lg'
-                : 'bg-slate-900/90 backdrop-blur-sm border-slate-700 shadow-lg'
+            <h2 style={{ fontFamily: 'Caveat Variable, cursive' }} className={`text-5xl md:text-6xl font-bold mb-12 md:mb-16 text-center tracking-normal ${
+              theme === 'theme-light' ? 'text-gray-900 drop-shadow-sm' : 'text-white drop-shadow-lg'
             }`}>
-              <h2 style={{ fontFamily: 'Caveat Variable, cursive' }} className={`text-5xl md:text-6xl font-bold mb-8 text-center underline tracking-normal ${
-                theme === 'theme-light' ? 'text-black' : 'text-white'
-              }`}>
-                {t('featuredProjects.title')}
-              </h2>
-              <ProjectsCarousel projects={featuredProjects} />
-            </div>
+              {t('featuredProjects.title')}
+            </h2>
+            <FeaturedProjectsGrid projects={featuredProjects} />
           </div>
         </div>
       </section>

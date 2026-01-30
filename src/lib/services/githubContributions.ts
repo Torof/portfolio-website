@@ -1,7 +1,6 @@
 /**
  * Fetch GitHub contribution data
- * Note: GitHub doesn't provide official API for contribution graphs
- * This uses various approaches to get contribution data
+ * Uses our API route which calls GitHub's official GraphQL API
  */
 
 interface ContributionDay {
@@ -10,72 +9,49 @@ interface ContributionDay {
   level: number;
 }
 
-interface ContributionData {
+export interface ContributionData {
   total: number;
   days: ContributionDay[];
+  weeks?: number[][];
 }
 
 /**
- * Fetch contribution data from GitHub's contribution graph
- * Using the unofficial GitHub contributions API
+ * Fetch contribution data from our API route
+ * The API route uses GitHub's official GraphQL API for accurate data
  */
-export async function fetchGitHubContributions(username: string = 'Torof'): Promise<ContributionData | null> {
+export async function fetchGitHubContributions(_username: string = 'Torof'): Promise<ContributionData | null> {
   try {
-    console.log('📊 Fetching GitHub contributions for:', username);
-    
-    // Option 1: Use github-contributions-api (unofficial but reliable)
-    const response = await fetch(
-      `https://github-contributions-api.deno.dev/${username}.json`,
-      {
-        next: { revalidate: 3600 } // Cache for 1 hour
-      }
-    );
+    console.log('📊 Fetching GitHub contributions from API...');
+
+    // Use our API route which has access to the GitHub token
+    const response = await fetch('/api/contributions', {
+      next: { revalidate: 3600 } // Cache for 1 hour
+    });
 
     if (!response.ok) {
       throw new Error(`Failed to fetch contributions: ${response.status}`);
     }
 
     const data = await response.json();
-    
+
     // Transform the data to our format
-    const days: ContributionDay[] = [];
-    let total = 0;
+    const days: ContributionDay[] = data.days.map((day: { date: string; count: number }) => ({
+      date: day.date,
+      count: day.count,
+      level: getContributionLevel(day.count)
+    }));
 
-    // The API returns an array of weeks, each containing an array of day objects  
-    interface ApiDay {
-      date: string;
-      contributionCount: number;
-      color?: string;
-      contributionLevel?: string;
-    }
-    
-    if (data.contributions && Array.isArray(data.contributions)) {
-      data.contributions.forEach((week: ApiDay[]) => {
-        if (Array.isArray(week)) {
-          week.forEach((day: ApiDay) => {
-            const contributionCount = day.contributionCount || 0;
-            total += contributionCount;
-            
-            days.push({
-              date: day.date,
-              count: contributionCount,
-              level: getContributionLevel(contributionCount)
-            });
-          });
-        }
-      });
-    }
+    console.log(`✅ Fetched ${days.length} days of contribution data, total: ${data.total}`);
 
-    console.log(`✅ Fetched ${days.length} days of contribution data, total: ${total}`);
-    
     return {
-      total,
-      days: days.sort((a, b) => a.date.localeCompare(b.date))
+      total: data.total,
+      days: days.sort((a, b) => a.date.localeCompare(b.date)),
+      weeks: data.weeks
     };
-    
+
   } catch (error) {
     console.error('Error fetching GitHub contributions:', error);
-    
+
     // Fallback: Generate realistic mock data based on patterns
     return generateRealisticContributions();
   }
@@ -216,28 +192,32 @@ function generateRealisticContributions(): ContributionData {
 
 /**
  * Transform contribution data for the graph component
- * Convert the daily data back into a weekly grid format (52 weeks x 7 days)
+ * Uses pre-formatted weeks from API if available, otherwise converts daily data
  */
 export function transformContributionsForGraph(data: ContributionData): number[][] {
+  // If weeks data is already available from the API, use it directly
+  if (data.weeks && data.weeks.length > 0) {
+    return data.weeks;
+  }
+
+  // Fallback: Group the days into weeks (7 days each)
   const weeks: number[][] = [];
-  
-  // Group the days into weeks (7 days each)
+
   for (let i = 0; i < data.days.length; i += 7) {
     const weekData = data.days.slice(i, i + 7).map(day => day.count);
-    
+
     // Pad incomplete weeks with zeros if needed
     while (weekData.length < 7) {
       weekData.push(0);
     }
-    
+
     weeks.push(weekData);
   }
-  
-  // Ensure we have exactly 52 weeks
+
+  // Ensure we have at least 52 weeks
   while (weeks.length < 52) {
     weeks.push([0, 0, 0, 0, 0, 0, 0]);
   }
-  
-  // Trim to exactly 52 weeks if we have more
-  return weeks.slice(0, 52);
+
+  return weeks;
 }

@@ -17,13 +17,22 @@ export default function HeroSection() {
   const profileAnimation = useScrollAnimation<HTMLDivElement>({ threshold: 0.1, delay: 300 });
 
   return (
-    <section 
-      className={`relative flex items-start pt-32 md:pt-40 pb-16 overflow-hidden border-b ${
+    <section
+      className={`relative flex items-start pt-32 md:pt-40 pb-16 border-b ${
         theme === 'theme-light'
-          ? 'bg-gradient-to-b from-[#f3f4f6] to-[#e5e7eb] border-[rgba(0,0,0,0.05)]'
-          : 'bg-gradient-to-b from-[#2a2a2a] to-[#1a1a1a] border-[rgba(255,255,255,0.05)]'
+          ? 'border-[rgba(0,0,0,0.05)]'
+          : 'border-[rgba(255,255,255,0.05)]'
       }`}
     >
+      {/* Background that extends to top of screen */}
+      <div
+        className={`absolute -top-16 left-0 right-0 bottom-0 ${
+          theme === 'theme-light'
+            ? 'bg-gradient-to-b from-[#f3f4f6] to-[#e5e7eb]'
+            : 'bg-gradient-to-b from-[#2a2a2a] to-[#1a1a1a]'
+        }`}
+        style={{ zIndex: -1 }}
+      />
       {/* Blockchain Rain Background */}
       <BlockchainRain theme={theme} />
       

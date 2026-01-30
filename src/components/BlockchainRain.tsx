@@ -16,10 +16,13 @@ export default function BlockchainRain({ theme = 'theme-dark' }: BlockchainRainP
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Set canvas size
+    // Set canvas size based on parent section height + navbar offset
+    const navbarHeight = 64; // 4rem = 64px
     const resizeCanvas = () => {
+      const parent = canvas.parentElement;
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      // Use parent height + navbar offset, fallback to window height
+      canvas.height = parent ? parent.offsetHeight + navbarHeight : window.innerHeight;
     };
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
@@ -156,7 +159,7 @@ export default function BlockchainRain({ theme = 'theme-dark' }: BlockchainRainP
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 opacity-40 pointer-events-none"
+      className="absolute -top-16 left-0 right-0 bottom-0 opacity-40 pointer-events-none"
       style={{ zIndex: 0 }}
     />
   );
